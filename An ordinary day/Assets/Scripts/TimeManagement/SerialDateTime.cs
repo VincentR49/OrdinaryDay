@@ -21,5 +21,15 @@ public class SerialDateTime
     }
 
 
+    public SerialDateTime(DateTime dateTime)
+    {
+        Day = dateTime.Day;
+        Year = dateTime.Year;
+        Month = dateTime.Month;
+        Hour = dateTime.Hour;
+        Min = dateTime.Minute;
+        Sec = dateTime.Second;
+    }
+
     public DateTime ToDateTime() => new DateTime(Year,Month,Day,Hour,Min,Sec);
 }

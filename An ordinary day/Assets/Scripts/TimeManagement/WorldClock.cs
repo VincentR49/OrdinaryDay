@@ -6,15 +6,14 @@ using System;
 public class WorldClock : MonoBehaviour
 {
     [SerializeField]
-    private float _gameTimeScale = 1f;
-    [SerializeField]
     [Tooltip("Value of 1sec IRL in the game")]
     private float _inGameTimeMultiplier = 60f;
+    [SerializeField]
+    private DateTimeData _currentTime;
 
     private static WorldClock _instance;
-    private DateTime _currentTime;
-    public static bool IsPaused => Math.Abs(Time.timeScale) < 0.001f;
-
+    public bool IsRunning { private set; get; }
+    public static DateTime Date => _instance._currentTime.Value;
 
     private void Awake()
     {
@@ -27,47 +26,44 @@ public class WorldClock : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(this);
-        Init();
+        DontDestroyOnLoad(gameObject);
     }
 
-
-    private void Init()
+    private void Start()
     {
-        _currentTime = DateTime.Now;
-        Time.timeScale = _gameTimeScale;
+        Resume();
     }
 
 
-    public void SetTime(DateTime time)
+    public void SetTime(DateTime dateTime)
     {
-        _currentTime = time;
+        Debug.Log("Init World Clock");
+        _currentTime.Value = dateTime;
     }
-   
+
 
     private void Update()
     {
-        RefreshTime(Time.deltaTime * _inGameTimeMultiplier);
+        if (!IsRunning) 
+            return;
+        UpdateTime(Time.deltaTime * _inGameTimeMultiplier);
     }
 
 
-    private void RefreshTime(float secondsSinceLastRefresh)
+    private void UpdateTime(float secondsSinceLastRefresh)
     {
-        _currentTime = _currentTime.AddSeconds(secondsSinceLastRefresh);
-    }
-
-
-    public void Pause()
-    {
-        Time.timeScale = 0;
+        _currentTime.Value = _currentTime.Value.AddSeconds(secondsSinceLastRefresh);
     }
 
 
     public void Resume()
     {
-        Time.timeScale = _gameTimeScale;
+        IsRunning = true;
     }
 
 
-    public static DateTime GetTime() => _instance._currentTime;
+    public void Stop()
+    {
+        IsRunning = false;
+    }
 }

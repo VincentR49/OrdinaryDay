@@ -67,7 +67,7 @@ public class WalkManager : MonoBehaviour
     private void ChangeState(State state)
     {
         _state = state;
-        Debug.Log("Change State: " + state);
+        //Debug.Log("Change State: " + state);
         Animate(state);
     }
 

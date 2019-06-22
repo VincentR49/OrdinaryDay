@@ -6,14 +6,14 @@ public class TimeDebugger : MonoBehaviour
     private WorldClock _worldClock;
 
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (WorldClock.IsPaused)
-                _worldClock.Resume();
+            if (_worldClock.IsRunning)
+                _worldClock.Stop();
             else
-                _worldClock.Pause();
+                _worldClock.Resume();
         }
     }
 }

@@ -1,36 +1,49 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using System;
 
 public class TimeLooper : MonoBehaviour
 {
-    public UnityEvent NewLoopStarted;
+    [SerializeField]
+    private string _firstSceneTag = "MainScene";
 
     [SerializeField]
     private SerialDateTime _startDate;
     [SerializeField]
     private SerialDateTime _endDate;
     [SerializeField]
-    private WorldClock _worldClock;
+    private DateTimeData _currentTime;
 
-    private DateTime _startDateTime;
-    private DateTime _endDateTime;
-    private bool _isRunning;
+    private static TimeLooper _instance;
+    private DateTime StartDateTime => _startDate.ToDateTime();
+    private DateTime EndDateTime => _endDate.ToDateTime();
 
 
     private void Awake()
     {
-        _startDateTime = _startDate.ToDateTime();
-        _endDateTime = _endDate.ToDateTime();
-        _isRunning = false;
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+    private void Start()
+    {
+        Init();
     }
 
 
     private void Update()
     {
-        if (!_isRunning) return;
-
-        if (WorldClock.GetTime() >= _endDateTime)
+        if (_currentTime.Value >= EndDateTime)
         {
             StartNewLoop();
         }
@@ -39,16 +52,21 @@ public class TimeLooper : MonoBehaviour
     // To Call to init the timeLooper
     public void Init()
     {
-        _isRunning = true;
-        StartNewLoop(false);
+        Debug.Log("Init Time Looper");
+        ResetTime();
     }
 
 
-    public void StartNewLoop(bool notify = true)
+    public void StartNewLoop()
     {
         Debug.Log("[TimeLooper] Start new loop");
-        _worldClock.SetTime(_startDateTime);
-        if (notify)
-            NewLoopStarted.Invoke();
+        ResetTime();
+        SceneManager.LoadScene(_firstSceneTag);
+    }
+
+
+    private void ResetTime()
+    {
+        _currentTime.Value = StartDateTime;
     }
 }

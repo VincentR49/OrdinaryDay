@@ -27,7 +27,7 @@ public class TimeDisplay : MonoBehaviour
 
     private void Refresh()
     {
-        _text.text = WorldClock.GetTime().ToString("MM/dd/yyyy HH:mm:ss");
-        _text.color = WorldClock.IsPaused ? _pauseColor : _standardColor;
+        _text.text = WorldClock.Date.ToString("MM/dd/yyyy HH:mm:ss");
+        _text.color = GameManager.IsPaused ? _pauseColor : _standardColor;
     }
 }
