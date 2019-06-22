@@ -18,22 +18,24 @@ public class WorldClock : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance != null)
+        if (_instance == null)
         {
-            Debug.LogError("Cannot instanciate more than one World Clock!");
-            Destroy(this);
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
             return;
         }
+        DontDestroyOnLoad(this);
         Init();
     }
 
 
     private void Init()
     {
-        _instance = this;
         _currentTime = DateTime.Now;
         Time.timeScale = _gameTimeScale;
-        DontDestroyOnLoad(this); // persistant time
     }
 
 

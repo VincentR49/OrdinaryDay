@@ -43,7 +43,6 @@ public class SpriteAnimator : MonoBehaviour
                 _spriteRenderer.sprite = _currentAnimation.Sprites[0];
             _currentAnimation = null;
             StopCoroutine(_currentAnimationRoutine);
-            Debug.Log("StopCurrentAnimation");
         }
     }
 

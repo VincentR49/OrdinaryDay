@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System;
 
-public class TimeLoopManager : MonoBehaviour
+public class TimeLooper : MonoBehaviour
 {
+    public UnityEvent NewLoopStarted;
+
     [SerializeField]
     private SerialDateTime _startDate;
     [SerializeField]
@@ -12,33 +15,40 @@ public class TimeLoopManager : MonoBehaviour
 
     private DateTime _startDateTime;
     private DateTime _endDateTime;
+    private bool _isRunning;
 
 
     private void Awake()
     {
         _startDateTime = _startDate.ToDateTime();
         _endDateTime = _endDate.ToDateTime();
-    }
-
-
-    private void Start()
-    {
-        StartNewLoop();
+        _isRunning = false;
     }
 
 
     private void Update()
     {
+        if (!_isRunning) return;
+
         if (WorldClock.GetTime() >= _endDateTime)
         {
             StartNewLoop();
         }
     }
 
-
-    public void StartNewLoop()
+    // To Call to init the timeLooper
+    public void Init()
     {
-        Debug.Log("[TimeLoopManager] Start new loop");
+        _isRunning = true;
+        StartNewLoop(false);
+    }
+
+
+    public void StartNewLoop(bool notify = true)
+    {
+        Debug.Log("[TimeLooper] Start new loop");
         _worldClock.SetTime(_startDateTime);
+        if (notify)
+            NewLoopStarted.Invoke();
     }
 }
