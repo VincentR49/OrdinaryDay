@@ -47,6 +47,12 @@ TagManager:
   - name: Ground
     uniqueID: 3411657437
     locked: 0
-  - name: Units
+  - name: Background
+    uniqueID: 3075995231
+    locked: 0
+  - name: DynamicLayer
     uniqueID: 1830909639
+    locked: 0
+  - name: Foreground
+    uniqueID: 914961635
     locked: 0

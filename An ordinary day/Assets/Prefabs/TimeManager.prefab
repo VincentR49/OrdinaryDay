@@ -45,11 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2255e9c36db634cd8bc0ad0bb0620da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewLoopStarted:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  _firstSceneTag: MainScene
   _startDate:
     Day: 28
     Month: 5

@@ -12,7 +12,7 @@ public class WorldClock : MonoBehaviour
     private DateTimeData _currentTime;
 
     private static WorldClock _instance;
-    public bool IsRunning { private set; get; }
+    public bool IsRunning => enabled;
     public static DateTime Date => _instance._currentTime.Value;
 
     private void Awake()
@@ -44,8 +44,6 @@ public class WorldClock : MonoBehaviour
 
     private void Update()
     {
-        if (!IsRunning) 
-            return;
         UpdateTime(Time.deltaTime * _inGameTimeMultiplier);
     }
 
@@ -58,12 +56,12 @@ public class WorldClock : MonoBehaviour
 
     public void Resume()
     {
-        IsRunning = true;
+        enabled = true;
     }
 
 
     public void Stop()
     {
-        IsRunning = false;
+        enabled = false;
     }
 }
