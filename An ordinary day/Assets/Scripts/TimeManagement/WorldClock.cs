@@ -10,23 +10,20 @@ public class WorldClock : MonoBehaviour
     private float _inGameTimeMultiplier = 60f;
     [SerializeField]
     private DateTimeData _currentTime;
-
-    private static WorldClock _instance;
     public bool IsRunning => enabled;
-    public static DateTime Date => _instance._currentTime.Value;
+    private static bool _alreadyExists;
 
     private void Awake()
     {
-        if (_instance == null)
+        if (!_alreadyExists)
         {
-            _instance = this;
+            _alreadyExists = true;
+            DontDestroyOnLoad(gameObject);
         }
-        else if (_instance != this)
+        else 
         {
             Destroy(gameObject);
-            return;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

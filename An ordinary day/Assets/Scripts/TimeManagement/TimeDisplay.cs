@@ -5,9 +5,8 @@ public class TimeDisplay : MonoBehaviour
 {
     [SerializeField]
     private Text _text;
-
-    [Header("Colors")]
-
+    [SerializeField]
+    private DateTimeData _currentTime;
     [SerializeField]
     private Color _pauseColor = Color.red;
 
@@ -27,7 +26,7 @@ public class TimeDisplay : MonoBehaviour
 
     private void Refresh()
     {
-        _text.text = WorldClock.Date.ToString("MM/dd/yyyy HH:mm:ss");
+        _text.text = _currentTime.Value.ToString("MM/dd/yyyy HH:mm:ss");
         _text.color = GameManager.IsPaused ? _pauseColor : _standardColor;
     }
 }

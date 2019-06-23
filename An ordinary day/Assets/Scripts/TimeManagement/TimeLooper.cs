@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
 
 public class TimeLooper : MonoBehaviour
 {
     [SerializeField]
-    private ScenePicker _loopScenePicker;
+    private SceneSwitcher _loopSceneSwitch;
 
     [SerializeField]
     private SerialDateTime _startDate;
@@ -14,23 +13,21 @@ public class TimeLooper : MonoBehaviour
     [SerializeField]
     private DateTimeData _currentTime;
 
-    private static TimeLooper _instance;
     private DateTime StartDateTime => _startDate.ToDateTime();
     private DateTime EndDateTime => _endDate.ToDateTime();
-
+    private static bool _alreadyExists;
 
     private void Awake()
     {
-        if (_instance == null)
+        if (!_alreadyExists)
         {
-            _instance = this;
+            _alreadyExists = true;
+            DontDestroyOnLoad(gameObject);
         }
-        else if (_instance != this)
+        else
         {
             Destroy(gameObject);
-            return;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -60,7 +57,7 @@ public class TimeLooper : MonoBehaviour
     {
         Debug.Log("[TimeLooper] Start new loop");
         ResetTime();
-        SceneManager.LoadScene(_loopScenePicker.ScenePath);
+        _loopSceneSwitch.Switch();
     }
 
 

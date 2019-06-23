@@ -8,28 +8,28 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private ScenePicker _firstGameScenePicker;
    
-    private static GameManager _instance;
+    private static bool _alreadyExists;
     public static bool IsPaused => Math.Abs(Time.timeScale) < 0.001f;
 
     private void Awake()
     {
-        if (_instance == null)
+        if (!_alreadyExists)
         {
-            _instance = this;
+            _alreadyExists = true;
+            DontDestroyOnLoad(gameObject);
         }
-        else if (_instance != this)
+        else
         {
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
     }
 
 
     public void StartNewGame()
     {
         Debug.Log("[GameManager] Start NewGame");
-        SceneManager.LoadScene(_firstGameScenePicker.ScenePath);
+        LoadFirstScene();
     }
 
 
@@ -50,12 +50,6 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    public void OnNewTimeLoopStarted()
-    {
-        Debug.Log("[GameManager] Reset Game after loop");
-        SceneManager.LoadScene(_firstGameScenePicker.ScenePath);
-    }
-
 
     public void Pause()
     {
@@ -66,5 +60,12 @@ public class GameManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1f;
+    }
+
+
+    private void LoadFirstScene()
+    {
+        SceneLoaderAsync.Instance.LoadScene(_firstGameScenePicker.ScenePath);
+        //SceneManager.LoadScene(_firstGameScenePicker.ScenePath);
     }
 }
