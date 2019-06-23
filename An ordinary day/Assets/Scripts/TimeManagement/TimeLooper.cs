@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System;
 
 public class TimeLooper : MonoBehaviour
 {
     [SerializeField]
-    private string _firstSceneTag = "MainScene";
+    private ScenePicker _loopScenePicker;
 
     [SerializeField]
     private SerialDateTime _startDate;
@@ -61,7 +60,7 @@ public class TimeLooper : MonoBehaviour
     {
         Debug.Log("[TimeLooper] Start new loop");
         ResetTime();
-        SceneManager.LoadScene(_firstSceneTag);
+        SceneManager.LoadScene(_loopScenePicker.ScenePath);
     }
 
 

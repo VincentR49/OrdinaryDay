@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private string _firstSceneTag = "MainScene";
+    private ScenePicker _firstGameScenePicker;
    
     private static GameManager _instance;
     public static bool IsPaused => Math.Abs(Time.timeScale) < 0.001f;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         Debug.Log("[GameManager] Start NewGame");
-        SceneManager.LoadScene(_firstSceneTag);
+        SceneManager.LoadScene(_firstGameScenePicker.ScenePath);
     }
 
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public void OnNewTimeLoopStarted()
     {
         Debug.Log("[GameManager] Reset Game after loop");
-        SceneManager.LoadScene(_firstSceneTag);
+        SceneManager.LoadScene(_firstGameScenePicker.ScenePath);
     }
 
 

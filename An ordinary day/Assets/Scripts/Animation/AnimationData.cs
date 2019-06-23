@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "AnimationData")]
+[CreateAssetMenu(menuName = "Scriptables/AnimationData")]
 public class AnimationData : ScriptableObject
 {
     public bool FlipX = false;

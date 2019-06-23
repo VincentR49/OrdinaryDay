@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5164031015229162629}
   - component: {fileID: 5164031015229162630}
   - component: {fileID: 930413440669159573}
+  - component: {fileID: 6738490835387207079}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2255e9c36db634cd8bc0ad0bb0620da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstSceneTag: MainScene
+  _loopScenePicker: {fileID: 6738490835387207079}
   _startDate:
     Day: 28
     Month: 5
@@ -88,3 +89,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _worldClock: {fileID: 5164031015229162630}
+--- !u!114 &6738490835387207079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164031015229162631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85b6eb40021c249139ef4e9a3a13ac9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scenePath: Assets/Scenes/MainScene.unity

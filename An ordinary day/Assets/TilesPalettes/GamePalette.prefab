@@ -59,6 +59,15 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: -3, y: -1, z: 0}
+    second:
+      m_TileIndex: 6
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 5
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 2
   - first: {x: -2, y: -1, z: 0}
     second:
       m_TileIndex: 2
@@ -68,6 +77,15 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: -1, y: -1, z: 0}
+    second:
+      m_TileIndex: 5
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 4
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 2
   - first: {x: -2, y: 0, z: 0}
     second:
       m_TileIndex: 1
@@ -98,15 +116,19 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: a414a9de8aee240ee9bce0e4f22c7a19, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: ec76c62a6e4264922a7bb0adc4294f12, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: fb7646e4abc2c42edbc78c6d5f1ed2b5, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: baeb518adc520490abc5e6ec02a2958d, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 3
+  - m_RefCount: 5
     m_Data: {fileID: 21300000, guid: 34adee9cca0684445857279a8517cbd4, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 3af4fbc94131e436f9de002ef87e1460, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 6943df94dce4b419ba499e1c82fc0be1, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 5
+  - m_RefCount: 7
     m_Data:
       e00: 1
       e01: 0
@@ -133,6 +155,10 @@ Tilemap:
     m_Data: {r: 0.9811321, g: 0.868599, b: 0.37486652, a: 1}
   - m_RefCount: 2
     m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 1
+    m_Data: {r: 0.745283, g: 0.48412877, b: 0.17225882, a: 1}
+  - m_RefCount: 1
+    m_Data: {r: 0.5582503, g: 0.58174187, b: 0.6132076, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -3, y: -4, z: 0}
