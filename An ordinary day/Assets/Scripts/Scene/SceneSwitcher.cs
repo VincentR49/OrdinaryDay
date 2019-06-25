@@ -5,10 +5,12 @@
 public class SceneSwitcher : MonoBehaviour
 {
     [SerializeField]
-    private ScenePicker _destinationScene;
+    private SceneReference _destinationScene;
+    [SerializeField]
+    private bool _showLoading;
 
     public void Switch()
     {
-        SceneLoaderAsync.Instance.LoadScene(_destinationScene.ScenePath);
+        SceneLoader.Instance.LoadScene(_destinationScene.Path, _showLoading);
     }
 }

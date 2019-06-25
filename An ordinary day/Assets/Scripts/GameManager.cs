@@ -1,12 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-//
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private ScenePicker _firstGameScenePicker;
+    private SceneReference _firstGameScene;
    
     private static bool _alreadyExists;
     public static bool IsPaused => Math.Abs(Time.timeScale) < 0.001f;
@@ -65,7 +63,6 @@ public class GameManager : MonoBehaviour
 
     private void LoadFirstScene()
     {
-        SceneLoaderAsync.Instance.LoadScene(_firstGameScenePicker.ScenePath);
-        //SceneManager.LoadScene(_firstGameScenePicker.ScenePath);
+        SceneLoader.Instance.LoadScene(_firstGameScene.Path, true);
     }
 }

@@ -11,20 +11,7 @@ public class WorldClock : MonoBehaviour
     [SerializeField]
     private DateTimeData _currentTime;
     public bool IsRunning => enabled;
-    private static bool _alreadyExists;
 
-    private void Awake()
-    {
-        if (!_alreadyExists)
-        {
-            _alreadyExists = true;
-            DontDestroyOnLoad(gameObject);
-        }
-        else 
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void Start()
     {

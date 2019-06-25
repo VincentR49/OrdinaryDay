@@ -15,20 +15,6 @@ public class TimeLooper : MonoBehaviour
 
     private DateTime StartDateTime => _startDate.ToDateTime();
     private DateTime EndDateTime => _endDate.ToDateTime();
-    private static bool _alreadyExists;
-
-    private void Awake()
-    {
-        if (!_alreadyExists)
-        {
-            _alreadyExists = true;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
 
     private void Start()

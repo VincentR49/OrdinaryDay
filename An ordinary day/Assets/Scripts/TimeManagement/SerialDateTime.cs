@@ -1,6 +1,7 @@
 ﻿using System;
 
 [Serializable]
+// Serializable class to represent a DateTime
 public class SerialDateTime
 {
     public int Day;
