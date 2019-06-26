@@ -1,48 +1,111 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 // Manage the load / unload of scenes
+// todo always fading
+// todo not waiting for fade to disappear
 public class SceneLoader : Singleton<SceneLoader>
 {
-    private const string LoadingSceneTag = "Loading";
-    // Loading Progress: private setter, public getter
-    private float _loadingProgress;
-    public float LoadingProgress => _loadingProgress;
+    private const float LoadingTime = 2f; // todo debug
+    public static float LoadingProgress { private set; get; }
+    public static event LoadingFinished OnLoadingFinished;
+    public delegate void LoadingFinished();
+
+    private static bool _fade;
+    private static bool _loadingScreen;
+    private static bool _busy;
+    private static string _sceneName;
+    private static UnityAction _afterFadeOutAction;
 
     #region Load
-    public void LoadScene(string sceneName, bool withLoading = false)
+    public static void LoadScene(string sceneName, bool fade, bool loadingScreen)
     {
-        if (withLoading)
+        if (_busy)
         {
-            StartCoroutine(LoadSceneWithLoadingRoutine(sceneName));
+            Debug.LogError("Already loading a scene");
+            return;
+        }
+        _busy = true;
+        _fade = fade;
+        _loadingScreen = loadingScreen;
+        _sceneName = sceneName;
+        if (_fade)
+        {
+            Instance.StartFadeOut(Instance.StartLoading);
         }
         else
         {
-            StartCoroutine(LoadSceneRoutine(sceneName));
+            Instance.StartLoading();
         }
     }
 
-    private IEnumerator LoadSceneWithLoadingRoutine(string sceneName)
+    private void StartFadeOut(UnityAction afterFadeAction)
     {
-        // LoadSceneAsync() returns an AsyncOperation, 
-        // so will only continue past this point when the Operation has finished
-        yield return SceneManager.LoadSceneAsync(LoadingSceneTag);
-        // as soon as we've finished loading the loading screen, start loading the game scene
-        yield return StartCoroutine(LoadSceneRoutine(sceneName));
+        _afterFadeOutAction = afterFadeAction;
+        ScreenFader.FadeOutFinished.AddListener(Instance.OnFadeOutFinished);
+        ScreenFader.FadeOut();
     }
 
-    private IEnumerator LoadSceneRoutine(string sceneName)
-    {
-        Debug.Log("Start to load scene: " + sceneName);
-        var asyncScene = SceneManager.LoadSceneAsync(sceneName);
 
+    private void OnFadeOutFinished()
+    {
+        Debug.Log("OnFadeOutFinished");
+        _afterFadeOutAction.Invoke();
+        ScreenFader.FadeOutFinished.RemoveListener(Instance.OnFadeOutFinished);
+    }
+
+
+    private void StartLoading()
+    {
+        if (_loadingScreen)
+        {
+            StartCoroutine(Instance.LoadSceneWithLoadingRoutine(_sceneName));
+        }
+        else
+        {
+            StartCoroutine(Instance.LoadSceneRoutine(_sceneName));
+        }
+    }
+
+
+    private IEnumerator LoadSceneWithLoadingRoutine(string sceneName)
+    {
+        // Loading screen
+        if (_fade)
+        {
+            ScreenFader.FadeIn();
+        }
+        yield return LoadingHandler.Instance.OpenLoadingSceneRoutine();
+        yield return new WaitForSeconds(LoadingTime);
+        if (_fade)
+        {
+            StartFadeOut(() => StartLoadSceneRoutine(sceneName));
+        }
+        else
+        {
+            yield return StartCoroutine(Instance.LoadSceneRoutine(sceneName));
+        }
+    }
+
+
+    private void StartLoadSceneRoutine(string sceneName)
+    {
+        StartCoroutine(Instance.LoadSceneRoutine(sceneName));
+    }
+
+
+    private IEnumerator LoadSceneRoutine(string sceneName, LoadSceneMode loadMode = LoadSceneMode.Single)
+    {
+        Debug.Log("Start to load scene: " + sceneName + ", " + loadMode);
+        var asyncScene = SceneManager.LoadSceneAsync(sceneName, loadMode);
         // this value stops the scene from displaying when it's finished loading
         asyncScene.allowSceneActivation = false;
         while (!asyncScene.isDone)
         {
             // loading bar progress
-            _loadingProgress = Mathf.Clamp01(asyncScene.progress / 0.9f) * 100;
+            LoadingProgress = Mathf.Clamp01(asyncScene.progress / 0.9f) * 100;
             // scene has loaded as much as possible, the last 10% can't be multi-threaded
             if (asyncScene.progress >= 0.9f)
             {
@@ -52,29 +115,11 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return null;
         }
         Debug.Log("Scene loaded: " + sceneName);
-    }
-    #endregion
-
-
-    #region Unload
-    public void UnloadScene(string sceneName)
-    {
-        var scene = Utils.IsPath(sceneName) ? 
-            SceneManager.GetSceneByPath(sceneName) 
-            : SceneManager.GetSceneByName(sceneName);
-        if (scene != null)
+        if (_fade)
         {
-            Debug.Log("Unload Scene: " + sceneName);
-            StartCoroutine(UnloadSceneRoutine(scene));
+            ScreenFader.FadeIn();
         }
-    }
-
-
-    private IEnumerator UnloadSceneRoutine(Scene scene)
-    {
-        Debug.Log("Start to unload scene: " + scene.name);
-        yield return SceneManager.UnloadSceneAsync(scene.buildIndex);
-        Debug.Log("Scene unloaded: " + scene.name);
+        _busy = false;
     }
     #endregion
 }

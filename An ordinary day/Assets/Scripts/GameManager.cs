@@ -63,6 +63,6 @@ public class GameManager : MonoBehaviour
 
     private void LoadFirstScene()
     {
-        SceneLoader.Instance.LoadScene(_firstGameScene.Path, true);
+        SceneLoader.LoadScene(_firstGameScene.Path, true, true);
     }
 }

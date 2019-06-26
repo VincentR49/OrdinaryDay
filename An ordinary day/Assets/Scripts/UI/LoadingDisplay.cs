@@ -10,6 +10,6 @@ public class LoadingDisplay : MonoBehaviour
     private void Update()
     {
         //Debug.Log(SceneLoaderAsync.Instance.LoadingProgress);
-        _text.text = string.Format("Loading: {0}%", SceneLoader.Instance.LoadingProgress);
+        _text.text = string.Format("Loading: {0}%", SceneLoader.LoadingProgress);
     }
 }

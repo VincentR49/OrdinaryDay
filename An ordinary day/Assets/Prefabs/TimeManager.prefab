@@ -75,7 +75,8 @@ MonoBehaviour:
   _destinationScene:
     _asset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
     _path: Assets/Scenes/MainScene.unity
-  _showLoading: 0
+  _withLoadingScene: 0
+  _fade: 1
 --- !u!1 &5164031015229162631
 GameObject:
   m_ObjectHideFlags: 0

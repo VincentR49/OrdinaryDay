@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236b0a1b285404031ab33e455aa55ff8, type: 3}
   m_Name: PlayerWalkDown
   m_EditorClassIdentifier: 
-  Tag: PlayerWalkDown
   FlipX: 0
-  FlipY: 0
   Loop: 1
+  ReturnToFirstSpriteWhenFinished: 1
   Sprites:
   - {fileID: -3966044189379602213, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
   - {fileID: 5214576322002826026, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
