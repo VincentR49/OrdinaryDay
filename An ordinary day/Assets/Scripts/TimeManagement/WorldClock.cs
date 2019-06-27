@@ -9,7 +9,7 @@ public class WorldClock : MonoBehaviour
     [Tooltip("Value of 1sec IRL in the game")]
     private float _inGameTimeMultiplier = 60f;
     [SerializeField]
-    private DateTimeData _currentTime;
+    private DateTimeData _currentTime = default;
     public bool IsRunning => enabled;
 
 

@@ -4,14 +4,13 @@ using System;
 public class TimeLooper : MonoBehaviour
 {
     [SerializeField]
-    private SceneSwitcher _loopSceneSwitch;
-
+    private SceneSwitcher _loopSceneSwitch = default;
     [SerializeField]
-    private SerialDateTime _startDate;
+    private SerialDateTime _startDate = default;
     [SerializeField]
-    private SerialDateTime _endDate;
+    private SerialDateTime _endDate = default;
     [SerializeField]
-    private DateTimeData _currentTime;
+    private DateTimeData _currentTime = default;
 
     private DateTime StartDateTime => _startDate.ToDateTime();
     private DateTime EndDateTime => _endDate.ToDateTime();

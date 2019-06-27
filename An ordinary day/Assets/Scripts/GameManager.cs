@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private SceneReference _firstGameScene;
+    private SceneReference _firstGameScene = default;
    
     private static bool _alreadyExists;
     public static bool IsPaused => Math.Abs(Time.timeScale) < 0.001f;

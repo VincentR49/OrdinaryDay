@@ -82,7 +82,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6632703550906818029}
   - component: {fileID: 6632703550906818018}
-  - component: {fileID: 6632703550906818019}
   - component: {fileID: -1588951213166646456}
   m_Layer: 0
   m_Name: ScreenFader
@@ -125,28 +124,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6632703550906818019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6632703550906818028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57fa7d78348042e493d6df8056a748e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FadeInFinished:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  FadeOutFinished:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &-1588951213166646456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +136,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523be84516f8b428095f53f48f8c8717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fader: {fileID: 6632703550906818019}
+  _defaultFadeDuration: 0.1
+  FadeInFinished:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  FadeOutFinished:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &6632703551207888577
 GameObject:
   m_ObjectHideFlags: 0

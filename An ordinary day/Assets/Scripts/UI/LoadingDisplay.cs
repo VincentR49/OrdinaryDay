@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class LoadingDisplay : MonoBehaviour
 {
     [SerializeField]
-    private Text _text;
+    private Text _text = default;
 
 
     private void Update()

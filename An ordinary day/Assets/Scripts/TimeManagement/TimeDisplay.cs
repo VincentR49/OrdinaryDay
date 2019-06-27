@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class TimeDisplay : MonoBehaviour
 {
     [SerializeField]
-    private Text _text;
+    private Text _text = default;
     [SerializeField]
-    private DateTimeData _currentTime;
+    private DateTimeData _currentTime = default;
     [SerializeField]
     private Color _pauseColor = Color.red;
 

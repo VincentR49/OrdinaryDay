@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     [SerializeField]
-    private SceneReference _destinationScene;
+    private SceneReference _destinationScene = default;
     [SerializeField]
-    private bool _withLoadingScene;
+    private bool _withLoadingScene = default;
     [SerializeField]
-    private bool _fade;
+    private bool _fade = default;
 
     public void Switch()
     {

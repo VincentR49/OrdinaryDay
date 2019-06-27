@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private WalkManager _walkManager;
+    private WalkManager _walkManager = default;
 
     private Vector2 _moveDirection;
 

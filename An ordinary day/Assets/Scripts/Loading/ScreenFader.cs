@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
-public class ScreenFader : MonoBehaviour
+// Singleton class heriting from fader
+public class ScreenFader : Fader
 {
-    [SerializeField]
-    private Fader _fader;
-
-    public static UnityEvent FadeInFinished => Instance._fader.FadeInFinished;
-    public static UnityEvent FadeOutFinished => Instance._fader.FadeOutFinished;
-
     public static ScreenFader Instance;
-    private void Awake()
+   
+
+    new private void Awake()
     {
+        base.Awake();
         if (Instance == null)
         {
             Instance = this;
@@ -24,8 +21,4 @@ public class ScreenFader : MonoBehaviour
             return;
         }
     }
-
-
-    public static void FadeIn() => Instance._fader.FadeIn();
-    public static void FadeOut() => Instance._fader.FadeOut();
 }

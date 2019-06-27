@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _target;
+    private GameObject _target = default;
     [SerializeField]
-    private bool _followTarget;
+    private bool _followTarget = default;
 
 
     private void Update()

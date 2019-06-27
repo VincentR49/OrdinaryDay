@@ -7,7 +7,7 @@ public class FPSCounter : MonoBehaviour
     private float _count;
     private Color _color = Color.green;
     [SerializeField]
-    private GUIStyle _style;
+    private GUIStyle _style = default;
  
     private IEnumerator Start()
     {

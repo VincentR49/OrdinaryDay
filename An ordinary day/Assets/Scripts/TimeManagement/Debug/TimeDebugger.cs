@@ -3,7 +3,7 @@
 public class TimeDebugger : MonoBehaviour
 {
     [SerializeField]
-    private WorldClock _worldClock;
+    private WorldClock _worldClock = default;
 
 
     private void Update()

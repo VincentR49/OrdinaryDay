@@ -8,54 +8,30 @@ using UnityEngine.Events;
 // todo not waiting for fade to disappear
 public class SceneLoader : Singleton<SceneLoader>
 {
+    private const float FadeDuration = 0.1f;
     private const float LoadingTime = 2f; // todo debug
+    private const string LoadingScene = "Loading";
     public static float LoadingProgress { private set; get; }
-    public static event LoadingFinished OnLoadingFinished;
-    public delegate void LoadingFinished();
-
     private static bool _fade;
     private static bool _loadingScreen;
-    private static bool _busy;
     private static string _sceneName;
-    private static UnityAction _afterFadeOutAction;
 
     #region Load
+    // todo Remove fade parameter?
     public static void LoadScene(string sceneName, bool fade, bool loadingScreen)
     {
-        if (_busy)
-        {
-            Debug.LogError("Already loading a scene");
-            return;
-        }
-        _busy = true;
         _fade = fade;
         _loadingScreen = loadingScreen;
         _sceneName = sceneName;
-        if (_fade)
-        {
-            Instance.StartFadeOut(Instance.StartLoading);
-        }
-        else
-        {
-            Instance.StartLoading();
-        }
+        Instance.StartLoading();
     }
 
-    private void StartFadeOut(UnityAction afterFadeAction)
+
+    private IEnumerator FadeOut()
     {
-        _afterFadeOutAction = afterFadeAction;
-        ScreenFader.FadeOutFinished.AddListener(Instance.OnFadeOutFinished);
-        ScreenFader.FadeOut();
+        ScreenFader.Instance.FadeOut(FadeDuration);
+        yield return new WaitForSeconds(FadeDuration);
     }
-
-
-    private void OnFadeOutFinished()
-    {
-        Debug.Log("OnFadeOutFinished");
-        _afterFadeOutAction.Invoke();
-        ScreenFader.FadeOutFinished.RemoveListener(Instance.OnFadeOutFinished);
-    }
-
 
     private void StartLoading()
     {
@@ -72,21 +48,9 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator LoadSceneWithLoadingRoutine(string sceneName)
     {
-        // Loading screen
-        if (_fade)
-        {
-            ScreenFader.FadeIn();
-        }
-        yield return LoadingHandler.Instance.OpenLoadingSceneRoutine();
+        yield return StartCoroutine(Instance.LoadSceneRoutine(LoadingScene));
         yield return new WaitForSeconds(LoadingTime);
-        if (_fade)
-        {
-            StartFadeOut(() => StartLoadSceneRoutine(sceneName));
-        }
-        else
-        {
-            yield return StartCoroutine(Instance.LoadSceneRoutine(sceneName));
-        }
+        yield return StartCoroutine(Instance.LoadSceneRoutine(sceneName));
     }
 
 
@@ -99,6 +63,8 @@ public class SceneLoader : Singleton<SceneLoader>
     private IEnumerator LoadSceneRoutine(string sceneName, LoadSceneMode loadMode = LoadSceneMode.Single)
     {
         Debug.Log("Start to load scene: " + sceneName + ", " + loadMode);
+        if (_fade)
+            yield return FadeOut();
         var asyncScene = SceneManager.LoadSceneAsync(sceneName, loadMode);
         // this value stops the scene from displaying when it's finished loading
         asyncScene.allowSceneActivation = false;
@@ -116,10 +82,7 @@ public class SceneLoader : Singleton<SceneLoader>
         }
         Debug.Log("Scene loaded: " + sceneName);
         if (_fade)
-        {
-            ScreenFader.FadeIn();
-        }
-        _busy = false;
+            ScreenFader.Instance.FadeIn(FadeDuration);
     }
     #endregion
 }

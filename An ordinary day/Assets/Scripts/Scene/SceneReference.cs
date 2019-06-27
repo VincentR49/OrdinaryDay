@@ -11,11 +11,11 @@ public class SceneReference : ISerializationCallbackReceiver
 {
 #if UNITY_EDITOR
     [SerializeField]
-    private SceneAsset _asset; // hidden by the drawer
+    private SceneAsset _asset = default; // hidden by the drawer
 #endif
 
     [SerializeField]
-    private string _path; // hidden by the drawer
+    private string _path = default; // hidden by the drawer
 
     [PublicAPI]
     public string Path => _path;

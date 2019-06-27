@@ -4,19 +4,19 @@ public class WalkManager : MonoBehaviour
 {
     private const float Epsilon = 0.001f;
     [SerializeField]
-    private float _speed;
+    private float _speed = default;
     [SerializeField]
-    private SpriteAnimator _spriteAnimator;
+    private SpriteAnimator _spriteAnimator = default;
 
     [Header("Animations")]
     [SerializeField]
-    private AnimationData _leftAnimation;
+    private AnimationData _leftAnimation = default;
     [SerializeField]
-    private AnimationData _rightAnimation;
+    private AnimationData _rightAnimation = default;
     [SerializeField]
-    private AnimationData _topAnimation;
+    private AnimationData _topAnimation = default;
     [SerializeField]
-    private AnimationData _downAnimation;
+    private AnimationData _downAnimation = default;
 
     private Rigidbody2D _rb;
 
