@@ -610,6 +610,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1588951213166646456, guid: f819dfdd71eab49749d25e143b5d4342,
+        type: 3}
+      propertyPath: _defaultFadeDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f819dfdd71eab49749d25e143b5d4342, type: 3}
 --- !u!1 &735151227

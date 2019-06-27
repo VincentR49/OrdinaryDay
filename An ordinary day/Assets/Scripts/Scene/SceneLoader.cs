@@ -8,19 +8,18 @@ using UnityEngine.Events;
 // todo not waiting for fade to disappear
 public class SceneLoader : Singleton<SceneLoader>
 {
-    private const float FadeDuration = 0.1f;
     private const float LoadingTime = 2f; // todo debug
     private const string LoadingScene = "Loading";
     public static float LoadingProgress { private set; get; }
-    private static bool _fade;
+    private static float _fadeDuration;
     private static bool _loadingScreen;
     private static string _sceneName;
 
     #region Load
     // todo Remove fade parameter?
-    public static void LoadScene(string sceneName, bool fade, bool loadingScreen)
+    public static void LoadScene(string sceneName, float fadeDuration, bool loadingScreen)
     {
-        _fade = fade;
+        _fadeDuration = fadeDuration;
         _loadingScreen = loadingScreen;
         _sceneName = sceneName;
         Instance.StartLoading();
@@ -29,8 +28,8 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator FadeOut()
     {
-        ScreenFader.Instance.FadeOut(FadeDuration);
-        yield return new WaitForSeconds(FadeDuration);
+        ScreenFader.Instance.FadeOut(_fadeDuration);
+        yield return new WaitForSeconds(_fadeDuration);
     }
 
     private void StartLoading()
@@ -63,8 +62,7 @@ public class SceneLoader : Singleton<SceneLoader>
     private IEnumerator LoadSceneRoutine(string sceneName, LoadSceneMode loadMode = LoadSceneMode.Single)
     {
         Debug.Log("Start to load scene: " + sceneName + ", " + loadMode);
-        if (_fade)
-            yield return FadeOut();
+        yield return FadeOut();
         var asyncScene = SceneManager.LoadSceneAsync(sceneName, loadMode);
         // this value stops the scene from displaying when it's finished loading
         asyncScene.allowSceneActivation = false;
@@ -81,8 +79,7 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return null;
         }
         Debug.Log("Scene loaded: " + sceneName);
-        if (_fade)
-            ScreenFader.Instance.FadeIn(FadeDuration);
+        ScreenFader.Instance.FadeIn(_fadeDuration/2);
     }
     #endregion
 }

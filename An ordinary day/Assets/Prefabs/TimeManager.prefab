@@ -76,7 +76,7 @@ MonoBehaviour:
     _asset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
     _path: Assets/Scenes/MainScene.unity
   _withLoadingScene: 0
-  _fade: 1
+  _fade: 0.5
 --- !u!1 &5164031015229162631
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,4 +167,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469241b22af1b44888baac4fd5d01060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _worldClock: {fileID: 0}
+  _worldClock: {fileID: 7844121296811513160}

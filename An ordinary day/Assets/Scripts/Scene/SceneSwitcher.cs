@@ -10,7 +10,7 @@ public class SceneSwitcher : MonoBehaviour
     [SerializeField]
     private bool _withLoadingScene = default;
     [SerializeField]
-    private bool _fade = default;
+    private float _fade = 0.5f;
 
     public void Switch()
     {

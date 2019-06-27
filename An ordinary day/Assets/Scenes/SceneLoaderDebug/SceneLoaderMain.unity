@@ -348,7 +348,7 @@ MonoBehaviour:
     _asset: {fileID: 102900000, guid: d8a5c27f063f34afba3e1ec67552d455, type: 3}
     _path: Assets/Scenes/SceneLoaderDebug/SceneLoader3.unity
   _withLoadingScene: 0
-  _fade: 1
+  _fade: 0.5
 --- !u!1 &662078654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,4 +1422,4 @@ MonoBehaviour:
     _asset: {fileID: 102900000, guid: 5a53812ec3062455189e29f15b57f396, type: 3}
     _path: Assets/Scenes/SceneLoaderDebug/SceneLoader4.unity
   _withLoadingScene: 1
-  _fade: 1
+  _fade: 0.5
