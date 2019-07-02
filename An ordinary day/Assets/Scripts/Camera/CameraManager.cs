@@ -17,6 +17,7 @@ public class CameraManager : MonoBehaviour
     }
 
 
+
     private void FollowTarget()
     {
         var x = _target.transform.position.x;

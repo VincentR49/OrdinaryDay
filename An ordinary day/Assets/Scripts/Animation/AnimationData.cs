@@ -7,6 +7,6 @@ public class AnimationData : ScriptableObject
 {
     public bool FlipX = false;
     public bool Loop = false;
-    public bool ReturnToFirstSpriteWhenFinished = true;
+    public bool ReturnToFirstSpriteWhenFinished = true; // todo to remove?
     public Sprite[] Sprites;
 }

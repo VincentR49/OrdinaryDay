@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     [SerializeField]
-    private SceneReference _destinationScene = default;
+    protected SceneReference _destinationScene = default;
     [SerializeField]
     private bool _withLoadingScene = default;
     [SerializeField]

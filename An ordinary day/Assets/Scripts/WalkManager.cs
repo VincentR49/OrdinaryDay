@@ -8,7 +8,7 @@ public class WalkManager : MonoBehaviour
     [SerializeField]
     private SpriteAnimator _spriteAnimator = default;
 
-    [Header("Animations")]
+    [Header("Walk Animations")]
     [SerializeField]
     private AnimationData _leftAnimation = default;
     [SerializeField]
@@ -19,7 +19,6 @@ public class WalkManager : MonoBehaviour
     private AnimationData _downAnimation = default;
 
     private Rigidbody2D _rb;
-
 
     private enum State
     {
@@ -71,6 +70,7 @@ public class WalkManager : MonoBehaviour
         Animate(state);
     }
 
+
     private void Animate(State state)
     {
         switch (state)
@@ -87,6 +87,7 @@ public class WalkManager : MonoBehaviour
             case State.Right:
                 _spriteAnimator.StartAnimation(_rightAnimation);
                 break;
+            case State.Stop:
             default:
                 _spriteAnimator.StopCurrentAnimation();
                 break;
