@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 // Teleport the player to the given position
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerTeleporter : MonoBehaviour
 {
-    private const float Fade = 0.5f;
+    private const float Fade = 0.25f;
     private const string PlayerTag = "Player";
     [SerializeField]
     private SceneReference _sceneDestination = default;
@@ -31,7 +32,11 @@ public class PlayerTeleporter : MonoBehaviour
             {
                 var spriteDirectioner = player.GetComponent<SpriteDirectioner>();
                 player.GetComponent<SpriteAnimator>().StopCurrentAnimation();
-                spawnPoint.Spawn(player, spriteDirectioner);
+                var componentsToDisable = new List<MonoBehaviour>
+                {
+                    player.GetComponent<PlayerController>()
+                };
+                spawnPoint.Spawn(player, spriteDirectioner, componentsToDisable);
             }
         }
         else // go to different scene

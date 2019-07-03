@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerSpawner : MonoBehaviour
 {
@@ -11,9 +12,8 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField]
     private GameObject _playerPrefab;
 
-    private void OnLevelWasLoaded(int level)
+    private void Start()
     {
-        Debug.Log("On level load");
         var spawnTag = _playerSpawnPointTag.Value;
         if (!string.IsNullOrEmpty(spawnTag))
         {
@@ -26,7 +26,11 @@ public class PlayerSpawner : MonoBehaviour
                 {
                     player = Instantiate(_playerPrefab);
                 }
-                spawnPoint.Spawn(player, player.GetComponent<SpriteDirectioner>());
+                spawnPoint.Spawn(player, player.GetComponent<SpriteDirectioner>(),
+                    new List<MonoBehaviour>
+                    { 
+                        player.GetComponent<PlayerController>()
+                    });
                 _playerSpawnPointTag.Value = "";
             }
 

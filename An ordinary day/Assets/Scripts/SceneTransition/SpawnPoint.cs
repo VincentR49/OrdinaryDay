@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -32,20 +33,28 @@ public class SpawnPoint : MonoBehaviour
     }
 
 
-    public void Spawn(GameObject go, SpriteDirectioner spriteDirectioner)
+    public void Spawn(GameObject go, SpriteDirectioner spriteDirectioner, List<MonoBehaviour> behaviourToDisable = null)
     {
-        StartCoroutine(SpawnCoroutine(go, spriteDirectioner));
+        StartCoroutine(SpawnCoroutine(go, spriteDirectioner, behaviourToDisable));
     }
 
 
-    private IEnumerator SpawnCoroutine(GameObject go, SpriteDirectioner spriteDirectioner)
+    private IEnumerator SpawnCoroutine(GameObject go, SpriteDirectioner spriteDirectioner, List<MonoBehaviour> disableDuringSpawn = null)
     {
         Debug.Log("Start spawn coroutine");
-        go.SetActive(false);
-        yield return new WaitForSeconds(SpawnDuration);
+        if (disableDuringSpawn != null)
+        {
+            foreach (var behaviour in disableDuringSpawn)
+                behaviour.enabled = false;
+        }
         go.transform.position = gameObject.transform.position;
         spriteDirectioner.SetDirection(_spawnDirection);
-        go.SetActive(true);
+        yield return new WaitForSeconds(SpawnDuration);
+        if (disableDuringSpawn != null)
+        {
+            foreach (var behaviour in disableDuringSpawn)
+                behaviour.enabled = true;
+        }
         Debug.Log("Finish spawn !");
     }
 }
