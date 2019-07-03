@@ -16,12 +16,6 @@ public class TimeLooper : MonoBehaviour
     private DateTime EndDateTime => _endDate.ToDateTime();
 
 
-    private void Start()
-    {
-        Init();
-    }
-
-
     private void Update()
     {
         if (_currentTime.Value >= EndDateTime)

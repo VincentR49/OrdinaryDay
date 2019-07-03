@@ -8,7 +8,7 @@ using UnityEngine.Events;
 // todo not waiting for fade to disappear
 public class SceneLoader : Singleton<SceneLoader>
 {
-    private const float LoadingTime = 2f; // todo debug
+    private const float LoadingTime = 0f; // todo debug
     private const string LoadingScene = "Loading";
     public static float LoadingProgress { private set; get; }
     private static float _fadeDuration;

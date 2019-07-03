@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+
+    private void Update()
+    {
+
     }
 
 
@@ -49,21 +56,33 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Pause()
+    private void LoadFirstScene()
     {
-        Time.timeScale = 0;
+        SceneLoader.LoadScene(_firstGameScene.Path, 0.5f, true);
+        SceneManager.sceneLoaded += OnFirstLevelLoaded;
     }
 
 
-    public void Resume()
+    private void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+
+    private void ResumeGame()
     {
         Time.timeScale = 1f;
     }
 
 
-    private void LoadFirstScene()
+    private void OnFirstLevelLoaded(Scene scene, LoadSceneMode sceneMode)
     {
-        // todo change this
-        SceneLoader.LoadScene(_firstGameScene.Path, 0.5f, true);
+        if (scene.path.Equals(_firstGameScene.Path))
+        {
+            SceneManager.sceneLoaded -= OnFirstLevelLoaded;
+            TimeManager.Init();
+            //PauseGame();
+            // TODO press key to start
+        }
     }
 }

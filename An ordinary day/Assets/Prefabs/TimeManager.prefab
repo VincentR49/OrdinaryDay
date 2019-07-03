@@ -56,8 +56,8 @@ MonoBehaviour:
     Day: 28
     Month: 5
     Year: 1991
-    Hour: 21
-    Min: 5
+    Hour: 9
+    Min: 30
     Sec: 0
   _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
 --- !u!114 &2191877259488034131
@@ -86,6 +86,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5164031015229162628}
+  - component: {fileID: 3865206502472594099}
+  - component: {fileID: 4381218839566284558}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -109,6 +111,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3865206502472594099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164031015229162631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e75046b4acea4cd3a6e9fbbe4eba531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _worldClock: {fileID: 7844121296811513160}
+  _timeLooper: {fileID: 8830298107148822949}
+--- !u!114 &4381218839566284558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164031015229162631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd9818a248054caf9418f7dc451c6e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _worldClock: {fileID: 7844121296811513160}
+  _timeLooper: {fileID: 8830298107148822949}
 --- !u!1 &6040582252057897964
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +149,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2080537267424495253}
   - component: {fileID: 7844121296811513160}
-  - component: {fileID: 8582105202475040367}
   m_Layer: 0
   m_Name: WorldClock
   m_TagString: Untagged
@@ -155,16 +184,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inGameTimeMultiplier: 60
   _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
---- !u!114 &8582105202475040367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6040582252057897964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 469241b22af1b44888baac4fd5d01060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _worldClock: {fileID: 7844121296811513160}
