@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c76b81810fa984032bf0d6b476fe72a0, type: 3}
-  m_Name: GamePhase
+  m_Script: {fileID: 11500000, guid: fe10678b92c1e4d8a9ceb4bb6fbd9baa, type: 3}
+  m_Name: JisooDown
   m_EditorClassIdentifier: 
-  Value: 0
+  Sprite: {fileID: -8107361669236297097, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
+  FlipX: 0

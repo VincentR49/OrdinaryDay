@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80db1238ca67b4b6bba8b2297cd560f2, type: 3}
+  m_Name: Jisoo
+  m_EditorClassIdentifier: 
+  Top: {fileID: 11400000, guid: 3acdc619732774c9fb02e0e686ec4e77, type: 2}
+  Bottom: {fileID: 11400000, guid: 19a70a923e2ed4a95b09748f3bd54c89, type: 2}
+  Right: {fileID: 11400000, guid: e1ccbd42999894369903742bd514a671, type: 2}
+  Left: {fileID: 11400000, guid: c2c06ffec0d3b473da6d67868eb9ab9b, type: 2}

@@ -4,7 +4,7 @@ public class WalkManager : MonoBehaviour
 {
     private const float Epsilon = 0.001f;
     [SerializeField]
-    private float _speed = default;
+    private float _speed = 3f;
     [SerializeField]
     private SpriteAnimator _spriteAnimator = default;
 
@@ -86,5 +86,11 @@ public class WalkManager : MonoBehaviour
                 _spriteAnimator.StopCurrentAnimation();
                 break;
         }
+    }
+
+
+    public void SetWalkAnimation(CardinalAnimationData walkAnimation)
+    {
+        _walkAnimation = walkAnimation;
     }
 }

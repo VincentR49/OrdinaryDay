@@ -13,4 +13,8 @@ public class PNJData : ScriptableObject
     public CardinalSpriteData CardinalSprite;
     public CardinalAnimationData WalkingAnimation;
 
+
+    public override string ToString() 
+        => string.Format("{0} {1}, {2}, {3}", FirstName, LastName, Age, Gender);
+
 }

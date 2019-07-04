@@ -31,13 +31,13 @@ TextureImporter:
     second: base_8
   - first:
       213: -8107361669236297097
-    second: base_9
+    second: j_down_0
   - first:
       213: -7680469812963594789
-    second: base_10
+    second: j_down_1
   - first:
       213: 1024074796330160991
-    second: base_11
+    second: j_down_2
   - first:
       213: 6691632742945144734
     second: base_12
@@ -76,13 +76,13 @@ TextureImporter:
     second: base_23
   - first:
       213: -3796457673653549526
-    second: base_24
+    second: j_left_0
   - first:
       213: 124673092095999976
-    second: base_25
+    second: j_left_1
   - first:
       213: -2881294000722933249
-    second: base_26
+    second: j_left_2
   - first:
       213: 2577102852368661612
     second: base_27
@@ -121,13 +121,13 @@ TextureImporter:
     second: base_38
   - first:
       213: -4170587855172687427
-    second: base_39
+    second: j_up_0
   - first:
       213: 3615958328265510303
-    second: base_40
+    second: j_up_1
   - first:
       213: -7216913541734566180
-    second: base_41
+    second: j_up_2
   - first:
       213: -3145729488303835316
     second: base_42
@@ -685,7 +685,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_9
+      name: j_down_0
       rect:
         serializedVersion: 2
         x: 144
@@ -706,7 +706,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_10
+      name: j_down_1
       rect:
         serializedVersion: 2
         x: 160
@@ -727,7 +727,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_11
+      name: j_down_2
       rect:
         serializedVersion: 2
         x: 176
@@ -1000,7 +1000,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_24
+      name: j_left_0
       rect:
         serializedVersion: 2
         x: 144
@@ -1021,7 +1021,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_25
+      name: j_left_1
       rect:
         serializedVersion: 2
         x: 160
@@ -1042,7 +1042,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_26
+      name: j_left_2
       rect:
         serializedVersion: 2
         x: 176
@@ -1315,7 +1315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_39
+      name: j_up_0
       rect:
         serializedVersion: 2
         x: 144
@@ -1336,7 +1336,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_40
+      name: j_up_1
       rect:
         serializedVersion: 2
         x: 160
@@ -1357,7 +1357,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: base_41
+      name: j_up_2
       rect:
         serializedVersion: 2
         x: 176

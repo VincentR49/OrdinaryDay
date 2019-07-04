@@ -19,4 +19,9 @@ public class SpriteDirectioner : MonoBehaviour
         _spriteRenderer.flipX = sprite.FlipX;
         _spriteRenderer.sprite = sprite.Sprite;
     }
+
+    public void SetCardinalSprite(CardinalSpriteData sprite)
+    {
+        _cardinalSprite = sprite;
+    }
 }

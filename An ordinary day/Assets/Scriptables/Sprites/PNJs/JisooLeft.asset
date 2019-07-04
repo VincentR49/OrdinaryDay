@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69c36b5ba1b5c4a9686cdbc22b2428f3, type: 3}
-  m_Name: Jisoo
+  m_Script: {fileID: 11500000, guid: fe10678b92c1e4d8a9ceb4bb6fbd9baa, type: 3}
+  m_Name: JisooLeft
   m_EditorClassIdentifier: 
-  FirstName: Jisoo
-  LastName: Tsutsu
-  Age: 29
-  Gender: 1
-  CardinalSprite: {fileID: 11400000, guid: cf6e8cad484194d9bb99760d685fb49b, type: 2}
-  WalkingAnimation: {fileID: 0}
+  Sprite: {fileID: -3796457673653549526, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
+  FlipX: 0

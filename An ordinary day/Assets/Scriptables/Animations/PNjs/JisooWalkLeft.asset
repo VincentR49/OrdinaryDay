@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236b0a1b285404031ab33e455aa55ff8, type: 3}
+  m_Name: JisooWalkLeft
+  m_EditorClassIdentifier: 
+  FlipX: 0
+  Loop: 1
+  ReturnToFirstSpriteWhenFinished: 1
+  Sprites:
+  - {fileID: -3796457673653549526, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
+  - {fileID: 124673092095999976, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
+  - {fileID: -2881294000722933249, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
