@@ -16,13 +16,15 @@ public class SceneLoader : Singleton<SceneLoader>
     private static bool _loadingScreen;
     private static string _sceneName;
 
+    private static Action _callAfterLoading;
+
     #region Load
-    // todo add callback to execute when the scene is loaded
-    public static void LoadScene(string sceneName, float fadeDuration, bool loadingScreen)
+    public static void LoadScene(string sceneName, float fadeDuration, bool loadingScreen, Action callAfterLoading = null)
     {
         _fadeDuration = fadeDuration;
         _loadingScreen = loadingScreen;
         _sceneName = sceneName;
+        _callAfterLoading = callAfterLoading;
         Instance.StartLoading();
     }
 
@@ -37,26 +39,26 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         if (_loadingScreen)
         {
-            StartCoroutine(Instance.LoadSceneWithLoadingRoutine(_sceneName));
+            StartCoroutine(LoadSceneWithLoadingRoutine(_sceneName));
         }
         else
         {
-            StartCoroutine(Instance.LoadSceneRoutine(_sceneName));
+            StartCoroutine(LoadSceneRoutine(_sceneName));
         }
     }
 
 
     private IEnumerator LoadSceneWithLoadingRoutine(string sceneName)
     {
-        yield return StartCoroutine(Instance.LoadSceneRoutine(LoadingScene));
+        yield return StartCoroutine(LoadSceneRoutine(LoadingScene));
         yield return new WaitForSeconds(LoadingTime);
-        yield return StartCoroutine(Instance.LoadSceneRoutine(sceneName));
+        yield return StartCoroutine(LoadSceneRoutine(sceneName));
     }
 
 
     private void StartLoadSceneRoutine(string sceneName)
     {
-        StartCoroutine(Instance.LoadSceneRoutine(sceneName));
+        StartCoroutine(LoadSceneRoutine(sceneName));
     }
 
 
@@ -81,6 +83,15 @@ public class SceneLoader : Singleton<SceneLoader>
         }
         Debug.Log("Scene loaded: " + sceneName);
         ScreenFader.Instance.FadeIn(_fadeDuration/2);
+        if (_callAfterLoading != null)
+            ScreenFader.Instance.FadeInFinished.AddListener(OnLoadingFinished);
     }
     #endregion
+
+    private void OnLoadingFinished()
+    {
+        Debug.Log("Execute OnLoadingFinished Action");
+        ScreenFader.Instance.FadeInFinished.RemoveListener(OnLoadingFinished);
+        _callAfterLoading.Invoke();
+    }
 }

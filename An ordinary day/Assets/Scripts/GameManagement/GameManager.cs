@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -63,29 +62,12 @@ public class GameManager : MonoBehaviour
     // TODO move to game loader ?
     private void LoadFirstScene()
     {
-        SceneLoader.LoadScene(_firstGameScene.Path, 0.5f, true);
-        SceneManager.sceneLoaded += OnFirstLevelLoaded;
-    }
-
-
-    private void OnFirstLevelLoaded(Scene scene, LoadSceneMode sceneMode)
-    {
-        if (scene.path.Equals(_firstGameScene.Path))
-        {
-            SceneManager.sceneLoaded -= OnFirstLevelLoaded;
-            ScreenFader.Instance.FadeInFinished.AddListener(OnFirstLevelFadeInFinished);
-        }
-    }
-
-
-    private void OnFirstLevelFadeInFinished()
-    {
-        ScreenFader.Instance.FadeInFinished.RemoveListener(OnFirstLevelFadeInFinished);
-        InitGame();
+        SceneLoader.LoadScene(_firstGameScene.Path, 0.5f, true, new Action(InitGame));
     }
 
     private void InitGame()
     {
+        Debug.Log("InitGame");
         TimeManager.Init();
         GamePauser.Pause();
     }

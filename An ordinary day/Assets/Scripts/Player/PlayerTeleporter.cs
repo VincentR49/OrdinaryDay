@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
-// Teleport the player to the given position
+// Teleport the player to the given position (on the same scene or another scene)
 [RequireComponent(typeof(BoxCollider2D))]
 public class PlayerTeleporter : MonoBehaviour
 {

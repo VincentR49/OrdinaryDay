@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Spawn the player on Start at the given spawn point
+/// </summary>
 public class PlayerSpawner : MonoBehaviour
 {
     private const string PlayerTag = "Player";
