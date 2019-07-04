@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 6925280656517238178}
   - component: {fileID: 3750014047367875637}
   - component: {fileID: 6944839440982991390}
-  - component: {fileID: 1807742197504527549}
+  - component: {fileID: 8257796692927599842}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -315,8 +315,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1807742197504527549}
-        m_MethodName: Switch
+      - m_Target: {fileID: 8257796692927599842}
+        m_MethodName: SwitchToGameMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -328,7 +328,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1807742197504527549
+--- !u!114 &8257796692927599842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -337,13 +337,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5063032259518522868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dd527a1571da4b498300053c5991c00, type: 3}
+  m_Script: {fileID: 11500000, guid: e542882094d094a9da957e2784c627bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destinationScene:
-    _asset: {fileID: 102900000, guid: 7e1a7727ecca74fdc847cf8b95060c64, type: 3}
-    _path: Assets/Scenes/BootScene.unity
-  _showLoading: 1
 --- !u!1 &8957058992947085802
 GameObject:
   m_ObjectHideFlags: 0

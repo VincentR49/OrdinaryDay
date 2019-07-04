@@ -25,12 +25,14 @@ public class TimeManager : MonoBehaviour
 
     public static void StopTime()
     {
+        Debug.Log("[TimeManager] Stop Time");
         _instance._worldClock.Stop();
     }
 
 
     public static void ResumeTime()
     {
+        Debug.Log("[TimeManager] Resume Time");
         _instance._worldClock.Resume();
     }
 

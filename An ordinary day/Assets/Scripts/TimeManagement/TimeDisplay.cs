@@ -27,6 +27,6 @@ public class TimeDisplay : MonoBehaviour
     private void Refresh()
     {
         _text.text = _currentTime.Value.ToString("MM/dd/yyyy HH:mm:ss");
-        _text.color = GameManager.IsPaused ? _pauseColor : _standardColor;
+        _text.color = GamePauser.IsPaused ? _pauseColor : _standardColor;
     }
 }

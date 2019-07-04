@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private SceneReference _firstGameScene = default;
    
     private static bool _alreadyExists;
-    public static bool IsPaused => Math.Abs(Time.timeScale) < 0.001f;
+
 
     private void Awake()
     {
@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
+        if (GamePauser.IsPaused && Input.anyKeyDown)
+        {
+            GamePauser.Resume();
+        }
     }
 
 
@@ -55,23 +58,13 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
+    #region Load first level
 
+    // TODO move to game loader ?
     private void LoadFirstScene()
     {
         SceneLoader.LoadScene(_firstGameScene.Path, 0.5f, true);
         SceneManager.sceneLoaded += OnFirstLevelLoaded;
-    }
-
-
-    private void PauseGame()
-    {
-        Time.timeScale = 0f;
-    }
-
-
-    private void ResumeGame()
-    {
-        Time.timeScale = 1f;
     }
 
 
@@ -80,9 +73,22 @@ public class GameManager : MonoBehaviour
         if (scene.path.Equals(_firstGameScene.Path))
         {
             SceneManager.sceneLoaded -= OnFirstLevelLoaded;
-            TimeManager.Init();
-            //PauseGame();
-            // TODO press key to start
+            ScreenFader.Instance.FadeInFinished.AddListener(OnFirstLevelFadeInFinished);
         }
     }
+
+
+    private void OnFirstLevelFadeInFinished()
+    {
+        ScreenFader.Instance.FadeInFinished.RemoveListener(OnFirstLevelFadeInFinished);
+        InitGame();
+    }
+
+    private void InitGame()
+    {
+        TimeManager.Init();
+        GamePauser.Pause();
+    }
+
+    #endregion
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System;
 
 // Manage the load / unload of scenes
 // todo always fading
@@ -16,7 +17,7 @@ public class SceneLoader : Singleton<SceneLoader>
     private static string _sceneName;
 
     #region Load
-    // todo Remove fade parameter?
+    // todo add callback to execute when the scene is loaded
     public static void LoadScene(string sceneName, float fadeDuration, bool loadingScreen)
     {
         _fadeDuration = fadeDuration;
