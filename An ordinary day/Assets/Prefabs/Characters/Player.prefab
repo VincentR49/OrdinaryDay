@@ -126,10 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _spriteAnimator: {fileID: 3175301384753072671}
-  _leftAnimation: {fileID: 11400000, guid: f82f51b1af71841c6b04e2ca45b3adc7, type: 2}
-  _rightAnimation: {fileID: 11400000, guid: 720aaa11b629b4513a4f23ff9bdc2827, type: 2}
-  _topAnimation: {fileID: 11400000, guid: d3ea282e95931484a97febf9c8d38fe7, type: 2}
-  _downAnimation: {fileID: 11400000, guid: 4a2d7ba349312496fbbffa65fc8507c1, type: 2}
+  _walkAnimation: {fileID: 11400000, guid: 60a91e1c6d2254107a94b031ef45e610, type: 2}
 --- !u!50 &800747845
 Rigidbody2D:
   serializedVersion: 4

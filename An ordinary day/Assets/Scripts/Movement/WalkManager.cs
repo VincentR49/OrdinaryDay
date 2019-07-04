@@ -10,13 +10,7 @@ public class WalkManager : MonoBehaviour
 
     [Header("Walk Animations")]
     [SerializeField]
-    private AnimationData _leftAnimation = default;
-    [SerializeField]
-    private AnimationData _rightAnimation = default;
-    [SerializeField]
-    private AnimationData _topAnimation = default;
-    [SerializeField]
-    private AnimationData _downAnimation = default;
+    private CardinalAnimationData _walkAnimation;
 
     private Rigidbody2D _rb;
 
@@ -76,16 +70,16 @@ public class WalkManager : MonoBehaviour
         switch (state)
         {
             case State.Top:
-                _spriteAnimator.StartAnimation(_topAnimation);
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Top));
                 break;
             case State.Down:
-                _spriteAnimator.StartAnimation(_downAnimation);
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Bottom));
                 break;
             case State.Left:
-                _spriteAnimator.StartAnimation(_leftAnimation);
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Left));
                 break;
             case State.Right:
-                _spriteAnimator.StartAnimation(_rightAnimation);
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Right));
                 break;
             case State.Stop:
             default:

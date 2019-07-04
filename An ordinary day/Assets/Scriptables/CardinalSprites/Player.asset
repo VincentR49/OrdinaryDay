@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80db1238ca67b4b6bba8b2297cd560f2, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  Top: {fileID: 8354808821997234557, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
-  Bottom: {fileID: -3966044189379602213, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
-  Right: {fileID: 0}
-  Left: {fileID: 5773040618309687636, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
-  FlipXForRightOrLeft: 1
+  Top: {fileID: 11400000, guid: eed8d88f58df844f7aa1c49be8c4d008, type: 2}
+  Bottom: {fileID: 11400000, guid: 9d86be3e0e14345a6a008fc8e47cdc18, type: 2}
+  Right: {fileID: 11400000, guid: b8257663771584581a2f06cac7804922, type: 2}
+  Left: {fileID: 11400000, guid: 75520e17f7d464a1f86a59943548e7b4, type: 2}
