@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameController : MonoBehaviour
 {
     [SerializeField]
     private SceneReference _firstGameScene = default;

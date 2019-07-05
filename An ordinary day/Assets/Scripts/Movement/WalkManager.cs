@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Deal with the change of position of an object and displayed the correct animation according to its movement.
+/// </summary>
 public class WalkManager : MonoBehaviour
 {
     private const float Epsilon = 0.001f;

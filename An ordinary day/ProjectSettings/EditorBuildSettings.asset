@@ -21,18 +21,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Loading.unity
     guid: 9be729006e7f34377be1a199861827f4
   - enabled: 1
-    path: Assets/Scenes/SceneLoaderDebug/SceneLoader2.unity
+    path: Assets/Scenes/Debug/SceneLoader/SceneLoader2.unity
     guid: 24a6f1d441b18419994b77d8b874b1c9
   - enabled: 1
-    path: Assets/Scenes/SceneLoaderDebug/SceneLoader1.unity
+    path: Assets/Scenes/Debug/SceneLoader/SceneLoader1.unity
     guid: 2589086a164264081999dfc5a50fdd07
   - enabled: 1
-    path: Assets/Scenes/SceneLoaderDebug/SceneLoaderMain.unity
+    path: Assets/Scenes/Debug/SceneLoader/SceneLoaderMain.unity
     guid: c585c6ac108244c94ac0f892f1fe5134
   - enabled: 1
-    path: Assets/Scenes/SceneLoaderDebug/SceneLoader4.unity
+    path: Assets/Scenes/Debug/SceneLoader/SceneLoader4.unity
     guid: 5a53812ec3062455189e29f15b57f396
   - enabled: 1
-    path: Assets/Scenes/SceneLoaderDebug/SceneLoader3.unity
+    path: Assets/Scenes/Debug/SceneLoader/SceneLoader3.unity
     guid: d8a5c27f063f34afba3e1ec67552d455
   m_configObjects: {}
