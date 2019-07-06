@@ -26,9 +26,12 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (GamePauser.IsPaused && Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            GamePauser.Resume();
+            if (GamePauser.IsPaused)
+                GamePauser.Resume();
+            else
+                GamePauser.Pause();
         }
     }
 
@@ -69,7 +72,6 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("InitGame");
         TimeManager.Init();
-        GamePauser.Pause();
     }
 
     #endregion

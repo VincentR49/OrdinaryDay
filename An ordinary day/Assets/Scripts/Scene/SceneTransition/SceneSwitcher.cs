@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 
 // Sitch to the given scene contained in the scene picker.
 // todo add some parameters
@@ -12,8 +12,8 @@ public class SceneSwitcher : MonoBehaviour
     [SerializeField]
     private float _fade = 0.5f;
 
-    public void Switch()
+    public void Switch(Action afterLoadingCallback = null)
     {
-        SceneLoader.LoadScene(_destinationScene.Path, _fade, _withLoadingScene);
+        SceneLoader.LoadScene(_destinationScene.Path, _fade, _withLoadingScene, afterLoadingCallback);
     }
 }

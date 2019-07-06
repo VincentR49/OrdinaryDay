@@ -60,6 +60,7 @@ MonoBehaviour:
     Min: 30
     Sec: 0
   _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
+  _pauseOnTimeLoopStarted: 0
 --- !u!114 &2191877259488034131
 MonoBehaviour:
   m_ObjectHideFlags: 0

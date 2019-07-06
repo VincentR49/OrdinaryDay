@@ -17,4 +17,4 @@ MonoBehaviour:
   Age: 29
   Gender: 1
   CardinalSprite: {fileID: 11400000, guid: cf6e8cad484194d9bb99760d685fb49b, type: 2}
-  WalkingAnimation: {fileID: 0}
+  WalkingAnimation: {fileID: 11400000, guid: ee0904f65df5545deb198e3b36176e9a, type: 2}
