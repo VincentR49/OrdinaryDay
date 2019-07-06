@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4197437973840161360}
   - component: {fileID: 6927588342372206890}
   - component: {fileID: 5768089228721020594}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PNJ
   m_TagString: PNJ
   m_Icon: {fileID: 0}
