@@ -32,15 +32,15 @@ public class ColliderScanner : MonoBehaviour
     private Color _nOkColor;
 
     private float _lastRefreshTime;
-    private WorldGrid<bool> _scanResult;
+    public WorldGrid<bool> ScanResult { get; private set; }
     private List<Vector2> _pointsToScan; // store in order to optimize computations
 
 
     #region Init
     private void InitScanGrid()
     {
-        _scanResult = new WorldGrid<bool>(_scanArea, _spacialResolution);
-        _pointsToScan = _scanResult.GetWorldCooordinateList();
+        ScanResult = new WorldGrid<bool>(_scanArea, _spacialResolution);
+        _pointsToScan = ScanResult.GetWorldCooordinateList();
     }
 
 
@@ -70,7 +70,7 @@ public class ColliderScanner : MonoBehaviour
         Scan(_staticLayersToScan);
         // Remove all the static points that already have colliders
         var n = _pointsToScan.Count;
-        _pointsToScan.RemoveAll ((point) => _scanResult.Get(point));
+        _pointsToScan.RemoveAll ((point) => ScanResult.Get(point));
         var nAfterOpti = _pointsToScan.Count;
         Debug.Log("Scan optimization. Removed " + (n - nAfterOpti) + " points to scan.");
     }
@@ -96,7 +96,7 @@ public class ColliderScanner : MonoBehaviour
     private void Scan(LayerMask layer)
     {
         foreach (var point in _pointsToScan)
-            _scanResult.Set(point, HasCollider(point, layer));
+            ScanResult.Set(point, HasCollider(point, layer));
     }
 
     #endregion
@@ -130,14 +130,14 @@ public class ColliderScanner : MonoBehaviour
     private List<Vector2> GetAllNOkPoints()
     {
         var nOKPoints = new List<Vector2>();
-        if (_scanResult != null)
+        if (ScanResult != null)
         {
-            for (int row = 0; row < _scanResult.NRow; row++)
+            for (int x = 0; x < ScanResult.Nx; x++)
             {
-                for (int column = 0; column < _scanResult.NColumn; column++)
+                for (int y = 0; y < ScanResult.Ny; y++)
                 {
-                    if (_scanResult[row, column])
-                        nOKPoints.Add(_scanResult.GetWordCoordinate(row, column));
+                    if (ScanResult[x, y])
+                        nOKPoints.Add(ScanResult.GetWordCoordinate(x, y));
                 }
             }
         }

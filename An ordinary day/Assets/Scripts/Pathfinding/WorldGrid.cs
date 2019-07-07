@@ -5,8 +5,8 @@ using UnityEngine;
 public class WorldGrid<T>
 {
     private T[,] _grid;
-    public int NRow => _grid.GetLength(0);
-    public int NColumn => _grid.GetLength(1);
+    public int Nx => _grid.GetLength(0);
+    public int Ny => _grid.GetLength(1);
 
     // link with world coordinate
     private Rect _rect;
@@ -24,11 +24,11 @@ public class WorldGrid<T>
         _rect = rect;
         _cellSize = cellSize;
         // grid initialization
-        var nRow = (int) Mathf.Ceil(rect.height / cellSize);
-        var nCol = (int) Mathf.Ceil(rect.width / cellSize);
-        _grid = new T[nRow, nCol];
+        var nX = (int) Mathf.Ceil(rect.width / cellSize);
+        var nY = (int) Mathf.Ceil(rect.height / cellSize);
+        _grid = new T[nX, nY];
         Debug.Log("Create World Grid");
-        Debug.Log("N Elements: " + NRow * NColumn);
+        Debug.Log("N Elements: " + Nx * Ny);
     }
 
 
@@ -50,28 +50,28 @@ public class WorldGrid<T>
     public List<Vector2> GetWorldCooordinateList()
     {
         var list = new List<Vector2>();
-        for (int row = 0; row < NRow; row++)
+        for (int x = 0; x < Nx; x++)
         {
-            for (int column = 0; column < NColumn; column++)
-                list.Add(GetWordCoordinate(row, column));
+            for (int y = 0; y < Ny; y++)
+                list.Add(GetWordCoordinate(x, y));
         }
         return list;
     }
 
 
-    public Vector2 GetWordCoordinate(int row, int column)
+    public Vector2 GetWordCoordinate(int x, int y)
     {
-        var x = _rect.x + column * _cellSize + _cellSize / 2; // middle
-        var y = _rect.y + row * _cellSize + _cellSize / 2; // middle
-        return new Vector2(x, y);
+        var wx = _rect.x + x * _cellSize + _cellSize / 2; // middle
+        var wy = _rect.y + y * _cellSize + _cellSize / 2; // middle
+        return new Vector2(wx, wy);
     }
 
 
     public Vector2Int GetGridIndex(Vector2 worldPosition)
     {
-        var row = (int) Mathf.Ceil ((worldPosition.y - _rect.yMin) / _cellSize) - 1;
-        var column = (int) Mathf.Ceil ((worldPosition.x - _rect.xMin) / _cellSize) - 1;
-        return new Vector2Int(row, column);
+        var x = (int) Mathf.Ceil ((worldPosition.x - _rect.xMin) / _cellSize) - 1;
+        var y = (int) Mathf.Ceil ((worldPosition.y - _rect.yMin) / _cellSize) - 1;
+        return new Vector2Int(x, y);
     }
 
 
