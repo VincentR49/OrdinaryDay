@@ -6,6 +6,11 @@ public class PathFinder : MonoBehaviour
     [SerializeField]
     private ColliderScanner _colliderScanner;
 
+    [Header("Parameters")]
+    [SerializeField]
+    [Tooltip("If true, check also the neighbours in diagonal direction")]
+    private bool _checkDiagonalNeighbours = true;
+
     [Header("Debug")]
     [SerializeField]
     private Transform _start;
@@ -108,6 +113,8 @@ public class PathFinder : MonoBehaviour
             {
                 // not reachable or same node as origin
                 if ((nodeX == x && nodeY == y) || CollidersGrid[x,y])
+                    continue;
+                if (!_checkDiagonalNeighbours && (x != nodeX && y != nodeY))
                     continue;
                 neighbours.Add(new Node(new Vector2Int(x, y), node));
             }
