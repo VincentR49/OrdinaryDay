@@ -144,6 +144,11 @@ public class PathFinder : MonoBehaviour
         => node.Cost + node.GetDistanceFrom(target);
 
 
+    public void SetColliderScanner(ColliderScanner colliderScanner)
+    {
+        _colliderScanner = colliderScanner;
+    }
+
     #region Debug
 
     public void FindPathDebug()

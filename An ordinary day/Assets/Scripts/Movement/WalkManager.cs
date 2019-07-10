@@ -46,6 +46,12 @@ public class WalkManager : MonoBehaviour
     }
 
 
+    public void Stop()
+    {
+        ChangeState(State.Stop);
+    }
+
+
     private State GetState(Vector2 direction)
     {
         var absX = Mathf.Abs(direction.x);

@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 4197437973840161363}
   - component: {fileID: 4197437973840161360}
   - component: {fileID: 6927588342372206890}
-  - component: {fileID: 5768089228721020594}
+  - component: {fileID: 1999833727167035478}
+  - component: {fileID: 2148825919971324433}
   m_Layer: 9
   m_Name: PNJ
   m_TagString: PNJ
@@ -180,7 +181,10 @@ MonoBehaviour:
   _pnjData: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}
   _walkManager: {fileID: 4197437973840161361}
   _spriteDirectioner: {fileID: 4197437973840161363}
---- !u!114 &5768089228721020594
+  _pathFinder: {fileID: 1999833727167035478}
+  _pathFollower: {fileID: 2148825919971324433}
+  _pathTarget: {fileID: 0}
+--- !u!114 &1999833727167035478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +193,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4197437973840161370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 598b7a22d886f4ffeaa2bb69ab4c7b92, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ce3cc9cb63cb4c33bdb84ebdabf60d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colliderScanner: {fileID: 0}
+  _checkDiagonalNeighbours: 0
+  _start: {fileID: 0}
+  _target: {fileID: 0}
+  _showDebug: 0
+  _pathColor: {r: 1, g: 0, b: 0.85180044, a: 1}
+--- !u!114 &2148825919971324433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197437973840161370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9adc7f93cf0c44e7c9b03d3355334619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _walkManager: {fileID: 4197437973840161361}
