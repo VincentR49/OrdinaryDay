@@ -7,44 +7,66 @@ using System.Collections.Generic;
 public class PathFollower : MonoBehaviour
 {
     // define the minimal distance from the current target needed to go to the next target 
-    private const float ReachedTargetMinDistance = 0.5f; 
+    private const float ReachedTargetMinDistance = 0.2f; 
 
     [SerializeField]
     private WalkManager _walkManager;
 
-    private bool _isFollowingPath;
-    private List<Vector2> _path;
-    private Vector2 _target;
+    private Queue<Vector2> _path;
+    private Vector2 Target => _path.Peek();
+    public bool IsFollowing { private set; get; }
 
 
-    public void FollowPath(List<Vector2> path)
+    public void FollowPath(Queue<Vector2> path)
     {
-        Debug.Log("Start following path");
-        _isFollowingPath = true;
+        if (path == null)
+            return;
+        Debug.Log("Start following path: " + string.Join(",", path));
+        IsFollowing = true;
         _path = path;
     }
 
 
-    public void Stop()
+    public void Stop(bool resetPath = false)
     {
-        if (!_isFollowingPath) return;
-        _isFollowingPath = false;
+        Debug.Log("Stop following path");
+        IsFollowing = false;
         _walkManager.Stop();
+        if (resetPath)
+            _path = null;
     }
 
 
     private void Update()
     {
-        if (_isFollowingPath)
+        if (IsFollowing)
         {
-            // todo do something
+            if (HasReachedCurrentTarget())
+            {
+                if (!GoToNextStep())
+                    return;
+            }
+            _walkManager.Move(Target - new Vector2(transform.position.x, transform.position.y));
         }
     }
 
 
-    private Vector2 GetNextTarget()
+    private bool HasReachedCurrentTarget()
     {
-        // todo
-        return Vector2.zero;
+        if (_path == null || _path.Count == 0)
+            return true;
+        return Utils.Distance(transform.position, Target) <= ReachedTargetMinDistance;
+    }
+
+
+    private bool GoToNextStep()
+    {
+        _path.Dequeue();
+        if (_path.Count == 0)
+        {
+            Stop();
+            return false;
+        }
+        return true;
     }
 }

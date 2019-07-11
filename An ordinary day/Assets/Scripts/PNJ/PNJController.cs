@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Manage the PNJ behaviours
@@ -23,8 +24,7 @@ public class PNJController : MonoBehaviour
 
     [Header("PathFinding Debug")]
     [SerializeField]
-    private Transform _pathTarget;
-    private bool _pathfindLaunched;
+    private Transform _pathDebugTarget;
 
     #region Init
     private void Awake()
@@ -60,18 +60,6 @@ public class PNJController : MonoBehaviour
     #endregion
 
 
-    private void Update()
-    {
-        // todo some stuff here
-        if (!_pathfindLaunched)
-        {
-            GoToTarget(_pathTarget.position); // todo debug only
-            _pathfindLaunched = true;
-        }
-    }
-
-
-
     #region Path following
 
     private void GoToTarget(Vector2 target)
@@ -82,7 +70,18 @@ public class PNJController : MonoBehaviour
             Debug.LogError("Cannot go to target " + target);
             return;
         }
-        _pathFollower.FollowPath(path);
+        var pathQueue = new Queue<Vector2>(path);
+        _pathFollower.FollowPath(pathQueue);
+    }
+
+    #endregion
+
+
+    #region Debug
+
+    public void GoToDebugTarget()
+    {
+        GoToTarget(_pathDebugTarget.position);
     }
 
     #endregion

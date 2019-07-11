@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Behaviour searching the shortest path given a grid of obstacles (collider scanner)
+/// </summary>
 public class PathFinder : MonoBehaviour
 {
     [SerializeField]
-    private ColliderScanner _colliderScanner;
+    private ColliderScanner _colliderScanner; // obstacle grid
 
     [Header("Parameters")]
     [SerializeField]
@@ -125,6 +128,7 @@ public class PathFinder : MonoBehaviour
 
     /// <summary>
     /// Reconstructs the path going to a given node, using its parents
+    /// Start with the start position
     /// </summary>
     /// <returns>The world coordinate path.</returns>
     /// <param name="node">Node.</param>
@@ -136,6 +140,7 @@ public class PathFinder : MonoBehaviour
             path.Add(CollidersGrid.GetWordCoordinate(node.Position));
             node = node.Parent;
         }
+        path.Reverse(); // to start with the start position
         return path;
     }
 
