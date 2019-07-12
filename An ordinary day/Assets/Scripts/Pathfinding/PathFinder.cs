@@ -25,12 +25,13 @@ public class PathFinder : MonoBehaviour
     private Color _pathColor;
 
     private List<Vector2> _debugPath;
+    private WorldGrid<Collider2D> CollidersGrid => _colliderScanner.ScanResult;
 
-    private WorldGrid<bool> CollidersGrid => _colliderScanner.ScanResult;
 
-  
     /// <summary>
-    /// Finds the shortest path.
+    /// Finds the shortest path from start to final.
+    /// Return a list of position, starting by the starting position.
+    /// Return null if any path could be found or if the target is unreachable.
     /// </summary>
     /// <returns>The shortest path.</returns>
     /// <param name="start">Start.</param>

@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &4197437973840161364
 Rigidbody2D:
   serializedVersion: 4
@@ -183,7 +183,7 @@ MonoBehaviour:
   _spriteDirectioner: {fileID: 4197437973840161363}
   _pathFinder: {fileID: 1999833727167035478}
   _pathFollower: {fileID: 2148825919971324433}
-  _pathTarget: {fileID: 0}
+  _pathDebugTarget: {fileID: 0}
 --- !u!114 &1999833727167035478
 MonoBehaviour:
   m_ObjectHideFlags: 0

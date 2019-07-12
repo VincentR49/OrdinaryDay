@@ -32,14 +32,14 @@ public class ColliderScanner : MonoBehaviour
     private Color _nOkColor;
 
     private float _lastRefreshTime;
-    public WorldGrid<bool> ScanResult { get; private set; }
+    public WorldGrid<Collider2D> ScanResult { get; private set; }
     private List<Vector2> _pointsToScan; // store in order to optimize computations
 
 
     #region Init
     private void InitScanGrid()
     {
-        ScanResult = new WorldGrid<bool>(_scanArea, _spacialResolution);
+        ScanResult = new WorldGrid<Collider2D>(_scanArea, _spacialResolution);
         _pointsToScan = ScanResult.GetWorldCooordinateList();
     }
 
@@ -96,16 +96,16 @@ public class ColliderScanner : MonoBehaviour
     private void Scan(LayerMask layer)
     {
         foreach (var point in _pointsToScan)
-            ScanResult.Set(point, HasCollider(point, layer));
+            ScanResult.Set(point, ScanPosition(point, layer));
     }
 
     #endregion
 
 
     #region Utils
-    private bool HasCollider(Vector2 point, LayerMask layer)
+    private Collider2D ScanPosition(Vector2 point, LayerMask layer)
     {
-        return Physics2D.OverlapCircle(point, _spacialResolution / ScanRadiusDivider, layer) != null;
+        return Physics2D.OverlapCircle(point, _spacialResolution / ScanRadiusDivider, layer);
     }
 
     #endregion
