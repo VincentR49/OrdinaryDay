@@ -17,14 +17,7 @@ public static class Utils
 
 
     #region Extensions Methods
-
-    public static bool ContainsNode(this List<Node> list, Node item)
-    {
-        return list.Get(item) != null;
-    }
-
-
-    public static Node Get(this List<Node> list, Node item)
+    public static Node GetNodeByPosition(this List<Node> list, Node item)
     {
         return list.FirstOrDefault((x) => x.Position == item.Position);
     }

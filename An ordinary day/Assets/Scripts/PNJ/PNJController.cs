@@ -22,6 +22,8 @@ public class PNJController : MonoBehaviour
     [SerializeField]
     private PathFollower _pathFollower;
 
+    private Collider2D _pnjCollider;
+
     [Header("PathFinding Debug")]
     [SerializeField]
     private Transform _pathDebugTarget;
@@ -30,6 +32,7 @@ public class PNJController : MonoBehaviour
     private void Awake()
     {
         Debug.Log("PNJ Creation: " + _pnjData);
+        _pnjCollider = GetComponent<Collider2D>();
         InitSprites();
     }
 
@@ -64,7 +67,7 @@ public class PNJController : MonoBehaviour
 
     private void GoToTarget(Vector2 target)
     {
-        var path = _pathFinder.FindShortestPath(transform.position, target);
+        var path = _pathFinder.FindShortestPath(transform.position, target, new Collider2D[]{ _pnjCollider});
         if (path == null)
         {
             Debug.LogError("Cannot go to target " + target);

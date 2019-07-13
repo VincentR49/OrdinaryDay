@@ -19,7 +19,7 @@ public class PathFollower : MonoBehaviour
 
     public void FollowPath(Queue<Vector2> path)
     {
-        if (path == null)
+        if (path == null || path.Count == 0)
             return;
         Debug.Log("Start following path: " + string.Join(",", path));
         IsFollowing = true;
