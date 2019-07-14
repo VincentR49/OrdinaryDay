@@ -11,7 +11,6 @@ public static class Utils
         return str.Contains("/") || str.Contains("\\");
     }
 
-
     public static float Distance(Vector2 u, Vector2 v)
         => Mathf.Sqrt(Mathf.Pow(u.x - v.x, 2) + Mathf.Pow(u.y - v.y, 2));
 

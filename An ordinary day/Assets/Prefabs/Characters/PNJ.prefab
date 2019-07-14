@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6927588342372206890}
   - component: {fileID: 1999833727167035478}
   - component: {fileID: 2148825919971324433}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: PNJ
   m_TagString: PNJ
   m_Icon: {fileID: 0}
@@ -198,6 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colliderScanner: {fileID: 0}
   _checkDiagonalNeighbours: 0
+  _weightedElements:
+  - ObjectTag: Road
+    Weight: 3
   _start: {fileID: 0}
   _target: {fileID: 0}
   _showDebug: 0

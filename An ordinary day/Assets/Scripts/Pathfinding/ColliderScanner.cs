@@ -19,9 +19,9 @@ public class ColliderScanner : MonoBehaviour
 
     [Header("Layers")]
     [SerializeField]
-    private LayerMask[] _dynamicLayersToScan;
+    private LayerMask _dynamicLayerToScan;
     [SerializeField]
-    private LayerMask[] _staticLayersToScan;
+    private LayerMask _staticLayerToScan;
 
     [Header("Debug")]
     [SerializeField]
@@ -29,7 +29,9 @@ public class ColliderScanner : MonoBehaviour
     [SerializeField]
     private Texture2D _areaTexture;
     [SerializeField]
-    private Color _nOkColor;
+    private Color _collidersColor;
+    [SerializeField]
+    private Color _triggerColors;
 
     private float _lastRefreshTime;
     public WorldGrid<Collider2D> ScanResult { get; private set; }
@@ -67,7 +69,7 @@ public class ColliderScanner : MonoBehaviour
     private void ScanStaticLayers()
     {
         Debug.Log("[ColliderScanner] Scan Static Layer");
-        Scan(_staticLayersToScan);
+        Scan(_staticLayerToScan);
         // Remove all the static points that already have colliders
         var n = _pointsToScan.Count;
         _pointsToScan.RemoveAll ((point) => ScanResult.Get(point));
@@ -80,18 +82,8 @@ public class ColliderScanner : MonoBehaviour
     {
         Debug.Log("[ColliderScanner] ScanDynamicLayers");
         _lastRefreshTime = Time.time;
-        Scan(_dynamicLayersToScan);
+        Scan(_dynamicLayerToScan);
     }
-
-
-    private void Scan(LayerMask[] layers)
-    {
-        if (layers == null || layers.Length == 0)
-            return;
-        foreach (var layer in layers)
-            Scan(layer);
-    }
-
 
     private void Scan(LayerMask layer)
     {
@@ -119,17 +111,20 @@ public class ColliderScanner : MonoBehaviour
             return;
         Gizmos.DrawGUITexture(_scanArea, _areaTexture);
         // Draw nOk Areas
-        var nOKPoints = GetAllNOkPoints();
-        Gizmos.color = _nOkColor;
-        foreach (var point in nOKPoints)
-            Gizmos.DrawCube(point, Vector3.one * 0.5f);
-                     
+        GetCollidersInGrid(out List<Vector2> colliderPoints, out List<Vector2> triggerPoints);
+        Gizmos.color = _collidersColor;
+        foreach (var point in colliderPoints)
+            Gizmos.DrawCube(point, Vector3.one * _spacialResolution / 2f);
+        Gizmos.color = _triggerColors;
+        foreach (var point in triggerPoints)
+            Gizmos.DrawCube(point, Vector3.one * _spacialResolution / 2f);
     }
 
 
-    private List<Vector2> GetAllNOkPoints()
+    private void GetCollidersInGrid(out List<Vector2> colliderPoints, out List<Vector2> triggerPoints)
     {
-        var nOKPoints = new List<Vector2>();
+        colliderPoints = new List<Vector2>();
+        triggerPoints = new List<Vector2>();
         if (ScanResult != null)
         {
             for (int x = 0; x < ScanResult.Nx; x++)
@@ -137,11 +132,20 @@ public class ColliderScanner : MonoBehaviour
                 for (int y = 0; y < ScanResult.Ny; y++)
                 {
                     if (ScanResult[x, y])
-                        nOKPoints.Add(ScanResult.GetWordCoordinate(x, y));
+                    {
+                        if (ScanResult[x,y].isTrigger)
+                        {
+                            triggerPoints.Add(ScanResult.GetWordCoordinate(x, y));
+                        }
+                        else
+                        {
+                            colliderPoints.Add(ScanResult.GetWordCoordinate(x, y));
+                        }
+                    }
+                        
                 }
             }
         }
-        return nOKPoints;
     }
     #endregion
 }

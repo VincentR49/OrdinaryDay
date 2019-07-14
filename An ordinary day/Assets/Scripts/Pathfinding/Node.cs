@@ -19,7 +19,11 @@ public class Node : IComparable<Node>
         Heuristic = heuristic;
     }
 
-    public float GetDistanceFrom(Node other) => Utils.Distance(Position, other.Position);
+    public float GetDistanceFrom(Node other)
+    {
+        return (float) (Math.Pow(Position.x - other.Position.x, 2) 
+                      + Math.Pow(Position.y - other.Position.y, 2));
+    }
 
     public int CompareTo(Node other)
     {

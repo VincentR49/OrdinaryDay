@@ -21,7 +21,8 @@ public class PathFollower : MonoBehaviour
     {
         if (path == null || path.Count == 0)
             return;
-        Debug.Log("Start following path: " + string.Join(",", path));
+        //Debug.Log("Start following path: " + string.Join(",", path));
+        Debug.Log("Start following path.");
         IsFollowing = true;
         _path = path;
     }

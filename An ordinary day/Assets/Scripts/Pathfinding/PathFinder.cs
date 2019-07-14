@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 /// <summary>
 /// Behaviour searching the shortest path given a grid of obstacles (collider scanner)
 /// </summary>
 public class PathFinder : MonoBehaviour
 {
+    private const float DefaultWeight = 1f;
+
     [SerializeField]
     private ColliderScanner _colliderScanner; // obstacle grid
 
@@ -14,6 +17,16 @@ public class PathFinder : MonoBehaviour
     [SerializeField]
     [Tooltip("If true, check also the neighbours in diagonal direction")]
     private bool _checkDiagonalNeighbours = true;
+    [SerializeField]
+    private WeightedElement[] _weightedElements;
+
+    [Serializable]
+    private class WeightedElement
+    {
+        public string ObjectTag;
+        [Range(1f,5f)]
+        public float Weight = 3f;
+    }
 
     [Header("Debug")]
     [SerializeField]
@@ -59,7 +72,7 @@ public class PathFinder : MonoBehaviour
         while (openList.Count > 0)
         {
             // Pick up the node with the lowest heuristic and remove it from the open list
-            var node = openList[0]; 
+            var node = openList[0];
             openList.Remove(node);
             // we reached the final position: return the path and stop algorithm
             if (node.Position == finalNode.Position)
@@ -77,7 +90,7 @@ public class PathFinder : MonoBehaviour
                     continue;
 
                 // compute cost
-                neighbour.Cost = node.Cost + neighbour.GetDistanceFrom(node);
+                neighbour.Cost = ComputeCost(neighbour, node);
 
                 // pass if already in opened list and its cost is superior
                 var neighBourInOpenList = openList.GetNodeByPosition(neighbour);
@@ -91,6 +104,7 @@ public class PathFinder : MonoBehaviour
                 }
                 neighbour.Heuristic = ComputeHeuristic(neighbour, finalNode);
                 AddNodeInOpenList(openList, neighbour);
+                //openList.Add(neighbour);
             }
             // We add the node to the close if he doesnt exist already
             if (!closeList.Contains(node.Position))
@@ -152,12 +166,13 @@ public class PathFinder : MonoBehaviour
     /// </summary>
     private bool HasCollider(int x, int y)
     {
-        if (CollidersGrid[x, y] == null) // no collider
+        if (CollidersGrid[x, y] == null // no collider
+                                        // if the collider has to be ignored, return false                            
+            || CollidersGrid[x,y].isTrigger 
+            || (_collidersToIgnore != null && _collidersToIgnore.Contains(CollidersGrid[x, y]))
+             )
             return false;
-        // if the collider has to be ignored, return false
-        else if (_collidersToIgnore != null 
-                    && _collidersToIgnore.Contains(CollidersGrid[x, y]))
-            return false;
+
         return true;
     }
 
@@ -181,8 +196,37 @@ public class PathFinder : MonoBehaviour
     }
 
 
-    private static float ComputeHeuristic(Node node, Node target) => node.Cost + node.GetDistanceFrom(target);
+    #region Costs
+    private float ComputeHeuristic(Node node, Node target)
+    {
+        return node.Cost + node.GetDistanceFrom(target) / GetWeight(node);
+    }
 
+
+    private float ComputeCost(Node node, Node parent)
+    {
+        return parent.Cost + node.GetDistanceFrom(parent) / GetWeight(node);
+    }
+
+
+    private float GetWeight(Node node)
+    {
+        // no weighted elements defined, return default weight
+        if (_weightedElements == null || _weightedElements.Length == 0)
+            return DefaultWeight;
+        var nodeCollider = CollidersGrid[node.Position.x, node.Position.y];
+        if (nodeCollider != null && nodeCollider.isTrigger)
+        {
+            // If the collider found has a tag defined in the weighted element list
+            var weightedElement = _weightedElements.FirstOrDefault((x) => x.ObjectTag.Equals(nodeCollider.tag));
+            if (weightedElement != null)
+                return weightedElement.Weight;
+        }
+        return DefaultWeight;
+    }
+
+
+    #endregion
 
     public void SetColliderScanner(ColliderScanner colliderScanner)
     {
