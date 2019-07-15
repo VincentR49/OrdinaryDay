@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultSpeed: 3
-  _groundMultipliers:
+  _grounds:
   - GroundTag: Road
     Multiplier: 2
   _spriteAnimator: {fileID: 3175301384753072671}

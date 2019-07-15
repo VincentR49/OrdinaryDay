@@ -15,13 +15,13 @@ public class WalkManager : MonoBehaviour
     [SerializeField]
     private float _defaultSpeed = 3f;
     [SerializeField]
-    private GroundMultiplier[] _groundMultipliers;
+    private Ground[] _grounds;
 
     [Serializable]
-    private class GroundMultiplier
+    private class Ground
     {
         public string GroundTag;
-        public float Multiplier;
+        public float Multiplier = 1f;
     }
 
     [Header("Display")]
@@ -35,7 +35,7 @@ public class WalkManager : MonoBehaviour
     // speed management data
     private float Speed => _defaultSpeed * _speedMultiplier;
     private float _speedMultiplier = 1f;
-    private bool HasGroundMultiplier => _groundMultipliers != null && _groundMultipliers.Length > 0;
+    private bool HasGroundsDefined => _grounds != null && _grounds.Length > 0;
     private List<Collider2D> _currentTriggers = new List<Collider2D>();
 
     private enum State
@@ -134,7 +134,7 @@ public class WalkManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!HasGroundMultiplier)
+        if (!HasGroundsDefined)
             return;
         //Debug.Log("On trigger enter: " + collision.tag);
         _currentTriggers.Add(collision);
@@ -144,10 +144,9 @@ public class WalkManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!HasGroundMultiplier)
+        if (!HasGroundsDefined)
             return;
         //Debug.Log("On trigger exit: " + collision.tag);
-        ResetSpeedMultiplier();
         _currentTriggers.Remove(collision);
         UpdateCurrentGroundMultiplier();
     }
@@ -155,23 +154,24 @@ public class WalkManager : MonoBehaviour
 
     private void UpdateCurrentGroundMultiplier()
     {
-        var nTriggers = _currentTriggers.Count;
-        if (nTriggers == 0) // in contact with no trigger
+        // We take the most profitable ground currently in contact with the player
+        var specialGroundFound = false;
+        foreach (var trigger in _currentTriggers)
         {
-            ResetSpeedMultiplier();
-            return;
+            var ground = _grounds.FirstOrDefault((x) => x.GroundTag.Equals(trigger.tag));
+            if (ground != null)
+            {
+                specialGroundFound = true;
+                _speedMultiplier = Math.Max(_speedMultiplier, ground.Multiplier);
+            }
         }
-        // We take into account the last trigger collided as reference for the speed multiplier
-        var lastTriggerHit = _currentTriggers[nTriggers - 1];
-        var groundMultiplier = _groundMultipliers.FirstOrDefault((x) => x.GroundTag.Equals(lastTriggerHit.tag));
-        if (groundMultiplier != null)
-            _speedMultiplier = groundMultiplier.Multiplier;
-        else
+        if (!specialGroundFound)
             ResetSpeedMultiplier();
     }
 
     private void ResetSpeedMultiplier()
     {
+        //Debug.Log("ResetSpeedMultiplier");
         _speedMultiplier = 1f;
     }
 
