@@ -134,7 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf899e64fedd0443f8ee1241799ec9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _defaultSpeed: 3
+  _groundMultipliers:
+  - GroundTag: Road
+    Multiplier: 2
   _spriteAnimator: {fileID: 4197437973840161365}
   _walkAnimation: {fileID: 0}
 --- !u!114 &4197437973840161363

@@ -1,21 +1,42 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Deal with the change of position of an object and displayed the correct animation according to its movement.
+/// Can change the speed in function of where the object walk.
 /// </summary>
 public class WalkManager : MonoBehaviour
 {
     private const float Epsilon = 0.001f;
+
+    [Header("Speed")]
     [SerializeField]
-    private float _speed = 3f;
+    private float _defaultSpeed = 3f;
+    [SerializeField]
+    private GroundMultiplier[] _groundMultipliers;
+
+    [Serializable]
+    private class GroundMultiplier
+    {
+        public string GroundTag;
+        public float Multiplier;
+    }
+
+    [Header("Display")]
     [SerializeField]
     private SpriteAnimator _spriteAnimator = default;
-
-    [Header("Walk Animations")]
     [SerializeField]
     private CardinalAnimationData _walkAnimation;
 
     private Rigidbody2D _rb;
+
+    // speed management data
+    private float Speed => _defaultSpeed * _speedMultiplier;
+    private float _speedMultiplier = 1f;
+    private bool HasGroundMultiplier => _groundMultipliers != null && _groundMultipliers.Length > 0;
+    private List<Collider2D> _currentTriggers = new List<Collider2D>();
 
     private enum State
     {
@@ -28,10 +49,12 @@ public class WalkManager : MonoBehaviour
 
     private State _state = State.Stop;
 
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
+
 
     public void Move(Vector2 direction)
     {
@@ -42,10 +65,10 @@ public class WalkManager : MonoBehaviour
         {
             ChangeState(state);
         }
-        _rb.MovePosition(_rb.position + direction * _speed * Time.deltaTime);
+        _rb.MovePosition(_rb.position + direction * Speed * Time.deltaTime);
     }
 
-
+    #region State management
     public void Stop()
     {
         ChangeState(State.Stop);
@@ -72,8 +95,10 @@ public class WalkManager : MonoBehaviour
         //Debug.Log("Change State: " + state);
         Animate(state);
     }
+    #endregion
 
 
+    #region Animation
     private void Animate(State state)
     {
         switch (state)
@@ -102,4 +127,53 @@ public class WalkManager : MonoBehaviour
     {
         _walkAnimation = walkAnimation;
     }
+    #endregion
+
+
+    #region Speed
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!HasGroundMultiplier)
+            return;
+        //Debug.Log("On trigger enter: " + collision.tag);
+        _currentTriggers.Add(collision);
+        UpdateCurrentGroundMultiplier();
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!HasGroundMultiplier)
+            return;
+        //Debug.Log("On trigger exit: " + collision.tag);
+        ResetSpeedMultiplier();
+        _currentTriggers.Remove(collision);
+        UpdateCurrentGroundMultiplier();
+    }
+
+
+    private void UpdateCurrentGroundMultiplier()
+    {
+        var nTriggers = _currentTriggers.Count;
+        if (nTriggers == 0) // in contact with no trigger
+        {
+            ResetSpeedMultiplier();
+            return;
+        }
+        // We take into account the last trigger collided as reference for the speed multiplier
+        var lastTriggerHit = _currentTriggers[nTriggers - 1];
+        var groundMultiplier = _groundMultipliers.FirstOrDefault((x) => x.GroundTag.Equals(lastTriggerHit.tag));
+        if (groundMultiplier != null)
+            _speedMultiplier = groundMultiplier.Multiplier;
+        else
+            ResetSpeedMultiplier();
+    }
+
+    private void ResetSpeedMultiplier()
+    {
+        _speedMultiplier = 1f;
+    }
+
+    #endregion
 }
