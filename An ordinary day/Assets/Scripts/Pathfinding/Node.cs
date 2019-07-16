@@ -11,12 +11,16 @@ public class Node : IComparable<Node>
     public float Heuristic { get; set; }
     public Vector2Int Position { get; private set; }
 
-    public Node(Vector2Int position, Node parent, float cost = 0f, float heuristic = 0f)
+    public Node(int x, int y, Node parent)
+    {
+        Parent = parent;
+        Position = new Vector2Int(x,y);
+    }
+
+    public Node(Vector2Int position, Node parent)
     {
         Parent = parent;
         Position = position;
-        Cost = cost;
-        Heuristic = heuristic;
     }
 
     public float GetDistanceFrom(Node other)

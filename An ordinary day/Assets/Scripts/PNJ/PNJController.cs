@@ -47,7 +47,9 @@ public class PNJController : MonoBehaviour
         _spriteDirectioner.SetCardinalSprite(_pnjData.CardinalSprite);
         _walkManager.SetWalkAnimation(_pnjData.WalkingAnimation);
     }
+    #endregion
 
+    #region Path following
 
     private void InitPathFindingSystem()
     {
@@ -60,10 +62,7 @@ public class PNJController : MonoBehaviour
         _pathFinder.SetColliderScanner(colliderScanner);
         Debug.Log(_pnjData.FirstName + " pathfinding system initialized");
     }
-    #endregion
 
-
-    #region Path following
 
     private void GoToTarget(Vector2 target)
     {

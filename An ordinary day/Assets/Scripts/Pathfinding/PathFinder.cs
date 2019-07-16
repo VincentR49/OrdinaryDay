@@ -50,15 +50,15 @@ public class PathFinder : MonoBehaviour
     /// <returns>The shortest path.</returns>
     /// <param name="start">Start.</param>
     /// <param name="final">Final.</param>
-    /// // todo Optimize
     public List<Vector2> FindShortestPath(Vector2 start, Vector2 final, Collider2D[] collidersToIgnore = null)
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
         Debug.Log("Search path from " + start + " to " + final);
         _collidersToIgnore = collidersToIgnore;
         var finalNode = new Node(CollidersGrid.GetGridIndex(final), null);
-        if (CollidersGrid[finalNode.Position.x, finalNode.Position.y])
+        if (_colliderScanner.HasCollider(finalNode.Position, _collidersToIgnore))
         {
+            // TODO find closest reachable target
             Debug.LogError("Target is unreachable.");
             return null;
         }
@@ -83,7 +83,7 @@ public class PathFinder : MonoBehaviour
                 return GetWorldCoordinatePath(node);
             }
             // We check all the neighbours of the given node
-            foreach (var neighbour in GetReachableNeighbours(node))
+            foreach (var neighbour in GetReachableNeighbours(node, _checkDiagonalNeighbours))
             {
                 // already in closed list, dont take into account
                 if (closeList.Contains(neighbour.Position))
@@ -117,6 +117,7 @@ public class PathFinder : MonoBehaviour
     }
 
 
+    // Add a node in the open list at the good index (open list is sorted by ascendant heuristic)
     private void AddNodeInOpenList(List<Node> openList, Node node)
     {
         if (openList == null)
@@ -135,47 +136,27 @@ public class PathFinder : MonoBehaviour
     }
 
 
+    public void SetColliderScanner(ColliderScanner colliderScanner)
+    {
+        _colliderScanner = colliderScanner;
+    }
+
+
+    #region Utils
     // Get the neighbours of the given node
-    private List<Node> GetReachableNeighbours(Node node)
+    private List<Node> GetReachableNeighbours(Node node, bool checkDiagonal)
     {
         var neighbours = new List<Node>();
-        var nodeX = node.Position.x; // sugar
-        var nodeY = node.Position.y; // sugar
-
-        var minY = Mathf.Max(nodeY - 1, 0);
-        var maxY = Mathf.Min(nodeY + 1, CollidersGrid.Ny - 1);
-
-        for (int x = Mathf.Max(nodeX - 1, 0);
-                 x <= Mathf.Min(nodeX+ 1,CollidersGrid.Nx-1); x++)
+        var center = new Vector2Int(node.Position.x, node.Position.y);
+        var positions = _colliderScanner.GetReachablePositionFromSpecificRange(center, 1, _collidersToIgnore);
+        foreach (var position in positions)
         {
-            for (int y = minY; y <= maxY; y++)
-            {
-                // not reachable or same node as origin
-                if (!_checkDiagonalNeighbours && (x != nodeX && y != nodeY))
-                    continue;
-                if ((nodeX == x && nodeY == y) || HasCollider(x,y))
-                    continue;
-                neighbours.Add(new Node(new Vector2Int(x, y), node));
-            }
+            if (!checkDiagonal && (position.x != center.x && position.y != center.y))
+                continue;
+            neighbours.Add(new Node(position, node));
         }
         return neighbours;
     }
-
-    /// <summary>
-    /// Return true if the given position has a collider that shouldnt be ignored.
-    /// </summary>
-    private bool HasCollider(int x, int y)
-    {
-        if (CollidersGrid[x, y] == null // no collider
-                                        // if the collider has to be ignored, return false                            
-            || CollidersGrid[x,y].isTrigger 
-            || (_collidersToIgnore != null && _collidersToIgnore.Contains(CollidersGrid[x, y]))
-             )
-            return false;
-
-        return true;
-    }
-
 
     /// <summary>
     /// Reconstructs the path going to a given node, using its parents
@@ -194,7 +175,7 @@ public class PathFinder : MonoBehaviour
         path.Reverse(); // to start with the start position
         return path;
     }
-
+    #endregion
 
     #region Costs
     private float ComputeHeuristic(Node node, Node target)
@@ -228,10 +209,6 @@ public class PathFinder : MonoBehaviour
 
     #endregion
 
-    public void SetColliderScanner(ColliderScanner colliderScanner)
-    {
-        _colliderScanner = colliderScanner;
-    }
 
     #region Debug
 

@@ -17241,13 +17241,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colliderScanner: {fileID: 1178030071}
   _checkDiagonalNeighbours: 1
-  _weightedElements:
-  - ObjectTag: 
-    Weight: 5
+  _weightedElements: []
   _start: {fileID: 146247171}
   _target: {fileID: 1046296288}
   _showDebug: 1
-  _pathColor: {r: 0, g: 0.76483583, b: 1, a: 1}
+  _pathColor: {r: 1, g: 0.5917661, b: 0, a: 1}
 --- !u!4 &940827007
 Transform:
   m_ObjectHideFlags: 0
@@ -17686,7 +17684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046296286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4, y: 21, z: 0}
+  m_LocalPosition: {x: 10.7, y: -7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -18200,7 +18198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1684832054
 Transform:
   m_ObjectHideFlags: 0

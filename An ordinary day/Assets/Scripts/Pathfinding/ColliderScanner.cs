@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -99,6 +100,48 @@ public class ColliderScanner : MonoBehaviour
     {
         return Physics2D.OverlapCircle(point, _spacialResolution / ScanRadiusDivider, layer);
     }
+
+
+    public List<Vector2Int> GetReachablePositionFromSpecificRange(Vector2Int center, int range, Collider2D[] _collidersToIgnore = null)
+    {
+        var positions = new List<Vector2Int>();
+
+        var minY = Mathf.Max(center.y - range, 0);
+        var maxY = Mathf.Min(center.y + range, ScanResult.Ny - 1);
+
+        var minX = Mathf.Max(center.x - range, 0);
+        var maxX = Mathf.Min(center.x + range, ScanResult.Nx - 1);
+
+        for (int x = minX; x <= maxX; x++)
+        {
+            for (int y = minY; y <= maxY; y++)
+            {
+                if ((Mathf.Abs(center.x - x) != range && Mathf.Abs(center.y - y) != range) 
+                    || HasCollider(x, y, _collidersToIgnore))
+                    continue;
+                positions.Add(new Vector2Int(x, y));
+            }
+        }
+        return positions;
+    }
+
+    /// <summary>
+    /// Return true if the given position has a collider that shouldnt be ignored.
+    /// </summary>
+    public bool HasCollider(int x, int y, Collider2D[] collidersToIgnore = null)
+    {
+        if (ScanResult[x, y] == null // no collider
+                                        // if the collider has to be ignored, return false                            
+            || ScanResult[x, y].isTrigger
+            || (collidersToIgnore != null && collidersToIgnore.Contains(ScanResult[x, y]))
+             )
+            return false;
+        return true;
+    }
+
+
+    public bool HasCollider(Vector2Int position, Collider2D[] collidersToIgnore = null)
+        => HasCollider(position.x, position.y, collidersToIgnore);
 
     #endregion
 
