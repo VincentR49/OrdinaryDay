@@ -14,7 +14,7 @@ public class ColliderScanner : MonoBehaviour
     [Tooltip("Unity distance unit")]
     private float _spacialResolution = 1f;
     [SerializeField]
-    private float _refreshRateSec = 1f;
+    private float _refreshRateSec = 5f;
     [SerializeField]
     private Rect _scanArea;
 
@@ -67,13 +67,40 @@ public class ColliderScanner : MonoBehaviour
 
 
     #region Scanning
+
+    /// <summary>
+    /// Scan dynamic layers on all the scan area
+    /// </summary>
+    public void Scan()
+    {
+        ScanDynamicLayers();
+    }
+
+    /// <summary>
+    /// Scan dynamic layers on restricted are
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="radius"></param>
+    public void Scan(Vector2 center, float radius)
+    {
+        // TODO
+        Debug.LogError("TODO: Localized scan");
+        ScanDynamicLayers();
+    }
+
+
     private void ScanStaticLayers()
     {
         Debug.Log("[ColliderScanner] Scan Static Layer");
         Scan(_staticLayerToScan);
         // Remove all the static points that already have colliders
         var n = _pointsToScan.Count;
-        _pointsToScan.RemoveAll ((point) => ScanResult.Get(point));
+        // ze removed all the non trigger objects
+        _pointsToScan.RemoveAll ((point) =>
+        {
+            var scanedCollider = ScanResult.Get(point);
+            return scanedCollider != null; // && !scanedCollider.isTrigger;
+        }); 
         var nAfterOpti = _pointsToScan.Count;
         Debug.Log("Scan optimization. Removed " + (n - nAfterOpti) + " points to scan.");
     }
@@ -102,6 +129,14 @@ public class ColliderScanner : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Search all the accessible points located at the given range from the center point.
+    /// Those points are located on the border of a square area.
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="range"></param>
+    /// <param name="_collidersToIgnore"></param>
+    /// <returns></returns>
     public List<Vector2Int> GetReachablePositionFromSpecificRange(Vector2Int center, int range, Collider2D[] _collidersToIgnore = null)
     {
         var positions = new List<Vector2Int>();
@@ -116,8 +151,9 @@ public class ColliderScanner : MonoBehaviour
         {
             for (int y = minY; y <= maxY; y++)
             {
-                if ((Mathf.Abs(center.x - x) != range && Mathf.Abs(center.y - y) != range) 
-                    || HasCollider(x, y, _collidersToIgnore))
+                if ((   Mathf.Abs(center.x - x) != range
+                    &&  Mathf.Abs(center.y - y) != range) 
+                    ||  HasCollider(x, y, _collidersToIgnore))
                     continue;
                 positions.Add(new Vector2Int(x, y));
             }
@@ -126,9 +162,9 @@ public class ColliderScanner : MonoBehaviour
     }
 
     /// <summary>
-    /// Return true if the given position has a collider that shouldnt be ignored.
+    /// Return true if the given position has a collider.
     /// </summary>
-    public bool HasCollider(int x, int y, Collider2D[] collidersToIgnore = null)
+    private bool HasCollider(int x, int y, Collider2D[] collidersToIgnore = null)
     {
         if (ScanResult[x, y] == null // no collider
                                         // if the collider has to be ignored, return false                            

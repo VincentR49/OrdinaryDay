@@ -6,9 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public class PathFollower : MonoBehaviour
 {
-    // define the minimal distance from the current target needed to go to the next target 
-    private const float ReachedTargetMinDistance = 0.2f; 
-
+   
     [SerializeField]
     private WalkManager _walkManager;
 
@@ -16,6 +14,11 @@ public class PathFollower : MonoBehaviour
     private Vector2 Target => _path.Peek();
     public bool IsFollowing { private set; get; }
 
+    // define the minimal distance from the current target needed to go to the next target 
+    private float ReachedTargetMinDistance => _walkManager.Speed * Time.deltaTime;
+    public delegate void FinalTargetReachedHandler();
+
+    public event FinalTargetReachedHandler OnFinalTargetReached; // fired when the final target of the path is reached
 
     public void FollowPath(Queue<Vector2> path)
     {
@@ -42,12 +45,17 @@ public class PathFollower : MonoBehaviour
     {
         if (IsFollowing)
         {
-            if (HasReachedCurrentTarget())
+            var distance = Utils.Distance(transform.position, Target);
+            var direction = new Vector2(Target.x - transform.position.x, Target.y - transform.position.y);
+            if (distance < _walkManager.Speed * Time.deltaTime)
             {
-                if (!GoToNextStep())
-                    return;
+                GoToNextStep();
+                if (_path.Count != 0)
+                    _walkManager.Move(direction, distance / Time.deltaTime);
+                
             }
-            _walkManager.Move(Target - new Vector2(transform.position.x, transform.position.y));
+            else
+                _walkManager.Move(direction);
         }
     }
 
@@ -56,18 +64,18 @@ public class PathFollower : MonoBehaviour
     {
         if (_path == null || _path.Count == 0)
             return true;
-        return Utils.Distance(transform.position, Target) <= ReachedTargetMinDistance;
+        return Utils.Distance(transform.position, Target) < ReachedTargetMinDistance;
     }
 
 
-    private bool GoToNextStep()
+    private void GoToNextStep()
     {
         _path.Dequeue();
         if (_path.Count == 0)
         {
             Stop();
-            return false;
+            Debug.Log("[PathFollower] Final target reached.");
+            OnFinalTargetReached.Invoke();
         }
-        return true;
     }
 }

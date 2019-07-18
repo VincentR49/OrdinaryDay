@@ -33,7 +33,7 @@ public class WalkManager : MonoBehaviour
     private Rigidbody2D _rb;
 
     // speed management data
-    private float Speed => _defaultSpeed * _speedMultiplier;
+    public float Speed => _defaultSpeed * _speedMultiplier;
     private float _speedMultiplier = 1f;
     private bool HasGroundsDefined => _grounds != null && _grounds.Length > 0;
     private List<Collider2D> _currentTriggers = new List<Collider2D>();
@@ -58,14 +58,17 @@ public class WalkManager : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        direction.Normalize();
-        //Debug.Log(direction);
+        Move(direction, Speed);
+    }
+
+
+    public void Move(Vector2 direction, float speed)
+    { 
         var state = GetState(direction);
         if (state != _state)
-        {
             ChangeState(state);
-        }
-        _rb.MovePosition(_rb.position + direction * Speed * Time.deltaTime);
+        direction.Normalize();
+        _rb.MovePosition(_rb.position + direction * speed * Time.deltaTime);
     }
 
     #region State management

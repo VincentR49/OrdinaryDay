@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8218512808253011856}
   - component: {fileID: 3363905535439149627}
   - component: {fileID: 800747845}
-  - component: {fileID: 8797987678162084108}
   - component: {fileID: 6313559178790158276}
+  - component: {fileID: 3651036228150101991}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -151,22 +151,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &8797987678162084108
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447140917735947389}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.24}
-  serializedVersion: 2
-  m_Radius: 0.32
 --- !u!114 &6313559178790158276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +164,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardinalSprite: {fileID: 11400000, guid: e1e1bbaf67b32411195b03ad31ee6bea, type: 2}
+--- !u!70 &3651036228150101991
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8447140917735947389}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.2}
+  m_Size: {x: 0.75, y: 0.5}
+  m_Direction: 1

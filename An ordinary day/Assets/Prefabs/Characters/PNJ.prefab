@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 4197437973840161365}
   - component: {fileID: 4197437973840161361}
   - component: {fileID: 4197437973840161363}
-  - component: {fileID: 4197437973840161360}
   - component: {fileID: 6927588342372206890}
   - component: {fileID: 1999833727167035478}
   - component: {fileID: 2148825919971324433}
+  - component: {fileID: 4649255406199066533}
+  - component: {fileID: 5412823718567616287}
   m_Layer: 11
   m_Name: PNJ
   m_TagString: PNJ
@@ -33,7 +34,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4197437973840161370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8439151, y: -3.163836, z: -1.6786904}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf899e64fedd0443f8ee1241799ec9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultSpeed: 3
+  _defaultSpeed: 1
   _grounds:
   - GroundTag: Road
     Multiplier: 2
@@ -153,22 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardinalSprite: {fileID: 0}
---- !u!58 &4197437973840161360
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4197437973840161370}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.24}
-  serializedVersion: 2
-  m_Radius: 0.32
 --- !u!114 &6927588342372206890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,9 +169,7 @@ MonoBehaviour:
   _pnjData: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}
   _walkManager: {fileID: 4197437973840161361}
   _spriteDirectioner: {fileID: 4197437973840161363}
-  _pathFinder: {fileID: 1999833727167035478}
-  _pathFollower: {fileID: 2148825919971324433}
-  _pathDebugTarget: {fileID: 0}
+  _targetReacher: {fileID: 5412823718567616287}
 --- !u!114 &1999833727167035478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,8 +187,6 @@ MonoBehaviour:
   _weightedElements:
   - ObjectTag: Road
     Weight: 3
-  _start: {fileID: 0}
-  _target: {fileID: 0}
   _showDebug: 0
   _pathColor: {r: 1, g: 0, b: 0.85180044, a: 1}
 --- !u!114 &2148825919971324433
@@ -221,3 +202,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkManager: {fileID: 4197437973840161361}
+--- !u!70 &4649255406199066533
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197437973840161370}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.2}
+  m_Size: {x: 0.75, y: 0.5}
+  m_Direction: 1
+--- !u!114 &5412823718567616287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197437973840161370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64aa35fb08c6f4b74907a50fb18a644b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pathFinder: {fileID: 1999833727167035478}
+  _pathFollower: {fileID: 2148825919971324433}

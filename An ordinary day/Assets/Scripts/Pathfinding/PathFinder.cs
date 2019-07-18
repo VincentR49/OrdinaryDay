@@ -30,43 +30,42 @@ public class PathFinder : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField]
-    private Transform _start;
-    [SerializeField]
-    private Transform _target;
-    [SerializeField]
     private bool _showDebug;
     [SerializeField]
     private Color _pathColor;
 
-    private List<Vector2> _debugPath;
+    private List<Vector2> _currentPath;
     private WorldGrid<Collider2D> CollidersGrid => _colliderScanner.ScanResult;
     private Collider2D[] _collidersToIgnore;
 
     /// <summary>
     /// Finds the shortest path from start to final.
     /// Return a list of position, starting by the starting position.
-    /// Return null if any path could be found or if the target is unreachable.
+    /// Always return a path.
+    /// If the path is actually the shortest from start to target, then true i also return
+    /// Otherwise, we find the best possible path (for instance if the target is not reachable), and false is returned in the tupple.
     /// </summary>
-    /// <returns>The shortest path.</returns>
+    /// <returns>The shortest path</returns>
     /// <param name="start">Start.</param>
     /// <param name="final">Final.</param>
-    public List<Vector2> FindShortestPath(Vector2 start, Vector2 final, Collider2D[] collidersToIgnore = null)
+    public List<Vector2> FindShortestPath(Vector2 start, Vector2 final, out bool couldReachTarget, Collider2D[] collidersToIgnore = null)
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
         Debug.Log("Search path from " + start + " to " + final);
         _collidersToIgnore = collidersToIgnore;
         var finalNode = new Node(CollidersGrid.GetGridIndex(final), null);
-        if (_colliderScanner.HasCollider(finalNode.Position, _collidersToIgnore))
-        {
-            // TODO find closest reachable target
-            Debug.LogError("Target is unreachable.");
-            return null;
-        }
+
         // Preparation of the algorithm
         var startNode = new Node(CollidersGrid.GetGridIndex(start), null);
         var closeList = new List<Vector2Int>();
         var openList = new List<Node>();
         AddNodeInOpenList(openList, startNode);
+
+        // Initialisation to keep track of the best candidate node
+        couldReachTarget = false;
+        startNode.Heuristic = float.MaxValue;
+        var bestCandidate = startNode;
+
         int count = 0;
         Debug.Log("Search path from node: " + startNode + " to " + finalNode);
         while (openList.Count > 0)
@@ -77,10 +76,9 @@ public class PathFinder : MonoBehaviour
             // we reached the final position: return the path and stop algorithm
             if (node.Position == finalNode.Position)
             {
-                Debug.Log(string.Format("Path found in {0} iterations !", count));
-                watch.Stop();
-                Debug.Log("Path finding computation time: " + (watch.ElapsedMilliseconds / 1000f));
-                return GetWorldCoordinatePath(node);
+                couldReachTarget = true;
+                bestCandidate = node;
+                break;
             }
             // We check all the neighbours of the given node
             foreach (var neighbour in GetReachableNeighbours(node, _checkDiagonalNeighbours))
@@ -104,16 +102,20 @@ public class PathFinder : MonoBehaviour
                 }
                 neighbour.Heuristic = ComputeHeuristic(neighbour, finalNode);
                 AddNodeInOpenList(openList, neighbour);
-                //openList.Add(neighbour);
+                if (neighbour.Heuristic < bestCandidate.Heuristic)
+                    bestCandidate = neighbour;
             }
             // We add the node to the close if he doesnt exist already
             if (!closeList.Contains(node.Position))
                 closeList.Add(node.Position);
             count++;
         }
-        // couldnt find any path
-        Debug.LogError("Couldnt find any path from: " + start + " to " + final);
-        return null;
+        // couldnt find any path, we return the best possible path (from the best candidate node)
+        watch.Stop();
+        Debug.Log(string.Format("Found path in {0} iterations. Reached target: {1}", count, couldReachTarget));
+        Debug.Log("Path finding computation time: " + (watch.ElapsedMilliseconds / 1000f));
+        _currentPath = GetWorldCoordinatePath(bestCandidate);
+        return _currentPath;
     }
 
 
@@ -211,14 +213,6 @@ public class PathFinder : MonoBehaviour
 
 
     #region Debug
-
-    public void FindPathDebug()
-    {
-        // Debug
-        _debugPath = FindShortestPath(_start.position, _target.position);
-        Debug.Log(_debugPath);
-    }
-
     private void OnDrawGizmos()
     {
         // area
@@ -226,9 +220,9 @@ public class PathFinder : MonoBehaviour
             return;
         // Draw Path
         Gizmos.color = _pathColor;
-        if (_debugPath != null)
+        if (_currentPath != null)
         {
-            foreach (var point in _debugPath)
+            foreach (var point in _currentPath)
                 Gizmos.DrawCube(point, Vector3.one * 0.5f);
         }
     }
