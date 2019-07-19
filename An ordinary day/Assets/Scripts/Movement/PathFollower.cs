@@ -6,7 +6,6 @@ using System.Collections.Generic;
 /// </summary>
 public class PathFollower : MonoBehaviour
 {
-   
     [SerializeField]
     private WalkManager _walkManager;
 
@@ -24,20 +23,17 @@ public class PathFollower : MonoBehaviour
     {
         if (path == null || path.Count == 0)
             return;
-        //Debug.Log("Start following path: " + string.Join(",", path));
         Debug.Log("Start following path.");
         IsFollowing = true;
         _path = path;
     }
 
 
-    public void Stop(bool resetPath = false)
+    public void Stop()
     {
         Debug.Log("Stop following path");
         IsFollowing = false;
         _walkManager.Stop();
-        if (resetPath)
-            _path = null;
     }
 
 
@@ -47,24 +43,16 @@ public class PathFollower : MonoBehaviour
         {
             var distance = Utils.Distance(transform.position, Target);
             var direction = new Vector2(Target.x - transform.position.x, Target.y - transform.position.y);
+            // if we are less than one frame from the target
             if (distance < _walkManager.Speed * Time.deltaTime)
             {
                 GoToNextStep();
-                if (_path.Count != 0)
+                if (_path.Count != 0) // We move juste what is needed to go to the target
                     _walkManager.Move(direction, distance / Time.deltaTime);
-                
             }
             else
-                _walkManager.Move(direction);
+                _walkManager.Move(direction); // we move through this direction
         }
-    }
-
-
-    private bool HasReachedCurrentTarget()
-    {
-        if (_path == null || _path.Count == 0)
-            return true;
-        return Utils.Distance(transform.position, Target) < ReachedTargetMinDistance;
     }
 
 

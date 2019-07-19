@@ -1,16 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // Generic class to store some information contained in the world map on grid
-public class WorldGrid<T>
+public class WorldGrid<T> : IEnumerator, IEnumerable
 {
     private T[,] _grid;
     public int Nx => _grid.GetLength(0);
     public int Ny => _grid.GetLength(1);
 
+    public object Current => throw new System.NotImplementedException();
+
     // link with world coordinate
     private Rect _rect;
     private float _cellSize;
+    private Vector2Int _position;
+
 
     // Iterator
     public T this[int x ,int y]
@@ -76,4 +81,27 @@ public class WorldGrid<T>
 
 
     public Vector2 GetWordCoordinate(Vector2Int gridIndex) => GetWordCoordinate(gridIndex.x, gridIndex.y);
+
+
+    public IEnumerator GetEnumerator()
+    {
+        return (IEnumerator) this;
+    }
+
+    public bool MoveNext()
+    {
+        if (_position.x < Nx - 1)
+            _position.x++;
+        else
+        {
+            _position.y++;
+            _position.x = 0;
+        }
+        return _position.y < Ny;
+    }
+
+    public void Reset()
+    {
+        _position = Vector2Int.zero;
+    }
 }

@@ -9,8 +9,8 @@ using UnityEngine;
 public class TargetReacher : MonoBehaviour
 {
     // Constants to balance
-    private const float FollowingPathScanRefreshRate = 5f;
-    private const float ScanRadius = 1.5f; // in unity unit
+    private const float FollowingPathScanRefreshRate = 1f;
+    private const float ScanRadius = 2f; // in unity unit
     private const int MaxTrials = 10;
     private const float WaitBetweenTrialSec = 3f;
 
@@ -63,7 +63,8 @@ public class TargetReacher : MonoBehaviour
     public void GoToTarget(Vector2 target)
     {
         _target = target;
-        var path = _pathFinder.FindShortestPath(transform.position, target, out _currentDestinationIsTarget, new Collider2D[] { _pnjCollider });
+        // search first only static path
+        var path = _pathFinder.FindShortestPath(transform.position, target, out _currentDestinationIsTarget, true, new Collider2D[] { _pnjCollider });
         _pathFollower.FollowPath(new Queue<Vector2>(path));
         _lastSearchTargetTime = Time.time;
     }
@@ -108,7 +109,7 @@ public class TargetReacher : MonoBehaviour
             return;
         if (Time.time > (_lastSearchTargetTime + FollowingPathScanRefreshRate))
         {
-            RefreshPath();
+            ScanNearbyArea();
         }
         */
     }

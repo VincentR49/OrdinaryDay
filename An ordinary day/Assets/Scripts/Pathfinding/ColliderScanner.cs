@@ -14,6 +14,7 @@ public class ColliderScanner : MonoBehaviour
     [Tooltip("Unity distance unit")]
     private float _spacialResolution = 1f;
     [SerializeField]
+    [Tooltip("Put 0 for no automatic refresh")]
     private float _refreshRateSec = 5f;
     [SerializeField]
     private Rect _scanArea;
@@ -35,14 +36,18 @@ public class ColliderScanner : MonoBehaviour
     private Color _triggerColors;
 
     private float _lastRefreshTime;
-    public WorldGrid<Collider2D> ScanResult { get; private set; }
+    public WorldGrid<ScanInfo> ScanResult { get; private set; }
     private List<Vector2> _pointsToScan; // store in order to optimize computations
-
 
     #region Init
     private void InitScanGrid()
     {
-        ScanResult = new WorldGrid<Collider2D>(_scanArea, _spacialResolution);
+        ScanResult = new WorldGrid<ScanInfo>(_scanArea, _spacialResolution);
+        for (int x = 0; x < ScanResult.Nx; x++)
+        {
+            for (int y = 0; y < ScanResult.Ny; y++)
+                ScanResult[x, y] = new ScanInfo();
+        }
         _pointsToScan = ScanResult.GetWorldCooordinateList();
     }
 
@@ -51,15 +56,19 @@ public class ColliderScanner : MonoBehaviour
     {
         InitScanGrid();
         ScanStaticLayers();
-        ScanDynamicLayers();
-        //Debug.Log("Collider at debug position: " + _scanResult.Get(new Vector2(-9.42f, 1.12f)));
     }
     #endregion
 
+    #region Get / Set
+
+    public LayerMask GetStaticLayer() => _staticLayerToScan;
+    public LayerMask GetDynamicLayer() => _dynamicLayerToScan;
+
+    #endregion
 
     private void Update()
     {
-        if (Time.time >= _lastRefreshTime + _refreshRateSec)
+        if (_refreshRateSec > 0f && (Time.time >= _lastRefreshTime + _refreshRateSec))
         {
             ScanDynamicLayers();
         }
@@ -69,7 +78,7 @@ public class ColliderScanner : MonoBehaviour
     #region Scanning
 
     /// <summary>
-    /// Scan dynamic layers on all the scan area
+    /// Scan layers on all the scan area (only dynamic layers)
     /// </summary>
     public void Scan()
     {
@@ -83,9 +92,12 @@ public class ColliderScanner : MonoBehaviour
     /// <param name="radius"></param>
     public void Scan(Vector2 center, float radius)
     {
-        // TODO
-        Debug.LogError("TODO: Localized scan");
-        ScanDynamicLayers();
+        var points = _pointsToScan.FindAll((x) => Utils.Distance(center, x) <= radius);
+        if (points != null)
+        {
+           // Debug.Log("Perform local scan on " + points.Count + " points.");
+            Scan(_dynamicLayerToScan, points);
+        }
     }
 
 
@@ -113,10 +125,27 @@ public class ColliderScanner : MonoBehaviour
         Scan(_dynamicLayerToScan);
     }
 
+
+    /// <summary>
+    /// Scan a layer in the given world points
+    /// </summary>
+    private void Scan(LayerMask layer, List<Vector2> points)
+    {
+        foreach (var point in points)
+        {
+            var gridIndex = ScanResult.GetGridIndex(point);
+            var scanInfo = ScanResult[gridIndex.x, gridIndex.y];
+            scanInfo.Set(layer, ScanPosition(point, layer));
+        }
+    }
+
+    /// <summary>
+    /// Scan a complete layer on all the scan area
+    /// </summary>
+    /// <param name="layer"></param>
     private void Scan(LayerMask layer)
     {
-        foreach (var point in _pointsToScan)
-            ScanResult.Set(point, ScanPosition(point, layer));
+        Scan(layer, _pointsToScan);
     }
 
     #endregion
@@ -128,16 +157,27 @@ public class ColliderScanner : MonoBehaviour
         return Physics2D.OverlapCircle(point, _spacialResolution / ScanRadiusDivider, layer);
     }
 
+    /// <summary>
+    /// Search all the accessible points located at the given range from the center point in all layers mask.
+    /// Those points are located on the border of a square area.
+    /// <returns></returns>
+    public List<Vector2Int> GetReachablePositionFromSpecificRange(Vector2Int center, int range, Collider2D[] collidersToIgnore = null)
+        => GetReachablePositionFromSpecificRange(center, range, new LayerMask[] { _staticLayerToScan, _dynamicLayerToScan }, collidersToIgnore);
+
 
     /// <summary>
-    /// Search all the accessible points located at the given range from the center point.
+    /// Search all the accessible points located at the given range from the center point in a specific layer.
     /// Those points are located on the border of a square area.
-    /// </summary>
-    /// <param name="center"></param>
-    /// <param name="range"></param>
-    /// <param name="_collidersToIgnore"></param>
     /// <returns></returns>
-    public List<Vector2Int> GetReachablePositionFromSpecificRange(Vector2Int center, int range, Collider2D[] _collidersToIgnore = null)
+    public List<Vector2Int> GetReachablePositionFromSpecificRange(Vector2Int center, int range, LayerMask layer, Collider2D[] collidersToIgnore = null)
+        => GetReachablePositionFromSpecificRange(center, range, new LayerMask[] { layer }, collidersToIgnore);
+
+
+    /// <summary>
+    /// Search all the accessible points located at the given range from the center point in the defined layers.
+    /// Those points are located on the border of a square area.
+    /// <returns></returns>
+    public List<Vector2Int> GetReachablePositionFromSpecificRange(Vector2Int center, int range, LayerMask[] layers, Collider2D[] collidersToIgnore = null)
     {
         var positions = new List<Vector2Int>();
 
@@ -151,11 +191,13 @@ public class ColliderScanner : MonoBehaviour
         {
             for (int y = minY; y <= maxY; y++)
             {
-                if ((   Mathf.Abs(center.x - x) != range
-                    &&  Mathf.Abs(center.y - y) != range) 
-                    ||  HasCollider(x, y, _collidersToIgnore))
+                if (Mathf.Abs(center.x - x) != range && Mathf.Abs(center.y - y) != range)
                     continue;
-                positions.Add(new Vector2Int(x, y));
+                var hasCollider = false;
+                foreach (var layer in layers)
+                    hasCollider = hasCollider || HasCollider(x, y, layer, collidersToIgnore);
+                if (!hasCollider)
+                    positions.Add(new Vector2Int(x, y));
             }
         }
         return positions;
@@ -164,20 +206,17 @@ public class ColliderScanner : MonoBehaviour
     /// <summary>
     /// Return true if the given position has a collider.
     /// </summary>
-    private bool HasCollider(int x, int y, Collider2D[] collidersToIgnore = null)
+    private bool HasCollider(int x, int y, LayerMask layerMask, Collider2D[] collidersToIgnore = null)
     {
-        if (ScanResult[x, y] == null // no collider
-                                        // if the collider has to be ignored, return false                            
-            || ScanResult[x, y].isTrigger
-            || (collidersToIgnore != null && collidersToIgnore.Contains(ScanResult[x, y]))
-             )
+        var collision = ScanResult[x, y].Get(layerMask);
+        if (collision == null
+             || collision.isTrigger
+             || (collidersToIgnore != null && collidersToIgnore.Contains(collision)))
+        {
             return false;
+        }
         return true;
     }
-
-
-    public bool HasCollider(Vector2Int position, Collider2D[] collidersToIgnore = null)
-        => HasCollider(position.x, position.y, collidersToIgnore);
 
     #endregion
 
@@ -210,18 +249,23 @@ public class ColliderScanner : MonoBehaviour
             {
                 for (int y = 0; y < ScanResult.Ny; y++)
                 {
-                    if (ScanResult[x, y])
+                    var staticCollider = ScanResult[x, y].Get(_staticLayerToScan);
+                    var dynamicCollider = ScanResult[x, y].Get(_dynamicLayerToScan);
+                    if (dynamicCollider)
                     {
-                        if (ScanResult[x,y].isTrigger)
-                        {
+                        if (staticCollider.isTrigger)
                             triggerPoints.Add(ScanResult.GetWordCoordinate(x, y));
-                        }
                         else
-                        {
                             colliderPoints.Add(ScanResult.GetWordCoordinate(x, y));
-                        }
+                        continue;
                     }
-                        
+                    if (staticCollider)
+                    {
+                        if (staticCollider.isTrigger)
+                            triggerPoints.Add(ScanResult.GetWordCoordinate(x, y));
+                        else
+                            colliderPoints.Add(ScanResult.GetWordCoordinate(x, y));
+                    }
                 }
             }
         }

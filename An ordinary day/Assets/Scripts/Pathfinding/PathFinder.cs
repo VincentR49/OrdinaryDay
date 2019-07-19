@@ -24,7 +24,7 @@ public class PathFinder : MonoBehaviour
     private class WeightedElement
     {
         public string ObjectTag;
-        [Range(1f,5f)]
+        [Range(1f, 5f)]
         public float Weight = 3f;
     }
 
@@ -35,7 +35,8 @@ public class PathFinder : MonoBehaviour
     private Color _pathColor;
 
     private List<Vector2> _currentPath;
-    private WorldGrid<Collider2D> CollidersGrid => _colliderScanner.ScanResult;
+    private WorldGrid<ScanInfo> CollidersGrid => _colliderScanner.ScanResult;
+    private LayerMask StaticLayer => _colliderScanner.GetStaticLayer();
     private Collider2D[] _collidersToIgnore;
 
     /// <summary>
@@ -48,7 +49,7 @@ public class PathFinder : MonoBehaviour
     /// <returns>The shortest path</returns>
     /// <param name="start">Start.</param>
     /// <param name="final">Final.</param>
-    public List<Vector2> FindShortestPath(Vector2 start, Vector2 final, out bool couldReachTarget, Collider2D[] collidersToIgnore = null)
+    public List<Vector2> FindShortestPath(Vector2 start, Vector2 final, out bool couldReachTarget, bool onlyStaticLayer, Collider2D[] collidersToIgnore = null)
     {
         var watch = System.Diagnostics.Stopwatch.StartNew();
         Debug.Log("Search path from " + start + " to " + final);
@@ -81,7 +82,7 @@ public class PathFinder : MonoBehaviour
                 break;
             }
             // We check all the neighbours of the given node
-            foreach (var neighbour in GetReachableNeighbours(node, _checkDiagonalNeighbours))
+            foreach (var neighbour in GetReachableNeighbours(node, _checkDiagonalNeighbours, onlyStaticLayer))
             {
                 // already in closed list, dont take into account
                 if (closeList.Contains(neighbour.Position))
@@ -95,7 +96,7 @@ public class PathFinder : MonoBehaviour
                 if (neighBourInOpenList != null)
                 {
                     // less interesting node, so we just skip this one
-                    if (neighBourInOpenList.Cost <= neighbour.Cost) 
+                    if (neighBourInOpenList.Cost <= neighbour.Cost)
                         continue;
                     else // we remove the previous version of the node from the opened list
                         openList.Remove(neighBourInOpenList);
@@ -146,11 +147,13 @@ public class PathFinder : MonoBehaviour
 
     #region Utils
     // Get the neighbours of the given node
-    private List<Node> GetReachableNeighbours(Node node, bool checkDiagonal)
+    private List<Node> GetReachableNeighbours(Node node, bool checkDiagonal, bool onlyStaticLayer)
     {
         var neighbours = new List<Node>();
         var center = new Vector2Int(node.Position.x, node.Position.y);
-        var positions = _colliderScanner.GetReachablePositionFromSpecificRange(center, 1, _collidersToIgnore);
+        var positions = onlyStaticLayer ?
+                  _colliderScanner.GetReachablePositionFromSpecificRange(center, 1, StaticLayer, _collidersToIgnore)
+                : _colliderScanner.GetReachablePositionFromSpecificRange(center, 1, _collidersToIgnore);
         foreach (var position in positions)
         {
             if (!checkDiagonal && (position.x != center.x && position.y != center.y))
@@ -197,11 +200,12 @@ public class PathFinder : MonoBehaviour
         // no weighted elements defined, return default weight
         if (_weightedElements == null || _weightedElements.Length == 0)
             return DefaultWeight;
-        var nodeCollider = CollidersGrid[node.Position.x, node.Position.y];
-        if (nodeCollider != null && nodeCollider.isTrigger)
+        var scanInfo = CollidersGrid[node.Position.x, node.Position.y];
+        var staticCollider = scanInfo.Get(StaticLayer);
+        if (staticCollider != null && staticCollider.isTrigger)
         {
             // If the collider found has a tag defined in the weighted element list
-            var weightedElement = _weightedElements.FirstOrDefault((x) => x.ObjectTag.Equals(nodeCollider.tag));
+            var weightedElement = _weightedElements.FirstOrDefault((x) => x.ObjectTag.Equals(staticCollider.tag));
             if (weightedElement != null)
                 return weightedElement.Weight;
         }

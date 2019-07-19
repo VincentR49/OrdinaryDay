@@ -1,25 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 // Data container for the Collider Scanner results
 public class ScanInfo
 {
-    public ScanData StaticData;
-    public ScanData DynamicData;
+    private Dictionary<LayerMask, Collider2D> _scanDataDict;
 
-    public bool IsBlocked => StaticData.IsBlocked || DynamicData.IsBlocked;
-}
-
-
-public class ScanData
-{
-    public Collider2D Collider { private set; get; }
-    public bool IsTrigger => Collider != null && Collider.isTrigger;
-    public bool IsBlocked => Collider != null && !Collider.isTrigger;
-
-    public ScanData(Collider2D collider)
+    public ScanInfo()
     {
-        Collider = collider;
+        _scanDataDict = new Dictionary<LayerMask, Collider2D>();
+    }
+
+    public void Set(LayerMask layerMask, Collider2D collider)
+    {
+        _scanDataDict[layerMask] = collider;
+    }
+
+    public Collider2D Get(LayerMask layerMask)
+    {
+        if (_scanDataDict.ContainsKey(layerMask))
+            return _scanDataDict[layerMask];
+        return null;
     }
 }

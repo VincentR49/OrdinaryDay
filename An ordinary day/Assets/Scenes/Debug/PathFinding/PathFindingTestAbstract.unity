@@ -10497,7 +10497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spacialResolution: 1
-  _refreshRateSec: 5
+  _refreshRateSec: 0
   _scanArea:
     serializedVersion: 2
     x: -18
@@ -10510,7 +10510,7 @@ MonoBehaviour:
   _staticLayerToScan:
     serializedVersion: 2
     m_Bits: 256
-  _showDebug: 0
+  _showDebug: 1
   _areaTexture: {fileID: 2800000, guid: b244e504781d9422e833ec82d2e79488, type: 3}
   _collidersColor: {r: 1, g: 0, b: 0, a: 1}
   _triggerColors: {r: 0, g: 0.83137256, b: 1, a: 1}
@@ -10796,6 +10796,16 @@ PrefabInstance:
       propertyPath: _showDebug
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161367, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_Color.r
@@ -10815,16 +10825,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
