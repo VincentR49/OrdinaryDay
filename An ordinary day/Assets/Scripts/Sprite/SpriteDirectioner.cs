@@ -13,7 +13,7 @@ public class SpriteDirectioner : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void SetDirection(Direction direction)
+    public void SetSprite(Direction direction)
     {
         var sprite = _cardinalSprite.Get(direction);
         _spriteRenderer.flipX = sprite.FlipX;

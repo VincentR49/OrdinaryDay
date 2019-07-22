@@ -147,7 +147,6 @@ public class WalkManager : MonoBehaviour
     {
         if (!HasGroundsDefined)
             return;
-        //Debug.Log("On trigger enter: " + collision.tag);
         _currentTriggers.Add(collision);
         UpdateCurrentGroundMultiplier();
     }
@@ -157,7 +156,6 @@ public class WalkManager : MonoBehaviour
     {
         if (!HasGroundsDefined)
             return;
-        //Debug.Log("On trigger exit: " + collision.tag);
         _currentTriggers.Remove(collision);
         UpdateCurrentGroundMultiplier();
     }
@@ -182,7 +180,6 @@ public class WalkManager : MonoBehaviour
 
     private void ResetSpeedMultiplier()
     {
-        //Debug.Log("ResetSpeedMultiplier");
         _speedMultiplier = 1f;
     }
 

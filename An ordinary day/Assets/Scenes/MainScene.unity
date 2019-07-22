@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 266559817}
   - component: {fileID: 266559816}
   - component: {fileID: 266559818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MassiveObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 302427477}
   - component: {fileID: 302427476}
   - component: {fileID: 302427475}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4034,6 +4034,95 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &330964625
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5479793640582190400, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_Name
+      value: ColliderScanner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190415, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: _scanArea.x
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190415, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: _scanArea.width
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190415, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: _scanArea.y
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190415, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: _scanArea.height
+      value: 29
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: adba9bffdbcc9416e9d1eb98ea1fb55f, type: 3}
 --- !u!1 &343710806
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,7 +4133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 343710807}
   - component: {fileID: 343710808}
-  - component: {fileID: 343710809}
+  - component: {fileID: 343710810}
   m_Layer: 0
   m_Name: House1
   m_TagString: Untagged
@@ -4060,7 +4149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343710806}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.03, y: -1.44, z: 0}
+  m_LocalPosition: {x: 3.03, y: -1.259, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 650984976}
@@ -4090,9 +4179,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
---- !u!114 &343710809
+--- !u!114 &343710810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4101,7 +4190,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 343710806}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967aa21357a9f4ac8b08c717606afa29, type: 3}
+  m_Script: {fileID: 11500000, guid: 76317056f7673445eae25692d81a5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneDestination:
@@ -4111,6 +4200,7 @@ MonoBehaviour:
   _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
   _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
     type: 2}
+  _startTeleportDirection: 0
 --- !u!1 &599393181
 GameObject:
   m_ObjectHideFlags: 0
@@ -4366,7 +4456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506784252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.02, y: -3.35, z: 0}
+  m_LocalPosition: {x: 6.02, y: -2.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1858284624}
@@ -4412,7 +4502,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530303384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.06, y: -2.43, z: 0}
+  m_LocalPosition: {x: 3.06, y: -2.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1858284624}
@@ -4476,7 +4566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1934741110}
   - component: {fileID: 1934741112}
-  - component: {fileID: 1934741111}
+  - component: {fileID: 1934741113}
   m_Layer: 0
   m_Name: House2
   m_TagString: Untagged
@@ -4492,31 +4582,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934741109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.04, y: -2.4, z: 0}
+  m_LocalPosition: {x: 6.04, y: -2.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 650984976}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934741111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934741109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967aa21357a9f4ac8b08c717606afa29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _sceneDestination:
-    _asset: {fileID: 102900000, guid: 49697016a10774582ab3459670bce5cb, type: 3}
-    _path: Assets/Scenes/House2.unity
-  _spawnDestinationTag: Entrance
-  _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
-    type: 2}
 --- !u!61 &1934741112
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4541,8 +4612,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1934741113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934741109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76317056f7673445eae25692d81a5648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneDestination:
+    _asset: {fileID: 102900000, guid: 49697016a10774582ab3459670bce5cb, type: 3}
+    _path: Assets/Scenes/House2.unity
+  _spawnDestinationTag: Entrance
+  _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
+  _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
+    type: 2}
+  _startTeleportDirection: 0
 --- !u!1 &1983946726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4554,7 +4645,7 @@ GameObject:
   - component: {fileID: 1983946727}
   - component: {fileID: 1983946729}
   - component: {fileID: 1983946728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

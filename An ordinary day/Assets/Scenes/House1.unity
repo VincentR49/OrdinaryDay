@@ -991,8 +991,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1127312383}
-  - component: {fileID: 1127312382}
   - component: {fileID: 1127312384}
+  - component: {fileID: 1127312382}
   m_Layer: 0
   m_Name: MainLandTeleporter
   m_TagString: Untagged
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1127312381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967aa21357a9f4ac8b08c717606afa29, type: 3}
+  m_Script: {fileID: 11500000, guid: 76317056f7673445eae25692d81a5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneDestination:
@@ -1019,6 +1019,7 @@ MonoBehaviour:
   _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
   _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
     type: 2}
+  _startTeleportDirection: 2
 --- !u!4 &1127312383
 Transform:
   m_ObjectHideFlags: 0
@@ -1027,7 +1028,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127312381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -5.48, z: -1.12523}
+  m_LocalPosition: {x: 0.03, y: -5.73, z: -1.12523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1057,7 +1058,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
 --- !u!1 &1402119028
 GameObject:
@@ -1084,7 +1085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402119028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07, y: -3.99, z: -1.12523}
+  m_LocalPosition: {x: -0.07, y: -4.87, z: -1.12523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

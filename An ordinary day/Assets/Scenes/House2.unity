@@ -998,7 +998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761461569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07, y: -4.36, z: -1.12523}
+  m_LocalPosition: {x: -0.07, y: -4.91, z: -1.12523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1082,8 +1082,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 773506220}
-  - component: {fileID: 773506219}
   - component: {fileID: 773506218}
+  - component: {fileID: 773506221}
   m_Layer: 0
   m_Name: MainLandTeleporter
   m_TagString: Untagged
@@ -1115,9 +1115,23 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &773506219
+--- !u!4 &773506220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773506217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03, y: -5.75, z: -1.12523}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &773506221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1126,7 +1140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 773506217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967aa21357a9f4ac8b08c717606afa29, type: 3}
+  m_Script: {fileID: 11500000, guid: 76317056f7673445eae25692d81a5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneDestination:
@@ -1136,20 +1150,7 @@ MonoBehaviour:
   _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
   _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
     type: 2}
---- !u!4 &773506220
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773506217}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -5.48, z: -1.12523}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  _startTeleportDirection: 2
 --- !u!1 &1711041873
 GameObject:
   m_ObjectHideFlags: 0

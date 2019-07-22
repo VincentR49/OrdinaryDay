@@ -48,7 +48,7 @@ public class SpawnPoint : MonoBehaviour
                 behaviour.enabled = false;
         }
         go.transform.position = gameObject.transform.position;
-        spriteDirectioner.SetDirection(_spawnDirection);
+        spriteDirectioner.SetSprite(_spawnDirection);
         yield return new WaitForSeconds(SpawnDuration);
         if (disableDuringSpawn != null)
         {

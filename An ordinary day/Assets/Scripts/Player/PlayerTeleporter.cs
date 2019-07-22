@@ -17,13 +17,20 @@ public class PlayerTeleporter : MonoBehaviour
     [SerializeField]
     private StringData _playerSpawnPointTag;
 
+    protected bool _isTeleporting;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.tag.Equals(PlayerTag))
+        if (_isTeleporting || !IsPlayer(collision))
             return;
-        var player = collision.gameObject;
+        TeleportPlayer(collision.gameObject);
+    }
+
+
+    protected void TeleportPlayer(GameObject player)
+    {
         Debug.Log("Teleport to scene: " + _sceneDestination.Path + " at spawnPoint " + _spawnDestinationTag);
+        _isTeleporting = true;
         if (_sceneDestination.Path.Equals(SceneManager.GetActiveScene().path))
         {
             // teleport inside the scene without loading
@@ -37,6 +44,7 @@ public class PlayerTeleporter : MonoBehaviour
                     player.GetComponent<PlayerController>()
                 };
                 spawnPoint.Spawn(player, spriteDirectioner, componentsToDisable);
+                _isTeleporting = false;
             }
         }
         else // go to different scene
@@ -45,4 +53,7 @@ public class PlayerTeleporter : MonoBehaviour
             SceneLoader.LoadScene(_sceneDestination.Path, Fade, false);
         }
     }
+
+
+    protected bool IsPlayer(Collider2D collision) => collision.tag.Equals(PlayerTag);
 }
