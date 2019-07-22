@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf899e64fedd0443f8ee1241799ec9ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultSpeed: 1
+  _defaultSpeed: 2
   _grounds:
   - GroundTag: Road
     Multiplier: 2

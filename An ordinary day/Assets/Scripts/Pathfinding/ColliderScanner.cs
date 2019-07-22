@@ -37,7 +37,7 @@ public class ColliderScanner : MonoBehaviour
 
     private float _lastRefreshTime;
     public WorldGrid<ScanInfo> ScanResult { get; private set; }
-    private List<Vector2> _pointsToScan; // store in order to optimize computations
+    private List<Vector2> _pointsToScan; // points to scan during for the dynamic layer
 
     #region Init
     private void InitScanGrid()
@@ -106,15 +106,13 @@ public class ColliderScanner : MonoBehaviour
         Debug.Log("[ColliderScanner] Scan Static Layer");
         Scan(_staticLayerToScan);
         // Remove all the static points that already have colliders
-        var n = _pointsToScan.Count;
-        // ze removed all the non trigger objects
+        var nBefore = _pointsToScan.Count;
+        // we removed all the points containing solid colliders on the static layer, for optiisation purpose
         _pointsToScan.RemoveAll ((point) =>
-        {
-            var scanedCollider = ScanResult.Get(point);
-            return scanedCollider != null; // && !scanedCollider.isTrigger;
-        }); 
-        var nAfterOpti = _pointsToScan.Count;
-        Debug.Log("Scan optimization. Removed " + (n - nAfterOpti) + " points to scan.");
+            ScanResult.Get(point).HasSolidCollider(_staticLayerToScan)
+        ); 
+        var nAfter = _pointsToScan.Count;
+        Debug.Log("Scan optimization. Removed " + (nBefore - nAfter) + " points to scan.");
     }
 
 
@@ -133,8 +131,7 @@ public class ColliderScanner : MonoBehaviour
     {
         foreach (var point in points)
         {
-            var gridIndex = ScanResult.GetGridIndex(point);
-            var scanInfo = ScanResult[gridIndex.x, gridIndex.y];
+            var scanInfo = ScanResult.Get(point);
             scanInfo.Set(layer, ScanPosition(point, layer));
         }
     }
@@ -194,6 +191,7 @@ public class ColliderScanner : MonoBehaviour
                 if (Mathf.Abs(center.x - x) != range && Mathf.Abs(center.y - y) != range)
                     continue;
                 var hasCollider = false;
+                // Check collision on all the layer mask defined
                 foreach (var layer in layers)
                     hasCollider = hasCollider || HasCollider(x, y, layer, collidersToIgnore);
                 if (!hasCollider)
@@ -204,7 +202,7 @@ public class ColliderScanner : MonoBehaviour
     }
 
     /// <summary>
-    /// Return true if the given position has a collider.
+    /// Return true if the given position has a collider in the given LayerMask
     /// </summary>
     private bool HasCollider(int x, int y, LayerMask layerMask, Collider2D[] collidersToIgnore = null)
     {
@@ -253,7 +251,7 @@ public class ColliderScanner : MonoBehaviour
                     var dynamicCollider = ScanResult[x, y].Get(_dynamicLayerToScan);
                     if (dynamicCollider)
                     {
-                        if (staticCollider.isTrigger)
+                        if (dynamicCollider.isTrigger)
                             triggerPoints.Add(ScanResult.GetWordCoordinate(x, y));
                         else
                             colliderPoints.Add(ScanResult.GetWordCoordinate(x, y));

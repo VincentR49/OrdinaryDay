@@ -14,10 +14,10 @@ public abstract class CardinalData<T> : ScriptableObject
     {
         switch (direction)
         {
-            case Direction.Top: return Top;
-            case Direction.Bottom: return Bottom;
-            case Direction.Right: return Right;
-            case Direction.Left: return Left;
+            case Direction.North: return Top;
+            case Direction.South: return Bottom;
+            case Direction.West: return Right;
+            case Direction.East: return Left;
         }
         return default;
     }

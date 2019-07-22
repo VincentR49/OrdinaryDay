@@ -63,13 +63,21 @@ public class WalkManager : MonoBehaviour
 
 
     public void Move(Vector2 direction, float speed)
-    { 
+    {
         var state = GetState(direction);
         if (state != _state)
             ChangeState(state);
         direction.Normalize();
         _rb.MovePosition(_rb.position + direction * speed * Time.deltaTime);
     }
+
+    public void SetDefaultSpeed(float defaultSpeed)
+    {
+        _defaultSpeed = defaultSpeed;
+    }
+
+
+    public float GetDefaultSpeed() => _defaultSpeed;
 
     #region State management
     public void Stop()
@@ -84,9 +92,9 @@ public class WalkManager : MonoBehaviour
         var absY = Mathf.Abs(direction.y);
         if (absX < Epsilon && absY < Epsilon)
             return State.Stop;
-        else if (absX >= absY) 
+        else if (absX >= absY)
             return direction.x > 0 ? State.Right : State.Left;
-        else 
+        else
             return direction.y > 0 ? State.Top : State.Down;
 
     }
@@ -107,16 +115,16 @@ public class WalkManager : MonoBehaviour
         switch (state)
         {
             case State.Top:
-                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Top));
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.North));
                 break;
             case State.Down:
-                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Bottom));
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.South));
                 break;
             case State.Left:
-                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Left));
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.East));
                 break;
             case State.Right:
-                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.Right));
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.West));
                 break;
             case State.Stop:
             default:

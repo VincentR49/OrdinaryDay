@@ -10,9 +10,9 @@ public class PathFollower : MonoBehaviour
     private WalkManager _walkManager;
 
     private Queue<Vector2> _path;
-    private Vector2 Target => _path.Peek();
-    public bool IsFollowing { private set; get; }
-
+    public Vector2 Target => _path.Peek();
+    public bool IsRunning { private set; get; }
+    private float _previousSpeed;
     // define the minimal distance from the current target needed to go to the next target 
     private float ReachedTargetMinDistance => _walkManager.Speed * Time.deltaTime;
     public delegate void FinalTargetReachedHandler();
@@ -24,7 +24,7 @@ public class PathFollower : MonoBehaviour
         if (path == null || path.Count == 0)
             return;
         Debug.Log("Start following path.");
-        IsFollowing = true;
+        IsRunning = true;
         _path = path;
     }
 
@@ -32,26 +32,32 @@ public class PathFollower : MonoBehaviour
     public void Stop()
     {
         Debug.Log("Stop following path");
-        IsFollowing = false;
+        IsRunning = false;
         _walkManager.Stop();
     }
 
 
+    public void Resume()
+    {
+        Debug.Log("Resume path following");
+        IsRunning = true;
+    }
+
     private void Update()
     {
-        if (IsFollowing)
+        if (IsRunning)
         {
             var distance = Utils.Distance(transform.position, Target);
-            var direction = new Vector2(Target.x - transform.position.x, Target.y - transform.position.y);
+            var direction = Target - transform.position.ToVector2();
             // if we are less than one frame from the target
             if (distance < _walkManager.Speed * Time.deltaTime)
             {
                 GoToNextStep();
-                if (_path.Count != 0) // We move juste what is needed to go to the target
+                if (_path.Count != 0) // We move just what is needed to reach the target
                     _walkManager.Move(direction, distance / Time.deltaTime);
             }
             else
-                _walkManager.Move(direction); // we move through this direction
+                _walkManager.Move(direction);
         }
     }
 
@@ -65,5 +71,18 @@ public class PathFollower : MonoBehaviour
             Debug.Log("[PathFollower] Final target reached.");
             OnFinalTargetReached.Invoke();
         }
+    }
+
+
+    public void EditSpeed(float mutliplier)
+    {
+        _previousSpeed = _walkManager.GetDefaultSpeed();
+        _walkManager.SetDefaultSpeed(_previousSpeed * mutliplier);
+    }
+
+
+    public void ResetSpeed()
+    {
+        _walkManager.SetDefaultSpeed(_previousSpeed);
     }
 }
