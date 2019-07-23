@@ -13,6 +13,7 @@ public class DirectionalPlayerTeleporter : PlayerTeleporter
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         // do nothing
+        // override onTriggerENter of base class
     }
 
     private void OnTriggerStay2D(Collider2D collision)
