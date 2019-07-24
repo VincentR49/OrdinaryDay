@@ -1,24 +1,16 @@
 ﻿using UnityEngine;
 
-public class CameraPlayerFollower : MonoBehaviour
+public class PlayerFollower : MonoBehaviour
 {
     private const string PlayerTag = "Player";
 
     private GameObject _target;
-    private Camera _camera;
-
-
-    private void Awake()
-    {
-        _camera = GetComponent<Camera>();
-    }
 
     private void Start()
     {
         _target = LookForTarget();
         FollowTarget();
     }
-
 
     private GameObject LookForTarget()
     {

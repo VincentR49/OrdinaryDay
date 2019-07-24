@@ -2,7 +2,6 @@
 using System;
 
 [CreateAssetMenu(menuName = "GameData/DateTime")]
-public class DateTimeData : ScriptableObject
+public class DateTimeData : VariableData<DateTime>
 {
-    public DateTime Value;
 }

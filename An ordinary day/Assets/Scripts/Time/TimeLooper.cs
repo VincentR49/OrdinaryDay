@@ -6,16 +6,16 @@ public class TimeLooper : MonoBehaviour
     [SerializeField]
     private SceneSwitcher _loopSceneSwitch = default;
     [SerializeField]
-    private SerialDateTime _startDate = default;
+    private SerialDateTimeData _startDate = default;
     [SerializeField]
-    private SerialDateTime _endDate = default;
+    private SerialDateTimeData _endDate = default;
     [SerializeField]
     private DateTimeData _currentTime = default;
     [SerializeField]
     private bool _pauseOnTimeLoopStarted = true;
 
-    private DateTime StartDateTime => _startDate.ToDateTime();
-    private DateTime EndDateTime => _endDate.ToDateTime();
+    private DateTime StartDateTime => _startDate.Value.ToDateTime();
+    private DateTime EndDateTime => _endDate.Value.ToDateTime();
     private bool _timeLoopStarting;
 
     private void Update()

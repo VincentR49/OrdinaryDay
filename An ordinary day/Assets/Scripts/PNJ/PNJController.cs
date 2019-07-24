@@ -17,19 +17,35 @@ public class PNJController : MonoBehaviour
     private SpriteDirectioner _spriteDirectioner;
     [SerializeField]
     private TargetReacher _targetReacher;
-   
+    [SerializeField]
+    private ScheduleHandler _scheduleHandler;
    
     #region Init
     private void Awake()
     {
         Debug.Log("PNJ Creation: " + _pnjData);
-        InitSprites();
+        Init();
     }
+
+
+    private void Init()
+    {
+        InitSprites();
+        InitScheduleSystem();
+    }
+
 
     private void InitSprites()
     {
         _spriteDirectioner.SetCardinalSprite(_pnjData.CardinalSprite);
         _walkManager.SetWalkAnimation(_pnjData.WalkingAnimation);
+    }
+
+
+    private void InitScheduleSystem()
+    {
+        Debug.Log("Init Schedule System of " + _pnjData.FirstName);
+        _scheduleHandler.Init(_pnjData.Schedule);
     }
     #endregion
 }

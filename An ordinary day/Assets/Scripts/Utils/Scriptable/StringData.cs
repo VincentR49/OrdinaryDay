@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName ="GameData/String")]
-public class StringData : ScriptableObject
+public class StringData : VariableData<string>
 {
-    public string Value;
+
 }
