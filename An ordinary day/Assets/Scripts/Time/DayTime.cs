@@ -13,4 +13,7 @@ public class DayTime
         Min = min;
         Sec = sec;
     }
+
+
+    public long ToSeconds() => Hour * 3600 + Min * 60 + Sec;
 }

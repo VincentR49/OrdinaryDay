@@ -18,4 +18,5 @@ MonoBehaviour:
   Gender: 1
   CardinalSprite: {fileID: 11400000, guid: cf6e8cad484194d9bb99760d685fb49b, type: 2}
   WalkingAnimation: {fileID: 11400000, guid: ee0904f65df5545deb198e3b36176e9a, type: 2}
-  Schedule: {fileID: 11400000, guid: 229d65c1fbae54986b6f83c5def5d64f, type: 2}
+  DefaultSchedule: {fileID: 11400000, guid: 229d65c1fbae54986b6f83c5def5d64f, type: 2}
+  InGameSchedule: {fileID: 11400000, guid: a91265e8cb6664ba7bab99a429a9a1a4, type: 2}

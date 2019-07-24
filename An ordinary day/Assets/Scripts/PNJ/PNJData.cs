@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Scriptable containing the PNJ informations
+/// </summary>
 [CreateAssetMenu(menuName ="Scriptables/PNJData")]
 public class PNJData : ScriptableObject
 {
@@ -14,7 +17,8 @@ public class PNJData : ScriptableObject
     public CardinalAnimationData WalkingAnimation;
 
     [Header("Schedule")]
-    public Schedule Schedule;
+    public Schedule DefaultSchedule; // readyonly, just used to store the basic schedule data
+    public Schedule InGameSchedule; // reference to the dynamic schedule
 
     public override string ToString() 
         => string.Format("{0} {1}, {2}, {3}", FirstName, LastName, Age, Gender);

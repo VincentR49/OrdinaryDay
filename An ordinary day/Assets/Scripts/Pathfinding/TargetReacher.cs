@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using System;
 
 /// <summary>
 /// Enable a PNJ to find and follow a path to the given target

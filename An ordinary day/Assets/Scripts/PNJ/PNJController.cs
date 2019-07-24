@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 /// <summary>
 /// Manage the PNJ behaviours
@@ -44,8 +43,14 @@ public class PNJController : MonoBehaviour
 
     private void InitScheduleSystem()
     {
+        // We use only the ingame schedule
+        // The default schedule is just readonly
         Debug.Log("Init Schedule System of " + _pnjData.FirstName);
-        _scheduleHandler.Init(_pnjData.Schedule);
+        var defaultSchedule = _pnjData.DefaultSchedule;
+        var inGameSchedule = _pnjData.InGameSchedule;
+        inGameSchedule.Copy(defaultSchedule);
+        inGameSchedule.Reset();
+        _scheduleHandler.Init(inGameSchedule);
     }
     #endregion
 }

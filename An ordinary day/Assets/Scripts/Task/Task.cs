@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Generic class for task
+/// Generic abstract class for defining a Task
 /// </summary>
 public abstract class Task : ScriptableObject
 {

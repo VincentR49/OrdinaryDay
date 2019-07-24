@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public static class Utils
 {
@@ -26,6 +27,11 @@ public static class Utils
     }
 
     public static Vector2 ToVector2(this Vector3 v) => new Vector2(v.x, v.y);
+
+
+    public static DateTime GetDateTime(DayDate dayDate, DayTime dayTime)
+        =>  new DateTime(dayDate.Year, dayDate.Month, dayDate.Day, dayTime.Hour, dayTime.Min, dayTime.Sec);
+
 
     #region Extensions Methods
     public static Node GetNodeByPosition(this List<Node> list, Node item)

@@ -6,6 +6,31 @@ public class ScheduledTask
     public DayTime StartTime;
     public DayTime EndTime;
 	public int Priority;
-    public bool IsDone;
+    public TaskState State;
     public Task Task;
+
+
+    public enum TaskState
+    {
+        ToDo,
+        Doing,
+        Done,
+        Canceled
+    }
+
+
+    public ScheduledTask(ScheduledTask other)
+    {
+        StartTime = other.StartTime;
+        EndTime = other.EndTime;
+        Priority = other.Priority;
+        State = other.State;
+        Task = other.Task;
+    }
+
+
+    public void Reset()
+    {
+        State = TaskState.ToDo;
+    }
 }

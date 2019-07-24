@@ -13,4 +13,9 @@ public class DayDate
         Month = month;
         Day = day;
     }
+
+
+    public bool Equals(DateTime dateTime)
+        => dateTime.Year == Year && dateTime.Month == Month && dateTime.Day == Day;
+    
 }
