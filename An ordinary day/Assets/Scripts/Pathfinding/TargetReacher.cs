@@ -28,6 +28,10 @@ public class TargetReacher : MonoBehaviour
     [SerializeField]
     private PathFollower _pathFollower;
 
+    // Events
+    public delegate void OnTargetReachedHandler(Vector2 target);
+    public event OnTargetReachedHandler OnTargetReached;
+
     // Data
     private Vector2 _finalTarget;
     private List<Vector2> _staticPath;
@@ -102,7 +106,10 @@ public class TargetReacher : MonoBehaviour
             }
         }
         else // we reached the good target
+        {
             _trialNumber = 0;
+            OnTargetReached?.Invoke(_finalTarget);
+        }    
     }
 
    

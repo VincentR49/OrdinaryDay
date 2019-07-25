@@ -15,8 +15,6 @@ public class PNJController : MonoBehaviour
     [SerializeField]
     private SpriteDirectioner _spriteDirectioner;
     [SerializeField]
-    private TargetReacher _targetReacher;
-    [SerializeField]
     private ScheduleHandler _scheduleHandler;
    
     #region Init
