@@ -90,6 +90,12 @@ public class TargetReacher : MonoBehaviour
     }
 
 
+    public void Stop()
+    {
+        Debug.Log("Stop going to the target");
+        _pathFollower.Stop();
+    }
+
     private void OnCurrentTargetReached()
     {
         Debug.Log("[PNJTargetReacher] OnCurrentTargetReached");

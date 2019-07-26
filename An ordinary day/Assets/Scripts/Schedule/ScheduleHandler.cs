@@ -13,6 +13,8 @@ public class ScheduleHandler : MonoBehaviour
     private Schedule _schedule;
     private ScheduledTask _nextTaskToDo;
     private bool _isInitialized;
+    // todo track game state too
+
 
     public void Init(Schedule schedule)
     {

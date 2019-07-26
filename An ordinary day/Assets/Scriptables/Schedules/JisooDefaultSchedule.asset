@@ -19,7 +19,7 @@ MonoBehaviour:
   Tasks:
   - StartTime:
       Hour: 9
-      Min: 5
+      Min: 3
       Sec: 0
     EndTime:
       Hour: 10

@@ -3,6 +3,9 @@ using System;
 
 public class TimeLooper : MonoBehaviour
 {
+    private static DateTime NoTime = new DateTime();
+    [SerializeField]
+    private WorldClock _worldClock;
     [SerializeField]
     private SceneSwitcher _loopSceneSwitch = default;
     [SerializeField]
@@ -39,6 +42,8 @@ public class TimeLooper : MonoBehaviour
         if (_timeLoopStarting)
             return;
         Debug.Log("[TimeLooper] Start new loop");
+        _worldClock.Stop();
+        _currentTime.Value = NoTime;
         _timeLoopStarting = true;
         _loopSceneSwitch.Switch(OnTimeLoopStart);
     }
@@ -54,7 +59,8 @@ public class TimeLooper : MonoBehaviour
     {
         if (_pauseOnTimeLoopStarted)
             GamePauser.Pause();
-        ResetTime();
         _timeLoopStarting = false;
+        ResetTime();
+        _worldClock.Resume();
     }
 }

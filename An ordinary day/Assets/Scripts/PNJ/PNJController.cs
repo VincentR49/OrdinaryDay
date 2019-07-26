@@ -18,7 +18,7 @@ public class PNJController : MonoBehaviour
     private ScheduleHandler _scheduleHandler;
    
     #region Init
-    private void Awake()
+    private void Start()
     {
         Debug.Log("PNJ Creation: " + _pnjData);
         Init();

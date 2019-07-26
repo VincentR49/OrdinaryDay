@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Perform a moving task
+/// </summary>
 public class MovePerformer : TaskPerformerDelegate
 {
+    private const string NotInGoodScene = "notInGoodScene";
+
     private TargetReacher _targetReacher;
-    public override event OnTaskFinishedHandler OnTaskFinished; // necessary to be called here
+
 
     public void Perform(Move task, TargetReacher targetReacher)
     {
         base.Perform(task);
+        if (!task.Destination.IsInCurrentScene())
+        {
+            OnTaskFailed(NotInGoodScene);
+            return;
+        }
         _targetReacher = targetReacher;
-        // TODO check scene
         _targetReacher.OnTargetReached += OnMoveToDestinationSucceded;
         _targetReacher.GoToTarget(task.Destination.Value.Position);
     }
@@ -17,8 +26,19 @@ public class MovePerformer : TaskPerformerDelegate
 
     private void OnMoveToDestinationSucceded(Vector2 target)
     {
-        _targetReacher.OnTargetReached -= OnMoveToDestinationSucceded;
         Debug.Log("OnMoveToDestinationSucceded");
-        OnTaskFinished?.Invoke();
+        OnTaskFinished();
+    }
+
+
+    public override void CleanListeners()
+    {
+        _targetReacher.OnTargetReached -= OnMoveToDestinationSucceded;
+    }
+
+    public override void Cancel()
+    {
+        base.Cancel();
+        _targetReacher.Stop();
     }
 }
