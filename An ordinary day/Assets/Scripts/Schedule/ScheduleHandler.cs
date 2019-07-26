@@ -12,34 +12,109 @@ public class ScheduleHandler : MonoBehaviour
 
     private Schedule _schedule;
     private ScheduledTask _nextTaskToDo;
+    private ScheduledTask _currentTask;
     private bool _isInitialized;
-    // todo track game state too
+    private bool IsDoingTask => _currentTask != null;
 
 
     public void Init(Schedule schedule)
     {
+        if (_isInitialized)
+        {
+            Debug.Log("Schedule handler already initialized");
+            return;
+        } 
         _schedule = schedule;
-        _nextTaskToDo = _schedule.GetFirstTaskToDo();
+        _nextTaskToDo = GetNextTaskToDo();
         _isInitialized = true;
+        InitListeners();
+    }
+
+
+    private void OnDestroy()
+    {
+        CleanListeners();
     }
 
 
     private void Update()
     {
-        // TODO manage here the change of status of the different tasks
         if (!_isInitialized)
             return;
-        if (_nextTaskToDo != null
-                && _nextTaskToDo.State == ScheduledTask.TaskState.ToDo
-                && _schedule.Day.Equals(_currentTime.Value))
+        if (!_schedule.Day.Equals(_currentTime.Value)) // should be the good day
+            return;
+
+        if (IsDoingTask)
         {
-            var taskDateTime = _schedule.GetDateTime(_nextTaskToDo.StartTime);
-            if (taskDateTime <= _currentTime.Value)
+            if (IsTaskCannotBeDoneOnTime(_currentTask))
             {
-                Debug.Log("Start scheduled task. Current time: " + _currentTime.Value + ". Task time: " + taskDateTime);
-                _taskPerformer.Perform(_nextTaskToDo.Task);
-                _nextTaskToDo.State = ScheduledTask.TaskState.Doing;
+                CancelCurrentTask();
             }
         }
+        else if (_nextTaskToDo != null && IsTaskReadyToDo(_nextTaskToDo))
+        {
+            StartTask(_nextTaskToDo);
+        }
     }
+
+
+    private void StartTask(ScheduledTask task)
+    {
+        _currentTask = task;
+        Debug.Log("Start scheduled task. Current time: " + _currentTime.Value + ". Task time: " + task.StartTime);
+        _taskPerformer.Perform(task.Task);
+        _currentTask.State = ScheduledTask.TaskState.Doing;
+        _nextTaskToDo = GetNextTaskToDo();
+    }
+
+
+    private void CancelCurrentTask()
+    {
+        _taskPerformer.CancelCurrentTask();
+        OnCurrentTaskEnded(ScheduledTask.TaskState.Canceled);
+    }
+
+    private void OnCurrentTaskEnded(ScheduledTask.TaskState finalState)
+    {
+        _currentTask.State = finalState;
+        _currentTask = null;
+        _nextTaskToDo = GetNextTaskToDo();
+    }
+
+    #region Listeners
+    private void InitListeners()
+    {
+        _taskPerformer.OnTaskFinishedEvent += OnCurrentTaskFinished;
+        _taskPerformer.OnTaskFailedEvent += OnCurrentTaskFailed;
+    }
+
+
+    private void CleanListeners()
+    {
+        _taskPerformer.OnTaskFinishedEvent -= OnCurrentTaskFinished;
+        _taskPerformer.OnTaskFailedEvent -= OnCurrentTaskFailed;
+    }
+
+
+    private void OnCurrentTaskFinished()
+    {
+        OnCurrentTaskEnded(ScheduledTask.TaskState.Done);
+    }
+
+
+    private void OnCurrentTaskFailed(string failMessage)
+    {
+        OnCurrentTaskEnded(ScheduledTask.TaskState.Failed);
+    }
+
+    #endregion
+
+
+    #region Utils
+
+    private ScheduledTask GetNextTaskToDo() => _schedule.GetFirstTaskToDo();
+
+    private bool IsTaskReadyToDo(ScheduledTask task) => _schedule.GetDateTime(task.StartTime) <= _currentTime.Value;
+    private bool IsTaskCannotBeDoneOnTime(ScheduledTask task) => _schedule.GetDateTime(task.EndTime) <= _currentTime.Value;
+    #endregion
 }

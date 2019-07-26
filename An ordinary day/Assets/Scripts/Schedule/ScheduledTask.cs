@@ -15,7 +15,8 @@ public class ScheduledTask
         ToDo,
         Doing,
         Done,
-        Canceled
+        Canceled,
+        Failed
     }
 
 

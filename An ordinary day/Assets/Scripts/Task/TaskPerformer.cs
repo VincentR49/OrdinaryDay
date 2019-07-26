@@ -5,9 +5,18 @@
 /// </summary>
 public class TaskPerformer : MonoBehaviour
 {
+    // Inspecto
     [SerializeField]
     private TargetReacher _targetReacher;
 
+    // Event related
+    public delegate void OnTaskFinishedHandler();
+    public virtual event OnTaskFinishedHandler OnTaskFinishedEvent;
+
+    public delegate void OnTaskFailedHandler(string failMessage);
+    public virtual event OnTaskFailedHandler OnTaskFailedEvent;
+
+    // Data
     private TaskPerformerDelegate _performer;
 
     #region Performing Management
@@ -39,7 +48,6 @@ public class TaskPerformer : MonoBehaviour
         }
         _performer.Cancel();
         CleanPerformerListeners();
-        // TODO notify
     }
 
     #endregion
@@ -50,7 +58,7 @@ public class TaskPerformer : MonoBehaviour
     {
         CleanPerformerListeners();
         Debug.Log("TaskPerformer: OnTaskFinished");
-        // TODO notify
+        OnTaskFinishedEvent?.Invoke();
     }
 
 
@@ -58,7 +66,7 @@ public class TaskPerformer : MonoBehaviour
     {
         CleanPerformerListeners();
         Debug.LogError("TaskPerformer: OnTaskFailed");
-        // TODO notify
+        OnTaskFailedEvent?.Invoke(failMessage);
     }
 
 
@@ -74,6 +82,5 @@ public class TaskPerformer : MonoBehaviour
         _performer.OnTaskFinishedEvent += OnTaskFinished;
         _performer.OnTaskFailedEvent += OnTaskFailed;
     }
-
     #endregion
 }

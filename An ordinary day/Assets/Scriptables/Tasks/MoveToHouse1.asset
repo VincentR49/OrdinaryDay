@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fab5faeb1cb64d0db5f375744440b51, type: 3}
-  m_Name: TimeLoopEndTime
+  m_Script: {fileID: 11500000, guid: f426889dfa641459eb0d4ed947429182, type: 3}
+  m_Name: MoveToHouse1
   m_EditorClassIdentifier: 
-  Value:
-    Day: 28
-    Month: 5
-    Year: 1991
-    Hour: 10
-    Min: 0
-    Sec: 0
+  Description: My Task
+  Destination: {fileID: 11400000, guid: ca610fbdebb4a45358f6f4401d3d92da, type: 2}
