@@ -68,7 +68,7 @@ public class PathFinder : MonoBehaviour
         var bestCandidate = startNode;
 
         int count = 0;
-        Debug.Log("Search path from node: " + startNode + " to " + finalNode);
+        //Debug.Log("Search path from node: " + startNode + " to " + finalNode);
         while (openList.Count > 0)
         {
             // Pick up the node with the lowest heuristic and remove it from the open list

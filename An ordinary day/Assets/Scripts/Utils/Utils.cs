@@ -28,7 +28,6 @@ public static class Utils
 
     public static Vector2 ToVector2(this Vector3 v) => new Vector2(v.x, v.y);
 
-
     public static DateTime GetDateTime(DayDate dayDate, DayTime dayTime)
         =>  new DateTime(dayDate.Year, dayDate.Month, dayDate.Day, dayTime.Hour, dayTime.Min, dayTime.Sec);
 

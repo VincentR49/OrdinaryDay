@@ -25,11 +25,11 @@ public class PlayerSpawner : MonoBehaviour
             {
                 // Search for the player
                 var player = GameObject.FindWithTag(PlayerTag);
-                if (player == null)
+                if (player == null) // doesnt exit, we instanciate him
                 {
                     player = Instantiate(_playerPrefab);
                 }
-                spawnPoint.Spawn(player, player.GetComponent<SpriteDirectioner>(),
+                spawnPoint.Spawn(player,
                     new List<MonoBehaviour>
                     { 
                         player.GetComponent<PlayerController>()

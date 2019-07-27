@@ -10,6 +10,9 @@ public class Schedule : ScriptableObject
     public List<ScheduledTask> Tasks;
     public int NTasks => Tasks == null ? 0 : Tasks.Count;
 
+    public delegate void ScheduleResetHandler();
+    public event ScheduleResetHandler OnScheduleResetEvent;
+
     public void Copy(Schedule other)
     {
         Day = other.Day;
@@ -24,16 +27,22 @@ public class Schedule : ScriptableObject
         if (Tasks == null) return;
         foreach (var task in Tasks)
             task.Reset();
-        // We order by start time
-        Tasks.OrderBy((x) => x.StartTime.ToSeconds());
+        Sort();
+        OnScheduleResetEvent?.Invoke();
     }
 
+
+    public void Sort()
+    {
+        Tasks.OrderBy((x) => x.StartTime.ToSeconds());
+    }
+   
 
     public ScheduledTask GetFirstTaskToDo()
     {
         if (NTasks == 0)
             return null;
-        return Tasks.FirstOrDefault((x) => x.State == ScheduledTask.TaskState.ToDo);
+        return Tasks.FirstOrDefault((x) => x.State == TaskState.ToDo);
     }
 
 

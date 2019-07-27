@@ -9,7 +9,7 @@ public abstract class TaskPerformerDelegate
     public delegate void OnTaskFinishedHandler();
     public virtual event OnTaskFinishedHandler OnTaskFinishedEvent;
 
-    public delegate void OnTaskFailedHandler(string failMessage);
+    public delegate void OnTaskFailedHandler(int code, string failMessage = "");
     public virtual event OnTaskFailedHandler OnTaskFailedEvent;
 
     protected Task _currentTask;
@@ -33,7 +33,10 @@ public abstract class TaskPerformerDelegate
         CleanListeners();
     }
 
-    public abstract void CleanListeners();
+    public virtual void CleanListeners()
+    {
+        // do nothing
+    }
 
 
     #region Events related methods
@@ -48,11 +51,11 @@ public abstract class TaskPerformerDelegate
     }
 
 
-    protected void OnTaskFailed(string failMessage)
+    protected void OnTaskFailed(int code, string failMessage = "")
     {
         Debug.LogError("OnTaskFailed: " + _currentTask + ": " + failMessage);
         CleanListeners();
-        OnTaskFailedEvent?.Invoke(failMessage);
+        OnTaskFailedEvent?.Invoke(code, failMessage);
     }
     #endregion
 }

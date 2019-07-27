@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fab5faeb1cb64d0db5f375744440b51, type: 3}
-  m_Name: TimeLoopEndTime
+  m_Script: {fileID: 11500000, guid: 36416e31b2a124fe78aa18326dc950e3, type: 3}
+  m_Name: PNJList
   m_EditorClassIdentifier: 
-  Value:
-    Day: 28
-    Month: 5
-    Year: 1991
-    Hour: 9
-    Min: 30
-    Sec: 0
+  List:
+  - {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}

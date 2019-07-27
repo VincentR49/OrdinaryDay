@@ -7,6 +7,8 @@ public class TimeLooper : MonoBehaviour
     [SerializeField]
     private WorldClock _worldClock;
     [SerializeField]
+    private GameEvent _onTimeLoopStartedEvent;
+    [SerializeField]
     private SceneSwitcher _loopSceneSwitch = default;
     [SerializeField]
     private SerialDateTimeData _startDate = default;
@@ -62,5 +64,6 @@ public class TimeLooper : MonoBehaviour
         _timeLoopStarting = false;
         ResetTime();
         _worldClock.Resume();
+        _onTimeLoopStartedEvent.Raise();
     }
 }

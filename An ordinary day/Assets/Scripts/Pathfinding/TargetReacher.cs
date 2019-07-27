@@ -151,7 +151,7 @@ public class TargetReacher : MonoBehaviour
             //Debug.Log("Collider is not blocking the way to the target, no avoiding process.");
             return;
         }
-        Debug.LogError("Start avoiding process");
+        Debug.Log("Start avoiding process");
         _colliderToAvoid = collision.collider;
         _avoidingRoutine = StartCoroutine(AvoidingRoutine());
     }

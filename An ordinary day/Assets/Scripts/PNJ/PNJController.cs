@@ -5,10 +5,6 @@
 /// </summary>
 public class PNJController : MonoBehaviour
 {
-    [Header("Data")]
-    [SerializeField]
-    private PNJData _pnjData;
-
     [Header("Managers")]
     [SerializeField]
     private WalkManager _walkManager;
@@ -16,17 +12,14 @@ public class PNJController : MonoBehaviour
     private SpriteDirectioner _spriteDirectioner;
     [SerializeField]
     private ScheduleHandler _scheduleHandler;
-   
+
+    private PNJData _pnjData;
+
     #region Init
-    private void Start()
+    public void Init(PNJData pnjData)
     {
-        Debug.Log("PNJ Creation: " + _pnjData);
-        Init();
-    }
-
-
-    private void Init()
-    {
+        _pnjData = pnjData;
+        Debug.Log("PNJ Initialisation: " + _pnjData);
         InitSprites();
         InitScheduleSystem();
     }
@@ -41,14 +34,7 @@ public class PNJController : MonoBehaviour
 
     private void InitScheduleSystem()
     {
-        // We use only the ingame schedule
-        // The default schedule is just readonly
-        Debug.Log("Init Schedule System of " + _pnjData.FirstName);
-        var defaultSchedule = _pnjData.DefaultSchedule;
-        var inGameSchedule = _pnjData.InGameSchedule;
-        inGameSchedule.Copy(defaultSchedule);
-        inGameSchedule.Reset();
-        _scheduleHandler.Init(inGameSchedule);
+        _scheduleHandler.SetSchedule(_pnjData.InGameSchedule);
     }
     #endregion
 }

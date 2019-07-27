@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Behaviour that handle task
+/// Behaviour that handle task for a given game object
 /// </summary>
 public class TaskPerformer : MonoBehaviour
 {
-    // Inspecto
+    // Inspector
     [SerializeField]
     private TargetReacher _targetReacher;
 
@@ -13,7 +13,7 @@ public class TaskPerformer : MonoBehaviour
     public delegate void OnTaskFinishedHandler();
     public virtual event OnTaskFinishedHandler OnTaskFinishedEvent;
 
-    public delegate void OnTaskFailedHandler(string failMessage);
+    public delegate void OnTaskFailedHandler(int code, string failMessage = "");
     public virtual event OnTaskFailedHandler OnTaskFailedEvent;
 
     // Data
@@ -29,6 +29,10 @@ public class TaskPerformer : MonoBehaviour
             var movePerformer = new MovePerformer();
             movePerformer.Perform((Move) task, _targetReacher);
             _performer = movePerformer; // cast
+        }
+        else if (task is Spawn)
+        {
+            // do nothing, not managed here
         }
         else
         {
@@ -62,11 +66,11 @@ public class TaskPerformer : MonoBehaviour
     }
 
 
-    private void OnTaskFailed(string failMessage)
+    private void OnTaskFailed(int code, string failMessage = "")
     {
         CleanPerformerListeners();
         Debug.LogError("TaskPerformer: OnTaskFailed");
-        OnTaskFailedEvent?.Invoke(failMessage);
+        OnTaskFailedEvent?.Invoke(code, failMessage);
     }
 
 

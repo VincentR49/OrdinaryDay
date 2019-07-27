@@ -32,8 +32,7 @@ public class WorldGrid<T> : IEnumerator, IEnumerable
         var nX = (int) Mathf.Ceil(rect.width / cellSize);
         var nY = (int) Mathf.Ceil(rect.height / cellSize);
         _grid = new T[nX, nY];
-        Debug.Log("Create World Grid");
-        Debug.Log("N Elements: " + Nx * Ny);
+        Debug.Log("Create World Grid containing: " + Nx * Ny + " elements.");
     }
 
 

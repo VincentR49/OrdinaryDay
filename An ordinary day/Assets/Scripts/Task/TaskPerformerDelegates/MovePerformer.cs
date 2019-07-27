@@ -5,17 +5,14 @@
 /// </summary>
 public class MovePerformer : TaskPerformerDelegate
 {
-    private const string NotInGoodScene = "notInGoodScene";
-
     private TargetReacher _targetReacher;
-
 
     public void Perform(Move task, TargetReacher targetReacher)
     {
         base.Perform(task);
         if (!task.Destination.IsInCurrentScene())
         {
-            OnTaskFailed(NotInGoodScene);
+            OnTaskFailed(TaskFailedConstants.NotInGoodScene);
             return;
         }
         _targetReacher = targetReacher;

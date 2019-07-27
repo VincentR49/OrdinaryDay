@@ -37,13 +37,11 @@ public class PlayerTeleporter : MonoBehaviour
             var spawnPoint = _spawnList.GetSpawnPoint(_spawnDestinationTag);
             if (spawnPoint) // teleport the player
             {
-                var spriteDirectioner = player.GetComponent<SpriteDirectioner>();
                 player.GetComponent<SpriteAnimator>().StopCurrentAnimation();
-                var componentsToDisable = new List<MonoBehaviour>
+                spawnPoint.Spawn(player, new List<MonoBehaviour>
                 {
                     player.GetComponent<PlayerController>()
-                };
-                spawnPoint.Spawn(player, spriteDirectioner, componentsToDisable);
+                });
                 _isTeleporting = false;
             }
         }

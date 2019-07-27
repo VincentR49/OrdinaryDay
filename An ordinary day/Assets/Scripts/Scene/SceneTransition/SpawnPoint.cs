@@ -33,13 +33,14 @@ public class SpawnPoint : MonoBehaviour
     }
 
 
-    public void Spawn(GameObject go, SpriteDirectioner spriteDirectioner, List<MonoBehaviour> behaviourToDisable = null)
+    public void Spawn(GameObject go, List<MonoBehaviour> disableDuringSpawn = null)
     {
-        StartCoroutine(SpawnCoroutine(go, spriteDirectioner, behaviourToDisable));
+        var spriteDirectioner = go.GetComponent<SpriteDirectioner>();
+        StartCoroutine(SpawnCoroutine(go, spriteDirectioner, disableDuringSpawn));
     }
 
 
-    private IEnumerator SpawnCoroutine(GameObject go, SpriteDirectioner spriteDirectioner, List<MonoBehaviour> disableDuringSpawn = null)
+    private IEnumerator SpawnCoroutine(GameObject go, SpriteDirectioner spriteDirectioner = null, List<MonoBehaviour> disableDuringSpawn = null)
     {
         Debug.Log("Start spawn coroutine");
         if (disableDuringSpawn != null)
@@ -48,7 +49,8 @@ public class SpawnPoint : MonoBehaviour
                 behaviour.enabled = false;
         }
         go.transform.position = gameObject.transform.position;
-        spriteDirectioner.SetSprite(_spawnDirection);
+        if (spriteDirectioner != null)
+            spriteDirectioner.SetSprite(_spawnDirection);
         yield return new WaitForSeconds(SpawnDuration);
         if (disableDuringSpawn != null)
         {

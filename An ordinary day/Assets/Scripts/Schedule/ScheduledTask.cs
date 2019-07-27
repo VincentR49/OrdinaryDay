@@ -9,17 +9,6 @@ public class ScheduledTask
     public TaskState State;
     public Task Task;
 
-
-    public enum TaskState
-    {
-        ToDo,
-        Doing,
-        Done,
-        Canceled,
-        Failed
-    }
-
-
     public ScheduledTask(ScheduledTask other)
     {
         StartTime = other.StartTime;

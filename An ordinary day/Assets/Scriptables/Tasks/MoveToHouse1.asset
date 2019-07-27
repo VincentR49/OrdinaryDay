@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f426889dfa641459eb0d4ed947429182, type: 3}
   m_Name: MoveToHouse1
   m_EditorClassIdentifier: 
-  Description: My Task
+  Description: MoveToHouse1
   Destination: {fileID: 11400000, guid: ca610fbdebb4a45358f6f4401d3d92da, type: 2}

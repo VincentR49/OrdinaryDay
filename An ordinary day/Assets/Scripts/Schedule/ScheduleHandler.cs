@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Manage a given schedule.
+/// Manage a given schedule for a instanciate PNJ.
 /// </summary>
 public class ScheduleHandler : MonoBehaviour
 {
@@ -13,33 +13,41 @@ public class ScheduleHandler : MonoBehaviour
     private Schedule _schedule;
     private ScheduledTask _nextTaskToDo;
     private ScheduledTask _currentTask;
-    private bool _isInitialized;
     private bool IsDoingTask => _currentTask != null;
 
 
-    public void Init(Schedule schedule)
+    private void Start()
     {
-        if (_isInitialized)
-        {
-            Debug.Log("Schedule handler already initialized");
-            return;
-        } 
+        InitTaskPerformerListeners();
+    }
+
+
+    public void SetSchedule(Schedule schedule)
+    {
+        Debug.Log("[ScheduleHandler] SetSchedule of instanciate PNJ");
+        if (_schedule != null)
+            CleanScheduleListeners();
         _schedule = schedule;
+        InitScheduleListeners();
+        if (IsDoingTask)
+        {
+            _taskPerformer.CancelCurrentTask();
+            _currentTask = null;
+        }
         _nextTaskToDo = GetNextTaskToDo();
-        _isInitialized = true;
-        InitListeners();
     }
 
 
     private void OnDestroy()
     {
-        CleanListeners();
+        CleanTaskPerformerListeners();
+        CleanScheduleListeners();
     }
 
 
     private void Update()
     {
-        if (!_isInitialized)
+        if (_schedule == null)
             return;
         if (!_schedule.Day.Equals(_currentTime.Value)) // should be the good day
             return;
@@ -63,7 +71,7 @@ public class ScheduleHandler : MonoBehaviour
         _currentTask = task;
         Debug.Log("Start scheduled task. Current time: " + _currentTime.Value + ". Task time: " + task.StartTime);
         _taskPerformer.Perform(task.Task);
-        _currentTask.State = ScheduledTask.TaskState.Doing;
+        _currentTask.State = TaskState.Doing;
         _nextTaskToDo = GetNextTaskToDo();
     }
 
@@ -71,10 +79,11 @@ public class ScheduleHandler : MonoBehaviour
     private void CancelCurrentTask()
     {
         _taskPerformer.CancelCurrentTask();
-        OnCurrentTaskEnded(ScheduledTask.TaskState.Canceled);
+        EndCurrentTask(TaskState.Canceled);
     }
 
-    private void OnCurrentTaskEnded(ScheduledTask.TaskState finalState)
+
+    private void EndCurrentTask(TaskState finalState)
     {
         _currentTask.State = finalState;
         _currentTask = null;
@@ -82,29 +91,54 @@ public class ScheduleHandler : MonoBehaviour
     }
 
     #region Listeners
-    private void InitListeners()
+    private void InitTaskPerformerListeners()
     {
         _taskPerformer.OnTaskFinishedEvent += OnCurrentTaskFinished;
         _taskPerformer.OnTaskFailedEvent += OnCurrentTaskFailed;
     }
 
 
-    private void CleanListeners()
+    private void CleanTaskPerformerListeners()
     {
         _taskPerformer.OnTaskFinishedEvent -= OnCurrentTaskFinished;
         _taskPerformer.OnTaskFailedEvent -= OnCurrentTaskFailed;
     }
 
 
-    private void OnCurrentTaskFinished()
+    private void InitScheduleListeners()
     {
-        OnCurrentTaskEnded(ScheduledTask.TaskState.Done);
+        _schedule.OnScheduleResetEvent += OnScheduleReset;
     }
 
 
-    private void OnCurrentTaskFailed(string failMessage)
+    private void CleanScheduleListeners()
     {
-        OnCurrentTaskEnded(ScheduledTask.TaskState.Failed);
+        _schedule.OnScheduleResetEvent -= OnScheduleReset;
+    }
+    #endregion
+
+    #region Event response
+
+    private void OnCurrentTaskFinished()
+    {
+        EndCurrentTask(TaskState.Done);
+    }
+
+
+    private void OnCurrentTaskFailed(int code, string failMessage)
+    {
+        EndCurrentTask(TaskState.Failed);
+    }
+
+
+    private void OnScheduleReset()
+    {
+        if (IsDoingTask)
+        {
+            _taskPerformer.CancelCurrentTask();
+            _currentTask = null;
+        }
+        _nextTaskToDo = GetNextTaskToDo();
     }
 
     #endregion
@@ -113,7 +147,6 @@ public class ScheduleHandler : MonoBehaviour
     #region Utils
 
     private ScheduledTask GetNextTaskToDo() => _schedule.GetFirstTaskToDo();
-
     private bool IsTaskReadyToDo(ScheduledTask task) => _schedule.GetDateTime(task.StartTime) <= _currentTime.Value;
     private bool IsTaskCannotBeDoneOnTime(ScheduledTask task) => _schedule.GetDateTime(task.EndTime) <= _currentTime.Value;
     #endregion

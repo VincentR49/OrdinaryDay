@@ -19,6 +19,17 @@ MonoBehaviour:
   Tasks:
   - StartTime:
       Hour: 9
+      Min: 0
+      Sec: 0
+    EndTime:
+      Hour: 9
+      Min: 3
+      Sec: 0
+    Priority: 0
+    State: 0
+    Task: {fileID: 11400000, guid: b802fc07a24d745f1adcf39debf6d304, type: 2}
+  - StartTime:
+      Hour: 9
       Min: 3
       Sec: 0
     EndTime:
