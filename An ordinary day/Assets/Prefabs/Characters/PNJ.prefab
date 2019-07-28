@@ -168,10 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4b4ca3f9e5443fcae20d875c1f5fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pnjData: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}
   _walkManager: {fileID: 4197437973840161361}
   _spriteDirectioner: {fileID: 4197437973840161363}
   _scheduleHandler: {fileID: 6740313738230560726}
+  _pnjData: {fileID: 0}
+  _initOnStart: 0
 --- !u!114 &1999833727167035478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _taskPerformer: {fileID: 8550125135232159765}
   _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
+  _inGameSpeedMultiplier: {fileID: 11400000, guid: 1efe113d4cd01410aa48b914586da4bb,
+    type: 2}
 --- !u!114 &8550125135232159765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,3 +264,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetReacher: {fileID: 5412823718567616287}
+  _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-[CreateAssetMenu(menuName = "GameData/DateTime")]
+[CreateAssetMenu(menuName = "VariableData/DateTime")]
 public class DateTimeData : VariableData<DateTime>
 {
 }

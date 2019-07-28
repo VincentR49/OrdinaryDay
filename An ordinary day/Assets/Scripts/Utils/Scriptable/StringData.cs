@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName ="GameData/String")]
+[CreateAssetMenu(menuName = "VariableData/String")]
 public class StringData : VariableData<string>
 {
 

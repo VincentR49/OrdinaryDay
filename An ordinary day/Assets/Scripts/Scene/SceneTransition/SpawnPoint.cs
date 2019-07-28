@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 public class SpawnPoint : MonoBehaviour
 {
+    public delegate void SpawnFinishHandler(GameObject go);
+    public event SpawnFinishHandler OnSpawnFinished;
+
+
     [SerializeField]
     private SpawnPointList _spawnPointList = default;
     [SerializeField]
@@ -42,7 +46,7 @@ public class SpawnPoint : MonoBehaviour
 
     private IEnumerator SpawnCoroutine(GameObject go, SpriteDirectioner spriteDirectioner = null, List<MonoBehaviour> disableDuringSpawn = null)
     {
-        Debug.Log("Start spawn coroutine");
+        Debug.Log("Start spawn coroutine on " + go.name);
         if (disableDuringSpawn != null)
         {
             foreach (var behaviour in disableDuringSpawn)
@@ -57,6 +61,7 @@ public class SpawnPoint : MonoBehaviour
             foreach (var behaviour in disableDuringSpawn)
                 behaviour.enabled = true;
         }
-        Debug.Log("Finish spawn !");
+        Debug.Log("Finish spawn on " + go.name);
+        OnSpawnFinished?.Invoke(go);
     }
 }

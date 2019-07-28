@@ -4,16 +4,18 @@
 public class ScheduledTask
 {
     public DayTime StartTime;
-    public DayTime EndTime;
-	public int Priority;
+    public DayTime MaxDuration;
+    public DayTime SimulatedDuration;
+    public bool StartJustAfterPreviousTask;
     public TaskState State;
     public Task Task;
 
     public ScheduledTask(ScheduledTask other)
     {
         StartTime = other.StartTime;
-        EndTime = other.EndTime;
-        Priority = other.Priority;
+        MaxDuration = other.MaxDuration;
+        SimulatedDuration = other.SimulatedDuration;
+        StartJustAfterPreviousTask = other.StartJustAfterPreviousTask;
         State = other.State;
         Task = other.Task;
     }

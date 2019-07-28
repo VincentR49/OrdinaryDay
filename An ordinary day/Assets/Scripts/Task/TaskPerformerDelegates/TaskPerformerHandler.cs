@@ -3,7 +3,7 @@
 /// <summary>
 /// Base class for class containing all the task performing logic
 /// </summary>
-public abstract class TaskPerformerDelegate
+public abstract class TaskPerformerHandler
 {
     // Events
     public delegate void OnTaskFinishedHandler();
@@ -16,11 +16,12 @@ public abstract class TaskPerformerDelegate
 
     /// <summary>
     /// Base performing method
+    /// Warning: To call on the child class
     /// </summary>
     /// <param name="task"></param>
     protected void Perform(Task task)
     {
-        Debug.Log("Perform " + task);
+        Debug.Log("[TaskPeformerHandler] Handle task " + task);
         _currentTask = task;
     }
 
@@ -29,11 +30,11 @@ public abstract class TaskPerformerDelegate
     /// </summary>
     public virtual void Cancel()
     {
-        Debug.Log("Cancel task: " + _currentTask);
-        CleanListeners();
+        Debug.Log("[TaskPeformerHandler] Cancel task: " + _currentTask);
+        Clean();
     }
 
-    public virtual void CleanListeners()
+    public virtual void Clean()
     {
         // do nothing
     }
@@ -45,17 +46,17 @@ public abstract class TaskPerformerDelegate
     /// </summary>
     protected void OnTaskFinished()
     {
-        Debug.Log("OnTaskFinished: " + _currentTask);
-        CleanListeners();
+        Debug.Log("OnTaskFinished: " + _currentTask);     
         OnTaskFinishedEvent?.Invoke();
+        Clean();
     }
 
 
     protected void OnTaskFailed(int code, string failMessage = "")
     {
-        Debug.LogError("OnTaskFailed: " + _currentTask + ": " + failMessage);
-        CleanListeners();
+        Debug.LogError("OnTaskFailed: " + _currentTask + ": " + code + " " + failMessage);
         OnTaskFailedEvent?.Invoke(code, failMessage);
+        Clean();
     }
     #endregion
 }

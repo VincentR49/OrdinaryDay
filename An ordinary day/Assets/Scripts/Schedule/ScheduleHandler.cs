@@ -1,19 +1,23 @@
 ﻿using UnityEngine;
+using System;
 
 /// <summary>
-/// Manage a given schedule for a instanciate PNJ.
+/// Manage a given schedule.
 /// </summary>
 public class ScheduleHandler : MonoBehaviour
 {
     [SerializeField]
-    private TaskPerformer _taskPerformer;
+    private BasicTaskPerformer _taskPerformer;
     [SerializeField]
     private DateTimeData _currentTime;
+    [SerializeField]
+    private FloatData _inGameSpeedMultiplier;
 
     private Schedule _schedule;
     private ScheduledTask _nextTaskToDo;
     private ScheduledTask _currentTask;
     private bool IsDoingTask => _currentTask != null;
+    private bool IsSimulated => _taskPerformer is SimulatedTaskPerformer;
 
 
     private void Start()
@@ -31,7 +35,7 @@ public class ScheduleHandler : MonoBehaviour
         InitScheduleListeners();
         if (IsDoingTask)
         {
-            _taskPerformer.CancelCurrentTask();
+            _taskPerformer.Cancel();
             _currentTask = null;
         }
         _nextTaskToDo = GetNextTaskToDo();
@@ -51,15 +55,9 @@ public class ScheduleHandler : MonoBehaviour
             return;
         if (!_schedule.Day.Equals(_currentTime.Value)) // should be the good day
             return;
-
-        if (IsDoingTask)
-        {
-            if (IsTaskCannotBeDoneOnTime(_currentTask))
-            {
-                CancelCurrentTask();
-            }
-        }
-        else if (_nextTaskToDo != null && IsTaskReadyToDo(_nextTaskToDo))
+        if (IsDoingTask) // do nothing if already busy
+            return;
+        if (_nextTaskToDo != null && IsTaskReadyToDo(_nextTaskToDo))
         {
             StartTask(_nextTaskToDo);
         }
@@ -69,16 +67,16 @@ public class ScheduleHandler : MonoBehaviour
     private void StartTask(ScheduledTask task)
     {
         _currentTask = task;
-        Debug.Log("Start scheduled task. Current time: " + _currentTime.Value + ". Task time: " + task.StartTime);
-        _taskPerformer.Perform(task.Task);
+        Debug.Log("Start scheduled task : " + _currentTask.Task + ". Current time: " + _currentTime.Value + ". Task time: " + _currentTask.StartTime);
         _currentTask.State = TaskState.Doing;
         _nextTaskToDo = GetNextTaskToDo();
+        _taskPerformer.Perform(task.Task, GetCurrentTaskMaxDuration());
     }
 
 
     private void CancelCurrentTask()
     {
-        _taskPerformer.CancelCurrentTask();
+        _taskPerformer.Cancel();
         EndCurrentTask(TaskState.Canceled);
     }
 
@@ -135,7 +133,7 @@ public class ScheduleHandler : MonoBehaviour
     {
         if (IsDoingTask)
         {
-            _taskPerformer.CancelCurrentTask();
+            _taskPerformer.Cancel();
             _currentTask = null;
         }
         _nextTaskToDo = GetNextTaskToDo();
@@ -148,6 +146,10 @@ public class ScheduleHandler : MonoBehaviour
 
     private ScheduledTask GetNextTaskToDo() => _schedule.GetFirstTaskToDo();
     private bool IsTaskReadyToDo(ScheduledTask task) => _schedule.GetDateTime(task.StartTime) <= _currentTime.Value;
-    private bool IsTaskCannotBeDoneOnTime(ScheduledTask task) => _schedule.GetDateTime(task.EndTime) <= _currentTime.Value;
+
+    private float GetCurrentTaskMaxDuration()
+            => (IsSimulated ? _currentTask.SimulatedDuration : _currentTask.MaxDuration).ToSeconds()
+                    / _inGameSpeedMultiplier.Value;
+        
     #endregion
 }

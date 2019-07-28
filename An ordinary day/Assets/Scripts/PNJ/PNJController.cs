@@ -12,8 +12,18 @@ public class PNJController : MonoBehaviour
     private SpriteDirectioner _spriteDirectioner;
     [SerializeField]
     private ScheduleHandler _scheduleHandler;
-
+    [SerializeField]
     private PNJData _pnjData;
+
+    [SerializeField]
+    private bool _initOnStart;
+
+
+    private void Start()
+    {
+        if (_initOnStart)
+            Init(_pnjData);
+    }
 
     #region Init
     public void Init(PNJData pnjData)

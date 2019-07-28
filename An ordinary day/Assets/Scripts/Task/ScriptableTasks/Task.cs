@@ -6,4 +6,6 @@
 public abstract class Task : ScriptableObject
 {
     public string Description = "My Task";
+
+    public override string ToString() => Description;
 }

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Perform a moving task
+/// Perform a move from a given move task
 /// </summary>
-public class MovePerformer : TaskPerformerDelegate
+public class MovePerformer : TaskPerformerHandler
 {
     private TargetReacher _targetReacher;
 
@@ -28,7 +28,7 @@ public class MovePerformer : TaskPerformerDelegate
     }
 
 
-    public override void CleanListeners()
+    public override void Clean()
     {
         _targetReacher.OnTargetReached -= OnMoveToDestinationSucceded;
     }

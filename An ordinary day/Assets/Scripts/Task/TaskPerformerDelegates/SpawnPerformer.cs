@@ -2,13 +2,18 @@
 using UnityEngine;
 
 /// <summary>
-/// Task that enable to spawn a go in the current scene
+/// Performer that enable to spawn a game object in the current scene
 /// The spawn point should be present in the scene to succeed.
 /// </summary>
-public class SpawnPerformer : TaskPerformerDelegate
+public class SpawnPerformer : TaskPerformerHandler
 {
+    private GameObject _goToSpawn;
+    private SpawnPoint _currentSpawnPoint;
+
     public void Perform(Spawn spawn, SpawnPointList spawnList, GameObject go, List<MonoBehaviour> disableDuringSpawn = null)
     {
+        base.Perform(spawn);
+        _goToSpawn = go;
         if (!spawn.IsInCurrentScene())
         {
             OnTaskFailed(TaskFailedConstants.NotInGoodScene);
@@ -17,12 +22,30 @@ public class SpawnPerformer : TaskPerformerDelegate
         var spawnPoint = spawnList.GetSpawnPoint(spawn.SpawnPointTag);
         if (spawnPoint != null)
         {
-            spawnPoint.Spawn(go, disableDuringSpawn);
-            OnTaskFinished();
+            _currentSpawnPoint = spawnPoint;
+            _currentSpawnPoint.OnSpawnFinished += OnSpawnFinished;
+            _currentSpawnPoint.Spawn(go, disableDuringSpawn);
         }
         else
         {
             OnTaskFailed(TaskFailedConstants.SpawnPointNotFound, spawn.SpawnPointTag);
+        }
+    }
+
+
+    private void OnSpawnFinished(GameObject go)
+    {
+        if (go == _goToSpawn)
+        {
+            OnTaskFinished();
+        }
+    }
+
+    public override void Clean()
+    {
+        if (_currentSpawnPoint != null)
+        {
+            _currentSpawnPoint.OnSpawnFinished -= OnSpawnFinished;
         }
     }
 }
