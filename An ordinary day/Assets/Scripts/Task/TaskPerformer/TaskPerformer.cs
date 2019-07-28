@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Behaviour that handle task for a given game object
@@ -42,38 +41,23 @@ public class TaskPerformer : BasicTaskPerformer
 
     public override void Cancel()
     {
-        base.Cancel();
         if (_performerHandler == null)
         {
             Debug.LogError("Cannot cancel current task: no performer active");
             return;
         }
         _performerHandler.Cancel();
-        CleanPerformerListeners();
+        base.Cancel();
     }
 
     #endregion
 
-    #region Events related
 
-    protected override void OnTaskFinished()
-    {
-        CleanPerformerListeners();
-        base.OnTaskFinished();
-    }
-
-
-    protected override void OnTaskFailed(int code, string failMessage = "")
-    {
-        Cancel();
-        base.OnTaskFailed(code, failMessage);
-    }
-
-
-    private void CleanPerformerListeners()
+    protected override void Clean()
     {
         _performerHandler.OnTaskFinishedEvent -= OnTaskFinished;
         _performerHandler.OnTaskFailedEvent -= OnTaskFailed;
+        base.Clean();
     }
 
 
@@ -82,5 +66,10 @@ public class TaskPerformer : BasicTaskPerformer
         _performerHandler.OnTaskFinishedEvent += OnTaskFinished;
         _performerHandler.OnTaskFailedEvent += OnTaskFailed;
     }
-    #endregion
+
+
+    protected override void OnCurrentTaskDurationReachedLimit()
+    {
+        OnTaskFailed(TaskFailedConstants.CouldntFinishOnTime);
+    }
 }

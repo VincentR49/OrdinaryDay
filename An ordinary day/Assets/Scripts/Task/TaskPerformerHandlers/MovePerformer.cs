@@ -28,14 +28,15 @@ public class MovePerformer : TaskPerformerHandler
     }
 
 
-    public override void Clean()
+    protected override void Clean()
     {
         _targetReacher.OnTargetReached -= OnMoveToDestinationSucceded;
+        base.Clean();
     }
 
     public override void Cancel()
     {
-        base.Cancel();
         _targetReacher.Stop();
+        base.Cancel();
     }
 }

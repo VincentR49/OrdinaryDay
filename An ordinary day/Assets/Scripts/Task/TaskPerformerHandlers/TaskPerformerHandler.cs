@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Base class for class containing all the task performing logic
+/// Manage the task performing logic of a specific task
+/// Only one task can be handle at the same time by a TaskPerformerHandler
 /// </summary>
 public abstract class TaskPerformerHandler
 {
-    // Events
     public delegate void OnTaskFinishedHandler();
     public virtual event OnTaskFinishedHandler OnTaskFinishedEvent;
 
@@ -13,6 +13,7 @@ public abstract class TaskPerformerHandler
     public virtual event OnTaskFailedHandler OnTaskFailedEvent;
 
     protected Task _currentTask;
+    public bool IsDoingTask => _currentTask != null;
 
     /// <summary>
     /// Base performing method
@@ -21,6 +22,11 @@ public abstract class TaskPerformerHandler
     /// <param name="task"></param>
     protected void Perform(Task task)
     {
+        if (IsDoingTask)
+        {
+            Debug.LogError("Cannot perform several tasks simultaneously");
+            return;
+        }
         Debug.Log("[TaskPeformerHandler] Handle task " + task);
         _currentTask = task;
     }
@@ -34,9 +40,9 @@ public abstract class TaskPerformerHandler
         Clean();
     }
 
-    public virtual void Clean()
+    protected virtual void Clean()
     {
-        // do nothing
+        _currentTask = null;
     }
 
 

@@ -36,16 +36,12 @@ public class SpawnPerformer : TaskPerformerHandler
     private void OnSpawnFinished(GameObject go)
     {
         if (go == _goToSpawn)
-        {
             OnTaskFinished();
-        }
     }
 
-    public override void Clean()
+    protected override void Clean()
     {
-        if (_currentSpawnPoint != null)
-        {
-            _currentSpawnPoint.OnSpawnFinished -= OnSpawnFinished;
-        }
+        _currentSpawnPoint.OnSpawnFinished -= OnSpawnFinished;
+        base.Clean();
     }
 }
