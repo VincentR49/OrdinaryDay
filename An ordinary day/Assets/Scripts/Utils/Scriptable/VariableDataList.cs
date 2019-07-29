@@ -19,4 +19,17 @@ public class VariableDataList<T> : ScriptableObject
             return;
         List.Remove(item);
     }
+
+
+    public T Find(T item)
+    {
+        if (List == null)
+            return default;
+        foreach (var t in List)
+        {
+            if (t.Equals(item))
+                return t;
+        }
+        return default;
+    }
 }

@@ -5,6 +5,9 @@
 /// </summary>
 public class PNJController : MonoBehaviour
 {
+    [SerializeField]
+    private PNJControllerList _pnjList;
+
     [Header("Managers")]
     [SerializeField]
     private WalkManager _walkManager;
@@ -15,8 +18,20 @@ public class PNJController : MonoBehaviour
     [SerializeField]
     private PNJData _pnjData;
 
+    [Header("Debug")]
     [SerializeField]
     private bool _initOnStart;
+
+
+    private void Awake()
+    {
+        _pnjList.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        _pnjList.Remove(this);
+    }
 
 
     private void Start()
@@ -46,5 +61,13 @@ public class PNJController : MonoBehaviour
     {
         _scheduleHandler.SetSchedule(_pnjData.InGameSchedule);
     }
+    #endregion
+
+
+    #region Accessors
+
+    public PNJData GetPNJData() => _pnjData;
+
+
     #endregion
 }
