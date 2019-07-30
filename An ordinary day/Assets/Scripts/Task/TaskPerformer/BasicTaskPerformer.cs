@@ -15,23 +15,32 @@ public abstract class BasicTaskPerformer : MonoBehaviour
     protected Task _task;
     protected float _maxDurationTask;
     protected float _currentTaskDurationSec;
+    protected float _initProgressPrc;
+    public float ProgressPrc { protected set; get; }
     public bool IsDoingTask => _task != null;
 
-
+    // Abstract methods
     protected abstract void OnCurrentTaskDurationReachedLimit();
-
+    protected abstract void RefreshCurrentTaskProgress();
 
     /// <summary>
     /// Perform a given task
     /// </summary>
     /// <param name="task"></param>
     /// <param name="maxDurationSec"></param>
-    public virtual void Perform(Task task, float maxDurationSec)
+    public virtual void Perform(Task task, float maxDurationSec, float initProgressPrc)
     {
+        if (IsDoingTask)
+        {
+            Debug.LogError("Already perfoming a task: " + _task + ". Canceled current task.");
+            Cancel();
+        }
         Debug.Log("Perform " + task + ". Max duration: " + maxDurationSec);
         _task = task;
+        _initProgressPrc = initProgressPrc;
+        ProgressPrc = initProgressPrc;
         _maxDurationTask = maxDurationSec;
-        _currentTaskDurationSec = 0f;
+        _currentTaskDurationSec = _maxDurationTask * initProgressPrc;
     }
 
 
@@ -40,6 +49,7 @@ public abstract class BasicTaskPerformer : MonoBehaviour
         if (IsDoingTask)
         {
             _currentTaskDurationSec += Time.deltaTime;
+            RefreshCurrentTaskProgress();
             if (_currentTaskDurationSec >= _maxDurationTask)
             {
                 OnCurrentTaskDurationReachedLimit();
@@ -61,14 +71,12 @@ public abstract class BasicTaskPerformer : MonoBehaviour
     protected virtual void Clean()
     {
         _task = null;
-        _maxDurationTask = 0f;
-        _currentTaskDurationSec = 0f;
     }
 
     /// <summary>
     /// Call when the current task is finished
     /// </summary>
-    protected virtual void OnTaskFinished()
+    protected void OnTaskFinished()
     {
         Debug.Log("[TaskPerformer] OnTaskFinished: " + _task);
         OnTaskFinishedEvent?.Invoke();
@@ -80,7 +88,7 @@ public abstract class BasicTaskPerformer : MonoBehaviour
     /// </summary>
     /// <param name="code"></param>
     /// <param name="failMessage"></param>
-    protected virtual void OnTaskFailed(int code, string failMessage = "")
+    protected void OnTaskFailed(int code, string failMessage = "")
     {
         Debug.LogError("[TaskPerformer] OnTaskFailed (" + _task +  "): " + code + " " + failMessage);
         OnTaskFailedEvent?.Invoke(code, failMessage);

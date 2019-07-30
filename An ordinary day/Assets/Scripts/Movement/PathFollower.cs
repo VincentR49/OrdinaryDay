@@ -10,6 +10,9 @@ public class PathFollower : MonoBehaviour
     private WalkManager _walkManager;
 
     private Queue<Vector2> _path;
+    private int _initPathLength;
+    private int _step;
+    public float ProgressPrc => IsRunning ? (float) _step / _initPathLength : 0f;
     public Vector2 Target => _path.Peek();
     public bool IsRunning { private set; get; }
     private float _previousSpeed;
@@ -22,10 +25,12 @@ public class PathFollower : MonoBehaviour
     public void FollowPath(Queue<Vector2> path)
     {
         if (path == null || path.Count == 0)
-            return;
+            return;  
         Debug.Log("Start following path.");
         IsRunning = true;
         _path = path;
+        _initPathLength = _path.Count;
+        _step = 0;
     }
 
 
@@ -65,6 +70,7 @@ public class PathFollower : MonoBehaviour
     private void GoToNextStep()
     {
         _path.Dequeue();
+        _step++;
         if (_path.Count == 0)
         {
             Stop();

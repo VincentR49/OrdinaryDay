@@ -55,7 +55,10 @@ public class ScheduleHandler : MonoBehaviour
         if (!_schedule.Day.Equals(_currentTime.Value)) // should be the good day
             return;
         if (IsDoingTask) // do nothing if already busy
+        {
+            _currentTask.CompletionPrc = _taskPerformer.ProgressPrc;
             return;
+        }
         if (_nextTaskToDo != null && IsTaskReadyToDo(_nextTaskToDo))
         {
             StartTask(_nextTaskToDo);
@@ -69,7 +72,7 @@ public class ScheduleHandler : MonoBehaviour
         Debug.Log("Start scheduled task : " + _currentTask.Task + ". Current time: " + _currentTime.Value + ". Task time: " + _currentTask.StartTime);
         _currentTask.State = TaskState.Doing;
         _nextTaskToDo = GetNextTaskToDo();
-        _taskPerformer.Perform(task.Task, GetCurrentTaskMaxDuration());
+        _taskPerformer.Perform(task.Task, GetCurrentTaskMaxDuration(), task.CompletionPrc);
     }
 
 
@@ -118,6 +121,7 @@ public class ScheduleHandler : MonoBehaviour
 
     private void OnCurrentTaskFinished()
     {
+        _currentTask.CompletionPrc = 1f;
         EndCurrentTask(TaskState.Done);
     }
 

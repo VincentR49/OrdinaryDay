@@ -37,6 +37,7 @@ public class TargetReacher : MonoBehaviour
     private List<Vector2> _staticPath;
     private bool _currentDestinationIsTarget;
     private int _trialNumber;
+    public float ProgressPrc => _pathFollower.ProgressPrc;
 
     // Other util behaviours
     private ColliderScanner _colliderScanner;

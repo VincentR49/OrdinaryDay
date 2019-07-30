@@ -7,7 +7,6 @@ public class SpawnPoint : MonoBehaviour
     public delegate void SpawnFinishHandler(GameObject go);
     public event SpawnFinishHandler OnSpawnFinished;
 
-
     [SerializeField]
     private SpawnPointList _spawnPointList = default;
     [SerializeField]

@@ -9,6 +9,7 @@ public class ScheduledTask
     public bool StartJustAfterPreviousTask;
     public TaskState State;
     public Task Task;
+    public float CompletionPrc;
 
     public ScheduledTask(ScheduledTask other)
     {
@@ -18,11 +19,13 @@ public class ScheduledTask
         StartJustAfterPreviousTask = other.StartJustAfterPreviousTask;
         State = other.State;
         Task = other.Task;
+        CompletionPrc = other.CompletionPrc;
     }
 
 
     public void Reset()
     {
         State = TaskState.ToDo;
+        CompletionPrc = 0f;
     }
 }

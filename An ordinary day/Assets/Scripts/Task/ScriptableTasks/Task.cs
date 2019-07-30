@@ -7,14 +7,5 @@ public abstract class Task : ScriptableObject
 {
     public string Description = "";
 
-    public override string ToString() => Description;
-
-    private void OnEnable()
-    {
-        // Fast way to set the description
-        if (string.IsNullOrEmpty(Description))
-        {
-            Description = name;
-        }
-    }
+    public override string ToString() => string.IsNullOrEmpty(Description) ? name : Description;
 }

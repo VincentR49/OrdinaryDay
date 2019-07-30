@@ -4,8 +4,14 @@
 /// </summary>
 public class SimulatedTaskPerformer : BasicTaskPerformer
 {
+    // Finish task when we reach the limit duration
     protected override void OnCurrentTaskDurationReachedLimit()
     {
         OnTaskFinished();
+    }
+
+    protected override void RefreshCurrentTaskProgress()
+    {
+        ProgressPrc = _currentTaskDurationSec / _maxDurationTask;
     }
 }
