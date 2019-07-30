@@ -12,7 +12,7 @@ public class PathFollower : MonoBehaviour
     private Queue<Vector2> _path;
     private int _initPathLength;
     private int _step;
-    public float ProgressPrc => IsRunning ? (float) _step / _initPathLength : 0f;
+    public float ProgressPrc => (float) _step / _initPathLength;
     public Vector2 Target => _path.Peek();
     public bool IsRunning { private set; get; }
     private float _previousSpeed;

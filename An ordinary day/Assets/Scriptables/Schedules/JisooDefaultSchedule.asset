@@ -32,33 +32,36 @@ MonoBehaviour:
     StartJustAfterPreviousTask: 0
     State: 0
     Task: {fileID: 11400000, guid: 4519f4d5f661e4706b52b2654d532708, type: 2}
+    CompletionPrc: 0
   - StartTime:
       Hour: 9
       Min: 3
       Sec: 0
     MaxDuration:
       Hour: 0
-      Min: 5
+      Min: 15
       Sec: 0
     SimulatedDuration:
       Hour: 0
-      Min: 5
+      Min: 12
       Sec: 0
     StartJustAfterPreviousTask: 0
     State: 0
     Task: {fileID: 11400000, guid: d49f168370042406d903f23dfddf92d1, type: 2}
+    CompletionPrc: 0
   - StartTime:
       Hour: 9
-      Min: 12
+      Min: 20
       Sec: 0
     MaxDuration:
       Hour: 0
-      Min: 8
+      Min: 12
       Sec: 0
     SimulatedDuration:
       Hour: 0
-      Min: 8
+      Min: 10
       Sec: 0
     StartJustAfterPreviousTask: 0
     State: 0
     Task: {fileID: 11400000, guid: ca756753e25464063afc579f92917b25, type: 2}
+    CompletionPrc: 0

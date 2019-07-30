@@ -60,7 +60,6 @@ public class TargetReacher : MonoBehaviour
         InitPathFindingSystem();
     }
 
-
     private void InitPathFindingSystem()
     {
         _colliderScanner = FindObjectOfType<ColliderScanner>();

@@ -18,14 +18,21 @@ public class ScheduleHandler : MonoBehaviour
     private bool IsDoingTask => _currentTask != null;
     private bool IsSimulated => _taskPerformer is SimulatedTaskPerformer;
 
+    [Header("Debug")]
+    [SerializeField]
+    private Schedule schedule;
+    [SerializeField]
+    private bool _initOnStart;
 
     private void Start()
     {
         InitTaskPerformerListeners();
+        if (_initOnStart)
+            Init(schedule);
     }
 
 
-    public void SetSchedule(Schedule schedule)
+    public void Init(Schedule schedule)
     {
         Debug.Log("[ScheduleHandler] SetSchedule of instanciate PNJ");
         if (_schedule != null)
@@ -113,7 +120,8 @@ public class ScheduleHandler : MonoBehaviour
 
     private void CleanScheduleListeners()
     {
-        _schedule.OnScheduleResetEvent -= OnScheduleReset;
+        if (_schedule != null)
+            _schedule.OnScheduleResetEvent -= OnScheduleReset;
     }
     #endregion
 

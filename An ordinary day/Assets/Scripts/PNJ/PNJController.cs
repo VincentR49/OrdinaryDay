@@ -59,7 +59,7 @@ public class PNJController : MonoBehaviour
 
     private void InitScheduleSystem()
     {
-        _scheduleHandler.SetSchedule(_pnjData.InGameSchedule);
+        _scheduleHandler.Init(_pnjData.InGameSchedule);
     }
     #endregion
 
