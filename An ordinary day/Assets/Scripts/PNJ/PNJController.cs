@@ -6,7 +6,7 @@
 public class PNJController : MonoBehaviour
 {
     [SerializeField]
-    private PNJControllerList _pnjList;
+    private PNJControllerList _pnjControllerList;
 
     [Header("Managers")]
     [SerializeField]
@@ -23,14 +23,9 @@ public class PNJController : MonoBehaviour
     private bool _initOnStart;
 
 
-    private void Awake()
-    {
-        _pnjList.Add(this);
-    }
-
     private void OnDestroy()
     {
-        _pnjList.Remove(this);
+        _pnjControllerList.Remove(this);
     }
 
 
@@ -47,6 +42,7 @@ public class PNJController : MonoBehaviour
         Debug.Log("PNJ Initialisation: " + _pnjData);
         InitSprites();
         InitScheduleSystem();
+        _pnjControllerList.Add(this); // we register only if initialized
     }
 
 
@@ -63,11 +59,5 @@ public class PNJController : MonoBehaviour
     }
     #endregion
 
-
-    #region Accessors
-
     public PNJData GetPNJData() => _pnjData;
-
-
-    #endregion
 }

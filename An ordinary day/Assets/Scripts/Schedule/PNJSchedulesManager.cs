@@ -34,6 +34,7 @@ public class PNJSchedulesManager : MonoBehaviour
         }
     }
 
+    #region Event responses
     // Attach in inspector to a game event listener
     public void OnTimeLoopStarted()
     {
@@ -42,11 +43,24 @@ public class PNJSchedulesManager : MonoBehaviour
     }
 
 
+    public void OnPNJCreated()
+    {
+        // TODO
+    }
+
+
+    public void OnPNJDestroyed()
+    {
+        // todo
+    }
+    #endregion
+
+
     private void InitPNJSchedules()
     {
         Debug.Log("[PNJSchedulesManager] Init PNJ schedules");
         _pnjSchedules = new List<Schedule>();
-        foreach (var pnj in _pnjList.List)
+        foreach (var pnj in _pnjList.Items)
             _pnjSchedules.Add (InitPNJSchedule(pnj));
     }
 

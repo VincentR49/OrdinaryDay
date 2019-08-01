@@ -1,37 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DataList<T> : ScriptableObject
 {
-    protected List<T> _items;
-
+    public List<T> Items;
+    public delegate void OnListChanged(T item);
+    public event OnListChanged OnItemAdded;
+    public event OnListChanged OnItemRemoved;
 
     public void Add(T item)
     {
-        if (_items == null)
+        if (Items == null)
         {
-            _items = new List<T>();
+            Items = new List<T>();
         }
-        _items.Add(item);
+        if (Items.Contains(item))
+            return;
+        Items.Add(item);
+        OnItemAdded?.Invoke(item);
+        Debug.Log("DataList: " + name + ". On item added " + item);
     }
 
 
     public void Remove(T item)
     {
-        if (_items == null)
+        if (Items == null)
             return;
-        _items.Remove(item);
-        if (_items.Count == 0)
-            _items = null;
+        Items.Remove(item);
+        OnItemRemoved?.Invoke(item);
+        Debug.Log("DataList: " + name + ". On item removed " + item);
+        if (Items.Count == 0)
+            Items = null;
     }
 
 
     public void Clear()
     {
-        if (_items == null)
+        if (Items == null)
             return;
-        _items.Clear();
-        _items = null;
+        for (int i = Items.Count - 1; i >= 0; i--)
+            Remove(Items[i]); // to call the event
+    }
+
+
+    public T Find(T item)
+    {
+        if (Items == null)
+            return default;
+        foreach (var t in Items)
+        {
+            if (t.Equals(item))
+                return t;
+        }
+        return default;
     }
 }

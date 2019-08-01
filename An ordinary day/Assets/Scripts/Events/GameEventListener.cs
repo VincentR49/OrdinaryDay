@@ -20,5 +20,4 @@ public class GameEventListener : MonoBehaviour
     {
         Response.Invoke();
     }
-
 }

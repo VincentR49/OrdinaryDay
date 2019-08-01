@@ -5,9 +5,9 @@ public class SpawnPointList : DataList<SpawnPoint>
 {
     public SpawnPoint GetSpawnPoint(string tag)
     {
-        if (_items != null)
+        if (Items != null)
         {
-            foreach (var spawnPoint in _items)
+            foreach (var spawnPoint in Items)
             {
                 if (spawnPoint.GetTag().Equals(tag))
                     return spawnPoint;
