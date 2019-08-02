@@ -9,13 +9,11 @@ public class PlayerTeleporter : MonoBehaviour
     private const float Fade = 0.25f;
     private const string PlayerTag = "Player";
     [SerializeField]
-    private SceneReference _sceneDestination = default;
+    private SpawnData _targetSpawn;
     [SerializeField]
-    private string _spawnDestinationTag = default;
+    private SpawnerList _spawnerList = default;
     [SerializeField]
-    private SpawnPointList _spawnList = default;
-    [SerializeField]
-    private StringData _playerSpawnPointTag;
+    private SpawnDataVariable _playerNextSpawnData;
 
     protected bool _isTeleporting;
 
@@ -29,12 +27,12 @@ public class PlayerTeleporter : MonoBehaviour
 
     protected void TeleportPlayer(GameObject player)
     {
-        Debug.Log("Teleport to scene: " + _sceneDestination.Path + " at spawnPoint " + _spawnDestinationTag);
+        Debug.Log("Teleport to scene: " + _targetSpawn.Scene.Path + " at spawnPoint " + _targetSpawn.name);
         _isTeleporting = true;
-        if (_sceneDestination.Path.Equals(SceneManager.GetActiveScene().path))
+        if (_targetSpawn.IsInCurrentScene())
         {
             // teleport inside the scene without loading
-            var spawnPoint = _spawnList.GetSpawnPoint(_spawnDestinationTag);
+            var spawnPoint = _spawnerList.GetSpawner(_targetSpawn);
             if (spawnPoint) // teleport the player
             {
                 player.GetComponent<SpriteAnimator>().StopCurrentAnimation();
@@ -47,8 +45,8 @@ public class PlayerTeleporter : MonoBehaviour
         }
         else // go to different scene
         {
-            _playerSpawnPointTag.Value = _spawnDestinationTag;
-            SceneLoader.LoadScene(_sceneDestination.Path, Fade, false);
+            _playerNextSpawnData.Value = _targetSpawn;
+            SceneLoader.LoadScene(_targetSpawn.Scene.Path, Fade, false);
         }
     }
 

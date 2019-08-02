@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4702531232417884066}
   - component: {fileID: 4702531232417884069}
   - component: {fileID: 4702531232417884067}
-  - component: {fileID: 4983225289815323121}
-  - component: {fileID: 3583581549872724166}
   m_Layer: 0
   m_Name: PNJScheduleManager
   m_TagString: Untagged
@@ -46,10 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9976bf2de7b5f4b6ab752f17c98e53b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pnjList: {fileID: 11400000, guid: 6ffa9fcbe70df4a7eb48fc24128c31a7, type: 2}
+  _allPNJs: {fileID: 11400000, guid: 6ffa9fcbe70df4a7eb48fc24128c31a7, type: 2}
+  _inGamePNJs: {fileID: 11400000, guid: 5984acc906bc7461db60fc9e22d3669b, type: 2}
   _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
-  _pnjCreatedListener: {fileID: 0}
-  _pnjDestroyedListener: {fileID: 0}
+  _simulatedScheduleHandlerPrefab: {fileID: 2753489607323397688, guid: 9368db7f5ce684bda9c210d13a968ba5,
+    type: 3}
 --- !u!114 &4702531232417884067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,27 +78,3 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &4983225289815323121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4702531232417884068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e70f80230624491b8204ed44b34e051, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3583581549872724166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4702531232417884068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e70f80230624491b8204ed44b34e051, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

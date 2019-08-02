@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2753489607323397691}
   - component: {fileID: 2753489607323397690}
   - component: {fileID: 2753489607323397689}
+  - component: {fileID: 1748750794923316929}
   m_Layer: 0
   m_Name: ScheduleHandlerSimulator
   m_TagString: Untagged
@@ -44,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d928629f38cfb44a9a563bd8d6e6a77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pnjSpawner: {fileID: 1748750794923316929}
+  _goToSpawn: {fileID: 0}
 --- !u!114 &2753489607323397689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,3 +65,19 @@ MonoBehaviour:
     type: 2}
   schedule: {fileID: 0}
   _initOnStart: 0
+--- !u!114 &1748750794923316929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2753489607323397688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc74b8b630bba433ba4b23267e2d10db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pnjPrefab: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+    type: 3}
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _instanciatedPNJs: {fileID: 11400000, guid: 5984acc906bc7461db60fc9e22d3669b, type: 2}

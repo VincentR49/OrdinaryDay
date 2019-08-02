@@ -11,9 +11,9 @@ public class TaskPerformer : BasicTaskPerformer
     [SerializeField]
     private TargetReacher _targetReacher;
     [SerializeField]
-    private SpawnPointList _spawnList;
+    private SpawnerList _spawnList;
 
-    private SpawnPoint _currentSpawnPoint;
+    private Spawner _currentSpawnPoint;
     private Vector2 _currentMoveTarget;
 
 
@@ -38,7 +38,7 @@ public class TaskPerformer : BasicTaskPerformer
             case Move move:
                 PerformMove(move);
                 break;
-            case Spawn spawn:
+            case SpawnPNJ spawn:
                 PerformSpawn(spawn);
                 break;
             default:
@@ -111,17 +111,17 @@ public class TaskPerformer : BasicTaskPerformer
 
 
     #region Spawn
-    public void PerformSpawn(Spawn spawn)
+    public void PerformSpawn(SpawnPNJ spawn)
     {
         if (!spawn.IsInCurrentScene())
         {
             OnTaskFailed(TaskFailedConstants.NotInGoodScene);
             return;
         }
-        var spawnPoint = _spawnList.GetSpawnPoint(spawn.SpawnPointTag);
+        var spawnPoint = _spawnList.GetSpawner(spawn.SpawnData);
         if (spawnPoint == null)
         {
-            OnTaskFailed(TaskFailedConstants.SpawnPointNotFound, spawn.SpawnPointTag);
+            OnTaskFailed(TaskFailedConstants.SpawnPointNotFound, spawn.SpawnData.name);
         }
         else
         {

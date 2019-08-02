@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca5f85fc0efc4f86b5d08f813ca4d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
-    type: 2}
-  _spawnPointList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
+  _playerNextSpawn: {fileID: 11400000, guid: 1d4738a33089b4a368242e48a94aced8, type: 2}
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
   _playerPrefab: {fileID: 8447140917735947389, guid: 8b5d39be394ec4beba0895fc13066a01,
     type: 3}

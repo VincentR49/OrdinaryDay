@@ -24,6 +24,7 @@ public class ScheduleHandler : MonoBehaviour
     [SerializeField]
     private bool _initOnStart;
 
+
     private void Start()
     {
         InitTaskPerformerListeners();

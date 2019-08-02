@@ -94,8 +94,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -163,9 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6963cb4c05686476181f1c3d92d2a26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPointList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _tag: GameStart
-  _spawnDirection: 2
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _spawnData: {fileID: 11400000, guid: 79eb83f7f4e4244e181957d2dbecc5a7, type: 2}
 --- !u!1 &266559814
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +223,7 @@ TilemapRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -444,6 +444,7 @@ TilemapRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4198,12 +4199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76317056f7673445eae25692d81a5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneDestination:
-    _asset: {fileID: 102900000, guid: d817a7159e4754c68acd5500202a5419, type: 3}
-    _path: Assets/Scenes/House1.unity
-  _spawnDestinationTag: Entrance
-  _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
+  _targetSpawn: {fileID: 11400000, guid: 98531f32e40014ebdb8cf3e30564aae7, type: 2}
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _playerNextSpawnData: {fileID: 11400000, guid: 1d4738a33089b4a368242e48a94aced8,
     type: 2}
   _startTeleportDirection: 0
 --- !u!1 &415561002
@@ -4249,9 +4247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6963cb4c05686476181f1c3d92d2a26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPointList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _tag: Crossroad
-  _spawnDirection: 1
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _spawnData: {fileID: 11400000, guid: d2c3350ed2ca4471cbd2ea8d649dadb9, type: 2}
 --- !u!1 &599393181
 GameObject:
   m_ObjectHideFlags: 0
@@ -4279,7 +4276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 599393181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
@@ -4298,7 +4295,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 599393181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
@@ -4396,12 +4393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967aa21357a9f4ac8b08c717606afa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneDestination:
-    _asset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
-    _path: Assets/Scenes/MainTestScene.unity
-  _spawnDestinationTag: GameStart
-  _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _playerSpawnPointTag: {fileID: 0}
+  _targetSpawn: {fileID: 11400000, guid: 79eb83f7f4e4244e181957d2dbecc5a7, type: 2}
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _playerNextSpawnData: {fileID: 11400000, guid: 1d4738a33089b4a368242e48a94aced8,
+    type: 2}
 --- !u!61 &769936094
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4453,6 +4448,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4527,7 +4523,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -4640,9 +4636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6963cb4c05686476181f1c3d92d2a26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPointList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _tag: House2Door
-  _spawnDirection: 2
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _spawnData: {fileID: 11400000, guid: e117c89e9a39a46848e4a917eee69fcb, type: 2}
 --- !u!1 &1530303384
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,9 +4681,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6963cb4c05686476181f1c3d92d2a26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPointList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _tag: House1Door
-  _spawnDirection: 2
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _spawnData: {fileID: 11400000, guid: 3f61edc020b2c4c7ebbdeee29da9339b, type: 2}
 --- !u!1 &1858284623
 GameObject:
   m_ObjectHideFlags: 0
@@ -4797,6 +4791,7 @@ TilemapRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -5830,12 +5825,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76317056f7673445eae25692d81a5648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneDestination:
-    _asset: {fileID: 102900000, guid: 49697016a10774582ab3459670bce5cb, type: 3}
-    _path: Assets/Scenes/House2.unity
-  _spawnDestinationTag: Entrance
-  _spawnList: {fileID: 11400000, guid: fd3771a4a0796462d8edd750b456e21c, type: 2}
-  _playerSpawnPointTag: {fileID: 11400000, guid: 558f445697c3a45c1844daa23c8a256c,
+  _targetSpawn: {fileID: 11400000, guid: 8fe906c2e61534be58906616beb4ad8d, type: 2}
+  _spawnerList: {fileID: 11400000, guid: 13de726a2d07f498da322b5363f6052b, type: 2}
+  _playerNextSpawnData: {fileID: 11400000, guid: 1d4738a33089b4a368242e48a94aced8,
     type: 2}
   _startTeleportDirection: 0
 --- !u!1 &1983946726
@@ -5895,6 +5887,7 @@ TilemapRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

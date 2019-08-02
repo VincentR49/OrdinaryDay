@@ -9,34 +9,34 @@ public class PlayerSpawner : MonoBehaviour
     private const string PlayerTag = "Player";
 
     [SerializeField]
-    private StringData _playerSpawnPointTag;
+    private SpawnDataVariable _playerNextSpawn;
     [SerializeField]
-    private SpawnPointList _spawnPointList;
+    private SpawnerList _spawnerList;
     [SerializeField]
     private GameObject _playerPrefab;
 
     private void Start()
     {
-        var spawnTag = _playerSpawnPointTag.Value;
-        if (!string.IsNullOrEmpty(spawnTag))
+        var spawnPoint = _spawnerList.GetSpawner(_playerNextSpawn.Value);
+        if (spawnPoint)
         {
-            var spawnPoint = _spawnPointList.GetSpawnPoint(spawnTag);
-            if (spawnPoint)
-            {
-                // Search for the player
-                var player = GameObject.FindWithTag(PlayerTag);
-                if (player == null) // doesnt exit, we instanciate him
-                {
-                    player = Instantiate(_playerPrefab);
-                }
-                spawnPoint.Spawn(player,
-                    new List<MonoBehaviour>
-                    { 
-                        player.GetComponent<PlayerController>()
-                    });
-                _playerSpawnPointTag.Value = "";
-            }
-
+            // Search for the player
+            var player = InstanciateIfNeeded();
+            spawnPoint.Spawn(player,
+                new List<MonoBehaviour>
+                { 
+                    player.GetComponent<PlayerController>()
+                });
+            _playerNextSpawn.Value = null;
         }
+    }
+
+
+    private GameObject InstanciateIfNeeded()
+    {
+        var player = GameObject.FindWithTag(PlayerTag);
+        if (player == null) // doesnt exit, we instanciate him
+            player = Instantiate(_playerPrefab);
+        return player;
     }
 }

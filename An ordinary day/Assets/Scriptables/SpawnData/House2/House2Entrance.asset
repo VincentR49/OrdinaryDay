@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e631059ecda444b69b045459e253e372, type: 3}
-  m_Name: PlayerSpawnPointTag
+  m_Script: {fileID: 11500000, guid: 002c4322590324bd7a3101cde5173ac3, type: 3}
+  m_Name: House2Entrance
   m_EditorClassIdentifier: 
-  Value: 
+  SpawnDirection: 0
+  Scene:
+    _asset: {fileID: 102900000, guid: 49697016a10774582ab3459670bce5cb, type: 3}
+    _path: Assets/Scenes/House2.unity

@@ -2,37 +2,31 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SpawnPoint : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
+    private const float SpawnDuration = 0.25f;
+
+    [SerializeField]
+    private SpawnerList _spawnerList = default;
+    [SerializeField]
+    private SpawnData _spawnData;
+
     public delegate void SpawnFinishHandler(GameObject go);
     public event SpawnFinishHandler OnSpawnFinished;
 
-    [SerializeField]
-    private SpawnPointList _spawnPointList = default;
-    [SerializeField]
-    private string _tag = default;
-    [SerializeField]
-    private Direction _spawnDirection = default;
-
-    private const float SpawnDuration = 0.25f;
+    public SpawnData GetSpawnData() => _spawnData;
 
     private void Awake()
     {
-        _spawnPointList.Add(this);
+        if (!_spawnData.IsInCurrentScene())
+            Debug.LogError("Wrong scene for this spawn data, shoudlnt happen !");
+        _spawnerList.Add(this);
     }
 
 
     private void OnDestroy()
     {
-        _spawnPointList.Remove(this);
-    }
-
-
-    public string GetTag()
-    {
-        if (string.IsNullOrEmpty(_tag))
-            return name;
-        return _tag;
+        _spawnerList.Remove(this);
     }
 
 
@@ -53,7 +47,7 @@ public class SpawnPoint : MonoBehaviour
         }
         go.transform.position = gameObject.transform.position;
         if (spriteDirectioner != null)
-            spriteDirectioner.SetSprite(_spawnDirection);
+            spriteDirectioner.SetSprite(_spawnData.SpawnDirection);
         yield return new WaitForSeconds(SpawnDuration);
         if (disableDuringSpawn != null)
         {

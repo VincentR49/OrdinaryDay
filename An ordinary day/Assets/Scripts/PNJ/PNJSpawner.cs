@@ -5,38 +5,27 @@ public class PNJSpawner : MonoBehaviour
     [SerializeField]
     private PNJController _pnjPrefab;
     [SerializeField]
-    private SpawnPointList _spawnPointList;
+    private SpawnerList _spawnerList;
     [SerializeField]
-    private PNJControllerList _instanciatedPNJ;
+    private PNJControllerList _instanciatedPNJs;
 
-
-    public void Spawn(PNJData pnjData, Vector2 position, Direction direction)
+    public (PNJController, Spawner) Spawn(PNJData pnjData, SpawnData spawnData)
     {
-        Debug.Log("[PNJSpawner] Created " + pnjData + " at " + position);
+        var spawn = _spawnerList.GetSpawner(spawnData);
+        if (spawn == null)
+        {
+            Debug.LogError("Couldnt find spawn point of tag: " + spawnData);
+            return (null,null);
+        }
         var pnj = InstanciateIfNeeded(pnjData);
-        pnj.gameObject.transform.position = position;
-        pnj.GetComponent<SpriteDirectioner>().SetSprite(direction);
-    }
-
-
-    public void Spawn(PNJData pnjData, string spawnTag)
-    {
-        var spawn = _spawnPointList.GetSpawnPoint(spawnTag);
-        if (spawn != null)
-        {
-            var pnj = InstanciateIfNeeded(pnjData);
-            spawn.Spawn(pnj.gameObject);
-        }
-        else
-        {
-            Debug.LogError("Couldnt find spawn point of tag: " + spawnTag);
-        }
+        spawn.Spawn(pnj.gameObject);
+        return (pnj, spawn);
     }
 
 
     private PNJController InstanciateIfNeeded(PNJData pnjData)
     {
-        var pnj = _instanciatedPNJ.Get(pnjData);
+        var pnj = _instanciatedPNJs.Get(pnjData);
         if (pnj == null) // if not in current scene, make it spawn
             pnj = Instanciate(pnjData);
         return pnj;
