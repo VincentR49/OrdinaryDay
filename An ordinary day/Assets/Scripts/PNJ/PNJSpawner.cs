@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PNJSpawner : MonoBehaviour
 {
@@ -9,17 +10,20 @@ public class PNJSpawner : MonoBehaviour
     [SerializeField]
     private PNJControllerList _instanciatedPNJs;
 
-    public (PNJController, Spawner) Spawn(PNJData pnjData, SpawnData spawnData)
+    public bool Spawn(PNJData pnjData, SpawnData spawnData)
     {
         var spawn = _spawnerList.GetSpawner(spawnData);
         if (spawn == null)
         {
             Debug.LogError("Couldnt find spawn point of tag: " + spawnData);
-            return (null,null);
+            return false;
         }
         var pnj = InstanciateIfNeeded(pnjData);
-        spawn.Spawn(pnj.gameObject);
-        return (pnj, spawn);
+        spawn.Spawn(pnj.gameObject, new List<MonoBehaviour>
+        {
+            pnj.GetComponent<ScheduleHandler>()
+        });
+        return true;
     }
 
 
@@ -27,15 +31,14 @@ public class PNJSpawner : MonoBehaviour
     {
         var pnj = _instanciatedPNJs.Get(pnjData);
         if (pnj == null) // if not in current scene, make it spawn
-            pnj = Instanciate(pnjData);
+            pnj = Instantiate(_pnjPrefab);
+        InitPNJ(pnj, pnjData);
         return pnj;
     }
 
 
-    private PNJController Instanciate(PNJData pnjData)
+    private void InitPNJ(PNJController pnj, PNJData pnjData)
     {
-        var pnj = Instantiate(_pnjPrefab);
         pnj.Init(pnjData);
-        return pnj;
     }
 }

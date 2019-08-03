@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Behaviour that handle task for a given game object
+/// Behaviour that handle task related to the current gameObject.
+/// Attach to the gameobject that should perform the task
 /// Delegate the work to TaskPerformerHandler that handles a specific task type.
 /// </summary>
 /// 
@@ -10,8 +11,6 @@ public class TaskPerformer : BasicTaskPerformer
 {
     [SerializeField]
     private TargetReacher _targetReacher;
-    [SerializeField]
-    private SpawnerList _spawnList;
 
     private Spawner _currentSpawnPoint;
     private Vector2 _currentMoveTarget;
@@ -113,32 +112,14 @@ public class TaskPerformer : BasicTaskPerformer
     #region Spawn
     public void PerformSpawn(SpawnPNJ spawn)
     {
-        if (!spawn.IsInCurrentScene())
+        if (!spawn.IsInCurrentScene()) // Destroy the current pnj
         {
-            OnTaskFailed(TaskFailedConstants.NotInGoodScene);
+            OnTaskFinished();
+            Destroy(gameObject);
             return;
         }
-        var spawnPoint = _spawnList.GetSpawner(spawn.SpawnData);
-        if (spawnPoint == null)
-        {
-            OnTaskFailed(TaskFailedConstants.SpawnPointNotFound, spawn.SpawnData.name);
-        }
-        else
-        {
-            _currentSpawnPoint = spawnPoint;
-            _currentSpawnPoint.OnSpawnFinished += OnSpawnFinished;
-            spawnPoint.Spawn(gameObject);
-        }
-    }
-
-
-    private void OnSpawnFinished(GameObject go)
-    {
-        if (go == gameObject)
-        {
-            _currentSpawnPoint.OnSpawnFinished -= OnSpawnFinished;
-            OnTaskFinished();
-        }    
+        Debug.LogError("Spawn pnj already present on the scene (teleportation). Shouldnt be here.");
+        OnTaskFinished();
     }
     #endregion
 }

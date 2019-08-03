@@ -28,4 +28,13 @@ public class ScheduledTask
         State = TaskState.ToDo;
         CompletionPrc = 0f;
     }
+
+
+    public override string ToString()
+    {
+        return string.Format("Task: {0}.\n" +
+            "Task Time: {1}\n" +
+            "Status: {2}\n" +
+            "PrcCompletion: {3}", Task.name, StartTime, State, CompletionPrc);
+    }
 }

@@ -38,11 +38,11 @@ public class Schedule : ScriptableObject
     }
    
 
-    public ScheduledTask GetFirstTaskToDo()
+    public ScheduledTask GetFirstTaskToDoOrFinish()
     {
         if (NTasks == 0)
             return null;
-        return Tasks.FirstOrDefault((x) => x.State == TaskState.ToDo);
+        return Tasks.FirstOrDefault((x) => x.State == TaskState.ToDo || x.State == TaskState.Doing);
     }
 
 

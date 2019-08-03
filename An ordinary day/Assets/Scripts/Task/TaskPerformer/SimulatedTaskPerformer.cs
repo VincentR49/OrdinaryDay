@@ -9,8 +9,6 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
     [SerializeField]
     private PNJSpawner _pnjSpawner;
 
-    private Spawner _currentSpawner;
-    private PNJController _currentPNJToSpawn;
 
     public override void Perform(Task task, float maxDurationSec, float initProgressPrc)
     {
@@ -21,7 +19,7 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
                 PerformSpawn(spawn);
                 break;
             default:
-                Debug.LogError("Task not implemented yet: " + task);
+                Debug.LogError("Task not implemented yet for simulation: " + task);
                 break;
         }
     }
@@ -29,23 +27,13 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
     #region Spawn
     public void PerformSpawn(SpawnPNJ spawn)
     {
-        (_currentPNJToSpawn, _currentSpawner) = _pnjSpawner.Spawn(spawn.PNJ, spawn.SpawnData);
-        if (_currentPNJToSpawn == null || _currentSpawner == null)
+        var success = _pnjSpawner.Spawn(spawn.PNJ, spawn.SpawnData);
+        if (!success)
         {
             OnTaskFailed(TaskFailedConstants.SpawnPointNotFound); // we skip the task (succeed by default, simulation)
             return;
         }
-        _currentSpawner.OnSpawnFinished += OnSpawnFinished;
-    }
-
-
-    private void OnSpawnFinished(GameObject go)
-    {
-        if (go == _currentPNJToSpawn.gameObject)
-        {
-            _currentSpawner.OnSpawnFinished -= OnSpawnFinished;
-            OnTaskFinished();
-        }
+        OnTaskFinished();
     }
     #endregion
 

@@ -16,4 +16,6 @@ public class DayTime
 
 
     public long ToSeconds() => Hour * 3600 + Min * 60 + Sec;
+
+    public override string ToString() => string.Format("{0}:{1}:{2}", Hour, Min, Sec);
 }

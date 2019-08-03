@@ -13,7 +13,6 @@ public class ScheduleHandler : MonoBehaviour
     private FloatData _inGameSpeedMultiplier;
 
     private Schedule _schedule;
-    private ScheduledTask _nextTaskToDo;
     private ScheduledTask _currentTask;
     private bool IsDoingTask => _currentTask != null;
     private bool IsSimulated => _taskPerformer is SimulatedTaskPerformer;
@@ -45,7 +44,6 @@ public class ScheduleHandler : MonoBehaviour
             _taskPerformer.Cancel();
             _currentTask = null;
         }
-        _nextTaskToDo = GetNextTaskToDo();
     }
 
 
@@ -67,9 +65,10 @@ public class ScheduleHandler : MonoBehaviour
             _currentTask.CompletionPrc = _taskPerformer.ProgressPrc;
             return;
         }
-        if (_nextTaskToDo != null && IsTaskReadyToDo(_nextTaskToDo))
+        var taskToDo = GetNextTaskToDo();
+        if (taskToDo != null && IsTaskReadyToDo(taskToDo))
         {
-            StartTask(_nextTaskToDo);
+            StartTask(taskToDo);
         }
     }
 
@@ -77,9 +76,8 @@ public class ScheduleHandler : MonoBehaviour
     private void StartTask(ScheduledTask task)
     {
         _currentTask = task;
-        Debug.Log("Start scheduled task : " + _currentTask.Task + ". Current time: " + _currentTime.Value + ". Task time: " + _currentTask.StartTime);
+        Debug.Log(name + " -> Start scheduled task : " + _currentTask + " at Current time: " + _currentTime.Value);
         _currentTask.State = TaskState.Doing;
-        _nextTaskToDo = GetNextTaskToDo();
         _taskPerformer.Perform(task.Task, GetCurrentTaskMaxDuration(), task.CompletionPrc);
     }
 
@@ -95,7 +93,6 @@ public class ScheduleHandler : MonoBehaviour
     {
         _currentTask.State = finalState;
         _currentTask = null;
-        _nextTaskToDo = GetNextTaskToDo();
     }
 
     #region Listeners
@@ -148,7 +145,6 @@ public class ScheduleHandler : MonoBehaviour
             _taskPerformer.Cancel();
             _currentTask = null;
         }
-        _nextTaskToDo = GetNextTaskToDo();
     }
 
     #endregion
@@ -156,7 +152,7 @@ public class ScheduleHandler : MonoBehaviour
 
     #region Utils
 
-    private ScheduledTask GetNextTaskToDo() => _schedule.GetFirstTaskToDo();
+    private ScheduledTask GetNextTaskToDo() => _schedule.GetFirstTaskToDoOrFinish();
     private bool IsTaskReadyToDo(ScheduledTask task) => _schedule.GetDateTime(task.StartTime) <= _currentTime.Value;
 
     private float GetCurrentTaskMaxDuration()
