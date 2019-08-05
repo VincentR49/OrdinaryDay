@@ -68,7 +68,7 @@ MonoBehaviour:
       CompletionPrc: 0
     - StartTime:
         Hour: 9
-        Min: 14
+        Min: 15
         Sec: 0
       MaxDuration:
         Hour: 0

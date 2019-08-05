@@ -147,7 +147,7 @@ public class ScheduleHandler : MonoBehaviour
     #region Utils
 
     private ScheduledTask GetNextTaskToDo() => CurrentSchedule.GetFirstTaskToDoOrFinish();
-    private bool IsTaskReadyToDo(ScheduledTask task) => CurrentSchedule.GetDateTime(task.StartTime) <= _currentTime.Value;
+    private bool IsTaskReadyToDo(ScheduledTask task) => task.StartJustAfterPreviousTask || CurrentSchedule.GetDateTime(task.StartTime) <= _currentTime.Value;
 
     private float GetCurrentTaskMaxDuration()
             => (IsSimulated ? _currentTask.SimulatedDuration : _currentTask.MaxDuration).ToSeconds()
