@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002c4322590324bd7a3101cde5173ac3, type: 3}
   m_Name: Crossroad
   m_EditorClassIdentifier: 
-  SpawnDirection: 1
-  Scene:
-    _asset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
-    _path: Assets/Scenes/MainTestScene.unity
+  Direction: 0
+  GamePosition: {fileID: 11400000, guid: ad5c8d46cc48a486d96c1ed9d713c87d, type: 2}

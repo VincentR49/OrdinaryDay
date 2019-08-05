@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 // Teleport the player to the given position (on the same scene or another scene)
@@ -11,9 +10,7 @@ public class PlayerTeleporter : MonoBehaviour
     [SerializeField]
     private SpawnData _targetSpawn;
     [SerializeField]
-    private SpawnerList _spawnerList = default;
-    [SerializeField]
-    private SpawnDataVariable _playerNextSpawnData;
+    private RuntimeSpawnData _playerNextSpawnData;
 
     protected bool _isTeleporting;
 
@@ -27,27 +24,28 @@ public class PlayerTeleporter : MonoBehaviour
 
     protected void TeleportPlayer(GameObject player)
     {
-        Debug.Log("Teleport to scene: " + _targetSpawn.Scene.Path + " at spawnPoint " + _targetSpawn.name);
+        Debug.Log("Teleport to scene: " + _targetSpawn.ScenePath + " at spawnPoint " + _targetSpawn.name);
         _isTeleporting = true;
         if (_targetSpawn.IsInCurrentScene())
         {
             // teleport inside the scene without loading
-            var spawnPoint = _spawnerList.GetSpawner(_targetSpawn);
-            if (spawnPoint) // teleport the player
+            player.GetComponent<SpriteAnimator>().StopCurrentAnimation();
+            Spawner.Spawn(player, _targetSpawn, new List<MonoBehaviour>
             {
-                player.GetComponent<SpriteAnimator>().StopCurrentAnimation();
-                spawnPoint.Spawn(player, new List<MonoBehaviour>
-                {
-                    player.GetComponent<PlayerController>()
-                });
-                _isTeleporting = false;
-            }
+                player.GetComponent<PlayerController>()
+            }, FinishTeleport);
         }
         else // go to different scene
         {
             _playerNextSpawnData.Value = _targetSpawn;
-            SceneLoader.LoadScene(_targetSpawn.Scene.Path, Fade, false);
+            SceneLoader.LoadScene(_targetSpawn.ScenePath, Fade, false, FinishTeleport);
         }
+    }
+
+
+    private void FinishTeleport()
+    {
+        _isTeleporting = false;
     }
 
 

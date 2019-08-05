@@ -12,56 +12,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2117776d0bd1346e1b3b4ab7e9759f20, type: 3}
   m_Name: JisooDefaultSchedule
   m_EditorClassIdentifier: 
-  Day:
-    Year: 1991
-    Month: 5
-    Day: 28
-  Tasks:
-  - StartTime:
-      Hour: 9
-      Min: 0
-      Sec: 0
-    MaxDuration:
-      Hour: 0
-      Min: 1
-      Sec: 0
-    SimulatedDuration:
-      Hour: 0
-      Min: 1
-      Sec: 0
-    StartJustAfterPreviousTask: 0
-    State: 0
-    Task: {fileID: 11400000, guid: 26ce92e2ebe7249ceb14574138b9192e, type: 2}
-    CompletionPrc: 0
-  - StartTime:
-      Hour: 9
-      Min: 3
-      Sec: 0
-    MaxDuration:
-      Hour: 0
-      Min: 15
-      Sec: 0
-    SimulatedDuration:
-      Hour: 0
-      Min: 12
-      Sec: 0
-    StartJustAfterPreviousTask: 0
-    State: 0
-    Task: {fileID: 11400000, guid: d49f168370042406d903f23dfddf92d1, type: 2}
-    CompletionPrc: 0
-  - StartTime:
-      Hour: 9
-      Min: 20
-      Sec: 0
-    MaxDuration:
-      Hour: 0
-      Min: 12
-      Sec: 0
-    SimulatedDuration:
-      Hour: 0
-      Min: 10
-      Sec: 0
-    StartJustAfterPreviousTask: 0
-    State: 0
-    Task: {fileID: 11400000, guid: ca756753e25464063afc579f92917b25, type: 2}
-    CompletionPrc: 0
+  Value:
+    Day:
+      Year: 1991
+      Month: 5
+      Day: 28
+    Tasks:
+    - StartTime:
+        Hour: 9
+        Min: 2
+        Sec: 0
+      MaxDuration:
+        Hour: 0
+        Min: 1
+        Sec: 0
+      SimulatedDuration:
+        Hour: 0
+        Min: 1
+        Sec: 0
+      StartJustAfterPreviousTask: 0
+      State: 0
+      Task: {fileID: 11400000, guid: 26ce92e2ebe7249ceb14574138b9192e, type: 2}
+      CompletionPrc: 0
+    - StartTime:
+        Hour: 9
+        Min: 3
+        Sec: 0
+      MaxDuration:
+        Hour: 0
+        Min: 5
+        Sec: 0
+      SimulatedDuration:
+        Hour: 0
+        Min: 5
+        Sec: 0
+      StartJustAfterPreviousTask: 0
+      State: 0
+      Task: {fileID: 11400000, guid: d49f168370042406d903f23dfddf92d1, type: 2}
+      CompletionPrc: 0
+    - StartTime:
+        Hour: 9
+        Min: 10
+        Sec: 0
+      MaxDuration:
+        Hour: 0
+        Min: 5
+        Sec: 0
+      SimulatedDuration:
+        Hour: 0
+        Min: 5
+        Sec: 0
+      StartJustAfterPreviousTask: 0
+      State: 0
+      Task: {fileID: 11400000, guid: ca756753e25464063afc579f92917b25, type: 2}
+      CompletionPrc: 0
+    - StartTime:
+        Hour: 9
+        Min: 14
+        Sec: 0
+      MaxDuration:
+        Hour: 0
+        Min: 1
+        Sec: 0
+      SimulatedDuration:
+        Hour: 0
+        Min: 1
+        Sec: 0
+      StartJustAfterPreviousTask: 1
+      State: 0
+      Task: {fileID: 11400000, guid: e5c0de77b9dbd40e5af5c4e16fecb549, type: 2}
+      CompletionPrc: 0

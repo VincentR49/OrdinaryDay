@@ -17,9 +17,19 @@ public class PNJData : ScriptableObject
     public CardinalAnimationData WalkingAnimation;
 
     [Header("Schedule")]
-    public Schedule DefaultSchedule; // readyonly, just used to store the basic schedule data
-    public Schedule InGameSchedule; // reference to the dynamic schedule
+    public ScheduleData DefaultSchedule; // readyonly, just used to store the basic schedule data
+    public RuntimeSchedule InGameSchedule; // reference to the dynamic schedule
+
+    [Header("Trackers")]
+    public PositionTrackingData PositionTracking;
 
     public override string ToString() 
         => string.Format("{0} {1}, {2}, {3}", FirstName, LastName, Age, Gender);
+
+
+    public void InitRuntimeSchedule()
+    {
+        Debug.Log("[PNJSchedulesManager] Init schedule of " + FirstName);
+        InGameSchedule.Init(DefaultSchedule);
+    }
 }

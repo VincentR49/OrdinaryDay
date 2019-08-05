@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Linq;
 
-[CreateAssetMenu(menuName ="GameData/PNJControllerList")]
-public class PNJControllerList : DataList<PNJController>
+[CreateAssetMenu(menuName = "RuntimeVariable/PNJControllerList")]
+public class PNJControllerList : RuntimeDataList<PNJController>
 {
     public PNJController Get(PNJData pnj)
     {

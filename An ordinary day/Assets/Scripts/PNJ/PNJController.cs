@@ -8,6 +8,10 @@ public class PNJController : MonoBehaviour
     [SerializeField]
     private PNJControllerList _pnjControllerList;
 
+    [Header("Trackers")]
+    [SerializeField]
+    private PositionTracker _positionTracker;
+
     [Header("Managers")]
     [SerializeField]
     private WalkManager _walkManager;
@@ -15,10 +19,10 @@ public class PNJController : MonoBehaviour
     private SpriteDirectioner _spriteDirectioner;
     [SerializeField]
     private ScheduleHandler _scheduleHandler;
+    
+    [Header("Debug")]
     [SerializeField]
     private PNJData _pnjData;
-
-    [Header("Debug")]
     [SerializeField]
     private bool _initOnStart;
 
@@ -42,6 +46,7 @@ public class PNJController : MonoBehaviour
         Debug.Log("PNJ Initialisation: " + _pnjData);
         InitSprites();
         InitScheduleSystem();
+        _positionTracker.Init(pnjData.PositionTracking);
         _pnjControllerList.Add(this); // we register only if initialized
     }
 

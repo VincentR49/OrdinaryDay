@@ -115,6 +115,9 @@ public class TaskPerformer : BasicTaskPerformer
         if (!spawn.IsInCurrentScene()) // Destroy the current pnj
         {
             OnTaskFinished();
+            // we record the destination position
+            spawn.PNJ.PositionTracking.LastSpawn.Value = spawn.SpawnData;
+            spawn.PNJ.PositionTracking.LastSpawn.TimeSec = Time.time;
             Destroy(gameObject);
             return;
         }

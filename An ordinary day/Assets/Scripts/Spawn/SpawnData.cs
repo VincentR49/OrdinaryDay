@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "Scriptables/SpawnData")]
 public class SpawnData : ScriptableObject
 {
-    public Direction SpawnDirection;
-    public SceneReference Scene;
-
-    public bool IsInCurrentScene() => SceneManager.GetActiveScene().path.Equals(Scene.Path);
+    public Direction Direction;
+    public GamePositionData GamePosition;
+    public bool IsInCurrentScene() => GamePosition.IsInCurrentScene();
+    // sugar
+    public string ScenePath => GamePosition.Value.Scene.Path;
+    public Vector2 Position => GamePosition.Value.Position;
 }

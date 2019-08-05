@@ -6,7 +6,7 @@ public class TimeDisplay : MonoBehaviour
     [SerializeField]
     private Text _text = default;
     [SerializeField]
-    private DateTimeData _currentTime = default;
+    private RuntimeDateTime _currentTime = default;
     [SerializeField]
     private Color _pauseColor = Color.red;
 

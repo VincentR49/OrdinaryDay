@@ -7,38 +7,38 @@ public class Spawner : MonoBehaviour
 {
     private const float SpawnDuration = 0.25f;
 
-    [SerializeField]
-    private SpawnerList _spawnerList = default;
-    [SerializeField]
-    private SpawnData _spawnData;
-
     public delegate void SpawnFinishHandler(GameObject go);
     public event SpawnFinishHandler OnSpawnFinished;
 
-    public SpawnData GetSpawnData() => _spawnData;
+    private static Spawner _instance;
 
     private void Awake()
     {
-        if (!_spawnData.IsInCurrentScene())
-            Debug.LogError("Wrong scene for this spawn data, shoudlnt happen !");
-        _spawnerList.Add(this);
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Debug.LogError("Several instances of Spawner are detected.");
+            DestroyImmediate(gameObject);
+        }
     }
 
 
-    private void OnDestroy()
+    public static void Spawn(GameObject go, SpawnData spawn, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
     {
-        _spawnerList.Remove(this);
+        if (!spawn.IsInCurrentScene())
+        {
+            Debug.LogError("Spawn should be in current scene: " + spawn.name);
+            return;
+        }
+        _instance.StartCoroutine(SpawnCoroutine(go, spawn, disableDuringSpawn, executeAfterSpawn));
     }
 
 
-    public void Spawn(GameObject go, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
-    {
-        var spriteDirectioner = go.GetComponent<SpriteDirectioner>();
-        StartCoroutine(SpawnCoroutine(go, spriteDirectioner, disableDuringSpawn));
-    }
-
-
-    private IEnumerator SpawnCoroutine(GameObject go, SpriteDirectioner spriteDirectioner = null, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
+    private static IEnumerator SpawnCoroutine(GameObject go, SpawnData spawn, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
     {
         Debug.Log("Start spawn coroutine on " + go.name);
         if (disableDuringSpawn != null)
@@ -46,9 +46,10 @@ public class Spawner : MonoBehaviour
             foreach (var behaviour in disableDuringSpawn)
                 behaviour.enabled = false;
         }
-        go.transform.position = gameObject.transform.position;
+        go.transform.position = spawn.Position;
+        var spriteDirectioner = go.GetComponent<SpriteDirectioner>();
         if (spriteDirectioner != null)
-            spriteDirectioner.SetSprite(_spawnData.SpawnDirection);
+            spriteDirectioner.SetSprite(spawn.Direction);
         yield return new WaitForSeconds(SpawnDuration);
         if (disableDuringSpawn != null)
         {
@@ -56,7 +57,7 @@ public class Spawner : MonoBehaviour
                 behaviour.enabled = true;
         }
         Debug.Log("Finish spawn on " + go.name);
-        OnSpawnFinished?.Invoke(go);
+        _instance.OnSpawnFinished?.Invoke(go);
         if (executeAfterSpawn != null)
             executeAfterSpawn.Invoke();
     }

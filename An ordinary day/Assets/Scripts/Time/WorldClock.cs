@@ -9,9 +9,13 @@ public class WorldClock : MonoBehaviour
     [Tooltip("Value of 1sec IRL in the game")]
     private FloatData _inGameTimeMultiplier;
     [SerializeField]
-    private DateTimeData _currentTime = default;
+    private RuntimeDateTime _currentTime = default;
     public bool IsRunning => enabled;
 
+    private void Awake()
+    {
+        Debug.Log("Start time: " + _currentTime.Value);
+    }
 
     private void Start()
     {

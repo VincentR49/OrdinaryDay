@@ -6,24 +6,16 @@ public class PNJSpawner : MonoBehaviour
     [SerializeField]
     private PNJController _pnjPrefab;
     [SerializeField]
-    private SpawnerList _spawnerList;
-    [SerializeField]
     private PNJControllerList _instanciatedPNJs;
 
-    public bool Spawn(PNJData pnjData, SpawnData spawnData)
+    public PNJController Spawn(PNJData pnjData, SpawnData spawnData)
     {
-        var spawn = _spawnerList.GetSpawner(spawnData);
-        if (spawn == null)
-        {
-            Debug.LogError("Couldnt find spawn point of tag: " + spawnData);
-            return false;
-        }
         var pnj = InstanciateIfNeeded(pnjData);
-        spawn.Spawn(pnj.gameObject, new List<MonoBehaviour>
+        Spawner.Spawn(pnj.gameObject, spawnData, new List <MonoBehaviour>
         {
             pnj.GetComponent<ScheduleHandler>()
         });
-        return true;
+        return pnj;
     }
 
 

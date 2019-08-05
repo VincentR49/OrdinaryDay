@@ -20,7 +20,6 @@ public class SceneReference : ISerializationCallbackReceiver
     [PublicAPI]
     public string Path => _path;
 
-
     public void OnAfterDeserialize()
     {
 #if UNITY_EDITOR

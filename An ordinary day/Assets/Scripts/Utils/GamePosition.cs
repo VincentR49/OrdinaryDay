@@ -4,6 +4,11 @@ using System;
 [Serializable]
 public class GamePosition
 {
-    public SceneReference Scene;
-    public Vector2 Position;
+	public string ScenePath;
+	public Vector2 Position;
+
+    public GamePosition()
+    {
+
+    }
 }

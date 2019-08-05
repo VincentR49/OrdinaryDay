@@ -50,7 +50,7 @@ MonoBehaviour:
   _loopSceneSwitch: {fileID: 2191877259488034131}
   _startDate: {fileID: 11400000, guid: e42c194748dd94910b001236cbb80fc3, type: 2}
   _endDate: {fileID: 11400000, guid: 9b4359fc25294411aad25ea77436fe72, type: 2}
-  _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
+  _currentTime: {fileID: 11400000, guid: 900306a7d015f4e709efa46ba76634bf, type: 2}
   _pauseOnTimeLoopStarted: 0
 --- !u!114 &2191877259488034131
 MonoBehaviour:
@@ -176,4 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inGameTimeMultiplier: {fileID: 11400000, guid: 1efe113d4cd01410aa48b914586da4bb,
     type: 2}
-  _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
+  _currentTime: {fileID: 11400000, guid: 900306a7d015f4e709efa46ba76634bf, type: 2}

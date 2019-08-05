@@ -15,7 +15,7 @@ public class TimeLooper : MonoBehaviour
     [SerializeField]
     private SerialDateTimeData _endDate = default;
     [SerializeField]
-    private DateTimeData _currentTime = default;
+    private RuntimeDateTime _currentTime = default;
     [SerializeField]
     private bool _pauseOnTimeLoopStarted = true;
 

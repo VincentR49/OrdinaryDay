@@ -5,7 +5,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     private SceneReference _firstGameScene = default;
-   
+
     private static bool _alreadyExists;
 
 

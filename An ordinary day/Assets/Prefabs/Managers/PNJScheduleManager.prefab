@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allPNJs: {fileID: 11400000, guid: 6ffa9fcbe70df4a7eb48fc24128c31a7, type: 2}
   _inGamePNJs: {fileID: 11400000, guid: 5984acc906bc7461db60fc9e22d3669b, type: 2}
-  _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
+  _currentTime: {fileID: 11400000, guid: 900306a7d015f4e709efa46ba76634bf, type: 2}
   _simulatedScheduleHandlerPrefab: {fileID: 2753489607323397688, guid: 9368db7f5ce684bda9c210d13a968ba5,
     type: 3}
 --- !u!114 &4702531232417884067

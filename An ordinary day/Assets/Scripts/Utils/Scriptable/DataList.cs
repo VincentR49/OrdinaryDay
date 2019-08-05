@@ -4,10 +4,7 @@ using UnityEngine;
 public class DataList<T> : ScriptableObject
 {
     public List<T> Items;
-    public delegate void OnListChanged(T item);
-    public event OnListChanged OnItemAdded;
-    public event OnListChanged OnItemRemoved;
-
+    
     public void Add(T item)
     {
         if (Items == null)
@@ -17,8 +14,6 @@ public class DataList<T> : ScriptableObject
         if (Items.Contains(item))
             return;
         Items.Add(item);
-        OnItemAdded?.Invoke(item);
-        Debug.Log("DataList: " + name + ". On item added " + item);
     }
 
 
@@ -27,8 +22,6 @@ public class DataList<T> : ScriptableObject
         if (Items == null)
             return;
         Items.Remove(item);
-        OnItemRemoved?.Invoke(item);
-        Debug.Log("DataList: " + name + ". On item removed " + item);
         if (Items.Count == 0)
             Items = null;
     }
@@ -38,20 +31,6 @@ public class DataList<T> : ScriptableObject
     {
         if (Items == null)
             return;
-        for (int i = Items.Count - 1; i >= 0; i--)
-            Remove(Items[i]); // to call the event
-    }
-
-
-    public T Find(T item)
-    {
-        if (Items == null)
-            return default;
-        foreach (var t in Items)
-        {
-            if (t.Equals(item))
-                return t;
-        }
-        return default;
+        Items.Clear();
     }
 }

@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pnjSpawner: {fileID: 1748750794923316929}
-  _goToSpawn: {fileID: 0}
 --- !u!114 &2753489607323397689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _taskPerformer: {fileID: 2753489607323397690}
-  _currentTime: {fileID: 11400000, guid: 8c2bdffae3ffb408588a64bd75d431c3, type: 2}
+  _currentTime: {fileID: 11400000, guid: 900306a7d015f4e709efa46ba76634bf, type: 2}
   _inGameSpeedMultiplier: {fileID: 11400000, guid: 1efe113d4cd01410aa48b914586da4bb,
     type: 2}
   schedule: {fileID: 0}

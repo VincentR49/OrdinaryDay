@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002c4322590324bd7a3101cde5173ac3, type: 3}
   m_Name: House2Entrance
   m_EditorClassIdentifier: 
-  SpawnDirection: 0
-  Scene:
-    _asset: {fileID: 102900000, guid: 49697016a10774582ab3459670bce5cb, type: 3}
-    _path: Assets/Scenes/House2.unity
+  Direction: 0
+  GamePosition: {fileID: 11400000, guid: dc8306133bbc749948c81d4c99ea0e94, type: 2}

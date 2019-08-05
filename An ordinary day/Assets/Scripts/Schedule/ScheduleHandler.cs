@@ -8,31 +8,25 @@ public class ScheduleHandler : MonoBehaviour
     [SerializeField]
     private BasicTaskPerformer _taskPerformer;
     [SerializeField]
-    private DateTimeData _currentTime;
+    private RuntimeDateTime _currentTime;
     [SerializeField]
     private FloatData _inGameSpeedMultiplier;
 
-    private Schedule _schedule;
+    private RuntimeSchedule _schedule;
     private ScheduledTask _currentTask;
     private bool IsDoingTask => _currentTask != null;
     private bool IsSimulated => _taskPerformer is SimulatedTaskPerformer;
+    private DaySchedule CurrentSchedule => _schedule.Value;
 
-    [Header("Debug")]
-    [SerializeField]
-    private Schedule schedule;
-    [SerializeField]
-    private bool _initOnStart;
 
+    public RuntimeSchedule GetSchedule() => _schedule;
 
     private void Start()
     {
         InitTaskPerformerListeners();
-        if (_initOnStart)
-            Init(schedule);
     }
 
-
-    public void Init(Schedule schedule)
+    public void Init(RuntimeSchedule schedule)
     {
         Debug.Log("[ScheduleHandler] SetSchedule of instanciate PNJ");
         if (_schedule != null)
@@ -56,9 +50,9 @@ public class ScheduleHandler : MonoBehaviour
 
     private void Update()
     {
-        if (_schedule == null)
+        if (CurrentSchedule == null)
             return;
-        if (!_schedule.Day.Equals(_currentTime.Value)) // should be the good day
+        if (!CurrentSchedule.Day.Equals(_currentTime.Value)) // should be the good day
             return;
         if (IsDoingTask) // do nothing if already busy
         {
@@ -152,8 +146,8 @@ public class ScheduleHandler : MonoBehaviour
 
     #region Utils
 
-    private ScheduledTask GetNextTaskToDo() => _schedule.GetFirstTaskToDoOrFinish();
-    private bool IsTaskReadyToDo(ScheduledTask task) => _schedule.GetDateTime(task.StartTime) <= _currentTime.Value;
+    private ScheduledTask GetNextTaskToDo() => CurrentSchedule.GetFirstTaskToDoOrFinish();
+    private bool IsTaskReadyToDo(ScheduledTask task) => CurrentSchedule.GetDateTime(task.StartTime) <= _currentTime.Value;
 
     private float GetCurrentTaskMaxDuration()
             => (IsSimulated ? _currentTask.SimulatedDuration : _currentTask.MaxDuration).ToSeconds()

@@ -13,13 +13,13 @@ public class PNJSchedulesManager : MonoBehaviour
     [SerializeField]
     private PNJControllerList _inGamePNJs;
     [SerializeField]
-    private DateTimeData _currentTime;
+    private RuntimeDateTime _currentTime;
     [SerializeField]
     private GameObject _simulatedScheduleHandlerPrefab;
 
     private static bool _alreadyExists;
-    private List<Schedule> _pnjSchedules; // store all the pnj schedule references for conveniance
     private Dictionary<PNJData, ScheduleHandler> _simulatedScheduleHandlerDict;
+
 
     private void Awake()
     {
@@ -35,8 +35,7 @@ public class PNJSchedulesManager : MonoBehaviour
         }
         _inGamePNJs.OnItemAdded += OnPNJCreated;
         _inGamePNJs.OnItemRemoved += OnPNJDestroyed;
-        InitSimulatedScheduleHandlers();
-        RefreshScheduleHandlersStatus();
+        InitSchedules(); 
     }
 
 
@@ -48,36 +47,31 @@ public class PNJSchedulesManager : MonoBehaviour
 
     #region Init
 
-    private void InitSimulatedScheduleHandlers()
+    private void InitSchedules()
     {
         Debug.Log("[PNJSchedulesManager] InitSimulatedScheduleHandlers");
         _simulatedScheduleHandlerDict = new Dictionary<PNJData, ScheduleHandler>();
         foreach (var pnj in _allPNJs.Items)
         {
+            // init the runtime schedule of the pnj
+            pnj.InitRuntimeSchedule();
+            // Create one simulated schedule handler for each pnjs
             var go = Instantiate(_simulatedScheduleHandlerPrefab, transform);
             var scheduleHandler = go.GetComponent<ScheduleHandler>();
             scheduleHandler.Init(pnj.InGameSchedule);
             _simulatedScheduleHandlerDict.Add(pnj, scheduleHandler);
+            // Update the status of the simulated schedule
+            RefreshScheduleHandlersStatus(scheduleHandler, pnj);
         }
     }
 
 
-    private void RefreshScheduleHandlersStatus()
+    private void RefreshScheduleHandlersStatus(ScheduleHandler scheduleHandler, PNJData pnjData)
     {
-        Debug.Log("[PNJSchedulesManager] InitSimulatedScheduleHandlersStatus");
-        foreach (var entry in _simulatedScheduleHandlerDict)
-        {
-            var pnjData = entry.Key;
-            var controller = _inGamePNJs.Items.Find(x => x.GetPNJData() == pnjData);
-            EnableSimulatedScheduleHandler(entry.Value, controller == null);
-        }
+        var pnjExists = _inGamePNJs.Items == null ? false : _inGamePNJs.Items.Find(x => x.GetPNJData() == pnjData) != null;
+        EnableSimulatedScheduleHandler(scheduleHandler, !pnjExists); 
     }
 
-
-    private void EnableSimulatedScheduleHandler(PNJData pnjData, bool enable)
-    {
-        EnableSimulatedScheduleHandler(_simulatedScheduleHandlerDict[pnjData], enable);
-    }
 
     private void EnableSimulatedScheduleHandler(ScheduleHandler scheduleHandler, bool enable)
     {
@@ -87,49 +81,34 @@ public class PNJSchedulesManager : MonoBehaviour
     #endregion
 
 
-    #region Schedule Init
-
-    private void InitPNJSchedules()
+    private void ResetPNJSchedules()
     {
-        Debug.Log("[PNJSchedulesManager] Init PNJ schedules");
-        _pnjSchedules = new List<Schedule>();
-        foreach (var pnj in _allPNJs.Items)
-            _pnjSchedules.Add(InitPNJSchedule(pnj));
+        foreach (var entry in _simulatedScheduleHandlerDict)
+            entry.Value.GetSchedule().Reset();
     }
 
-
-    private Schedule InitPNJSchedule(PNJData pnj)
-    {
-        Debug.Log("[PNJSchedulesManager] Init schedule of " + pnj.FirstName);
-        var defaultSchedule = pnj.DefaultSchedule;
-        var inGameSchedule = pnj.InGameSchedule;
-        inGameSchedule.Copy(defaultSchedule);
-        inGameSchedule.Reset();
-        return inGameSchedule;
-    }
-
-    #endregion
-
-
+    
     #region Event responses
     // Attach in inspector to a game event listener
     public void OnTimeLoopStarted()
     {
-        InitPNJSchedules();
+        ResetPNJSchedules();
     }
 
 
     public void OnPNJCreated(PNJController pnj)
     {
         Debug.Log("OnPNJCreated: " + pnj.GetPNJData());
-        EnableSimulatedScheduleHandler(pnj.GetPNJData(), false);
+        var scheduleHandler = _simulatedScheduleHandlerDict[pnj.GetPNJData()];
+        EnableSimulatedScheduleHandler(scheduleHandler, false);
     }
 
 
     public void OnPNJDestroyed(PNJController pnj)
     {
         Debug.Log("OnPNJDestroyed: " + pnj.GetPNJData());
-        EnableSimulatedScheduleHandler(pnj.GetPNJData(), true);
+        var scheduleHandler = _simulatedScheduleHandlerDict[pnj.GetPNJData()];
+        EnableSimulatedScheduleHandler(scheduleHandler, true);
     }
     #endregion
 }

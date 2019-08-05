@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5604191714237017650}
   - component: {fileID: 5604191714237017653}
   - component: {fileID: -8969654474840993486}
+  - component: {fileID: 946638008156845553}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firstGameScene:
     _asset: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
-    _path: Assets/Scenes/MainScene.unity
+    _path: Assets/Scenes/MainTestScene.unity
 --- !u!114 &-8969654474840993486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,3 +127,15 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+--- !u!114 &946638008156845553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5604191714237017651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6963cb4c05686476181f1c3d92d2a26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
