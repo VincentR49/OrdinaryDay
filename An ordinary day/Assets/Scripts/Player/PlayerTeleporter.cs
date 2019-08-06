@@ -6,13 +6,17 @@ using System.Collections.Generic;
 public class PlayerTeleporter : MonoBehaviour
 {
     private const float Fade = 0.25f;
-    private const string PlayerTag = "Player";
+    
     [SerializeField]
     private SpawnData _targetSpawn;
     [SerializeField]
-    private RuntimeSpawnData _playerNextSpawnData;
+    private GameObject _playerPrefab;
 
+    private string PlayerTag => _playerPrefab.tag;
     protected bool _isTeleporting;
+
+
+    protected bool IsPlayer(Collider2D collision) => collision.tag.Equals(PlayerTag);
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
@@ -37,8 +41,8 @@ public class PlayerTeleporter : MonoBehaviour
         }
         else // go to different scene
         {
-            _playerNextSpawnData.Value = _targetSpawn;
-            SceneLoader.LoadScene(_targetSpawn.ScenePath, Fade, false, FinishTeleport);
+            SceneLoader.LoadScene(_targetSpawn.ScenePath, Fade, false,
+                () => PlayerInstancier.InstanciatePlayer(_targetSpawn));
         }
     }
 
@@ -47,7 +51,4 @@ public class PlayerTeleporter : MonoBehaviour
     {
         _isTeleporting = false;
     }
-
-
-    protected bool IsPlayer(Collider2D collision) => collision.tag.Equals(PlayerTag);
 }

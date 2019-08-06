@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using System.IO;
 
 public class PNJInfoDisplayDebug : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class PNJInfoDisplayDebug : MonoBehaviour
             "{2} {3} {0}" +
             "{1} {0}" +
             "{4} -> {5}", Environment.NewLine, Separator, _pnj.FirstName, _pnj.LastName,
-                          _pnj.PositionTracking.LastPosition.ScenePath,
+                          Path.GetFileNameWithoutExtension(_pnj.PositionTracking.LastPosition.ScenePath),
                           _pnj.PositionTracking.LastPosition.Position);
         return text;
     }

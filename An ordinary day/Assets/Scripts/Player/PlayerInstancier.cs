@@ -1,39 +1,44 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
-/// <summary>
-/// Instanciate the player on Start at the last recorded spawn point
-/// </summary>
-public class PlayerInstancier : MonoBehaviour
+public class PlayerInstancier : Singleton<PlayerInstancier>
 {
-    [SerializeField]
-    private RuntimeSpawnData _playerNextSpawn;
-    [SerializeField]
-    private GameObject _playerPrefab;
-
-    private string PlayerTag => _playerPrefab.tag;
-
-    private void Start()
+    private static GameObject PlayerPrefab
     {
-        if (_playerNextSpawn.Value != null && _playerNextSpawn.Value.IsInCurrentScene())
+        get
         {
-            // Search for the player
-            var player = InstanciateIfNeeded();
-            Spawner.Spawn(player, _playerNextSpawn.Value,
-                new List<MonoBehaviour>
+            if (_playerPrefab == null)
+            {
+                _playerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(PathConstants.PlayerPrefab, typeof(GameObject));
+                if (_playerPrefab == null)
                 {
-                    player.GetComponent<PlayerController>()
-                });
-            _playerNextSpawn.Value = null;
+                    Debug.LogError("Couldnt find PlayerPrefab at " + PathConstants.PlayerPrefab);
+                }
+            }
+            return _playerPrefab;
         }
     }
 
+    private static GameObject _playerPrefab;
 
-    private GameObject InstanciateIfNeeded()
+    public static void InstanciatePlayer(SpawnData spawn)
     {
-        var player = GameObject.FindWithTag(PlayerTag);
+        // Search for the player
+        var player = InstanciateIfNeeded(PlayerPrefab);
+        Spawner.Spawn(player, spawn,
+            new List<MonoBehaviour>
+            {
+                    player.GetComponent<PlayerController>()
+            });
+    }
+
+
+    public static GameObject InstanciateIfNeeded(GameObject playerPrefab)
+    {
+        var player = GameObject.FindWithTag(playerPrefab.tag);
         if (player == null) // doesnt exit, we instanciate him
-            player = Instantiate(_playerPrefab);
+            player = Instantiate(playerPrefab);
         return player;
     }
 }
