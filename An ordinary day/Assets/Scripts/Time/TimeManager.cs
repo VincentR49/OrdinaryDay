@@ -17,7 +17,7 @@ public class TimeManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Several instances of TimeManager are detected.");
+            Debug.Log("Several instances of TimeManager are detected.");
             DestroyImmediate(gameObject);
         }
     }

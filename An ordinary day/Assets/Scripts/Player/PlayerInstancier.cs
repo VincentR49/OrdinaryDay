@@ -6,12 +6,12 @@ using System.Collections.Generic;
 /// </summary>
 public class PlayerInstancier : MonoBehaviour
 {
-    private const string PlayerTag = "Player";
-
     [SerializeField]
     private RuntimeSpawnData _playerNextSpawn;
     [SerializeField]
     private GameObject _playerPrefab;
+
+    private string PlayerTag => _playerPrefab.tag;
 
     private void Start()
     {

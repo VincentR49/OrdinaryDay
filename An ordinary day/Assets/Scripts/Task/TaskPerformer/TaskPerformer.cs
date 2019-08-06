@@ -116,8 +116,7 @@ public class TaskPerformer : BasicTaskPerformer
         {
             OnTaskFinished();
             // we record the destination position
-            spawn.PNJ.PositionTracking.LastSpawn.Value = spawn.SpawnData;
-            spawn.PNJ.PositionTracking.LastSpawn.TimeSec = Time.time;
+            spawn.PNJ.PositionTracking.LastPosition = new GamePosition(spawn.SpawnData.GamePosition.Value);
             Destroy(gameObject);
             return;
         }

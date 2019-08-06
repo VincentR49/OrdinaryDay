@@ -13,7 +13,7 @@ public class PositionTracker : MonoBehaviour
     public void Init(PositionTrackingData trackingData)
     {
         _trackingData = trackingData;
-        _trackingData.LastPosition.Value.ScenePath = SceneManager.GetActiveScene().path;
+        _trackingData.LastPosition.ScenePath = SceneManager.GetActiveScene().path;
         _isInit = true;
     }
 
@@ -22,8 +22,7 @@ public class PositionTracker : MonoBehaviour
     {
         if (_isInit)
         {
-            _trackingData.LastPosition.Value.Position = transform.position;
-            _trackingData.LastPosition.TimeSec = Time.time;
+            _trackingData.LastPosition.Position = transform.position;
         }
     }
 }

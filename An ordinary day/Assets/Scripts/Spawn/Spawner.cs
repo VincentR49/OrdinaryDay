@@ -3,28 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class Spawner : MonoBehaviour
+public class Spawner : Singleton<Spawner>
 {
     private const float SpawnDuration = 0.25f;
 
     public delegate void SpawnFinishHandler(GameObject go);
     public event SpawnFinishHandler OnSpawnFinished;
-
-    private static Spawner _instance;
-
-    private void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Debug.LogError("Several instances of Spawner are detected.");
-            DestroyImmediate(gameObject);
-        }
-    }
 
 
     public static void Spawn(GameObject go, SpawnData spawn, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
@@ -34,7 +18,7 @@ public class Spawner : MonoBehaviour
             Debug.LogError("Spawn should be in current scene: " + spawn.name);
             return;
         }
-        _instance.StartCoroutine(SpawnCoroutine(go, spawn, disableDuringSpawn, executeAfterSpawn));
+        Instance.StartCoroutine(SpawnCoroutine(go, spawn, disableDuringSpawn, executeAfterSpawn));
     }
 
 
@@ -57,7 +41,7 @@ public class Spawner : MonoBehaviour
                 behaviour.enabled = true;
         }
         Debug.Log("Finish spawn on " + go.name);
-        _instance.OnSpawnFinished?.Invoke(go);
+        Instance.OnSpawnFinished?.Invoke(go);
         if (executeAfterSpawn != null)
             executeAfterSpawn.Invoke();
     }

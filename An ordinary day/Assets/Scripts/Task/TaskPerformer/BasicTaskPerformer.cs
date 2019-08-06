@@ -80,6 +80,7 @@ public abstract class BasicTaskPerformer : MonoBehaviour
     {
         Debug.Log("[TaskPerformer] OnTaskFinished: " + _task);
         OnTaskFinishedEvent?.Invoke();
+       
         Clean();
     }
 

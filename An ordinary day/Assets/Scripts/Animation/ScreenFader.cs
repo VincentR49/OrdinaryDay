@@ -16,7 +16,7 @@ public class ScreenFader : Fader
         }
         else
         {
-            Debug.LogError("Several instances of ScreenFader are running");
+            Debug.Log("Several instances of ScreenFader are detected");
             Destroy(gameObject);
             return;
         }

@@ -5,14 +5,10 @@ using System;
 public class PositionTrackingData : ScriptableObject
 {
     [NonSerialized]
-    public DatedVariable<GamePosition> LastPosition;
-    [NonSerialized]
-    public DatedVariable<SpawnData> LastSpawn;
+    public GamePosition LastPosition;
 
     public PositionTrackingData()
     {
-        LastPosition = new DatedVariable<GamePosition>();
-        LastPosition.Value = new GamePosition();
-        LastSpawn = new DatedVariable<SpawnData>();
+        LastPosition = new GamePosition();
     }
 }
