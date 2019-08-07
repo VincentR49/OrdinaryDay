@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Manage the PNJ behaviours
 /// </summary>
 public class PNJController : MonoBehaviour
 {
-    [SerializeField]
-    private PNJControllerList _pnjControllerList;
-
     [Header("Trackers")]
     [SerializeField]
     private PositionTracker _positionTracker;
@@ -26,10 +24,15 @@ public class PNJController : MonoBehaviour
     [SerializeField]
     private bool _initOnStart;
 
+    private static List<PNJController> _pnjControllers = new List<PNJController>();
+    public delegate void InstancesChangedHandler(PNJController pnj);
+    public static event InstancesChangedHandler OnPNJAdded;
+    public static event InstancesChangedHandler OnPNJRemoved;
 
     private void OnDestroy()
     {
-        _pnjControllerList.Remove(this);
+        _pnjControllers.Remove(this);
+        OnPNJRemoved?.Invoke(this);
     }
 
 
@@ -47,7 +50,11 @@ public class PNJController : MonoBehaviour
         InitSprites();
         InitScheduleSystem();
         _positionTracker.Init(pnjData.PositionTracking);
-        _pnjControllerList.Add(this); // we register only if initialized
+        if (!_pnjControllers.Contains(this))
+        {
+            _pnjControllers.Add(this); // we register only if initialized 
+            OnPNJAdded?.Invoke(this);
+        }
     }
 
 
@@ -63,6 +70,16 @@ public class PNJController : MonoBehaviour
         _scheduleHandler.Init(_pnjData.InGameSchedule);
     }
     #endregion
+
+    public static PNJController Get(PNJData pnjData)
+    {
+        foreach (var controller in _pnjControllers)
+        {
+            if (controller._pnjData == pnjData)
+                return controller;
+        }
+        return null;
+    }
 
     public PNJData GetPNJData() => _pnjData;
 }

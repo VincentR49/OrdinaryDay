@@ -1,35 +1,18 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerInstancier : Singleton<PlayerInstancier>
 {
-    private static GameObject PlayerPrefab
-    {
-        get
-        {
-            if (_playerPrefab == null)
-            {
-                _playerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(PathConstants.PlayerPrefab, typeof(GameObject));
-                if (_playerPrefab == null)
-                {
-                    Debug.LogError("Couldnt find PlayerPrefab at " + PathConstants.PlayerPrefab);
-                }
-            }
-            return _playerPrefab;
-        }
-    }
-
-    private static GameObject _playerPrefab;
+    private static GameObject _playerPrefab = _playerPrefab = Utils.GetPrefab(PathConstants.PlayerPrefab);
 
     public static void InstanciatePlayer(SpawnData spawn)
     {
         // Search for the player
-        var player = InstanciateIfNeeded(PlayerPrefab);
+        var player = InstanciateIfNeeded(_playerPrefab);
         Spawner.Spawn(player, spawn,
             new List<MonoBehaviour>
             {
-                    player.GetComponent<PlayerController>()
+                player.GetComponent<PlayerController>()
             });
     }
 

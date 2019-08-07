@@ -94,8 +94,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -135,7 +135,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -192,11 +203,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -206,6 +212,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -230,7 +241,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -287,11 +309,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -302,6 +319,11 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
 --- !u!4 &21660981 stripped
@@ -310,116 +332,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 21660980}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &41250850
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 41250852}
-  - component: {fileID: 41250851}
-  m_Layer: 0
-  m_Name: FPSCounter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &41250851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41250850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4215aa48e42c493b9efc2ff2ac2cab0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _style:
-    m_Name: 
-    m_Normal:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 1, b: 0.0123586655, a: 1}
-    m_Hover:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Active:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Focused:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnNormal:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnHover:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnActive:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_OnFocused:
-      m_Background: {fileID: 0}
-      m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Border:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Margin:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Padding:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Overflow:
-      m_Left: 0
-      m_Right: 0
-      m_Top: 0
-      m_Bottom: 0
-    m_Font: {fileID: 0}
-    m_FontSize: 0
-    m_FontStyle: 0
-    m_Alignment: 0
-    m_WordWrap: 0
-    m_RichText: 1
-    m_TextClipping: 0
-    m_ImagePosition: 0
-    m_ContentOffset: {x: 0, y: 0}
-    m_FixedWidth: 0
-    m_FixedHeight: 0
-    m_StretchWidth: 1
-    m_StretchHeight: 0
---- !u!4 &41250852
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41250850}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &76749089
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +389,7 @@ TilemapRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -7053,7 +6966,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -7110,11 +7034,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -7124,6 +7043,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -7148,7 +7072,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -7205,11 +7140,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -7219,6 +7149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -7243,7 +7178,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -7300,11 +7246,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -7314,6 +7255,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -7338,7 +7284,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -7395,11 +7352,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -7409,6 +7361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -7433,7 +7390,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -7490,11 +7458,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -7504,6 +7467,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -7528,7 +7496,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -7585,11 +7564,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -7599,6 +7573,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -7666,6 +7645,7 @@ TilemapRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -10172,7 +10152,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -10229,11 +10220,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -10243,6 +10229,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -10295,7 +10286,7 @@ Transform:
   - {fileID: 76749090}
   - {fileID: 884057803}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1046296286
 GameObject:
@@ -10339,6 +10330,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -10374,7 +10366,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047721095
 GameObject:
@@ -10419,7 +10411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1127381108
 GameObject:
@@ -10465,7 +10457,7 @@ Transform:
   - {fileID: 1322717089}
   - {fileID: 183334923}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1322717088
 PrefabInstance:
@@ -10482,7 +10474,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -10539,11 +10542,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -10553,6 +10551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -10577,7 +10580,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -10634,11 +10648,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -10648,6 +10657,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -10674,6 +10688,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PNJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -10730,21 +10755,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161367, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_Color.r
@@ -10765,6 +10775,21 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
 --- !u!1001 &1827896993
@@ -10782,7 +10807,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -10839,11 +10875,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -10853,6 +10884,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -10917,7 +10953,7 @@ PrefabInstance:
     - target: {fileID: 8447140917735947391, guid: 8b5d39be394ec4beba0895fc13066a01,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8447140917735947391, guid: 8b5d39be394ec4beba0895fc13066a01,
         type: 3}
@@ -10955,7 +10991,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -11012,11 +11059,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -11026,6 +11068,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -11050,7 +11097,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -11107,11 +11165,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -11121,6 +11174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -11145,7 +11203,18 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 6927588342372206890, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -11202,11 +11271,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
-        type: 3}
-      propertyPath: _showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161364, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_BodyType
@@ -11216,6 +11280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999833727167035478, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
@@ -11358,7 +11427,7 @@ PrefabInstance:
     - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5479793640582190414, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
         type: 3}

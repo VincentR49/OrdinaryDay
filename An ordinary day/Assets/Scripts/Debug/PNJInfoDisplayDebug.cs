@@ -15,15 +15,15 @@ public class PNJInfoDisplayDebug : MonoBehaviour
     [SerializeField]
     private Text _text;
 
-    private PNJData _pnj => _dropdown.value == 0 ? null : _allPNJList.Items[_dropdown.value - 1];
+    private PNJData _pnj => _dropdown.value == _allPNJList.Items.Count ? null : _allPNJList.Items[_dropdown.value];
 
     private void Awake()
     {
         _dropdown.ClearOptions();
         var options = new List<Dropdown.OptionData>();
-        options.Add(new Dropdown.OptionData("None"));
         foreach (var pnj in _allPNJList.Items)
             options.Add(new Dropdown.OptionData(pnj.FirstName));
+        options.Add(new Dropdown.OptionData("None"));
         _dropdown.AddOptions(options);
     }
 

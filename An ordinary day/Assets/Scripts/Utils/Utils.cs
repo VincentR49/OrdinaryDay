@@ -2,7 +2,11 @@
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEditor;
 
+/// <summary>
+/// Need to be clean later
+/// </summary>
 public static class Utils
 {
     public static bool IsPath(string str)
@@ -14,6 +18,17 @@ public static class Utils
 
     public static float Distance(Vector2 u, Vector2 v)
         => Mathf.Sqrt(Mathf.Pow(u.x - v.x, 2) + Mathf.Pow(u.y - v.y, 2));
+
+
+    public static GameObject GetPrefab(string path)
+    {
+        var prefab = (GameObject)AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
+        if (prefab == null)
+        {
+            Debug.LogError("Couldnt find prefab at " + path);
+        }
+        return prefab;
+    }
 
 
     public static Direction GetDirection(Vector2 v)

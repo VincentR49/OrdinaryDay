@@ -1,19 +1,38 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
-/// Instanciate the pnj on Start at the last recorded position
+/// Singleton to instanciate PNJ
 /// </summary>
-public class PNJInstancier : MonoBehaviour
+public class PNJInstancier : Singleton<PNJInstancier>
 {
-    // Start is called before the first frame update
-    void Start()
+    private static PNJController _pnjPrefab =
+        Utils.GetPrefab(PathConstants.PNJPrefab).GetComponent<PNJController>();
+
+
+    public static PNJController InstanciatePNJ(PNJData pnjData, SpawnData spawnData)
     {
-        
+        var pnj = Instance.InstanciateIfNeeded(pnjData);
+        Spawner.Spawn(pnj.gameObject, spawnData, new List<MonoBehaviour>
+        {
+            pnj.GetComponent<ScheduleHandler>()
+        });
+        return pnj;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private PNJController InstanciateIfNeeded(PNJData pnjData)
     {
-        
+        var pnj = PNJController.Get(pnjData);
+        if (pnj == null) // if not in current scene, make it spawn
+            pnj = Instantiate(_pnjPrefab);
+        InitPNJ(pnj, pnjData);
+        return pnj;
+    }
+
+
+    private void InitPNJ(PNJController pnj, PNJData pnjData)
+    {
+        pnj.Init(pnjData);
     }
 }

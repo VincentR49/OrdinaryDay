@@ -16,7 +16,7 @@ public class ScheduleHandler : MonoBehaviour
     private ScheduledTask _currentTask;
     private bool IsDoingTask => _currentTask != null;
     private bool IsSimulated => _taskPerformer is SimulatedTaskPerformer;
-    private DaySchedule CurrentSchedule => _schedule.Value;
+    private DaySchedule CurrentSchedule => _schedule == null ? null : _schedule.Value;
 
 
     public RuntimeSchedule GetSchedule() => _schedule;

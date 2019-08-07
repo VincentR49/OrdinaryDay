@@ -6,9 +6,6 @@
 /// </summary>
 public class SimulatedTaskPerformer : BasicTaskPerformer
 {
-    [SerializeField]
-    private PNJSpawner _pnjSpawner;
-
     public override void Perform(Task task, float maxDurationSec, float initProgressPrc)
     {
         base.Perform(task, maxDurationSec, initProgressPrc);
@@ -29,7 +26,7 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
     #region Spawn
     public void PerformSpawn(SpawnPNJ spawn)
     {
-        var pnj = _pnjSpawner.Spawn(spawn.PNJ, spawn.SpawnData);
+        var pnj = PNJInstancier.InstanciatePNJ(spawn.PNJ, spawn.SpawnData);
         if (pnj == null)
         {
             OnTaskFailed(TaskFailedConstants.SpawnPointNotFound); // we skip the task (succeed by default, simulation)

@@ -10,8 +10,7 @@ public class PNJSchedulesManager : MonoBehaviour
 {
     [SerializeField]
     private PNJDataList _allPNJs;
-    [SerializeField]
-    private PNJControllerList _inGamePNJs;
+    
     [SerializeField]
     private RuntimeDateTime _currentTime;
     [SerializeField]
@@ -19,7 +18,6 @@ public class PNJSchedulesManager : MonoBehaviour
 
     private static bool _alreadyExists;
     private Dictionary<PNJData, ScheduleHandler> _simulatedScheduleHandlerDict;
-
 
     private void Awake()
     {
@@ -33,16 +31,16 @@ public class PNJSchedulesManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        _inGamePNJs.OnItemAdded += OnPNJCreated;
-        _inGamePNJs.OnItemRemoved += OnPNJDestroyed;
+        PNJController.OnPNJAdded += OnPNJCreated;
+        PNJController.OnPNJRemoved += OnPNJDestroyed;
         InitSchedules(); 
     }
 
 
     private void OnDestroy()
     {
-        _inGamePNJs.OnItemAdded -= OnPNJCreated;
-        _inGamePNJs.OnItemRemoved -= OnPNJDestroyed;
+        PNJController.OnPNJAdded -= OnPNJCreated;
+        PNJController.OnPNJRemoved -= OnPNJDestroyed;
     }
 
     #region Init
@@ -68,7 +66,7 @@ public class PNJSchedulesManager : MonoBehaviour
 
     private void RefreshScheduleHandlersStatus(ScheduleHandler scheduleHandler, PNJData pnjData)
     {
-        var pnjExists = _inGamePNJs.Items == null ? false : _inGamePNJs.Items.Find(x => x.GetPNJData() == pnjData) != null;
+        var pnjExists = PNJController.Get(pnjData) != null;
         EnableSimulatedScheduleHandler(scheduleHandler, !pnjExists); 
     }
 
