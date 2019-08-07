@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using System.Text;
 
 public class PNJInfoDisplayDebug : MonoBehaviour
 {
@@ -37,12 +38,22 @@ public class PNJInfoDisplayDebug : MonoBehaviour
     {
         if (_pnj == null)
             return "";
+        var sb = new StringBuilder();
         var text = string.Format("" +
             "{2} {3} {0}" +
-            "{1} {0}" +
-            "{4} -> {5}", Environment.NewLine, Separator, _pnj.FirstName, _pnj.LastName,
+            "{4} -> {5} {0}" +
+            "{1}", Environment.NewLine, GetScheduleText(), _pnj.FirstName, _pnj.LastName,
                           Path.GetFileNameWithoutExtension(_pnj.PositionTracking.LastPosition.ScenePath),
                           _pnj.PositionTracking.LastPosition.Position);
         return text;
+    }
+
+
+    private string GetScheduleText()
+    {
+        var sb = new StringBuilder();
+        foreach (var task in _pnj.InGameSchedule.Value.Tasks)
+            sb.AppendLine(task.ToString());
+        return sb.ToString();
     }
 }
