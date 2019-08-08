@@ -24,6 +24,7 @@ public class PNJController : MonoBehaviour
     [SerializeField]
     private bool _initOnStart;
 
+    private bool _isInit;
     private static List<PNJController> _pnjControllers = new List<PNJController>();
     public delegate void InstancesChangedHandler(PNJController pnj);
     public static event InstancesChangedHandler OnPNJAdded;
@@ -42,6 +43,14 @@ public class PNJController : MonoBehaviour
             Init(_pnjData);
     }
 
+
+    private void Update()
+    {
+        if (!_isInit)
+            return;
+        _positionTracker.UpdatePosition(transform.position);
+    }
+
     #region Init
     public void Init(PNJData pnjData)
     {
@@ -55,6 +64,7 @@ public class PNJController : MonoBehaviour
             _pnjControllers.Add(this); // we register only if initialized 
             OnPNJAdded?.Invoke(this);
         }
+        _isInit = true;
     }
 
 

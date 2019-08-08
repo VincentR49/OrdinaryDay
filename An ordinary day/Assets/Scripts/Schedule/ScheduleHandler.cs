@@ -19,12 +19,11 @@ public class ScheduleHandler : MonoBehaviour
     private DaySchedule CurrentSchedule => _schedule == null ? null : _schedule.Value;
 
 
-    public RuntimeSchedule GetSchedule() => _schedule;
-
     private void Start()
     {
         InitTaskPerformerListeners();
     }
+
 
     public void Init(RuntimeSchedule schedule)
     {

@@ -10,19 +10,27 @@ public class PositionTracker : MonoBehaviour
     private string _currentScenePath;
     private bool _isInit;
 
+
     public void Init(PositionTrackingData trackingData)
     {
         _trackingData = trackingData;
-        _trackingData.LastPosition.ScenePath = SceneManager.GetActiveScene().path;
         _isInit = true;
     }
 
 
-    private void Update()
+    public void UpdatePosition(Vector2 position)
     {
-        if (_isInit)
+        UpdatePosition(new GamePosition(SceneManager.GetActiveScene().path, position));
+    }
+
+
+    public void UpdatePosition(GamePosition gamePosition)
+    {
+        if (!_isInit)
         {
-            _trackingData.LastPosition.Position = transform.position;
+            Debug.LogError("Position tracker not initialized.");
+            return;
         }
+        _trackingData.GamePosition = gamePosition;
     }
 }

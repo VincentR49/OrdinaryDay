@@ -5,10 +5,10 @@ using System;
 public class PositionTrackingData : ScriptableObject
 {
     [NonSerialized]
-    public GamePosition LastPosition;
+    public GamePosition GamePosition;
 
     public PositionTrackingData()
     {
-        LastPosition = new GamePosition();
+        GamePosition = new GamePosition();
     }
 }

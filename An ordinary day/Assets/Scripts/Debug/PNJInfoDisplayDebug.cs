@@ -43,8 +43,8 @@ public class PNJInfoDisplayDebug : MonoBehaviour
             "{2} {3} {0}" +
             "{4} -> {5} {0}" +
             "{1}", Environment.NewLine, GetScheduleText(), _pnj.FirstName, _pnj.LastName,
-                          Path.GetFileNameWithoutExtension(_pnj.PositionTracking.LastPosition.ScenePath),
-                          _pnj.PositionTracking.LastPosition.Position);
+                          Path.GetFileNameWithoutExtension(_pnj.PositionTracking.GamePosition.ScenePath),
+                          _pnj.PositionTracking.GamePosition.Position);
         return text;
     }
 

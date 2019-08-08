@@ -4,7 +4,10 @@
 /// Behaviour that manage to perform a task
 /// </summary>
 public abstract class BasicTaskPerformer : MonoBehaviour
-{ 
+{
+    [SerializeField]
+    protected PositionTracker _positionTracker;
+
     // Event related
     public delegate void OnTaskFinishedHandler();
     public event OnTaskFinishedHandler OnTaskFinishedEvent;

@@ -32,6 +32,6 @@ public class ScheduledTask
 
     public override string ToString()
     {
-        return string.Format("{0} -> {1} - {2} - {3}", Task.name, StartTime, State, CompletionPrc);
+        return string.Format("{0} -> {1} - {2} - {3:0.00}", Task.name, StartTime, State, CompletionPrc);
     }
 }

@@ -32,7 +32,7 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
             OnTaskFailed(TaskFailedConstants.SpawnPointNotFound); // we skip the task (succeed by default, simulation)
             return;
         }
-        spawn.PNJ.PositionTracking.LastPosition = new GamePosition(spawn.SpawnData.GamePosition.Value);
+        _positionTracker.UpdatePosition(new GamePosition(spawn.SpawnData.GamePosition.Value));
         OnTaskFinished();
     }
     #endregion
