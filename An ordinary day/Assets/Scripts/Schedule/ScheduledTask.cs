@@ -3,12 +3,12 @@
 [Serializable]
 public class ScheduledTask
 {
+    public Task Task;
     public DayTime StartTime;
     public DayTime MaxDuration;
     public DayTime SimulatedDuration;
     public bool StartJustAfterPreviousTask;
     public TaskState State;
-    public Task Task;
     public float CompletionPrc;
 
     public ScheduledTask(ScheduledTask other)

@@ -9,6 +9,8 @@ public class TimeLooper : MonoBehaviour
     [SerializeField]
     private GameEvent _onTimeLoopStartedEvent;
     [SerializeField]
+    private SpawnData _timeLoopSpawnPosition; // implement later
+    [SerializeField]
     private SceneSwitcher _loopSceneSwitch = default;
     [SerializeField]
     private SerialDateTimeData _startDate = default;

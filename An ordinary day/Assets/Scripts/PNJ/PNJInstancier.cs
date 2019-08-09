@@ -12,6 +12,11 @@ public class PNJInstancier : Singleton<PNJInstancier>
 
     public static PNJController InstanciatePNJ(PNJData pnjData, SpawnData spawnData)
     {
+        if (!spawnData.IsInCurrentScene())
+        {
+            Debug.LogError("Spawn should be in different scene.");
+            return null;
+        }
         var pnj = Instance.InstanciateIfNeeded(pnjData);
         Spawner.Spawn(pnj.gameObject, spawnData, new List<MonoBehaviour>
         {

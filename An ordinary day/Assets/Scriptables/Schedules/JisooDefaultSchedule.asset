@@ -18,7 +18,8 @@ MonoBehaviour:
       Month: 5
       Day: 28
     Tasks:
-    - StartTime:
+    - Task: {fileID: 11400000, guid: 26ce92e2ebe7249ceb14574138b9192e, type: 2}
+      StartTime:
         Hour: 9
         Min: 2
         Sec: 0
@@ -32,9 +33,9 @@ MonoBehaviour:
         Sec: 0
       StartJustAfterPreviousTask: 0
       State: 0
-      Task: {fileID: 11400000, guid: 26ce92e2ebe7249ceb14574138b9192e, type: 2}
       CompletionPrc: 0
-    - StartTime:
+    - Task: {fileID: 11400000, guid: d49f168370042406d903f23dfddf92d1, type: 2}
+      StartTime:
         Hour: 9
         Min: 3
         Sec: 0
@@ -48,9 +49,9 @@ MonoBehaviour:
         Sec: 0
       StartJustAfterPreviousTask: 0
       State: 0
-      Task: {fileID: 11400000, guid: d49f168370042406d903f23dfddf92d1, type: 2}
       CompletionPrc: 0
-    - StartTime:
+    - Task: {fileID: 11400000, guid: ca756753e25464063afc579f92917b25, type: 2}
+      StartTime:
         Hour: 9
         Min: 10
         Sec: 0
@@ -64,9 +65,9 @@ MonoBehaviour:
         Sec: 0
       StartJustAfterPreviousTask: 0
       State: 0
-      Task: {fileID: 11400000, guid: ca756753e25464063afc579f92917b25, type: 2}
       CompletionPrc: 0
-    - StartTime:
+    - Task: {fileID: 11400000, guid: e5c0de77b9dbd40e5af5c4e16fecb549, type: 2}
+      StartTime:
         Hour: 9
         Min: 15
         Sec: 0
@@ -80,5 +81,20 @@ MonoBehaviour:
         Sec: 0
       StartJustAfterPreviousTask: 1
       State: 0
-      Task: {fileID: 11400000, guid: e5c0de77b9dbd40e5af5c4e16fecb549, type: 2}
+      CompletionPrc: 0
+    - Task: {fileID: 11400000, guid: 00cde7546d1854820a00aa2ae0ba7975, type: 2}
+      StartTime:
+        Hour: 9
+        Min: 16
+        Sec: 0
+      MaxDuration:
+        Hour: 0
+        Min: 4
+        Sec: 0
+      SimulatedDuration:
+        Hour: 0
+        Min: 4
+        Sec: 0
+      StartJustAfterPreviousTask: 1
+      State: 0
       CompletionPrc: 0

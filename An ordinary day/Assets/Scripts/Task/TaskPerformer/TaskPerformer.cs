@@ -11,10 +11,11 @@ public class TaskPerformer : BasicTaskPerformer
 {
     [SerializeField]
     private TargetReacher _targetReacher;
+    [SerializeField]
+    protected PositionTracker _positionTracker;
 
     private Spawner _currentSpawnPoint;
     private Vector2 _currentMoveTarget;
-
 
     private void Awake()
     {
@@ -115,7 +116,7 @@ public class TaskPerformer : BasicTaskPerformer
         if (!spawn.IsInCurrentScene()) // Destroy the current pnj
         {
             OnTaskFinished();
-            // Record the last position
+            // Record the spawn position
             _positionTracker.UpdatePosition(new GamePosition(spawn.SpawnData.GamePosition.Value));
             Destroy(gameObject);
             return;

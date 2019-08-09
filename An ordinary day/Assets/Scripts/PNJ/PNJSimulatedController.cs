@@ -49,7 +49,7 @@ public class PNJSimulatedController : MonoBehaviour
     public void OnPNJDestroyed(PNJController pnj)
     {
         if (pnj.GetPNJData() == _pnjData)
-            Enable(false);
+            Enable(true);
     }
 
 

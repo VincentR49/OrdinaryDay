@@ -6,6 +6,9 @@
 /// </summary>
 public class SimulatedTaskPerformer : BasicTaskPerformer
 {
+    [SerializeField]
+    protected PositionTracker _positionTracker;
+
     public override void Perform(Task task, float maxDurationSec, float initProgressPrc)
     {
         base.Perform(task, maxDurationSec, initProgressPrc);
@@ -26,13 +29,15 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
     #region Spawn
     public void PerformSpawn(SpawnPNJ spawn)
     {
-        var pnj = PNJInstancier.InstanciatePNJ(spawn.PNJ, spawn.SpawnData);
-        if (pnj == null)
+        if (spawn.IsInCurrentScene())
         {
-            OnTaskFailed(TaskFailedConstants.SpawnPointNotFound); // we skip the task (succeed by default, simulation)
-            return;
+            var pnj = PNJInstancier.InstanciatePNJ(spawn.PNJ, spawn.SpawnData);
+            if (pnj == null) // couldnt instanciate the pnj in the current scene for some reason
+            {
+                OnTaskFailed(TaskFailedConstants.SpawnPointNotFound);
+                return;
+            }
         }
-        _positionTracker.UpdatePosition(new GamePosition(spawn.SpawnData.GamePosition.Value));
         OnTaskFinished();
     }
     #endregion
@@ -40,6 +45,18 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
     // Finish task when we reach the limit duration
     protected override void OnCurrentTaskDurationReachedLimit()
     {
+        switch (_task)
+        {
+            case SpawnPNJ spawn:
+                _positionTracker.UpdatePosition(new GamePosition(spawn.SpawnData.GamePosition.Value));
+                break;
+            case Move move:
+                _positionTracker.UpdatePosition(new GamePosition(move.Destination.Value));
+                break;
+            default:
+                // do nothing
+                break;
+        }
         OnTaskFinished();
     }
 

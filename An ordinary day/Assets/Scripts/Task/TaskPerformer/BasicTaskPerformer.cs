@@ -5,9 +5,6 @@
 /// </summary>
 public abstract class BasicTaskPerformer : MonoBehaviour
 {
-    [SerializeField]
-    protected PositionTracker _positionTracker;
-
     // Event related
     public delegate void OnTaskFinishedHandler();
     public event OnTaskFinishedHandler OnTaskFinishedEvent;
@@ -83,7 +80,6 @@ public abstract class BasicTaskPerformer : MonoBehaviour
     {
         Debug.Log("[TaskPerformer] OnTaskFinished: " + _task);
         OnTaskFinishedEvent?.Invoke();
-       
         Clean();
     }
 
