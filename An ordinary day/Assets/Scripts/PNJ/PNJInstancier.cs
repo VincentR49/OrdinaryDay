@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Singleton to instanciate PNJ
@@ -10,18 +11,24 @@ public class PNJInstancier : Singleton<PNJInstancier>
         Utils.GetPrefab(PathConstants.PNJPrefab).GetComponent<PNJController>();
 
 
-    public static PNJController InstanciatePNJ(PNJData pnjData, SpawnData spawnData)
+    public static PNJController InstanciatePNJ(PNJData pnjData, SpawnData spawnData, Action executeAfterSpawn = null)
     {
         if (!spawnData.IsInCurrentScene())
         {
             Debug.LogError("Spawn should be in different scene.");
             return null;
         }
+        return InstanciatePNJ(pnjData, spawnData.Position, spawnData.Direction, executeAfterSpawn);
+    }
+
+    
+    public static PNJController InstanciatePNJ(PNJData pnjData, Vector2 position, Direction direction, Action executeAfterSpawn = null)
+    {
         var pnj = Instance.InstanciateIfNeeded(pnjData);
-        Spawner.Spawn(pnj.gameObject, spawnData, new List<MonoBehaviour>
+        Spawner.Spawn(pnj.gameObject, position, direction, new List<MonoBehaviour>
         {
             pnj.GetComponent<ScheduleHandler>()
-        });
+        }, executeAfterSpawn);
         return pnj;
     }
 

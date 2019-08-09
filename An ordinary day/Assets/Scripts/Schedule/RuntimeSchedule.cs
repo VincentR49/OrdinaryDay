@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "RuntimeVariable/Schedule")]
 public class RuntimeSchedule : RuntimeVariableData<DaySchedule>
@@ -21,4 +20,6 @@ public class RuntimeSchedule : RuntimeVariableData<DaySchedule>
         Value.Sort();
         OnScheduleResetEvent?.Invoke();
     }
+
+    public GamePosition GetLastKnownPosition() => Value.GetLastKnownPosition();
 }

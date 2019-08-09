@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manage a simulated PNJ behaviour (not present on current scene)
@@ -6,26 +7,35 @@
 public class PNJSimulatedController : MonoBehaviour
 {
     [SerializeField]
-    private SimulatedTaskPerformer _taskPerformer;
-    [SerializeField]
     private ScheduleHandler _scheduleHandler;
-    [SerializeField]
-    private PositionTracker _positionTracker;
 
     private PNJData _pnjData;
-
 
     private void Awake()
     {
         PNJController.OnPNJAdded += OnPNJCreated;
         PNJController.OnPNJRemoved += OnPNJDestroyed;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    // todo probably move to somewhere else
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        // check if we should instanciate the pnj
+        Debug.Log("On scene loaded: " + arg0.path);
+        var lastPosition = _scheduleHandler.GetLastKnownPosition();
+        if (lastPosition != null && lastPosition.IsInCurrentScene())
+        {
+            // define direction later
+            PNJInstancier.InstanciatePNJ(_pnjData, lastPosition.Position, Direction.South);
+        }
+    }
 
     private void OnDestroy()
     {
         PNJController.OnPNJAdded -= OnPNJCreated;
         PNJController.OnPNJRemoved -= OnPNJDestroyed;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
 
@@ -34,30 +44,40 @@ public class PNJSimulatedController : MonoBehaviour
         _pnjData = pnj;
         pnj.InitRuntimeSchedule();
         _scheduleHandler.Init(pnj.InGameSchedule);
-        _positionTracker.Init(pnj.PositionTracking);
-        Enable(PNJController.Get(_pnjData) == null);
+        if (PNJController.Get(_pnjData) == null)
+            Enable();
+        else
+            Disable();
     }
 
 
     public void OnPNJCreated(PNJController pnj)
     {
+        Debug.Log("[PNJSimulatedController] On PNJ Created: " + pnj);
         if (pnj.GetPNJData() == _pnjData)
-            Enable(false);
+            Disable();
     }
 
 
     public void OnPNJDestroyed(PNJController pnj)
     {
+        Debug.Log("[PNJSimulatedController] On PNJ Destroyed: " + pnj);
         if (pnj.GetPNJData() == _pnjData)
-            Enable(true);
+            Enable();
     }
 
 
-    private void Enable(bool enable)
+    private void Enable()
     {
-        gameObject.SetActive(enable);
+        gameObject.SetActive(true);
     }
 
+
+    private void Disable()
+    {
+        gameObject.SetActive(false);
+        _scheduleHandler.Stop();
+    }
 
     private void ResetPNJSchedules()
     {

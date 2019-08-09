@@ -33,10 +33,14 @@ public class ScheduleHandler : MonoBehaviour
         _schedule = schedule;
         InitScheduleListeners();
         if (IsDoingTask)
-        {
-            _taskPerformer.Cancel();
-            _currentTask = null;
-        }
+            Stop();
+    }
+
+
+    public void Stop()
+    {
+        _taskPerformer.Stop();
+        _currentTask = null;
     }
 
 
@@ -77,7 +81,7 @@ public class ScheduleHandler : MonoBehaviour
 
     private void CancelCurrentTask()
     {
-        _taskPerformer.Cancel();
+        _taskPerformer.Stop();
         EndCurrentTask(TaskState.Canceled);
     }
 
@@ -135,7 +139,7 @@ public class ScheduleHandler : MonoBehaviour
     {
         if (IsDoingTask)
         {
-            _taskPerformer.Cancel();
+            _taskPerformer.Stop();
             _currentTask = null;
         }
     }
@@ -151,6 +155,7 @@ public class ScheduleHandler : MonoBehaviour
     private float GetCurrentTaskMaxDuration()
             => (IsSimulated ? _currentTask.SimulatedDuration : _currentTask.MaxDuration).ToSeconds()
                     / _inGameSpeedMultiplier.Value;
-        
+
+    public GamePosition GetLastKnownPosition() => _schedule.GetLastKnownPosition();
     #endregion
 }

@@ -11,8 +11,6 @@ public class TaskPerformer : BasicTaskPerformer
 {
     [SerializeField]
     private TargetReacher _targetReacher;
-    [SerializeField]
-    protected PositionTracker _positionTracker;
 
     private Spawner _currentSpawnPoint;
     private Vector2 _currentMoveTarget;
@@ -48,7 +46,7 @@ public class TaskPerformer : BasicTaskPerformer
     }
 
 
-	public override void Cancel()
+	public override void Stop()
 	{
 		switch (_task)
         {
@@ -59,7 +57,7 @@ public class TaskPerformer : BasicTaskPerformer
                 // do nothing
                 break;
         }
-		base.Cancel();
+		base.Stop();
 	}
 
 
@@ -116,8 +114,6 @@ public class TaskPerformer : BasicTaskPerformer
         if (!spawn.IsInCurrentScene()) // Destroy the current pnj
         {
             OnTaskFinished();
-            // Record the spawn position
-            _positionTracker.UpdatePosition(new GamePosition(spawn.SpawnData.GamePosition.Value));
             Destroy(gameObject);
             return;
         }

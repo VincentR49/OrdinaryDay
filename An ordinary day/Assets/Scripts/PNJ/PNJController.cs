@@ -6,10 +6,6 @@ using System.Collections.Generic;
 /// </summary>
 public class PNJController : MonoBehaviour
 {
-    [Header("Trackers")]
-    [SerializeField]
-    private PositionTracker _positionTracker;
-
     [Header("Managers")]
     [SerializeField]
     private WalkManager _walkManager;
@@ -43,14 +39,6 @@ public class PNJController : MonoBehaviour
             Init(_pnjData);
     }
 
-
-    private void Update()
-    {
-        if (!_isInit)
-            return;
-        _positionTracker.UpdatePosition(transform.position);
-    }
-
     #region Init
     public void Init(PNJData pnjData)
     {
@@ -58,7 +46,6 @@ public class PNJController : MonoBehaviour
         Debug.Log("PNJ Initialisation: " + _pnjData);
         InitSprites();
         InitScheduleSystem();
-        _positionTracker.Init(pnjData.PositionTracking);
         if (!_pnjControllers.Contains(this))
         {
             _pnjControllers.Add(this); // we register only if initialized 

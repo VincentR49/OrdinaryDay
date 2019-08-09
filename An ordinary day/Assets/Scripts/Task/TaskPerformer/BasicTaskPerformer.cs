@@ -33,7 +33,7 @@ public abstract class BasicTaskPerformer : MonoBehaviour
         if (IsDoingTask)
         {
             Debug.LogError("Already perfoming a task: " + _task + ". Canceled current task.");
-            Cancel();
+            Stop();
         }
         Debug.Log("Perform " + task + ". Max duration: " + maxDurationSec);
         _task = task;
@@ -58,9 +58,9 @@ public abstract class BasicTaskPerformer : MonoBehaviour
     }
 
 
-    public virtual void Cancel()
+    public virtual void Stop()
     {
-        Debug.Log("Cancel task: " + _task);
+        Debug.Log("Stop task: " + _task);
         Clean();
     }
 
@@ -92,6 +92,6 @@ public abstract class BasicTaskPerformer : MonoBehaviour
     {
         Debug.LogError("[TaskPerformer] OnTaskFailed (" + _task +  "): " + code + " " + failMessage);
         OnTaskFailedEvent?.Invoke(code, failMessage);
-        Cancel(); // cancel a current task that have failed
+        Stop(); // cancel a current task that have failed
     }
 }

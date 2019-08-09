@@ -40,12 +40,12 @@ MonoBehaviour:
         Min: 3
         Sec: 0
       MaxDuration:
-        Hour: 0
-        Min: 5
+        Hour: 999
+        Min: 0
         Sec: 0
       SimulatedDuration:
         Hour: 0
-        Min: 5
+        Min: 10
         Sec: 0
       StartJustAfterPreviousTask: 0
       State: 0
@@ -53,15 +53,15 @@ MonoBehaviour:
     - Task: {fileID: 11400000, guid: ca756753e25464063afc579f92917b25, type: 2}
       StartTime:
         Hour: 9
-        Min: 10
+        Min: 13
         Sec: 0
       MaxDuration:
-        Hour: 0
-        Min: 5
+        Hour: 999
+        Min: 0
         Sec: 0
       SimulatedDuration:
         Hour: 0
-        Min: 5
+        Min: 10
         Sec: 0
       StartJustAfterPreviousTask: 0
       State: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
     - Task: {fileID: 11400000, guid: e5c0de77b9dbd40e5af5c4e16fecb549, type: 2}
       StartTime:
         Hour: 9
-        Min: 15
+        Min: 23
         Sec: 0
       MaxDuration:
         Hour: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
     - Task: {fileID: 11400000, guid: 00cde7546d1854820a00aa2ae0ba7975, type: 2}
       StartTime:
         Hour: 9
-        Min: 16
+        Min: 24
         Sec: 0
       MaxDuration:
         Hour: 0

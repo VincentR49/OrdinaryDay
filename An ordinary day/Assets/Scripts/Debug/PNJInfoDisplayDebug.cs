@@ -39,13 +39,14 @@ public class PNJInfoDisplayDebug : MonoBehaviour
         if (_pnj == null)
             return "";
         var sb = new StringBuilder();
-        var text = string.Format("" +
-            "{2} {3} {0}" +
-            "{4} -> {5} {0}" +
-            "{1}", Environment.NewLine, GetScheduleText(), _pnj.FirstName, _pnj.LastName,
-                          Path.GetFileNameWithoutExtension(_pnj.PositionTracking.GamePosition.ScenePath),
-                          _pnj.PositionTracking.GamePosition.Position);
-        return text;
+        sb.AppendLine(_pnj.FirstName + " " + _pnj.LastName);
+        var lastKnownPosition = _pnj.InGameSchedule.GetLastKnownPosition();
+        sb.AppendLine("Scene: " + (lastKnownPosition == null ? "Unknown"
+            : Path.GetFileNameWithoutExtension(lastKnownPosition.ScenePath)));
+        sb.AppendLine("Last know position: " + (lastKnownPosition == null ? "Unknown"
+            : lastKnownPosition.Position.ToString()));
+        sb.AppendLine(GetScheduleText());
+        return sb.ToString();
     }
 
 

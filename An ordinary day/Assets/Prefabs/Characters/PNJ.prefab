@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 5412823718567616287}
   - component: {fileID: 6740313738230560726}
   - component: {fileID: 8550125135232159765}
-  - component: {fileID: 1328814389059667854}
   m_Layer: 11
   m_Name: PNJ
   m_TagString: PNJ
@@ -170,7 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4b4ca3f9e5443fcae20d875c1f5fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionTracker: {fileID: 1328814389059667854}
   _walkManager: {fileID: 4197437973840161361}
   _spriteDirectioner: {fileID: 4197437973840161363}
   _scheduleHandler: {fileID: 6740313738230560726}
@@ -266,17 +264,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a55bf07c5d64841a5be50a5aa243a38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionTracker: {fileID: 1328814389059667854}
   _targetReacher: {fileID: 5412823718567616287}
---- !u!114 &1328814389059667854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4197437973840161370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1c2e1f925b1420684161dc7bdfe181, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

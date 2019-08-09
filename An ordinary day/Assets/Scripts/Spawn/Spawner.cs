@@ -18,11 +18,17 @@ public class Spawner : Singleton<Spawner>
             Debug.LogError("Spawn should be in current scene: " + spawn.name);
             return;
         }
-        Instance.StartCoroutine(SpawnCoroutine(go, spawn, disableDuringSpawn, executeAfterSpawn));
+        Instance.StartCoroutine(SpawnCoroutine(go, spawn.Position, spawn.Direction, disableDuringSpawn, executeAfterSpawn));
     }
 
 
-    private static IEnumerator SpawnCoroutine(GameObject go, SpawnData spawn, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
+    public static void Spawn(GameObject go, Vector2 position, Direction direction, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
+    {
+        Instance.StartCoroutine(SpawnCoroutine(go, position, direction, disableDuringSpawn, executeAfterSpawn));
+    }
+
+
+    private static IEnumerator SpawnCoroutine(GameObject go, Vector2 position, Direction direction, List<MonoBehaviour> disableDuringSpawn = null, Action executeAfterSpawn = null)
     {
         Debug.Log("Start spawn coroutine on " + go.name);
         if (disableDuringSpawn != null)
@@ -30,10 +36,10 @@ public class Spawner : Singleton<Spawner>
             foreach (var behaviour in disableDuringSpawn)
                 behaviour.enabled = false;
         }
-        go.transform.position = spawn.Position;
+        go.transform.position = position;
         var spriteDirectioner = go.GetComponent<SpriteDirectioner>();
         if (spriteDirectioner != null)
-            spriteDirectioner.SetSprite(spawn.Direction);
+            spriteDirectioner.SetSprite(direction);
         yield return new WaitForSeconds(SpawnDuration);
         if (disableDuringSpawn != null)
         {
