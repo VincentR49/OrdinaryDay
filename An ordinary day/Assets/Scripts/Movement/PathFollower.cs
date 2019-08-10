@@ -24,9 +24,17 @@ public class PathFollower : MonoBehaviour
 
     public void FollowPath(Queue<Vector2> path)
     {
-        if (path == null || path.Count == 0)
-            return;  
+        if (path == null)
+        {
+            Debug.LogError("Path is null");
+            return;
+        }
         Debug.Log("Start following path.");
+        if (path.Count == 0)
+        {
+            OnFollowPathEnded();
+            return;
+        }
         IsRunning = true;
         _path = path;
         _initPathLength = _path.Count;
@@ -73,10 +81,16 @@ public class PathFollower : MonoBehaviour
         _step++;
         if (_path.Count == 0)
         {
-            Stop();
-            Debug.Log("[PathFollower] Final target reached.");
-            OnFinalTargetReached.Invoke();
+            OnFollowPathEnded();
         }
+    }
+
+
+    private void OnFollowPathEnded()
+    {
+        Stop();
+        Debug.Log("[PathFollower] Final target reached.");
+        OnFinalTargetReached.Invoke();
     }
 
 

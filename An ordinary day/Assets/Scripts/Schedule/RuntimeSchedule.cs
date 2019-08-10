@@ -22,4 +22,5 @@ public class RuntimeSchedule : RuntimeVariableData<DaySchedule>
     }
 
     public GamePosition GetLastKnownPosition() => Value.GetLastKnownPosition();
+    public ScheduledTask GetDoingTask() => Value.GetDoingTask();
 }

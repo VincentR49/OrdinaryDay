@@ -28,7 +28,7 @@ public class PNJInstancier : Singleton<PNJInstancier>
         Spawner.Spawn(pnj.gameObject, position, direction, new List<MonoBehaviour>
         {
             pnj.GetComponent<ScheduleHandler>()
-        }, executeAfterSpawn);
+        }, executeAfterSpawn, 0f);
         return pnj;
     }
 

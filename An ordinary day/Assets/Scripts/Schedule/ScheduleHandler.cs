@@ -157,5 +157,6 @@ public class ScheduleHandler : MonoBehaviour
                     / _inGameSpeedMultiplier.Value;
 
     public GamePosition GetLastKnownPosition() => _schedule.GetLastKnownPosition();
+    public ScheduledTask GetDoingTask() => _schedule.GetDoingTask();
     #endregion
 }

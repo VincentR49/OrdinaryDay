@@ -72,7 +72,7 @@ public class TaskPerformer : BasicTaskPerformer
         switch (_task)
         {
             case Move move:
-                ProgressPrc = _initProgressPrc + _targetReacher.ProgressPrc / (1 - _initProgressPrc);
+                ProgressPrc = _initProgressPrc + _targetReacher.ProgressPrc  * (1 - _initProgressPrc);
                 break;
             default:
                 // do nothing

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -8,8 +9,11 @@ public class PNJSimulatedController : MonoBehaviour
 {
     [SerializeField]
     private ScheduleHandler _scheduleHandler;
+    [SerializeField]
+    private PathFinder _pathFinder;
 
     private PNJData _pnjData;
+    private PNJController InSceneController => PNJController.Get(_pnjData);
 
     private void Awake()
     {
@@ -26,10 +30,44 @@ public class PNJSimulatedController : MonoBehaviour
         var lastPosition = _scheduleHandler.GetLastKnownPosition();
         if (lastPosition != null && lastPosition.IsInCurrentScene())
         {
-            // define direction later
+            var doingTask = _scheduleHandler.GetDoingTask();
+            // If performing move, special behaviour
+            // we estimated where the pnj should be based on the current progress of the task and the static path to follow
+            if (doingTask != null && doingTask.Task is Move)
+            {
+                // todo put inside specific method
+                // todo store the current following path inside a runtime Scriptable??
+                InitPathFindingSystem();
+                Debug.Log("[PNJSimulatedController] Was performing moving task. Set new position.");
+                // todo compute the position
+                var move = (Move) doingTask.Task;
+                var staticPathToDo = _pathFinder.FindShortestPath(lastPosition.Position,
+                                            move.Destination.Value.Position, out bool couldReachTarget, true);
+                int nNodes = staticPathToDo.Count;
+                if (nNodes > 0)
+                {
+                    int startPositionIndex = (int) Math.Round(doingTask.CompletionPrc * nNodes);
+                    startPositionIndex = Mathf.Clamp(startPositionIndex, 0, nNodes - 1);
+                    var startPosition = staticPathToDo[startPositionIndex];
+                    lastPosition.Position = startPosition; // assign the accurate position to the spawn position
+                }
+            }
             PNJInstancier.InstanciatePNJ(_pnjData, lastPosition.Position, Direction.South);
         }
     }
+
+
+    private void InitPathFindingSystem()
+    {
+        var colliderScanner = FindObjectOfType<ColliderScanner>();
+        if (colliderScanner == null)
+        {
+            Debug.LogError("Collider scanner not found !");
+            return;
+        }
+        _pathFinder.SetColliderScanner(colliderScanner);
+    }
+
 
     private void OnDestroy()
     {

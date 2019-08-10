@@ -31,10 +31,10 @@ public class DaySchedule
 
     public ScheduledTask GetFirstTaskToDoOrFinish()
     {
-        if (NTasks == 0)
-            return null;
-        return Tasks.FirstOrDefault((x) => x.State == TaskState.ToDo || x.State == TaskState.Doing);
+        return NTasks == 0 ? null :
+                Tasks.FirstOrDefault((x) => x.State == TaskState.ToDo || x.State == TaskState.Doing);
     }
+
 
     public int NTasks => Tasks == null ? 0 : Tasks.Count;
     public DateTime GetDateTime(DayTime dayTime) => Utils.GetDateTime(Day, dayTime);
@@ -42,10 +42,10 @@ public class DaySchedule
 
     public GamePosition GetLastKnownPosition()
     {
+        if (NTasks == 0)  return null;
         var lastTask = Tasks.FindLast(task => task.State == TaskState.Done &&
-            (task.Task is Move || task.Task is SpawnPNJ));
-        if (lastTask == null)
-            return null;
+                                        (task.Task is Move || task.Task is SpawnPNJ));
+        if (lastTask == null)  return null;
         switch (lastTask.Task)
         {
             case Move move:
@@ -55,5 +55,11 @@ public class DaySchedule
             default:
                 return null;
         }
+    }
+
+    public ScheduledTask GetDoingTask()
+    {
+        if (NTasks == 0) return null;
+        return Tasks.FirstOrDefault(task => task.State == TaskState.Doing);
     }
 }

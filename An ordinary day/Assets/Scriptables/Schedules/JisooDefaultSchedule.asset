@@ -88,7 +88,7 @@ MonoBehaviour:
         Min: 24
         Sec: 0
       MaxDuration:
-        Hour: 0
+        Hour: 999
         Min: 4
         Sec: 0
       SimulatedDuration:

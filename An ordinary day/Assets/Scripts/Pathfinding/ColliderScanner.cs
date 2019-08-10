@@ -52,7 +52,7 @@ public class ColliderScanner : MonoBehaviour
     }
 
 
-    private void Start()
+    private void Awake()
     {
         InitScanGrid();
         ScanStaticLayers();

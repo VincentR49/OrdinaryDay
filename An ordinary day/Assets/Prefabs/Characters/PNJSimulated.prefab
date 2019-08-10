@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2753489607323397689}
   - component: {fileID: 934622669916574647}
   - component: {fileID: 191259759065124724}
+  - component: {fileID: 7811237951846782506}
   m_Layer: 0
   m_Name: PNJSimulated
   m_TagString: Untagged
@@ -75,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scheduleHandler: {fileID: 2753489607323397689}
+  _pathFinder: {fileID: 7811237951846782506}
 --- !u!114 &191259759065124724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,3 +106,22 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &7811237951846782506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2753489607323397688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce3cc9cb63cb4c33bdb84ebdabf60d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colliderScanner: {fileID: 0}
+  _checkDiagonalNeighbours: 0
+  _weightedElements:
+  - ObjectTag: Road
+    Weight: 3
+  _showDebug: 0
+  _pathColor: {r: 1, g: 0, b: 0.85180044, a: 1}

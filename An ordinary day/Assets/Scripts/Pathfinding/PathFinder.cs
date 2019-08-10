@@ -5,6 +5,7 @@ using System;
 
 /// <summary>
 /// Behaviour searching the shortest path given a grid of obstacles (collider scanner)
+/// TODO make it singleton
 /// </summary>
 public class PathFinder : MonoBehaviour
 {
