@@ -26,16 +26,12 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
     #region Spawn
     public void PerformSpawn(SpawnPNJ spawn)
     {
+        OnTaskFinished(); // automatic success
         if (spawn.IsInCurrentScene())
         {
-            var pnj = PNJInstancier.InstanciatePNJ(spawn.PNJ, spawn.SpawnData);
-            if (pnj == null) // couldnt instanciate the pnj in the current scene for some reason
-            {
-                OnTaskFailed(TaskFailedConstants.SpawnPointNotFound);
-                return;
-            }
+            // we instanciate the pnj if needed and make it spawn at the good position
+            PNJInstancier.InstanciatePNJ(spawn.PNJ, spawn.SpawnData);
         }
-        OnTaskFinished();
     }
     #endregion
 

@@ -74,7 +74,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f66477b6068445589608afef903e1d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _taskPerformer: {fileID: 2753489607323397690}
   _scheduleHandler: {fileID: 2753489607323397689}
 --- !u!114 &191259759065124724
 MonoBehaviour:
@@ -88,12 +87,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa4d2dbb0044f54baba93f05a48a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 15863671821db46b0bb804a215585933, type: 2}
+  Event: {fileID: 11400000, guid: dbceb386fe5f34a08b92137c06e4c102, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 934622669916574647}
-        m_MethodName: OnTimeLoopStarted
+        m_MethodName: OnTimeLoopInit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

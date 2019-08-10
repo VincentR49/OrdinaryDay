@@ -7,9 +7,11 @@ public class TimeLooper : MonoBehaviour
     [SerializeField]
     private WorldClock _worldClock;
     [SerializeField]
-    private GameEvent _onTimeLoopStartedEvent;
+    [Tooltip("Started the process of reseting time loop")]
+    private GameEvent _onTimeLoopInitializedEvent;
     [SerializeField]
-    private SpawnData _timeLoopSpawnPosition; // implement later
+    [Tooltip("New loop completely started")]
+    private GameEvent _onTimeLoopStartedEvent;
     [SerializeField]
     private SceneSwitcher _loopSceneSwitch = default;
     [SerializeField]
@@ -29,7 +31,7 @@ public class TimeLooper : MonoBehaviour
     {
         if (_currentTime.Value >= EndDateTime)
         {
-            StartNewLoop();
+            InitNewLoop();
         }
     }
 
@@ -37,11 +39,11 @@ public class TimeLooper : MonoBehaviour
     public void Init()
     {
         Debug.Log("Init Time Looper");
-        OnTimeLoopStart();
+        OnTimeLoopStarted();
     }
 
 
-    public void StartNewLoop()
+    public void InitNewLoop()
     {
         if (_timeLoopStarting)
             return;
@@ -49,7 +51,8 @@ public class TimeLooper : MonoBehaviour
         _worldClock.Stop();
         _currentTime.Value = NoTime;
         _timeLoopStarting = true;
-        _loopSceneSwitch.Switch(OnTimeLoopStart);
+        _onTimeLoopInitializedEvent.Raise();
+        _loopSceneSwitch.Switch(OnTimeLoopStarted);
     }
 
 
@@ -59,7 +62,7 @@ public class TimeLooper : MonoBehaviour
     }
 
 
-    private void OnTimeLoopStart()
+    private void OnTimeLoopStarted()
     {
         if (_pauseOnTimeLoopStarted)
             GamePauser.Pause();

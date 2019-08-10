@@ -53,7 +53,6 @@ public class PNJSimulatedController : MonoBehaviour
 
     public void OnPNJCreated(PNJController pnj)
     {
-        Debug.Log("[PNJSimulatedController] On PNJ Created: " + pnj);
         if (pnj.GetPNJData() == _pnjData)
             Disable();
     }
@@ -61,7 +60,6 @@ public class PNJSimulatedController : MonoBehaviour
 
     public void OnPNJDestroyed(PNJController pnj)
     {
-        Debug.Log("[PNJSimulatedController] On PNJ Destroyed: " + pnj);
         if (pnj.GetPNJData() == _pnjData)
             Enable();
     }
@@ -69,14 +67,16 @@ public class PNJSimulatedController : MonoBehaviour
 
     private void Enable()
     {
-        gameObject.SetActive(true);
+        Debug.Log("[PNJSimulatedController] Enable Simulated Controller: " + _pnjData);
+        _scheduleHandler.enabled = true;
     }
 
 
     private void Disable()
     {
-        gameObject.SetActive(false);
+        Debug.Log("[PNJSimulatedController] Disable Simulated Controller: " + _pnjData);
         _scheduleHandler.Stop();
+        _scheduleHandler.enabled = false;
     }
 
     private void ResetPNJSchedules()
@@ -86,7 +86,7 @@ public class PNJSimulatedController : MonoBehaviour
 
 
     // Attach in inspector to a game event listener
-    public void OnTimeLoopStarted()
+    public void OnTimeLoopInit()
     {
         ResetPNJSchedules();
     }

@@ -38,13 +38,7 @@ public class PNJInstancier : Singleton<PNJInstancier>
         var pnj = PNJController.Get(pnjData);
         if (pnj == null) // if not in current scene, make it spawn
             pnj = Instantiate(_pnjPrefab);
-        InitPNJ(pnj, pnjData);
-        return pnj;
-    }
-
-
-    private void InitPNJ(PNJController pnj, PNJData pnjData)
-    {
         pnj.Init(pnjData);
+        return pnj;
     }
 }

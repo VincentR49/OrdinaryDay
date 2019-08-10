@@ -19,7 +19,7 @@ public class TimeDebugger : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R)) // restart loop
         {
-            _timeLooper.StartNewLoop();
+            _timeLooper.InitNewLoop();
         }
     }
 }

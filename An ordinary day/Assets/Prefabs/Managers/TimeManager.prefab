@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _worldClock: {fileID: 7844121296811513160}
+  _onTimeLoopInitializedEvent: {fileID: 11400000, guid: dbceb386fe5f34a08b92137c06e4c102,
+    type: 2}
   _onTimeLoopStartedEvent: {fileID: 11400000, guid: 15863671821db46b0bb804a215585933,
     type: 2}
-  _timeLoopSpawnPosition: {fileID: 0}
   _loopSceneSwitch: {fileID: 2191877259488034131}
   _startDate: {fileID: 11400000, guid: e42c194748dd94910b001236cbb80fc3, type: 2}
   _endDate: {fileID: 11400000, guid: 9b4359fc25294411aad25ea77436fe72, type: 2}
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destinationScene:
     _asset: {fileID: 102900000, guid: d817a7159e4754c68acd5500202a5419, type: 3}
-    _path: Assets/Scenes/MainTestScene.unity
+    _path: Assets/Scenes/House1.unity
   _withLoadingScene: 0
   _fade: 0.5
 --- !u!1 &5164031015229162631
