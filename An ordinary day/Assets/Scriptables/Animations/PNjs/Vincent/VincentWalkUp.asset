@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236b0a1b285404031ab33e455aa55ff8, type: 3}
+  m_Name: VincentWalkUp
+  m_EditorClassIdentifier: 
+  FlipX: 0
+  Loop: 1
+  ReturnToFirstSpriteWhenFinished: 1
+  Sprites:
+  - {fileID: -5726255368262710674, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
+  - {fileID: 6696252798204239555, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
+  - {fileID: -3292901720398523775, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}

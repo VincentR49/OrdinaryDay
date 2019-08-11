@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2117776d0bd1346e1b3b4ab7e9759f20, type: 3}
+  m_Name: VincentSchedule
+  m_EditorClassIdentifier: 
+  Value:
+    Day:
+      Year: 1991
+      Month: 5
+      Day: 28
+    Tasks:
+    - Task: {fileID: 11400000, guid: 09ed0bb9feb354cc4a3a319a9ec7d6c8, type: 2}
+      StartTime:
+        Hour: 9
+        Min: 5
+        Sec: 0
+      MaxDuration:
+        Hour: 0
+        Min: 1
+        Sec: 0
+      SimulatedDuration:
+        Hour: 0
+        Min: 1
+        Sec: 0
+      StartJustAfterPreviousTask: 0
+      State: 0
+      CompletionPrc: 0
+    - Task: {fileID: 11400000, guid: d49f168370042406d903f23dfddf92d1, type: 2}
+      StartTime:
+        Hour: 9
+        Min: 7
+        Sec: 0
+      MaxDuration:
+        Hour: 999
+        Min: 0
+        Sec: 0
+      SimulatedDuration:
+        Hour: 0
+        Min: 10
+        Sec: 0
+      StartJustAfterPreviousTask: 0
+      State: 0
+      CompletionPrc: 0

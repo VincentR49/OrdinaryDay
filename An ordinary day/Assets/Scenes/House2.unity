@@ -1503,6 +1503,11 @@ PrefabInstance:
       propertyPath: _scanArea.height
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 5479793640582190415, guid: adba9bffdbcc9416e9d1eb98ea1fb55f,
+        type: 3}
+      propertyPath: _showDebug
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adba9bffdbcc9416e9d1eb98ea1fb55f, type: 3}
 --- !u!1 &1711041873

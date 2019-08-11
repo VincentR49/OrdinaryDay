@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36416e31b2a124fe78aa18326dc950e3, type: 3}
-  m_Name: PNJList
+  m_Script: {fileID: 11500000, guid: fe10678b92c1e4d8a9ceb4bb6fbd9baa, type: 3}
+  m_Name: VincentUp
   m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}
-  - {fileID: 11400000, guid: 8f2e576f136764c8790f4031fabfd204, type: 2}
+  Sprite: {fileID: -5726255368262710674, guid: ae4319e0c79ea45199c2c20a89c905ff, type: 3}
+  FlipX: 0
