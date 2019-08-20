@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c36b5ba1b5c4a9686cdbc22b2428f3, type: 3}
   m_Name: Jisoo
   m_EditorClassIdentifier: 
+  GameObjectName: Jisoo
   FirstName: Jisoo
   LastName: Tsutsu
   Age: 29
@@ -20,4 +21,4 @@ MonoBehaviour:
   WalkingAnimation: {fileID: 11400000, guid: ee0904f65df5545deb198e3b36176e9a, type: 2}
   DefaultSchedule: {fileID: 11400000, guid: 229d65c1fbae54986b6f83c5def5d64f, type: 2}
   InGameSchedule: {fileID: 11400000, guid: f8a70dd094bee401496df4c504cc51fe, type: 2}
-  PositionTracking: {fileID: 11400000, guid: 8d085144a61774ce7a9f3ca0adcc135f, type: 2}
+  DialogueTag: Jisoo

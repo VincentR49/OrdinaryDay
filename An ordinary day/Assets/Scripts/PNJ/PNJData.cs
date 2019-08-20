@@ -6,6 +6,8 @@
 [CreateAssetMenu(menuName ="Scriptables/PNJData")]
 public class PNJData : ScriptableObject
 {
+    public string GameObjectName;
+
     [Header("Standard Information")]
     public string FirstName;
     public string LastName;
@@ -20,6 +22,8 @@ public class PNJData : ScriptableObject
     public ScheduleData DefaultSchedule; // readyonly, just used to store the basic schedule data
     public RuntimeSchedule InGameSchedule; // reference to the dynamic schedule
 
+    [Header("Dialogue")]
+    public string DialogueTag;
 
     public override string ToString() 
         => string.Format("{0} {1}, {2}, {3}", FirstName, LastName, Age, Gender);

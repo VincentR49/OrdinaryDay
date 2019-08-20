@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c36b5ba1b5c4a9686cdbc22b2428f3, type: 3}
   m_Name: Vincent
   m_EditorClassIdentifier: 
+  GameObjectName: Vincent
   FirstName: Vincent
   LastName: Rynik
   Age: 28
@@ -20,3 +21,4 @@ MonoBehaviour:
   WalkingAnimation: {fileID: 11400000, guid: 33ffe97020054411db01a57423d56ce1, type: 2}
   DefaultSchedule: {fileID: 11400000, guid: e8c966f5c670a472cb319f2e0feb4d9b, type: 2}
   InGameSchedule: {fileID: 11400000, guid: 1592a022023d54e17a9dff5dca49171b, type: 2}
+  DialogueTag: Vincent
