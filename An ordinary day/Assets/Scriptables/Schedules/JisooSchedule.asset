@@ -53,7 +53,7 @@ MonoBehaviour:
     - Task: {fileID: 11400000, guid: ca756753e25464063afc579f92917b25, type: 2}
       StartTime:
         Hour: 9
-        Min: 13
+        Min: 40
         Sec: 0
       MaxDuration:
         Hour: 999
@@ -69,7 +69,7 @@ MonoBehaviour:
     - Task: {fileID: 11400000, guid: e5c0de77b9dbd40e5af5c4e16fecb549, type: 2}
       StartTime:
         Hour: 9
-        Min: 23
+        Min: 50
         Sec: 0
       MaxDuration:
         Hour: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
     - Task: {fileID: 11400000, guid: 00cde7546d1854820a00aa2ae0ba7975, type: 2}
       StartTime:
         Hour: 9
-        Min: 24
+        Min: 51
         Sec: 0
       MaxDuration:
         Hour: 999
