@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 594270467}
   - component: {fileID: 594270468}
   - component: {fileID: 594270469}
+  - component: {fileID: 594270470}
   m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
@@ -263,11 +264,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourceText: []
+  sourceText:
+  - {fileID: 4900000, guid: 25fde99b7c126424eb7a887d020b6067, type: 3}
   stringGroups: []
   shouldOverrideLanguage: 0
   overrideLanguage: 10
-  variableStorage: {fileID: 0}
+  variableStorage: {fileID: 594270470}
   dialogueUI: {fileID: 594270469}
   startNode: Start
   startAutomatically: 1
@@ -285,6 +287,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1742684911}
+--- !u!114 &594270470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594270466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84967e6778ff74db89c1ad320279ae5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultVariables: []
+  debugTextView: {fileID: 0}
 --- !u!1 &779474439
 GameObject:
   m_ObjectHideFlags: 0

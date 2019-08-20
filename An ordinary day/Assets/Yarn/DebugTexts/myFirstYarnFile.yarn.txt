@@ -1,0 +1,24 @@
+title: Start
+tags: 
+colorID: 0
+position: 503,-12
+---
+Hello world !
+[[That's all??|ThatsAll]]
+[[Leave|Leave]]
+===
+title: Leave
+tags: 
+colorID: 0
+position: 322,247
+---
+You left...
+===
+title: ThatsAll
+tags: 
+colorID: 0
+position: 663,249
+---
+Yep that is all.
+[[Leave|Leave]]
+===
