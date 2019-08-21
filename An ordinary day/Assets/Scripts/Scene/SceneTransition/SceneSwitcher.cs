@@ -12,7 +12,13 @@ public class SceneSwitcher : MonoBehaviour
     [SerializeField]
     private float _fade = 0.5f;
 
-    public void Switch(Action afterLoadingCallback = null)
+    public void Switch()
+    {
+        Switch(null);
+    }
+
+
+    public void Switch(Action afterLoadingCallback)
     {
         SceneLoader.LoadScene(_destinationScene.Path, _fade, _withLoadingScene, afterLoadingCallback);
     }
