@@ -3,7 +3,11 @@ tags:
 colorID: 0
 position: 503,-12
 ---
-Hello world !
+<<if visited("Start") is false>>
+    Hello world.
+<<else>>
+    Hello world again.
+<<endif>>
 [[That's all??|ThatsAll]]
 [[Leave|Leave]]
 ===
