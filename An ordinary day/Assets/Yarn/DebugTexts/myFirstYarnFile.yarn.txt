@@ -1,12 +1,12 @@
 title: Start
 tags: 
 colorID: 0
-position: 503,-12
+position: 502,-12
 ---
 <<if visited("Start") is false>>
     Hello world.
 <<else>>
-    Hello world again.
+    Hello world <color=green>again</color>.😀
 <<endif>>
 [[That's all??|ThatsAll]]
 [[Leave|Leave]]

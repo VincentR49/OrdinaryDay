@@ -4,7 +4,6 @@
 public class ScreenFader : Fader
 {
     public static ScreenFader Instance;
-   
 
     new private void Awake()
     {

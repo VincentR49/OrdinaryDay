@@ -31,6 +31,7 @@ public class DialogueUIExample : Yarn.Unity.DialogueUIBehaviour
         {
             button.gameObject.SetActive(false);
         }
+        
     }
 
 
