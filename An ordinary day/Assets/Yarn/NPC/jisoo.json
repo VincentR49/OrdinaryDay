@@ -2,10 +2,10 @@
 	{
 		"title": "Jisoo.Story",
 		"tags": "",
-		"body": "Bonjour ! \nVous êtes nouveau ? \nJe ne vous ai jamais vu par ici.\n->Oui\n    Je me disais bien que je ne vous connaissais pas.\n->Non\n    Ah bizarre, je pensais connaître tous les gens du quartier.\n\n",
+		"body": "Bonjour ! \nVous êtes nouveau ? \nJe ne vous ai jamais vu par ici.\n->Oui\n    Je me disais bien que je ne vous connaissais pas.\n    ->Continuer\n->Non\n    Ah bizarre, je pensais connaître tous les gens du quartier.\n    ->Continuer\nJe dois y aller.\nAurevoir ! 😊\n->Aurevoir",
 		"position": {
-			"x": 553,
-			"y": 179
+			"x": 522,
+			"y": 17
 		},
 		"colorID": 0
 	}

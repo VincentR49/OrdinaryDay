@@ -30,7 +30,6 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
 
     private PNJController _currentNPC;
 
-
     /// A delegate (ie a function-stored-in-a-variable) that
     /// we call to tell the dialogue system about what option
     /// the user selected (Yarn stuff)
@@ -57,6 +56,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     {
         // todo do more stuff here
         // Show the text
+        Debug.Log("RunLine: " + line.text);
         _dialogueText.text += line.text + System.Environment.NewLine;
         // TODO Change with emotion
         UpdatePNJPicture();
@@ -88,7 +88,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // Wait until the chooser has been used and then removed (see SetOption below)
         while (SetSelectedOption != null)
             yield return null;
-        _dialogueText.text = "";
+        ResetText();
         // Hide all the buttons
         foreach (var button in _optionButtons)
         {
@@ -119,7 +119,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     {
         Debug.Log("Dialogue starting!");
         _dialogueContainer.SetActive(true);
-        _dialogueText.text = "";
+        ResetText();
         yield break;
     }
 
@@ -128,13 +128,8 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     public override IEnumerator DialogueComplete()
     {
         Debug.Log("Dialogue complete");
-        while (Input.anyKeyDown == false)
-        {
-            yield return null;
-        }
         // Hide the dialogue interface.
         _dialogueContainer.SetActive(false);
-        _dialogueText.text = "";
         yield break;
     }
 
@@ -142,5 +137,11 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     public void SetCurrentNPC(PNJController npc)
     {
         _currentNPC = npc;
+    }
+
+
+    private void ResetText()
+    {
+        _dialogueText.text = "";
     }
 }
