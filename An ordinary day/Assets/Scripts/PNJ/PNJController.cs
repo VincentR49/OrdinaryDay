@@ -43,7 +43,7 @@ public class PNJController : MonoBehaviour
     public void Init(PNJData pnjData)
     {
         _pnjData = pnjData;
-        name = pnjData.GameObjectName;
+        name = pnjData.FirstName;
         Debug.Log("PNJ Initialisation: " + _pnjData);
         InitSprites();
         InitScheduleSystem();
@@ -78,6 +78,9 @@ public class PNJController : MonoBehaviour
         }
         return null;
     }
+
+
+    public static List<PNJController> GetPNJControllers() => _pnjControllers;
 
     public PNJData GetPNJData() => _pnjData;
 }
