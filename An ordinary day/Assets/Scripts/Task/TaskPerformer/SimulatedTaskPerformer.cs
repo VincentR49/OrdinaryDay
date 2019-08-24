@@ -11,7 +11,7 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
         base.Perform(task, maxDurationSec, initProgressPrc);
         switch (task)
         {
-            case SpawnPNJ spawn:
+            case SpawnNPC spawn:
                 PerformSpawn(spawn);
                 break;
             case Move move:
@@ -24,13 +24,13 @@ public class SimulatedTaskPerformer : BasicTaskPerformer
     }
 
     #region Spawn
-    public void PerformSpawn(SpawnPNJ spawn)
+    public void PerformSpawn(SpawnNPC spawn)
     {
         OnTaskFinished(); // automatic success
         if (spawn.IsInCurrentScene())
         {
-            // we instanciate the pnj if needed and make it spawn at the good position
-            PNJInstancier.InstanciatePNJ(spawn.PNJ, spawn.SpawnData);
+            // we instanciate the npc if needed and make it spawn at the good position
+            NPCInstancier.InstanciateNPC(spawn.NPC, spawn.SpawnData);
         }
     }
     #endregion

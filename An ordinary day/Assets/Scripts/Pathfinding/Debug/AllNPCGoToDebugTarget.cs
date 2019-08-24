@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AllPNJGoToDebugTarget : MonoBehaviour
+public class AllNPCGoToDebugTarget : MonoBehaviour
 {
-    private TargetReacher[] _pnjTargetReacher;
+    private TargetReacher[] _targetReachers;
     [SerializeField]
     private Transform _target;
     public bool OnStart = false;
 
     private void Start()
     {
-        _pnjTargetReacher = FindObjectsOfType<TargetReacher>();
+        _targetReachers = FindObjectsOfType<TargetReacher>();
         if (OnStart)
             StartCoroutine(GoToTargetRoutine());
     }
@@ -18,8 +18,8 @@ public class AllPNJGoToDebugTarget : MonoBehaviour
 
     public void GoToTarget()
     {
-        foreach (var pnjController in _pnjTargetReacher)
-            pnjController.GoToTarget(_target.position);
+        foreach (var targetReacher in _targetReachers)
+            targetReacher.GoToTarget(_target.position);
     }
 
 

@@ -36,7 +36,7 @@ public class TaskPerformer : BasicTaskPerformer
             case Move move:
                 PerformMove(move);
                 break;
-            case SpawnPNJ spawn:
+            case SpawnNPC spawn:
                 PerformSpawn(spawn);
                 break;
             default:
@@ -109,15 +109,15 @@ public class TaskPerformer : BasicTaskPerformer
 
 
     #region Spawn
-    public void PerformSpawn(SpawnPNJ spawn)
+    public void PerformSpawn(SpawnNPC spawn)
     {
-        if (!spawn.IsInCurrentScene()) // Destroy the current pnj
+        if (!spawn.IsInCurrentScene()) // Destroy the current npc
         {
             OnTaskFinished();
             Destroy(gameObject);
             return;
         }
-        Debug.LogError("Spawn pnj already present on the scene (teleportation). Shouldnt be here.");
+        Debug.LogError("Spawn npc already present on the scene (teleportation). Shouldnt be here.");
         OnTaskFinished();
     }
     #endregion

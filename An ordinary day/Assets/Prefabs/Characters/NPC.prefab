@@ -14,15 +14,15 @@ GameObject:
   - component: {fileID: 4197437973840161365}
   - component: {fileID: 4197437973840161361}
   - component: {fileID: 4197437973840161363}
-  - component: {fileID: 6927588342372206890}
   - component: {fileID: 1999833727167035478}
   - component: {fileID: 2148825919971324433}
   - component: {fileID: 4649255406199066533}
   - component: {fileID: 5412823718567616287}
   - component: {fileID: 6740313738230560726}
   - component: {fileID: 8550125135232159765}
+  - component: {fileID: 9092662860448043110}
   m_Layer: 11
-  m_Name: PNJ
+  m_Name: NPC
   m_TagString: PNJ
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,23 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardinalSprite: {fileID: 0}
---- !u!114 &6927588342372206890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4197437973840161370}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e4b4ca3f9e5443fcae20d875c1f5fa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _walkManager: {fileID: 4197437973840161361}
-  _spriteDirectioner: {fileID: 4197437973840161363}
-  _scheduleHandler: {fileID: 6740313738230560726}
-  _pnjData: {fileID: 0}
-  _initOnStart: 0
 --- !u!114 &1999833727167035478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,3 +248,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetReacher: {fileID: 5412823718567616287}
+--- !u!114 &9092662860448043110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197437973840161370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ef58e5964c04bfdb0053f251040e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _walkManager: {fileID: 4197437973840161361}
+  _spriteDirectioner: {fileID: 4197437973840161363}
+  _scheduleHandler: {fileID: 6740313738230560726}
+  _pnjData: {fileID: 0}
+  _initOnStart: 0

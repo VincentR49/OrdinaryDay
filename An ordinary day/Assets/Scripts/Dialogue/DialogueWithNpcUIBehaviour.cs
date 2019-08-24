@@ -19,7 +19,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     [SerializeField]
     private Image _npcPicture;
     [SerializeField]
-    private PNJDataList _allNpcDataList;
+    private NPCDataList _allNpcDataList;
 
     [Header("Dialogue Display")]
     [SerializeField]
@@ -28,7 +28,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     private List<Button> _optionButtons;
 
 
-    private PNJController _currentNPC;
+    private NPCController _currentNPC;
 
     /// A delegate (ie a function-stored-in-a-variable) that
     /// we call to tell the dialogue system about what option
@@ -59,7 +59,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         Debug.Log("RunLine: " + line.text);
         _dialogueText.text += line.text + System.Environment.NewLine;
         // TODO Change with emotion
-        UpdatePNJPicture();
+        UpdateNPCPicture();
         yield return null;
     }
 
@@ -97,9 +97,9 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     }
     #endregion
 
-    private void UpdatePNJPicture()
+    private void UpdateNPCPicture()
     {
-        var npcData = _currentNPC.GetPNJData();
+        var npcData = _currentNPC.GetNPCData();
         _npcPicture.sprite = npcData.DialoguePicture;
         _npcName.text = npcData.FirstName;
     }
@@ -134,7 +134,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     }
 
 
-    public void SetCurrentNPC(PNJController npc)
+    public void SetCurrentNPC(NPCController npc)
     {
         _currentNPC = npc;
     }

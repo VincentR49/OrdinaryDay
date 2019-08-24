@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: JisooSpawnInsideHouse1
   m_EditorClassIdentifier: 
   Description: 
-  PNJ: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}
+  NPC: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}
   SpawnData: {fileID: 11400000, guid: 98531f32e40014ebdb8cf3e30564aae7, type: 2}

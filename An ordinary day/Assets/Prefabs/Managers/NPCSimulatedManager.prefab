@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4702531232417884066}
-  - component: {fileID: 5913074958826473144}
+  - component: {fileID: 658289897119108233}
   m_Layer: 0
-  m_Name: PNJsSimulatedManager
+  m_Name: NPCSimulatedManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5913074958826473144
+--- !u!114 &658289897119108233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,9 +40,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4702531232417884068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9976bf2de7b5f4b6ab752f17c98e53b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4476185f512164ce7acab13a5bb9a541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _allPNJs: {fileID: 11400000, guid: 6ffa9fcbe70df4a7eb48fc24128c31a7, type: 2}
-  _PNJSimulatedPrefab: {fileID: 934622669916574647, guid: 9368db7f5ce684bda9c210d13a968ba5,
+  _allNPCs: {fileID: 11400000, guid: 6ffa9fcbe70df4a7eb48fc24128c31a7, type: 2}
+  _npcSimulatedPrefab: {fileID: 9051395102454318956, guid: 9368db7f5ce684bda9c210d13a968ba5,
     type: 3}

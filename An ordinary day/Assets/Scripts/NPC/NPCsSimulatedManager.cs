@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Manage the schedule of all the pnj included in the pnjList
+/// Manage the schedule of all the npc included in the npcList
 /// Initialise / Reset the schedule on each new time loop
 /// Manage the switch on / off of simulated schedules
 /// </summary>
-public class PNJsSimulatedManager : MonoBehaviour
+public class NPCsSimulatedManager : MonoBehaviour
 {
     [SerializeField]
-    private PNJDataList _allPNJs;
+    private NPCDataList _allNPCs;
     [SerializeField]
-    private PNJSimulatedController _PNJSimulatedPrefab;
+    private NPCSimulatedController _npcSimulatedPrefab;
 
     private static bool _alreadyExists;
 
@@ -26,17 +26,17 @@ public class PNJsSimulatedManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        InitSimulatedPNJs(); 
+        InitSimulatedNPCs(); 
     }
 
-    private void InitSimulatedPNJs()
+    private void InitSimulatedNPCs()
     {
-        Debug.Log("[PNJSchedulesManager] InitSimulatedPNJs");
-        foreach (var pnj in _allPNJs.Items)
+        Debug.Log("[NPCSchedulesManager] InitSimulatedNPCs");
+        foreach (var npc in _allNPCs.Items)
         {
-            // Create one simulated schedule handler for each pnjs
-            var go = Instantiate(_PNJSimulatedPrefab, transform);
-            go.Init(pnj);
+            // Create one simulated schedule handler for each npcs
+            var go = Instantiate(_npcSimulatedPrefab, transform);
+            go.Init(npc);
         }
     }
 }

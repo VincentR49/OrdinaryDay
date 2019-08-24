@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Enable a PNJ to find and follow a path to the given target
+/// Enable a NPC to find and follow a path to the given target
 /// Associate a pathfinder behaviour and a path follower one
 /// Enable also to avoid target in real time => TODO
 /// </summary>
@@ -98,7 +98,7 @@ public class TargetReacher : MonoBehaviour
 
     private void OnCurrentTargetReached()
     {
-        Debug.Log("[PNJTargetReacher] OnCurrentTargetReached");
+        Debug.Log("[NPCTargetReacher] OnCurrentTargetReached");
         if (!_currentDestinationIsTarget)
         {
             if (_trialNumber > MaxTrials)

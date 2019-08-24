@@ -2161,6 +2161,17 @@ PrefabInstance:
       propertyPath: _initOnStart
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _pnjData
+      value: 
+      objectReference: {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9cdf6d0278024df0a863331164e819a, type: 3}
 --- !u!1 &1863045257

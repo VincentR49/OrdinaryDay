@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Scriptable containing the PNJ informations
+/// Scriptable containing the NPC informations
 /// </summary>
-[CreateAssetMenu(menuName ="Scriptables/PNJData")]
-public class PNJData : ScriptableObject
+[CreateAssetMenu(menuName ="Scriptables/NPCData")]
+public class NPCData : ScriptableObject
 {
     [Header("Standard Information")]
     public string FirstName;
@@ -31,7 +31,6 @@ public class PNJData : ScriptableObject
 
     public void InitRuntimeSchedule()
     {
-        Debug.Log("[PNJSchedulesManager] Init schedule of " + FirstName);
         InGameSchedule.Init(DefaultSchedule);
     }
 }

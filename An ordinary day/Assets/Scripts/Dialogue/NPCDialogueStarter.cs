@@ -11,7 +11,7 @@ public class NPCDialogueStarter : MonoBehaviour
     [SerializeField]
     private float _interactionRadius;
 
-    private List<PNJController> InstanciateNPCs => PNJController.GetPNJControllers();
+    private List<NPCController> InstanciateNPCs => NPCController.GetNPCControllers();
     private NPCDialogueManager _dialogueManager;
 
     private void Start()
@@ -26,15 +26,15 @@ public class NPCDialogueStarter : MonoBehaviour
             var npc = CheckForNearbyNPC();
             if (npc != null)
             {
-                var pnjData = npc.GetPNJData();
-                Debug.Log("Start dialogue with " + pnjData.FirstName);
+                var npcData = npc.GetNPCData();
+                Debug.Log("Start dialogue with " + npcData.FirstName);
 				_dialogueManager.StartDialogueWith(npc);
             }
         }
     }
 
 
-    private PNJController CheckForNearbyNPC()
+    private NPCController CheckForNearbyNPC()
     {
         Debug.Log("CheckForNearbyNPC");
         if (InstanciateNPCs == null)

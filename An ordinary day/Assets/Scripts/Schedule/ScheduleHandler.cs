@@ -27,7 +27,7 @@ public class ScheduleHandler : MonoBehaviour
 
     public void Init(RuntimeSchedule schedule)
     {
-        Debug.Log("[ScheduleHandler] SetSchedule of instanciate PNJ");
+        Debug.Log("[ScheduleHandler] SetSchedule of instanciate NPC");
         if (_schedule != null)
             CleanScheduleListeners();
         _schedule = schedule;

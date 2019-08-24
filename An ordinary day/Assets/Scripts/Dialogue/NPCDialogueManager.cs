@@ -8,7 +8,7 @@ public class NPCDialogueManager : MonoBehaviour
     [SerializeField]
     private DialogueWithNpcUIBehaviour _dialogueUI;
     [SerializeField]
-    private PNJDataList _allNpcDataList;
+    private NPCDataList _allNpcDataList;
 
     private void Awake()
     {
@@ -27,9 +27,9 @@ public class NPCDialogueManager : MonoBehaviour
 
 
 
-    public void StartDialogueWith(PNJController npc)
+    public void StartDialogueWith(NPCController npc)
     {
         _dialogueUI.SetCurrentNPC(npc);
-        _dialogueRunner.StartDialogue(npc.GetPNJData().StartNodeStory);
+        _dialogueRunner.StartDialogue(npc.GetNPCData().StartNodeStory);
     }
 }

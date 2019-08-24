@@ -5,24 +5,24 @@ using System;
 using System.IO;
 using System.Text;
 
-public class PNJInfoDisplayDebug : MonoBehaviour
+public class NPCInfoDisplayDebug : MonoBehaviour
 {
     private static string Separator = new String('-', 35);
     [SerializeField]
-    private PNJDataList _allPNJList;
+    private NPCDataList _allNPCList;
     [SerializeField]
     private Dropdown _dropdown;
     [SerializeField]
     private Text _text;
 
-    private PNJData _pnj => _dropdown.value == _allPNJList.Items.Count ? null : _allPNJList.Items[_dropdown.value];
+    private NPCData _npc => _dropdown.value == _allNPCList.Items.Count ? null : _allNPCList.Items[_dropdown.value];
 
     private void Awake()
     {
         _dropdown.ClearOptions();
         var options = new List<Dropdown.OptionData>();
-        foreach (var pnj in _allPNJList.Items)
-            options.Add(new Dropdown.OptionData(pnj.FirstName));
+        foreach (var npc in _allNPCList.Items)
+            options.Add(new Dropdown.OptionData(npc.FirstName));
         options.Add(new Dropdown.OptionData("None"));
         _dropdown.AddOptions(options);
     }
@@ -30,17 +30,17 @@ public class PNJInfoDisplayDebug : MonoBehaviour
 
     private void Update()
     {
-        _text.text = GetPNJDebugText();
+        _text.text = GetDebugText();
     }
 
 
-    private string GetPNJDebugText()
+    private string GetDebugText()
     {
-        if (_pnj == null)
+        if (_npc == null)
             return "";
         var sb = new StringBuilder();
-        sb.AppendLine(_pnj.FirstName + " " + _pnj.LastName);
-        var lastKnownPosition = _pnj.InGameSchedule.GetLastKnownPosition();
+        sb.AppendLine(_npc.FirstName + " " + _npc.LastName);
+        var lastKnownPosition = _npc.InGameSchedule.GetLastKnownPosition();
         sb.AppendLine("Scene: " + (lastKnownPosition == null ? "Unknown"
             : Path.GetFileNameWithoutExtension(lastKnownPosition.ScenePath)));
         sb.AppendLine("Last know position: " + (lastKnownPosition == null ? "Unknown"
@@ -53,7 +53,7 @@ public class PNJInfoDisplayDebug : MonoBehaviour
     private string GetScheduleText()
     {
         var sb = new StringBuilder();
-        foreach (var task in _pnj.InGameSchedule.Value.Tasks)
+        foreach (var task in _npc.InGameSchedule.Value.Tasks)
             sb.AppendLine(task.ToString());
         return sb.ToString();
     }

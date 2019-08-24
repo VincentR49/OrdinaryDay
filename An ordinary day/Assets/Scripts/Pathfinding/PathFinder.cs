@@ -12,6 +12,7 @@ public class PathFinder : MonoBehaviour
     private const float DefaultWeight = 1f;
 
     [SerializeField]
+    [Tooltip("Optional, can be set at runtime")]
     private ColliderScanner _colliderScanner; // obstacle grid
 
     [Header("Parameters")]

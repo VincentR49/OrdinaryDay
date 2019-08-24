@@ -44,14 +44,14 @@ public class DaySchedule
     {
         if (NTasks == 0)  return null;
         var lastTask = Tasks.FindLast(task => task.State == TaskState.Done &&
-                                        (task.Task is Move || task.Task is SpawnPNJ));
+                                        (task.Task is Move || task.Task is SpawnNPC));
         if (lastTask == null)  return null;
         switch (lastTask.Task)
         {
             case Move move:
                 return new GamePosition(((Move)lastTask.Task).Destination.Value);
-            case SpawnPNJ spawn:
-                return new GamePosition(((SpawnPNJ)lastTask.Task).SpawnData);
+            case SpawnNPC spawn:
+                return new GamePosition(((SpawnNPC)lastTask.Task).SpawnData);
             default:
                 return null;
         }
