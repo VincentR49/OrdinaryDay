@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Yarn.Unity;
 
+/// <summary>
+/// Manager (future singleton), dealing with the dialogue with NPC
+/// </summary>
 public class NPCDialogueManager : MonoBehaviour
 {
     [SerializeField]
@@ -25,11 +28,10 @@ public class NPCDialogueManager : MonoBehaviour
         }
     }
 
-
+    public bool DialogueIsRunning() => _dialogueRunner.isDialogueRunning;
 
     public void StartDialogueWith(NPCController npc)
     {
-        _dialogueUI.SetCurrentNPC(npc);
         _dialogueRunner.StartDialogue(npc.GetNPCData().StartNodeStory);
     }
 }

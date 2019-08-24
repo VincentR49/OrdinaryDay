@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkManager: {fileID: 3363905535439149627}
+  spriteDirectioner: {fileID: 6313559178790158276}
+  _playerData: {fileID: 11400000, guid: e5a95cfcc20c442a595fc5531fa0bea9, type: 2}
 --- !u!114 &3363905535439149627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +133,6 @@ MonoBehaviour:
   - GroundTag: Road
     Multiplier: 1.2
   _spriteAnimator: {fileID: 3175301384753072671}
-  _walkAnimation: {fileID: 11400000, guid: 60a91e1c6d2254107a94b031ef45e610, type: 2}
 --- !u!50 &800747845
 Rigidbody2D:
   serializedVersion: 4
@@ -165,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e13b5ace870a45d3ac76c95045f42ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardinalSprite: {fileID: 11400000, guid: e1e1bbaf67b32411195b03ad31ee6bea, type: 2}
 --- !u!70 &3651036228150101991
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

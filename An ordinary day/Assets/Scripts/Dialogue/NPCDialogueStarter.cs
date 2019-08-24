@@ -21,6 +21,8 @@ public class NPCDialogueStarter : MonoBehaviour
 
     private void Update()
     {
+        if (_dialogueManager.DialogueIsRunning())
+            return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             var npc = CheckForNearbyNPC();

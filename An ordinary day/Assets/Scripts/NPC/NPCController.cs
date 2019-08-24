@@ -58,8 +58,8 @@ public class NPCController : MonoBehaviour
 
     private void InitSprites()
     {
-        _spriteDirectioner.SetCardinalSprite(_npcData.CardinalSprite);
-        _walkManager.SetWalkAnimation(_npcData.WalkingAnimation);
+        _spriteDirectioner.Init(_npcData.CardinalSprite);
+        _walkManager.Init(_npcData.WalkingAnimation);
     }
 
 

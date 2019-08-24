@@ -27,9 +27,8 @@ public class WalkManager : MonoBehaviour
     [Header("Display")]
     [SerializeField]
     private SpriteAnimator _spriteAnimator = default;
-    [SerializeField]
-    private CardinalAnimationData _walkAnimation;
 
+    private CardinalAnimationData _walkAnimation;
     private Rigidbody2D _rb;
 
     // speed management data
@@ -112,6 +111,11 @@ public class WalkManager : MonoBehaviour
     #region Animation
     private void Animate(State state)
     {
+        if (_walkAnimation == null)
+        {
+            Debug.LogError("WalkAnimation not set");
+            return;
+        }
         switch (state)
         {
             case State.Top:
@@ -134,7 +138,7 @@ public class WalkManager : MonoBehaviour
     }
 
 
-    public void SetWalkAnimation(CardinalAnimationData walkAnimation)
+    public void Init(CardinalAnimationData walkAnimation)
     {
         _walkAnimation = walkAnimation;
     }

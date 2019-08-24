@@ -206,6 +206,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5405077534269641082, guid: c200c36cad20e466996b667a703c5b91,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5405077534269641082, guid: c200c36cad20e466996b667a703c5b91,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5405077534749945993, guid: c200c36cad20e466996b667a703c5b91,
         type: 3}
       propertyPath: m_AnchorMin.y

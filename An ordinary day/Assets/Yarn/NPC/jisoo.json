@@ -2,9 +2,9 @@
 	{
 		"title": "Jisoo.Story",
 		"tags": "",
-		"body": "Bonjour ! \nVous êtes nouveau ? \nJe ne vous ai jamais vu par ici.\n->Oui\n    Je me disais bien que je ne vous connaissais pas.\n    ->Continuer\n->Non\n    Ah bizarre, je pensais connaître tous les gens du quartier.\n    ->Continuer\nJe dois y aller.\nAurevoir ! 😊\n->Aurevoir",
+		"body": "Jisoo: Bonjour !\nPlayer: Bonjour !\nJisoo: Vous êtes nouveau par ici?\nC'est la première fois que je vous vois.\nIl n'y a pas grand monde dans ce village, ça change de voir de nouveaux visages.\n->Oui\n    Jisoo: C'est bien ce que je pensais !\n->Non, je suis né ici\n    Jisoo: Ah bon? Je pensais connaître tout le monde pourtant...\n    Vincent: Visiblement pas tout le monde !\nJisoo: Je dois y aller, j'ai des courses à faire.\nVincent: Pas de soucis, aurevoir !\nJisoo: Aurevoir !",
 		"position": {
-			"x": 522,
+			"x": 523,
 			"y": 17
 		},
 		"colorID": 0

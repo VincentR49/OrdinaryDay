@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NPCList
   m_EditorClassIdentifier: 
   Items:
-  - {fileID: 11400000, guid: 26e039f2f4f9e48acbbe841d2117ebb2, type: 2}
-  - {fileID: 11400000, guid: 8f2e576f136764c8790f4031fabfd204, type: 2}
+  - {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd, type: 2}
+  - {fileID: 11400000, guid: d937b3758f5d54ed6b43d2c0a6d2242b, type: 2}

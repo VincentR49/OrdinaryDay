@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfad74a4c44994601b5f3f0eae809159, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  FirstName: Player
+  LastName: 
+  CardinalSprite: {fileID: 11400000, guid: e1e1bbaf67b32411195b03ad31ee6bea, type: 2}
+  WalkingAnimation: {fileID: 11400000, guid: 60a91e1c6d2254107a94b031ef45e610, type: 2}
+  DialogueTag: Player
+  DialoguePicture: {fileID: -3966044189379602213, guid: ae4319e0c79ea45199c2c20a89c905ff,
+    type: 3}

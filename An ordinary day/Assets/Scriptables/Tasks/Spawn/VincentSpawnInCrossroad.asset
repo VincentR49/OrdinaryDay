@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: VincentSpawnInCrossroad
   m_EditorClassIdentifier: 
   Description: 
-  NPC: {fileID: 11400000, guid: 8f2e576f136764c8790f4031fabfd204, type: 2}
+  NPC: {fileID: 11400000, guid: d937b3758f5d54ed6b43d2c0a6d2242b, type: 2}
   SpawnData: {fileID: 11400000, guid: d2c3350ed2ca4471cbd2ea8d649dadb9, type: 2}

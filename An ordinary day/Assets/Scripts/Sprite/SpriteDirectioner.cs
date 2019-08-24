@@ -3,9 +3,7 @@
 // Set the correct sprite according to the direction of the object
 public class SpriteDirectioner : MonoBehaviour
 {
-    [SerializeField]
-    private CardinalSpriteData _cardinalSprite = default;
-
+    private CardinalSpriteData _cardinalSprite;
     private SpriteRenderer _spriteRenderer;
 
     private void Awake()
@@ -15,12 +13,17 @@ public class SpriteDirectioner : MonoBehaviour
 
     public void SetSprite(Direction direction)
     {
+        if (_cardinalSprite == null)
+        {
+            Debug.LogError("Cardinal sprite not set.");
+            return;
+        }
         var sprite = _cardinalSprite.Get(direction);
         _spriteRenderer.flipX = sprite.FlipX;
         _spriteRenderer.sprite = sprite.Sprite;
     }
 
-    public void SetCardinalSprite(CardinalSpriteData sprite)
+    public void Init(CardinalSpriteData sprite)
     {
         _cardinalSprite = sprite;
     }
