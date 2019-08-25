@@ -2,9 +2,9 @@
 	{
 		"title": "Jisoo.Story",
 		"tags": "",
-		"body": "Jisoo: Bonjour !\nPlayer: Bonjour !\nJisoo: Vous êtes nouveau par ici?\nC'est la première fois que je vous vois.\nIl n'y a pas grand monde dans ce village, ça change de voir de nouveaux visages.\n->Oui\n    Jisoo: C'est bien ce que je pensais !\n->Non, je suis né ici\n    Jisoo: Ah bon? Je pensais connaître tout le monde pourtant...\n    Vincent: Visiblement pas tout le monde !\nJisoo: Je dois y aller, j'ai des courses à faire.\nVincent: Pas de soucis, aurevoir !\nJisoo: Aurevoir !",
+		"body": "Jisoo: Bonjour !\nPlayer: Bonjour !\nJisoo: Vous êtes nouveau par ici?\nC'est la première fois que je vous vois.\nIl n'y a pas grand monde dans ce village, ça change de voir de nouveaux visages.\n->Oui, je suis de passage pour le travail\n    Jisoo: C'est bien ce que je pensais !\n    Player: C'est un très beau village en tout cas.\n    Jisoo: Ah j'oubliais, j'ai des courses à faire.\n->Non, je suis né ici\n    Jisoo: Ah bon? Je pensais connaître tout le monde pourtant...\n    Player: Visiblement pas tout le monde !\n    Jisoo: Je dois y aller, j'ai des courses à faire.\nPlayer: Pas de soucis, au revoir !\nJisoo: Désolé de partir si brusquement.\nN'hésitez pas à me rendre visite à l'occasion, je serai ravie de rediscuter avec vous.\nJ'habite dans la petite maison bleue au coin de la rue.\nFrappez trois fois sur la porte et j'ouvrirai.\nA bientôt ! 😊\n",
 		"position": {
-			"x": 523,
+			"x": 524,
 			"y": 17
 		},
 		"colorID": 0

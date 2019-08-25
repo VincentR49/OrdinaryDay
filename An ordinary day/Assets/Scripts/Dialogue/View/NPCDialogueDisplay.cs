@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class NPCDialogueDisplay : CharacterDialogueDisplay
 {
-    // TODO
+    public override void Reset()
+    {
+        base.Reset();
+        _picture.sprite = null;
+        _name.text = "";
+    }
 }

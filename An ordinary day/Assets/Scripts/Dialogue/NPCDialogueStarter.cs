@@ -30,6 +30,8 @@ public class NPCDialogueStarter : MonoBehaviour
             {
                 var npcData = npc.GetNPCData();
                 Debug.Log("Start dialogue with " + npcData.FirstName);
+                // TODO stop task if he was doing one
+                // TODO Resume when dialogue is finished
 				_dialogueManager.StartDialogueWith(npc);
             }
         }

@@ -15,11 +15,12 @@ public class NPCDialogueManager : MonoBehaviour
 
     private void Awake()
     {
+        // Load scripts
         foreach (var npc in _allNpcDataList.Items)
         {
             if (npc.YarnDialogue != null)
             {
-                // TODO optiise, probably very heavy with a lot of text
+                // TODO optimise, probably very heavy with a lot of text
                 // upadte progressively as the players spawn
                 // and keep track of each scripts that have been added here
                 // Do when npc spawn and load at this moment (checking if the node exists or not)

@@ -5,18 +5,29 @@ using System.Collections;
 
 public abstract class CharacterDialogueDisplay : MonoBehaviour
 {
+    private static KeyCode GoToNextPageKey = KeyCode.Space;
+
     [SerializeField]
     protected GameObject _container;
     [SerializeField]
     protected TextMeshProUGUI _dialogue;
     [SerializeField]
-    protected Button _nextButton;
+    protected GameObject _nextPage;
     [SerializeField]
     protected TextMeshProUGUI _name;
     [SerializeField]
     protected Image _picture;
 
     private int TotalPage => _dialogue.textInfo.pageCount;
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(GoToNextPageKey) && !IsAtLastPage())
+        {
+            GoToNextPage();
+        }
+    }
 
 
     public void Show(bool show)
@@ -27,17 +38,26 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
 
     public IEnumerator SetText(string text)
     {
-        _nextButton.gameObject.SetActive(false);
+        Debug.Log("Set text: " + text);
+        _nextPage.SetActive(false);
         _dialogue.text = text;
         _dialogue.pageToDisplay = 1;
         yield return null;
         UpdateNextPageDisplay();
     }
 
-    // Make it routine (IEnumerator)
-    public IEnumerator AppendText(string textToDisplay)
+
+    public virtual void Reset()
     {
-        _nextButton.gameObject.SetActive(false);
+        _dialogue.text = "";
+        _dialogue.pageToDisplay = 1;
+        _nextPage.SetActive(false);
+    }
+
+
+    public IEnumerator AppendLine(string textToDisplay)
+    {
+        _dialogue.text += System.Environment.NewLine;
         _dialogue.text += textToDisplay;
         yield return null;
         UpdateNextPageDisplay();
@@ -45,17 +65,22 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
 
 
     // Link via inspector to the next button
+    // TODO will dispappear
     public void GoToNextPage()
     {
+        Debug.Log("GoToNextPage");
         _dialogue.pageToDisplay += 1;
         UpdateNextPageDisplay();
     }
 
 
+    public bool IsAtLastPage() => TotalPage == 0 || _dialogue.pageToDisplay >= TotalPage;
+
+
     private void UpdateNextPageDisplay()
     {
-        Debug.Log("Total page: " + TotalPage);
-        _nextButton.gameObject.SetActive(_dialogue.pageToDisplay < TotalPage);
+        Debug.Log("Current page: " + _dialogue.pageToDisplay + ". Total page: " + TotalPage);
+        _nextPage.SetActive(!IsAtLastPage());
     }
 
 
