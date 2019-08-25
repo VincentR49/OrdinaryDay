@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// Manage the display of a dialogue for a given character
+/// </summary>
 public abstract class CharacterDialogueDisplay : MonoBehaviour
 {
     private static KeyCode GoToNextPageKey = KeyCode.Space;
@@ -36,13 +39,13 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
     }
 
 
-    public IEnumerator SetText(string text)
+    public IEnumerator SetLine(string text)
     {
         Debug.Log("Set text: " + text);
         _nextPage.SetActive(false);
         _dialogue.text = text;
         _dialogue.pageToDisplay = 1;
-        yield return null;
+        yield return new WaitForEndOfFrame();
         UpdateNextPageDisplay();
     }
 
@@ -57,9 +60,14 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
 
     public IEnumerator AppendLine(string textToDisplay)
     {
+        if (string.IsNullOrEmpty(_dialogue.text))
+        {
+            SetLine(textToDisplay);
+            yield break;
+        } 
         _dialogue.text += System.Environment.NewLine;
         _dialogue.text += textToDisplay;
-        yield return null;
+        yield return new WaitForEndOfFrame();
         UpdateNextPageDisplay();
     }
 
@@ -68,7 +76,6 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
     // TODO will dispappear
     public void GoToNextPage()
     {
-        Debug.Log("GoToNextPage");
         _dialogue.pageToDisplay += 1;
         UpdateNextPageDisplay();
     }

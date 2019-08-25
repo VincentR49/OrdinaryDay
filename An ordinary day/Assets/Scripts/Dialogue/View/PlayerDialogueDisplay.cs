@@ -20,14 +20,23 @@ public class PlayerDialogueDisplay : CharacterDialogueDisplay
     /// we call to tell the dialogue system about what option
     /// the user selected (Yarn stuff)
     private Yarn.OptionChooser SetSelectedOption;
-    public bool HasChooseOption { private set; get; }
+    public bool HasChoosenAnOption { private set; get; }
+    private PlayerData _playerData;
+
+
+    public void Init(PlayerData playerData)
+    {
+        _picture.sprite = playerData.DialoguePicture;
+        _name.text = playerData.FirstName;
+    }
+
 
     public void ShowOptions(Options optionsCollection, OptionChooser optionChooser)
     {
         Reset();
         HideAllOptionButtons();
         _optionsContainer.SetActive(true);
-        HasChooseOption = false;
+        HasChoosenAnOption = false;
         SetSelectedOption = optionChooser;
         int count = 0;
         foreach (var option in optionsCollection.options)
@@ -45,7 +54,7 @@ public class PlayerDialogueDisplay : CharacterDialogueDisplay
         Debug.Log("Set Option: " + selectedOption);
         SetSelectedOption(selectedOption);
         // Now remove the delegate so that the loop in RunOptions will exit
-        HasChooseOption = true;
+        HasChoosenAnOption = true;
         _optionsContainer.SetActive(false);
         HideAllOptionButtons();
     }

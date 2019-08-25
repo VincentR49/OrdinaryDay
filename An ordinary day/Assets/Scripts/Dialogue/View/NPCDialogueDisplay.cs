@@ -10,4 +10,11 @@ public class NPCDialogueDisplay : CharacterDialogueDisplay
         _picture.sprite = null;
         _name.text = "";
     }
+
+
+    public void Init(NPCData npcData)
+    {
+        _picture.sprite = npcData.DialoguePicture;
+        _name.text = npcData.FirstName;
+    }
 }

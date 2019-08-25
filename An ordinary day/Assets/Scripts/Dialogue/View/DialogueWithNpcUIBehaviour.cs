@@ -35,8 +35,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     {
         Debug.Log("Dialogue Awake");
         ResetDisplays();
-        _playerDisplay.SetCharacterName(_playerData.FirstName);
-        _playerDisplay.SetCharacterPicture(_playerData.DialoguePicture);
+        _playerDisplay.Init(_playerData);
         _dialogueContainer.SetActive(false);
     }
 
@@ -59,7 +58,6 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     {
         Debug.Log("Dialogue complete");
         yield return WaitForSpeakerToFinish();
-        // Hide the dialogue interface.
         _dialogueContainer.SetActive(false);
         ResetDisplays();
         yield break;
@@ -79,14 +77,12 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // First line of the dialogue: 
         if (string.IsNullOrEmpty(_speaker))
         {
-            Debug.Log("First speaker: " + lineSpeaker);
             ChangeSpeaker(lineSpeaker);
-            yield return CurrentDialogueDisplay.SetText(line.text);
+            yield return CurrentDialogueDisplay.SetLine(line.text);
         }
         // We keep the same speaker as before, we just add some text to the previous text input
         else if (string.IsNullOrEmpty(lineSpeaker) || _speaker.Equals(lineSpeaker))
         {
-            Debug.Log("Same speaker: " + _speaker);
             yield return CurrentDialogueDisplay.AppendLine(line.text);
         }
         else // we change speaker only if we reached last page of the previous dialogue
@@ -94,7 +90,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         {
             yield return WaitForSpeakerToFinish();
             ChangeSpeaker(lineSpeaker);
-            yield return CurrentDialogueDisplay.SetText(line.text);
+            yield return CurrentDialogueDisplay.SetLine(line.text);
         }
         Debug.Log("RunLine ( " + _speaker + ") :" + line.text);
     }
@@ -111,13 +107,10 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         _playerDisplay.ShowOptions(optionsCollection, optionChooser);
         // Wait until the player has made his choice
         // The option selection is managed inside the PlayerDialogueDisplay class
-        while (!_playerDisplay.HasChooseOption)
-        {
+        while (!_playerDisplay.HasChoosenAnOption)
             yield return null;
-        }
         Debug.Log("Option was choosed");
         _optionWasJustChosen = true;
-        // Display current dialogue line
     }
     #endregion
 
@@ -132,12 +125,14 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // We need to wait the next frame to refresh the state of the input system
         // we already pressed the continue key to go to the last page of the current dialogue
         yield return new WaitForEndOfFrame();
-        // Then, and only then, we wait for user input to display the dialogue options
+        // Special management in case of an option has been choose
+        // We display directly the new content
         if (_optionWasJustChosen)
         {
             _optionWasJustChosen = false;
             yield break;
         }
+        // Then, and only then, we wait for user input to display the dialogue options
         while (!Input.GetKeyDown(ContinueKey))
         {
             yield return null;
@@ -178,7 +173,11 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         else
         {
             var npcData = _allNpcs.Items.FirstOrDefault(npc => npc.FirstName.Equals(_speaker));
-            // some check safety here on the npc tag
+            if (npcData == null)
+            {
+                Debug.LogError("Couldnt find any NPC with the given tag: " + _speaker);
+                return;
+            }
             NpcSpeaks(npcData);
         }
     }
@@ -194,9 +193,8 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     private void NpcSpeaks(NPCData npcData)
     {
         _playerDisplay.Show(false);
+        _npcDisplay.Init(npcData);
         _npcDisplay.Show(true);
-        _npcDisplay.SetCharacterName(npcData.FirstName);
-        _npcDisplay.SetCharacterPicture(npcData.DialoguePicture);
     }
 
     #endregion
