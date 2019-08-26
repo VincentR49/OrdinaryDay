@@ -31,4 +31,10 @@ public class SpriteDirectioner : MonoBehaviour
         _cardinalSprite = sprite;
         SetDirection(InitDirection);
     }
+
+
+    public void FaceTowards(Transform other)
+    {
+        SetDirection(Utils.GetDirection(other.position - transform.position));
+    }
 }

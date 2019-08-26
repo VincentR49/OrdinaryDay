@@ -79,9 +79,11 @@ public class NPCController : MonoBehaviour
     }
 
     // Call when a dialogue is starting
-    public void OnDialogueStarted()
+    public void OnDialogueStarted(Transform speakerTransform)
     {
         _walkManager.Stop();
+        // Face toward the speaker (more polite ^^)
+        _spriteDirectioner.FaceTowards(speakerTransform);
     }
 
     public static List<NPCController> GetNPCControllers() => _npcControllers;

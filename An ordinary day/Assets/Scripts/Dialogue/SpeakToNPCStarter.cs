@@ -12,11 +12,13 @@ public class SpeakToNPCStarter : MonoBehaviour
     private List<NPCController> InstanciateNPCs => NPCController.GetNPCControllers();
     private NPCDialogueManager _dialogueManager;
     private WalkManager _walkManager;
+    private SpriteDirectioner _spriteDirectioner;
     
     private void Start()
     {
 		_dialogueManager = FindObjectOfType<NPCDialogueManager>(); // change this later
         _walkManager = GetComponent<WalkManager>();
+        _spriteDirectioner = GetComponent<SpriteDirectioner>();
     }
 
 
@@ -30,9 +32,11 @@ public class SpeakToNPCStarter : MonoBehaviour
             if (npc != null)
             {
 				_dialogueManager.StartDialogue(npc);
-                npc.OnDialogueStarted();
+                npc.OnDialogueStarted(transform);
                 if (_walkManager)
                     _walkManager.Stop();
+                if (_spriteDirectioner)
+                    _spriteDirectioner.FaceTowards(npc.transform);
             }
         }
     }
