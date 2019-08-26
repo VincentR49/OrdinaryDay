@@ -31,12 +31,12 @@ public class SpeakToNPCStarter : MonoBehaviour
             var npc = CheckForNearbyNPC();
             if (npc != null)
             {
-				_dialogueManager.StartDialogue(npc);
                 npc.OnDialogueStarted(transform);
                 if (_walkManager)
                     _walkManager.Stop();
                 if (_spriteDirectioner)
                     _spriteDirectioner.FaceTowards(npc.transform);
+                _dialogueManager.StartDialogue(npc);
             }
         }
     }

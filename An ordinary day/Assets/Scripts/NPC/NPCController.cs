@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 /// <summary>
 /// Manage the NPC behaviours
@@ -81,10 +82,19 @@ public class NPCController : MonoBehaviour
     // Call when a dialogue is starting
     public void OnDialogueStarted(Transform speakerTransform)
     {
+        Debug.Log("On dialogue started: " + _npcData.FirstName);
+        StartCoroutine(StopWalkingAndFaceSpeaker(speakerTransform));
+    }
+
+
+    private IEnumerator StopWalkingAndFaceSpeaker(Transform speakerTransform)
+    {
         _walkManager.Stop();
-        // Face toward the speaker (more polite ^^)
+        yield return new WaitForEndOfFrame();
+        // more polite ;)
         _spriteDirectioner.FaceTowards(speakerTransform);
     }
+
 
     public static List<NPCController> GetNPCControllers() => _npcControllers;
 
