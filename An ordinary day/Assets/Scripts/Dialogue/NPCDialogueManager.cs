@@ -3,6 +3,8 @@ using Yarn.Unity;
 
 /// <summary>
 /// Manager (future singleton), dealing with the dialogue with NPC
+/// Probably not so usefull, check if it necessary or not
+/// Will be removed later
 /// </summary>
 public class NPCDialogueManager : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class NPCDialogueManager : MonoBehaviour
     private DialogueWithNpcUIBehaviour _dialogueUI;
     [SerializeField]
     private NPCDataList _allNpcDataList;
+
 
     private void Awake()
     {
@@ -31,8 +34,10 @@ public class NPCDialogueManager : MonoBehaviour
 
     public bool DialogueIsRunning() => _dialogueRunner.isDialogueRunning;
 
-    public void StartDialogueWith(NPCController npc)
+
+    public void StartDialogue(NPCController npc)
     {
+        Debug.Log("Start dialogue with " + npc.GetNPCData().FirstName);
         _dialogueRunner.StartDialogue(npc.GetNPCData().StartNodeStory);
     }
 }

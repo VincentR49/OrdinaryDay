@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 _moveDirection;
 
-
     private void Awake()
     {
         _walkManager.Init(_playerData.WalkingAnimation);

@@ -41,6 +41,13 @@ public class ScheduleHandler : MonoBehaviour
     {
         _taskPerformer.Stop();
         _currentTask = null;
+        enabled = false;
+    }
+
+
+    public void Resume()
+    {
+        enabled = true;
     }
 
 

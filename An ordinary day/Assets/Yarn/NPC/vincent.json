@@ -1,0 +1,12 @@
+[
+	{
+		"title": "Vincent.Story",
+		"tags": "",
+		"body": "Vincent: Bonjour,\nJe m'appelle Vincent.\nVous êtes?\nPlayer: Bonjour.\nJe m'appelle PLAYERNAME.\nVincent: Enchanté.\nOn se voit plus tard !\nPlayer: A toute !",
+		"position": {
+			"x": 540,
+			"y": 260
+		},
+		"colorID": 0
+	}
+]

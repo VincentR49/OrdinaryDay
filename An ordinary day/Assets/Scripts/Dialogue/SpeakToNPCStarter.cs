@@ -1,38 +1,38 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Yarn.Unity;
 
 /// <summary>
 /// Behaviour that enable to speak with a nearby NPC
 /// </summary>
-public class NPCDialogueStarter : MonoBehaviour
+public class SpeakToNPCStarter : MonoBehaviour
 {
-    // TODO
     [SerializeField]
     private float _interactionRadius;
 
     private List<NPCController> InstanciateNPCs => NPCController.GetNPCControllers();
     private NPCDialogueManager _dialogueManager;
-
+    private WalkManager _walkManager;
+    
     private void Start()
     {
 		_dialogueManager = FindObjectOfType<NPCDialogueManager>(); // change this later
+        _walkManager = GetComponent<WalkManager>();
     }
+
 
     private void Update()
     {
-        if (_dialogueManager.DialogueIsRunning())
+        if (_dialogueManager != null && _dialogueManager.DialogueIsRunning())
             return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             var npc = CheckForNearbyNPC();
             if (npc != null)
             {
-                var npcData = npc.GetNPCData();
-                Debug.Log("Start dialogue with " + npcData.FirstName);
-                // TODO stop task if he was doing one
-                // TODO Resume when dialogue is finished
-				_dialogueManager.StartDialogueWith(npc);
+				_dialogueManager.StartDialogue(npc);
+                npc.OnDialogueStarted();
+                if (_walkManager)
+                    _walkManager.Stop();
             }
         }
     }

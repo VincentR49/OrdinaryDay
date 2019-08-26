@@ -39,7 +39,7 @@ public class Spawner : Singleton<Spawner>
         go.transform.position = position;
         var spriteDirectioner = go.GetComponent<SpriteDirectioner>();
         if (spriteDirectioner != null)
-            spriteDirectioner.SetSprite(direction);
+            spriteDirectioner.SetDirection(direction);
         yield return new WaitForSeconds(Math.Abs(spawnDuration - 1f) < EPSILON ? DefaultSpawnDuration : spawnDuration);
         if (disableDuringSpawn != null)
         {

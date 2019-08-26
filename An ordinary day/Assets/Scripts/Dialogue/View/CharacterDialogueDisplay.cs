@@ -8,7 +8,7 @@ using System.Collections;
 /// </summary>
 public abstract class CharacterDialogueDisplay : MonoBehaviour
 {
-    private static KeyCode GoToNextPageKey = KeyCode.Space;
+    private static KeyCode ContinueKey = KeyCode.Space;
 
     [SerializeField]
     protected GameObject _container;
@@ -22,16 +22,24 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
     protected Image _picture;
 
     private int TotalPage => _dialogue.textInfo.pageCount;
-
+    private int Page => _dialogue.pageToDisplay;
+    private int CurrentPageEndIndex => _dialogue.textInfo.pageInfo[Page - 1].lastCharacterIndex;
+    public bool IsDisplayingText { get; private set; }
 
     private void Update()
     {
-        if (Input.GetKeyDown(GoToNextPageKey) && !IsAtLastPage())
+        if (Input.GetKeyDown(ContinueKey))
         {
-            GoToNextPage();
+            if (IsDisplayingText)
+            {
+                return;
+            }
+            if(! IsAtLastPage())
+            {
+                StartCoroutine(GoToNextPage());
+            }
         }
     }
-
 
     public void Show(bool show)
     {
@@ -42,11 +50,10 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
     public IEnumerator SetLine(string text)
     {
         Debug.Log("Set text: " + text);
-        _nextPage.SetActive(false);
         _dialogue.text = text;
         _dialogue.pageToDisplay = 1;
-        yield return new WaitForEndOfFrame();
-        UpdateNextPageDisplay();
+        _dialogue.maxVisibleCharacters = 0;
+        yield return ShowTextProgressively();
     }
 
 
@@ -64,41 +71,43 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
         {
             SetLine(textToDisplay);
             yield break;
-        } 
+        }
+        _nextPage.SetActive(false);
         _dialogue.text += System.Environment.NewLine;
         _dialogue.text += textToDisplay;
-        yield return new WaitForEndOfFrame();
-        UpdateNextPageDisplay();
+        yield return ShowTextProgressively();
     }
 
 
-    // Link via inspector to the next button
-    // TODO will dispappear
-    public void GoToNextPage()
+    private IEnumerator ShowTextProgressively()
+    {
+        IsDisplayingText = true;
+        _nextPage.SetActive(false);
+        yield return new WaitForEndOfFrame();
+        while (_dialogue.maxVisibleCharacters <= CurrentPageEndIndex)
+        {
+            _dialogue.maxVisibleCharacters++;
+            yield return new WaitForEndOfFrame();
+        }
+        IsDisplayingText = false;
+        RefreshNextPageDisplay();
+    }
+
+
+    public IEnumerator GoToNextPage()
     {
         _dialogue.pageToDisplay += 1;
-        UpdateNextPageDisplay();
+        yield return ShowTextProgressively();
     }
 
 
-    public bool IsAtLastPage() => TotalPage == 0 || _dialogue.pageToDisplay >= TotalPage;
+    public bool IsAtLastPage() => TotalPage == 0 || Page >= TotalPage;
 
 
-    private void UpdateNextPageDisplay()
+    private void RefreshNextPageDisplay()
     {
         Debug.Log("Current page: " + _dialogue.pageToDisplay + ". Total page: " + TotalPage);
         _nextPage.SetActive(!IsAtLastPage());
-    }
-
-
-    public void SetCharacterName(string characterName)
-    {
-        _name.text = characterName;
-    }
-
-    public void SetCharacterPicture(Sprite sprite)
-    {
-        _picture.sprite = sprite;
     }
 
     public bool IsActive() => isActiveAndEnabled;

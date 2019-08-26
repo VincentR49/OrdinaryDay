@@ -1613,7 +1613,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3696596513374239673
 CanvasRenderer:
@@ -1656,11 +1656,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'P: Stop the clock
+  m_Text: 'O: Stop the clock
+
+    P: Pause Game
 
     R: Restart TimeLoop
 
-    Space: Pause / Resume'
+    Space: Speak'
 --- !u!1 &8616643070317125430
 GameObject:
   m_ObjectHideFlags: 0

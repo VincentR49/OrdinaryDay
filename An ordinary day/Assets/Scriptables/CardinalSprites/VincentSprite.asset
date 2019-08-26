@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80db1238ca67b4b6bba8b2297cd560f2, type: 3}
-  m_Name: Jisoo
+  m_Name: VincentSprite
   m_EditorClassIdentifier: 
-  Top: {fileID: 11400000, guid: 3acdc619732774c9fb02e0e686ec4e77, type: 2}
-  Bottom: {fileID: 11400000, guid: 19a70a923e2ed4a95b09748f3bd54c89, type: 2}
-  Right: {fileID: 11400000, guid: e1ccbd42999894369903742bd514a671, type: 2}
-  Left: {fileID: 11400000, guid: c2c06ffec0d3b473da6d67868eb9ab9b, type: 2}
+  Top: {fileID: 11400000, guid: 4675f7e7b3f6d4f24ad1f4d6b9abfb61, type: 2}
+  Bottom: {fileID: 11400000, guid: d66bea851370a49a2bea1caac24e613d, type: 2}
+  Right: {fileID: 11400000, guid: 2dac613474f414f458b33e7199bcc479, type: 2}
+  Left: {fileID: 11400000, guid: e42b07dbe7f5e476b97d091494d17daa, type: 2}

@@ -182,7 +182,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -248,6 +248,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -438,7 +449,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -505,6 +516,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -548,7 +570,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -615,6 +637,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -658,7 +691,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -724,6 +757,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -9880,7 +9924,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -9946,6 +9990,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -11419,7 +11474,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -11485,6 +11540,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -17234,7 +17300,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -17300,6 +17366,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -17492,7 +17569,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -17558,6 +17635,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -17843,7 +17931,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -17910,6 +17998,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -17953,7 +18052,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18019,6 +18118,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18351,7 +18461,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18418,6 +18528,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -18461,7 +18582,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18528,6 +18649,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -18571,7 +18703,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18637,6 +18769,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18743,6 +18886,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -18790,7 +18944,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18857,6 +19011,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -18900,7 +19065,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -18966,6 +19131,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -19089,7 +19265,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -19156,6 +19332,17 @@ PrefabInstance:
       propertyPath: _pathDebugTarget
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: _speed
@@ -19199,7 +19386,7 @@ PrefabInstance:
     - target: {fileID: 4197437973840161370, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}
@@ -19265,6 +19452,17 @@ PrefabInstance:
         type: 3}
       propertyPath: _pathDebugTarget
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _npcData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2bdf74999190456cbf7d5cad24b4dcd,
+        type: 2}
+    - target: {fileID: 9092662860448043110, guid: b9cdf6d0278024df0a863331164e819a,
+        type: 3}
+      propertyPath: _initOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4197437973840161361, guid: b9cdf6d0278024df0a863331164e819a,
         type: 3}

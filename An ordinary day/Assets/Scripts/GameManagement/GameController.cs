@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (GamePauser.IsPaused)
                 GamePauser.Resume();

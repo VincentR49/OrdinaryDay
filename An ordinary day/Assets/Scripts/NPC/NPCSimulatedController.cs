@@ -106,7 +106,7 @@ public class NPCSimulatedController : MonoBehaviour
     private void Enable()
     {
         Debug.Log("[NPCSimulatedController] Enable Simulated Controller: " + _npcData);
-        _scheduleHandler.enabled = true;
+        _scheduleHandler.Resume();
     }
 
 
@@ -114,7 +114,6 @@ public class NPCSimulatedController : MonoBehaviour
     {
         Debug.Log("[NPCSimulatedController] Disable Simulated Controller: " + _npcData);
         _scheduleHandler.Stop();
-        _scheduleHandler.enabled = false;
     }
 
     private void ResetNPCSchedules()

@@ -49,6 +49,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         _playerDisplay.Show(false);
         _npcDisplay.Show(false);
         _dialogueContainer.SetActive(true);
+        GamePauser.Pause();
         yield break;
     }
 
@@ -60,6 +61,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         yield return WaitForSpeakerToFinish();
         _dialogueContainer.SetActive(false);
         ResetDisplays();
+        GamePauser.Resume();
         yield break;
     }
 
@@ -118,7 +120,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     {
         // We wait to be sure to be at the last page of the current dialogue line
         // to dont skip dialogue lines
-        while (!CurrentDialogueDisplay.IsAtLastPage())
+        while (!CurrentDialogueDisplay.IsAtLastPage() || CurrentDialogueDisplay.IsDisplayingText)
         {
             yield return null;
         }

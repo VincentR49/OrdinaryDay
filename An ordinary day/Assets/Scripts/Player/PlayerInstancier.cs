@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Singleton to instanciate the player at the given spawn point
+/// </summary>
 public class PlayerInstancier : Singleton<PlayerInstancier>
 {
     private static GameObject _playerPrefab = _playerPrefab = Utils.GetPrefab(PathConstants.PlayerPrefab);

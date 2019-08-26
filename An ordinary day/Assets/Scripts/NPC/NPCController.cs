@@ -20,11 +20,11 @@ public class NPCController : MonoBehaviour
     [SerializeField]
     private bool _initOnStart;
 
-    private bool _isInit;
     private static List<NPCController> _npcControllers = new List<NPCController>();
     public delegate void InstancesChangedHandler(NPCController npc);
     public static event InstancesChangedHandler OnNPCAdded;
     public static event InstancesChangedHandler OnNPCRemoved;
+
 
     private void OnDestroy()
     {
@@ -52,7 +52,6 @@ public class NPCController : MonoBehaviour
             _npcControllers.Add(this); // we register only if initialized 
             OnNPCAdded?.Invoke(this);
         }
-        _isInit = true;
     }
 
 
@@ -79,6 +78,11 @@ public class NPCController : MonoBehaviour
         return null;
     }
 
+    // Call when a dialogue is starting
+    public void OnDialogueStarted()
+    {
+        _walkManager.Stop();
+    }
 
     public static List<NPCController> GetNPCControllers() => _npcControllers;
 
