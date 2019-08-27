@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8493254526440787071}
-  - component: {fileID: 8493254526440787056}
   - component: {fileID: 2858046917800818503}
   - component: {fileID: 9006019366964258160}
   m_Layer: 0
-  m_Name: NPCDialogueManager
+  m_Name: NPCDialogueRunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,27 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8493254526440787056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8493254526440787070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sourceText: []
-  stringGroups: []
-  shouldOverrideLanguage: 0
-  overrideLanguage: 10
-  variableStorage: {fileID: 2858046917800818503}
-  dialogueUI: {fileID: 1055954055480275274}
-  startNode: Start
-  startAutomatically: 0
-  automaticCommands: 0
 --- !u!114 &2858046917800818503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,9 +59,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae32ee0299594e4e986019ded87a429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueRunner: {fileID: 8493254526440787056}
-  _dialogueUI: {fileID: 1055954055480275274}
-  _allNpcDataList: {fileID: 11400000, guid: 6ffa9fcbe70df4a7eb48fc24128c31a7, type: 2}
+  sourceText: []
+  stringGroups: []
+  shouldOverrideLanguage: 0
+  overrideLanguage: 10
+  variableStorage: {fileID: 2858046917800818503}
+  dialogueUI: {fileID: 1055954055480275274}
+  startNode: 
+  startAutomatically: 0
+  automaticCommands: 0
 --- !u!1001 &4529680727869553515
 PrefabInstance:
   m_ObjectHideFlags: 0

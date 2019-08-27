@@ -89,14 +89,14 @@ public class NPCSimulatedController : MonoBehaviour
     }
 
 
-    public void OnNPCCreated(NPCController npc)
+    private void OnNPCCreated(NPCController npc)
     {
         if (npc.GetNPCData() == _npcData)
             Disable();
     }
 
 
-    public void OnNPCDestroyed(NPCController npc)
+    private void OnNPCDestroyed(NPCController npc)
     {
         if (npc.GetNPCData() == _npcData)
             Enable();

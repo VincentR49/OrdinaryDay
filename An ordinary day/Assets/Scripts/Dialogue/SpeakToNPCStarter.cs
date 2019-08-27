@@ -10,13 +10,14 @@ public class SpeakToNPCStarter : MonoBehaviour
     private float _interactionRadius;
 
     private List<NPCController> InstanciateNPCs => NPCController.GetNPCControllers();
-    private NPCDialogueManager _dialogueManager;
+    private NPCDialogueRunner _npcdialogueRunner;
     private WalkManager _walkManager;
     private SpriteDirectioner _spriteDirectioner;
-    
+
+
     private void Start()
     {
-		_dialogueManager = FindObjectOfType<NPCDialogueManager>(); // change this later
+		_npcdialogueRunner = FindObjectOfType<NPCDialogueRunner>(); // change this later
         _walkManager = GetComponent<WalkManager>();
         _spriteDirectioner = GetComponent<SpriteDirectioner>();
     }
@@ -24,7 +25,7 @@ public class SpeakToNPCStarter : MonoBehaviour
 
     private void Update()
     {
-        if (_dialogueManager != null && _dialogueManager.DialogueIsRunning())
+        if (_npcdialogueRunner != null && _npcdialogueRunner.isDialogueRunning)
             return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -36,7 +37,7 @@ public class SpeakToNPCStarter : MonoBehaviour
                     _walkManager.Stop();
                 if (_spriteDirectioner)
                     _spriteDirectioner.FaceTowards(npc.transform);
-                _dialogueManager.StartDialogue(npc);
+                _npcdialogueRunner.StartDialogue(npc);
             }
         }
     }

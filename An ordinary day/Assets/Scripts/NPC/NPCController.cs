@@ -69,15 +69,8 @@ public class NPCController : MonoBehaviour
     }
     #endregion
 
-    public static NPCController Get(NPCData npcData)
-    {
-        foreach (var controller in _npcControllers)
-        {
-            if (controller._npcData == npcData)
-                return controller;
-        }
-        return null;
-    }
+
+    #region Dialogue
 
     // Call when a dialogue is starting
     public void OnDialogueStarted(Transform speakerTransform)
@@ -94,9 +87,23 @@ public class NPCController : MonoBehaviour
         // more polite ;)
         _spriteDirectioner.FaceTowards(speakerTransform);
     }
+    #endregion
 
+
+    #region Accessors
 
     public static List<NPCController> GetNPCControllers() => _npcControllers;
-
     public NPCData GetNPCData() => _npcData;
+
+
+    public static NPCController Get(NPCData npcData)
+    {
+        foreach (var controller in _npcControllers)
+        {
+            if (controller._npcData == npcData)
+                return controller;
+        }
+        return null;
+    }
+    #endregion
 }
