@@ -26,6 +26,7 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
     private int CurrentPageEndIndex => _dialogue.textInfo.pageInfo[Page - 1].lastCharacterIndex;
     public bool IsDisplayingText { get; private set; }
 
+
     private void Update()
     {
         if (Input.GetKeyDown(ContinueKey))
@@ -49,7 +50,7 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
 
     public IEnumerator SetLine(string text)
     {
-        Debug.Log("Set text: " + text);
+        //Debug.Log("Set text: " + text);
         _dialogue.text = text;
         _dialogue.pageToDisplay = 1;
         _dialogue.maxVisibleCharacters = 0;
@@ -106,7 +107,7 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
 
     private void RefreshNextPageDisplay()
     {
-        Debug.Log("Current page: " + _dialogue.pageToDisplay + ". Total page: " + TotalPage);
+        //Debug.Log("Current page: " + _dialogue.pageToDisplay + ". Total page: " + TotalPage);
         _nextPage.SetActive(!IsAtLastPage());
     }
 

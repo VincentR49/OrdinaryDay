@@ -2,16 +2,15 @@
 using Yarn.Unity;
 
 /// <summary>
-/// Manager (future singleton), dealing with the dialogue with NPC
-/// Probably not so usefull, check if it necessary or not
-/// Will be removed later
+/// Specific DialogueRunner class for NPC dialogues
+/// Ineritate from DialogueRunner of Yarn.
 /// </summary>
 public class NPCDialogueRunner : DialogueRunner
 {
     private void Awake()
     {
         NPCController.OnNPCAdded += OnNPCCreated;
-        // make it persistant between scenes
+        // make it persistant between scenes ?
     }
 
 
@@ -24,9 +23,7 @@ public class NPCDialogueRunner : DialogueRunner
     private void OnNPCCreated(NPCController npc)
     {
         var npcData = npc.GetNPCData();
-        if (npcData.YarnDialogue != null
-                
-                && !NodeExists(npcData.StartNodeStory))
+        if (npcData.YarnDialogue != null && !NodeExists(npcData.StartNodeStory))
         {
             Debug.Log("Added script on dialogue runner: " + npcData.StartNodeStory);
             AddScript(npcData.YarnDialogue);

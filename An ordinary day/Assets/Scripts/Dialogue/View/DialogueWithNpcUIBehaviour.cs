@@ -2,6 +2,7 @@
 using UnityEngine;
 using Yarn;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Manage dialogue view with NPC
@@ -25,6 +26,8 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     [SerializeField]
     private NPCDataList _allNpcs;
 
+
+    private NPCDialogueVariableStorage _variableStorage;
     private CharacterDialogueDisplay CurrentDialogueDisplay
         => _playerDisplay.IsActive() ? _playerDisplay : (CharacterDialogueDisplay) _npcDisplay;
     
@@ -37,6 +40,12 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         ResetDisplays();
         _playerDisplay.Init(_playerData);
         _dialogueContainer.SetActive(false);
+    }
+
+
+    private void Start()
+    {
+        _variableStorage = FindObjectOfType<NPCDialogueVariableStorage>();
     }
 
     #region Yarn Override methods
@@ -74,8 +83,9 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
 
     public override IEnumerator RunLine(Line line)
     {
-        Debug.Log("Begin runLine: " + line.text);
+        //Debug.Log("Begin runLine: " + line.text);
         var lineSpeaker = ExtractSpeakerTag(ref line);
+        line.text = ParseVariables(line.text);
         // First line of the dialogue: 
         if (string.IsNullOrEmpty(_speaker))
         {
@@ -94,7 +104,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
             ChangeSpeaker(lineSpeaker);
             yield return CurrentDialogueDisplay.SetLine(line.text);
         }
-        Debug.Log("RunLine ( " + _speaker + ") :" + line.text);
+        Debug.Log("RunLine (" + _speaker + "): " + line.text);
     }
 
  
@@ -111,7 +121,6 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // The option selection is managed inside the PlayerDialogueDisplay class
         while (!_playerDisplay.HasChoosenAnOption)
             yield return null;
-        Debug.Log("Option was choosed");
         _optionWasJustChosen = true;
     }
     #endregion
@@ -151,6 +160,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     /// <returns></returns>
     private string ExtractSpeakerTag(ref Line line)
     {
+        // todo use regexp instead (cleaner)
         var separatorIndex = line.text.IndexOf(':');
         if (separatorIndex > 0)
         {
@@ -174,6 +184,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         }
         else
         {
+            // the speaker tag for npc corresponds to their first name
             var npcData = _allNpcs.Items.FirstOrDefault(npc => npc.FirstName.Equals(_speaker));
             if (npcData == null)
             {
@@ -200,6 +211,35 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     }
 
     #endregion
+
+
+    #region Variable Display
+
+    private string ParseVariables(string originalText)
+    {
+        Regex reg = new Regex(@"\[\$(.*?)\]");
+        return reg.Replace(originalText, delegate (Match m) {
+            return ReplaceVariableTagByValue(m.Value);
+        });
+    }
+
+
+    private string ReplaceVariableTagByValue(string variableTag)
+    {
+        variableTag = variableTag.Replace("[$", "");
+        variableTag = variableTag.Replace("]", "");
+        var value = _variableStorage.GetValue(variableTag);
+        if (value == Value.NULL)
+        {
+            Debug.LogError("Couldnt find any variable with the tag: " + variableTag + ", inside the variableStorage");
+            return variableTag;
+        }
+        return value.AsString;
+    }
+
+    #endregion
+
+
 
     private void ResetDisplays()
     {

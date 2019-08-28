@@ -2,10 +2,20 @@
 	{
 		"title": "Vincent.Story",
 		"tags": "",
-		"body": "Vincent: Bonjour,\nJe m'appelle Vincent.\nVous êtes?\nPlayer: Bonjour.\nJe m'appelle PLAYERNAME.\nVincent: Enchanté.\nOn se voit plus tard !\nPlayer: A toute !",
+		"body": "<<if visited(\"Vincent.Story\") is false>>\n    [[Vincent.FirstVisit]]\n<<else>>\n    Vincent: Rebonjour [$playerName]\n    Player: Rebonjour !\n    Vincent: Je suis occupé.\n    On se voit plus tard !\n    Player: Ok !\n    A toute !\n<<endif>>",
 		"position": {
-			"x": 540,
-			"y": 260
+			"x": 407,
+			"y": 113
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Vincent.FirstVisit",
+		"tags": "",
+		"body": "Vincent: Bonjour,\nJe m'appelle Vincent.\nVous êtes?\nPlayer: Bonjour.\nJe m'appelle [$playerName].\nVincent: Enchanté.\nOn se voit plus tard !\nPlayer: A toute !",
+		"position": {
+			"x": 305,
+			"y": 361
 		},
 		"colorID": 0
 	}

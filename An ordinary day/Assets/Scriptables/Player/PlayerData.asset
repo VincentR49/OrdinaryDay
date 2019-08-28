@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfad74a4c44994601b5f3f0eae809159, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  FirstName: Player
-  LastName: 
+  FirstName: Bob
+  LastName: Hopkins
   CardinalSprite: {fileID: 11400000, guid: e1e1bbaf67b32411195b03ad31ee6bea, type: 2}
   WalkingAnimation: {fileID: 11400000, guid: 60a91e1c6d2254107a94b031ef45e610, type: 2}
   DialogueTag: Player
