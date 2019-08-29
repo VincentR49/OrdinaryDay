@@ -25,7 +25,6 @@ public class NPCDialogueVariableStorage : VariableStorageBehaviour
     {
         Clear();
         _variables.Add(DialogueVariables.PlayerName, new Yarn.Value(_playerData.FirstName + " " + _playerData.LastName));
-        Debug.Log("Variable PlayerName:" + _variables);
     }
 
     /// Set a variable's value
@@ -33,7 +32,7 @@ public class NPCDialogueVariableStorage : VariableStorageBehaviour
     {
         // Copy this value into our list
         _variables[variableName] = new Yarn.Value(value);
-        Debug.Log("Set variable: " + variableName + ": " + value);
+        //Debug.Log("Set variable: " + variableName + ": " + value);
     }
 
     /// Get a variable's value

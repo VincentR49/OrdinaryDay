@@ -226,6 +226,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
 
     private string ReplaceVariableTagByValue(string variableTag)
     {
+        // variable tag is in this form : [$Tag]
         variableTag = variableTag.Replace("[$", "");
         variableTag = variableTag.Replace("]", "");
         var value = _variableStorage.GetValue(variableTag);

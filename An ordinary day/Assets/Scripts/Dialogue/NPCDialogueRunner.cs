@@ -23,6 +23,7 @@ public class NPCDialogueRunner : DialogueRunner
     private void OnNPCCreated(NPCController npc)
     {
         var npcData = npc.GetNPCData();
+        // We add script progresively, as NPC spawns
         if (npcData.YarnDialogue != null && !NodeExists(npcData.StartNodeStory))
         {
             Debug.Log("Added script on dialogue runner: " + npcData.StartNodeStory);
