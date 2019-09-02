@@ -23,13 +23,14 @@ public class SpriteAnimator : MonoBehaviour
 
     public void StartAnimation(AnimationData animation)
     {
-        StopCurrentAnimation();
         if (animation == null)
         {
             Debug.LogError("Cannot run null animation");
         }
         else
         {
+            StopCurrentAnimation();
+            //Debug.Log("StartAnimation");
             _currentAnimationRoutine = StartCoroutine(AnimationCoroutine(animation));
         }
     }
@@ -39,10 +40,11 @@ public class SpriteAnimator : MonoBehaviour
     {
         if (IsAnimationRunning)
         {
+            //Debug.Log("Stop current animation");
             if (_currentAnimation.ReturnToFirstSpriteWhenFinished)
                 _spriteRenderer.sprite = _currentAnimation.Sprites[0];
             _currentAnimation = null;
-            StopCoroutine(_currentAnimationRoutine);
+            StopAllCoroutines();
         }
     }
 

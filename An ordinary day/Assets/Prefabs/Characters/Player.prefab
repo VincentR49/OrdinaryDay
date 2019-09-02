@@ -114,8 +114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _walkManager: {fileID: 3363905535439149627}
-  spriteDirectioner: {fileID: 6313559178790158276}
+  _spriteDirectioner: {fileID: 6313559178790158276}
   _playerData: {fileID: 11400000, guid: e5a95cfcc20c442a595fc5531fa0bea9, type: 2}
+  _speakToNPCStarter: {fileID: 949811407328490242}
 --- !u!114 &3363905535439149627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,4 +196,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionRadius: 1
-  _playerController: {fileID: 8218512808253011856}

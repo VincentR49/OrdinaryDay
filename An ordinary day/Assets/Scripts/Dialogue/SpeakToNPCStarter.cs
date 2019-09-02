@@ -23,27 +23,30 @@ public class SpeakToNPCStarter : MonoBehaviour
     }
 
 
-    private void Update()
+    public bool StartDialogueIfPossible()
     {
-        if (_npcdialogueRunner != null && _npcdialogueRunner.isDialogueRunning)
-            return;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            var npc = CheckForNearbyNPC();
-            if (npc != null)
-            {
-                npc.OnDialogueStarted(transform);
-                if (_walkManager)
-                    _walkManager.Stop();
-                if (_spriteDirectioner)
-                    _spriteDirectioner.FaceTowards(npc.transform);
-                _npcdialogueRunner.StartDialogue(npc);
-            }
-        }
+        if (_npcdialogueRunner.isDialogueRunning)
+            return false;
+        var npc = CheckForNearbyNPC();
+        if (npc == null)
+            return false;
+        StartDialogue(npc);
+        return true;
     }
 
 
-    private NPCController CheckForNearbyNPC()
+    public void StartDialogue(NPCController npc)
+    {
+        npc.OnDialogueStarted(transform);
+        if (_walkManager)
+            _walkManager.Stop();
+        if (_spriteDirectioner)
+            _spriteDirectioner.FaceTowards(npc.transform);
+        _npcdialogueRunner.StartDialogue(npc);
+    }
+
+
+    public NPCController CheckForNearbyNPC()
     {
         Debug.Log("CheckForNearbyNPC");
         if (InstanciateNPCs == null)
