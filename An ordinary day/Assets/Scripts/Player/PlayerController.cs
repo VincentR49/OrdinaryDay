@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private PlayerData _playerData;
     [SerializeField]
     private SpeakToNPCStarter _speakToNPCStarter;
+    [SerializeField]
+    private InteractWithObjectStarter _interactWithObjectStarter;
+
 
     private Vector2 _moveDirection;
 
@@ -34,6 +37,13 @@ public class PlayerController : MonoBehaviour
         _moveDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (Input.GetKeyDown(KeyCode.Space)) // Interaction Key
         {
+            // Interact with objects
+            var couldInteractWithObject = _interactWithObjectStarter.StartInteractionIfPossible();
+            if (couldInteractWithObject)
+            {
+                _moveDirection = Vector2.zero;
+                return;
+            }
             // Check for Npc to speak to
             var couldSpeakToNpc = _speakToNPCStarter.StartDialogueIfPossible();
             if (couldSpeakToNpc)
@@ -41,7 +51,6 @@ public class PlayerController : MonoBehaviour
                 _moveDirection = Vector2.zero;
                 return;
             }
-            // Interact with objects
         }
     }
 

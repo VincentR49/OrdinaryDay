@@ -37,4 +37,7 @@ public class SpriteDirectioner : MonoBehaviour
     {
         SetDirection(Utils.GetDirection(other.position - transform.position));
     }
+
+
+    public Direction GetDirection() => _direction;
 }

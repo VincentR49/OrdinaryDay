@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2858046917800818503}
   - component: {fileID: 9006019366964258160}
   m_Layer: 0
-  m_Name: NPCDialogueRunner
+  m_Name: PlayerDialogueManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

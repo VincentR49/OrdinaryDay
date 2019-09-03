@@ -5,7 +5,7 @@ using Yarn.Unity;
 /// <summary>
 /// Storing variable system for npc dialogue
 /// </summary>
-public class NPCDialogueVariableStorage : VariableStorageBehaviour
+public class DialogueVariableStorage : VariableStorageBehaviour
 {
     [Header("PlayerData")]
     [SerializeField]

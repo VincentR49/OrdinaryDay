@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 /// <summary>
 /// Manage dialogue view with NPC
 /// </summary>
-public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
+public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
 {
     private const KeyCode ContinueKey = KeyCode.Space;
 
@@ -26,13 +26,13 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     [SerializeField]
     private NPCDataList _allNpcs;
 
-
-    private NPCDialogueVariableStorage _variableStorage;
+    private DialogueVariableStorage _variableStorage;
     private CharacterDialogueDisplay CurrentDialogueDisplay
         => _playerDisplay.IsActive() ? _playerDisplay : (CharacterDialogueDisplay) _npcDisplay;
     
     private string _speaker;
     private bool _optionWasJustChosen;
+
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
 
     private void Start()
     {
-        _variableStorage = FindObjectOfType<NPCDialogueVariableStorage>();
+        _variableStorage = FindObjectOfType<DialogueVariableStorage>();
     }
 
     #region Yarn Override methods
@@ -239,8 +239,6 @@ public class DialogueWithNpcUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     }
 
     #endregion
-
-
 
     private void ResetDisplays()
     {

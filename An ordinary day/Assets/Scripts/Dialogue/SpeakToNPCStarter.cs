@@ -10,14 +10,14 @@ public class SpeakToNPCStarter : MonoBehaviour
     private float _interactionRadius;
 
     private List<NPCController> InstanciateNPCs => NPCController.GetNPCControllers();
-    private NPCDialogueRunner _npcdialogueRunner;
+    private PlayerDialogueRunner _dialogueRunner;
     private WalkManager _walkManager;
     private SpriteDirectioner _spriteDirectioner;
 
 
     private void Start()
     {
-		_npcdialogueRunner = FindObjectOfType<NPCDialogueRunner>(); // change this later
+		_dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
         _walkManager = GetComponent<WalkManager>();
         _spriteDirectioner = GetComponent<SpriteDirectioner>();
     }
@@ -25,7 +25,7 @@ public class SpeakToNPCStarter : MonoBehaviour
 
     public bool StartDialogueIfPossible()
     {
-        if (_npcdialogueRunner.isDialogueRunning)
+        if (_dialogueRunner.isDialogueRunning)
             return false;
         var npc = CheckForNearbyNPC();
         if (npc == null)
@@ -42,7 +42,7 @@ public class SpeakToNPCStarter : MonoBehaviour
             _walkManager.Stop();
         if (_spriteDirectioner)
             _spriteDirectioner.FaceTowards(npc.transform);
-        _npcdialogueRunner.StartDialogue(npc);
+        _dialogueRunner.StartDialogue(npc.GetNPCData().StartNodeStory);
     }
 
 
@@ -51,6 +51,7 @@ public class SpeakToNPCStarter : MonoBehaviour
         Debug.Log("CheckForNearbyNPC");
         if (InstanciateNPCs == null)
             return null;
+        // Better to check on the colliders around maybe??
         foreach (var npcController in InstanciateNPCs)
         {
             if (Utils.Distance(transform.position, npcController.transform.position) < _interactionRadius)

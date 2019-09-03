@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba2129c569d746189f202c4384515b5, type: 3}
+  m_Name: JisooHouse
+  m_EditorClassIdentifier: 
+  Tag: JisooHouse
+  YarnDialogue: {fileID: 4900000, guid: 64d4de15edaf7428db3c60a8d68148b3, type: 3}
+  StartNodeStory: JisooHouse
+  DialoguePicture: {fileID: 21300000, guid: 3af4fbc94131e436f9de002ef87e1460, type: 3}

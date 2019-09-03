@@ -2,10 +2,10 @@
 using Yarn.Unity;
 
 /// <summary>
-/// Specific DialogueRunner class for NPC dialogues
+/// Specific DialogueRunner class for Player based dialogue
 /// Ineritate from DialogueRunner of Yarn.
 /// </summary>
-public class NPCDialogueRunner : DialogueRunner
+public class PlayerDialogueRunner : DialogueRunner
 {
     private void Awake()
     {
@@ -29,12 +29,5 @@ public class NPCDialogueRunner : DialogueRunner
             Debug.Log("Added script on dialogue runner: " + npcData.StartNodeStory);
             AddScript(npcData.YarnDialogue);
         }
-    }
-
-
-    public void StartDialogue(NPCController npc)
-    {
-        Debug.Log("Start dialogue with " + npc.GetNPCData().FirstName);
-        StartDialogue(npc.GetNPCData().StartNodeStory);
     }
 }
