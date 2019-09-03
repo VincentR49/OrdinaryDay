@@ -10,6 +10,7 @@ public class PlayerDialogueRunner : DialogueRunner
     private void Awake()
     {
         NPCController.OnNPCAdded += OnNPCCreated;
+        InteractibleObject.OnInteractibleObjectCreated += OnInteractibleObjectCreated;
         // make it persistant between scenes ?
     }
 
@@ -17,6 +18,7 @@ public class PlayerDialogueRunner : DialogueRunner
     private void OnDestroy()
     {
         NPCController.OnNPCAdded -= OnNPCCreated;
+        InteractibleObject.OnInteractibleObjectCreated -= OnInteractibleObjectCreated;
     }
 
 
@@ -28,6 +30,17 @@ public class PlayerDialogueRunner : DialogueRunner
         {
             Debug.Log("Added script on dialogue runner: " + npcData.StartNodeStory);
             AddScript(npcData.YarnDialogue);
+        }
+    }
+
+
+    private void OnInteractibleObjectCreated(InteractibleObject interactibleObject)
+    {
+        var obj = interactibleObject.GetData();
+        if (obj.YarnDialogue != null && !NodeExists(obj.StartNodeStory))
+        {
+            Debug.Log("Added script on dialogue runner: " + obj.StartNodeStory);
+            AddScript(obj.YarnDialogue);
         }
     }
 }

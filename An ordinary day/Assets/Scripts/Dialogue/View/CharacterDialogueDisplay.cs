@@ -6,7 +6,7 @@ using System.Collections;
 /// <summary>
 /// Manage the display of a dialogue for a given character
 /// </summary>
-public abstract class CharacterDialogueDisplay : MonoBehaviour
+public class CharacterDialogueDisplay : MonoBehaviour
 {
     private static KeyCode ContinueKey = KeyCode.Space;
 
@@ -25,6 +25,13 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
     private int Page => _dialogue.pageToDisplay;
     private int CurrentPageEndIndex => _dialogue.textInfo.pageInfo[Page - 1].lastCharacterIndex;
     public bool IsDisplayingText { get; private set; }
+
+
+    public void Init(Sprite picture, string nameText = "")
+    {
+        _picture.sprite = picture;
+        _name.text = nameText;
+    }
 
 
     private void Update()
@@ -58,14 +65,14 @@ public abstract class CharacterDialogueDisplay : MonoBehaviour
     }
 
 
-    public virtual void Reset()
+    public void Reset()
     {
         _dialogue.text = "";
         _dialogue.pageToDisplay = 1;
         _nextPage.SetActive(false);
     }
 
-
+    
     public IEnumerator AppendLine(string textToDisplay)
     {
         if (string.IsNullOrEmpty(_dialogue.text))

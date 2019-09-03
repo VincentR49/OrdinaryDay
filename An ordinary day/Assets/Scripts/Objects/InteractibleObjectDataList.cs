@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptables/Interactible Objects List")]
-public class InteractibleObjectsDataList : DataList<InteractibleObjectData>
+public class InteractibleObjectDataList : DataList<InteractibleObjectData>
 {
     
 }

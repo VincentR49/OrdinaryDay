@@ -20,19 +20,28 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     [SerializeField]
     private PlayerData _playerData;
 
-    [Header("NPC")]
+    [Header("Other")]
     [SerializeField]
-    private NPCDialogueDisplay _npcDisplay;
+    private CharacterDialogueDisplay _otherDisplay;
     [SerializeField]
     private NPCDataList _allNpcs;
+    [SerializeField]
+    private InteractibleObjectDataList _allObjects;
 
     private DialogueVariableStorage _variableStorage;
     private CharacterDialogueDisplay CurrentDialogueDisplay
-        => _playerDisplay.IsActive() ? _playerDisplay : (CharacterDialogueDisplay) _npcDisplay;
+        => _playerDisplay.IsActive() ? _playerDisplay : (CharacterDialogueDisplay) _otherDisplay;
     
     private string _speaker;
     private bool _optionWasJustChosen;
 
+
+    private enum Speaker
+    {
+        Player,
+        NPC,
+        Object
+    }
 
     private void Awake()
     {
@@ -56,7 +65,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         Debug.Log("Dialogue starting!");
         _speaker = null;
         _playerDisplay.Show(false);
-        _npcDisplay.Show(false);
+        _otherDisplay.Show(false);
         _dialogueContainer.SetActive(true);
         GamePauser.Pause();
         yield break;
@@ -89,6 +98,11 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // First line of the dialogue: 
         if (string.IsNullOrEmpty(_speaker))
         {
+            if (string.IsNullOrEmpty(lineSpeaker))
+            {
+                Debug.LogError("The first speaker of the dialogue is unknown. Will assign the player Tag.");
+                lineSpeaker = _playerData.DialogueTag;
+            }
             ChangeSpeaker(lineSpeaker);
             yield return CurrentDialogueDisplay.SetLine(line.text);
         }
@@ -181,33 +195,37 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         if (_speaker.Equals(_playerData.DialogueTag))
         {
             PlayerSpeaks();
+            return;
         }
-        else
+        // the speaker tag for npc corresponds to their first name
+        var npcData = _allNpcs.Items.FirstOrDefault(npc => npc.FirstName.Equals(_speaker));
+        if (npcData != null)
         {
-            // the speaker tag for npc corresponds to their first name
-            var npcData = _allNpcs.Items.FirstOrDefault(npc => npc.FirstName.Equals(_speaker));
-            if (npcData == null)
-            {
-                Debug.LogError("Couldnt find any NPC with the given tag: " + _speaker);
-                return;
-            }
-            NpcSpeaks(npcData);
+            OtherSpeaks(npcData.DialoguePicture, npcData.FirstName);
+            return;
         }
+        var objectData = _allObjects.Items.FirstOrDefault(obj => obj.Tag.Equals(_speaker));
+        if (objectData != null)
+        {
+            OtherSpeaks(objectData.DialoguePicture);
+            return;
+        }
+        Debug.LogError("Couldnt find any NPC  or object with the given tag: " + _speaker);
     }
 
-
+    
     private void PlayerSpeaks()
     {
         _playerDisplay.Show(true);
-        _npcDisplay.Show(false);
+        _otherDisplay.Show(false);
     }
 
 
-    private void NpcSpeaks(NPCData npcData)
+    private void OtherSpeaks(Sprite picture, string nameText = "")
     {
         _playerDisplay.Show(false);
-        _npcDisplay.Init(npcData);
-        _npcDisplay.Show(true);
+        _otherDisplay.Init(picture, nameText);
+        _otherDisplay.Show(true);
     }
 
     #endregion
@@ -243,6 +261,6 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     private void ResetDisplays()
     {
         _playerDisplay.Reset();
-        _npcDisplay.Reset();
+        _otherDisplay.Reset();
     }
 }

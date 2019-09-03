@@ -10,17 +10,21 @@ public class InteractibleObject : MonoBehaviour
     private InteractibleObjectData _interactibleObjectData;
 
     private static List<InteractibleObject> _interactibleObjects = new List<InteractibleObject>();
-
+    public delegate void InstanciationHandler(InteractibleObject interactibleObject);
+    public static event InstanciationHandler OnInteractibleObjectCreated;
+    public static event InstanciationHandler OnInteractibleObjectDestroyed;
     
     private void Awake()
     {
         _interactibleObjects.Add(this);
+        OnInteractibleObjectCreated?.Invoke(this);
     }
 
 
     private void OnDestroy()
     {
         _interactibleObjects.Remove(this);
+        OnInteractibleObjectDestroyed?.Invoke(this);
     }
 
 
