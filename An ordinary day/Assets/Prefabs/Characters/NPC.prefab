@@ -143,7 +143,7 @@ MonoBehaviour:
   - GroundTag: Road
     Multiplier: 1.2
   _spriteAnimator: {fileID: 4197437973840161365}
-  _walkAnimation: {fileID: 0}
+  _spriteDirectioner: {fileID: 4197437973840161363}
 --- !u!114 &4197437973840161363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e13b5ace870a45d3ac76c95045f42ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardinalSprite: {fileID: 0}
 --- !u!114 &1999833727167035478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,5 +262,5 @@ MonoBehaviour:
   _walkManager: {fileID: 4197437973840161361}
   _spriteDirectioner: {fileID: 4197437973840161363}
   _scheduleHandler: {fileID: 6740313738230560726}
-  _pnjData: {fileID: 0}
+  _npcData: {fileID: 0}
   _initOnStart: 0

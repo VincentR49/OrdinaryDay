@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 /// <summary>
 /// Behaviour that enables to start an interaction with a given interactible objects
@@ -12,7 +11,6 @@ public class InteractWithObjectStarter : MonoBehaviour
     private SpriteDirectioner _spriteDirectioner;
 
     private PlayerDialogueRunner _dialogueRunner;
-    private List<InteractibleObject> InstanciatedObjects => InteractibleObject.GetInteractibleObjects();
     private Direction Direction => _spriteDirectioner.GetDirection();
 
     private void Start()
@@ -42,15 +40,35 @@ public class InteractWithObjectStarter : MonoBehaviour
     public InteractibleObject CheckForNearbyObjects()
     {
         Debug.Log("CheckForNearbyObjects");
-        if (InstanciatedObjects == null)
+        var nearbyColliders = ScanCollidersNearby();
+        if (nearbyColliders == null)
             return null;
-        // Better to check on the colliders around maybe??
-        foreach (var obj in InstanciatedObjects)
+        foreach (var coll in nearbyColliders)
         {
-            // TODO need to face the object
-            if (Utils.Distance(transform.position, obj.transform.position) < _interactionRadius)
-                return obj;
+            var intObj = coll.GetComponent<InteractibleObject>();
+            if (intObj != null)
+            {
+                // the current caracter should face the object in order to interact with it
+                if (IsFacingObject(intObj.transform))
+                {
+                    return intObj;
+                }
+            }   
         }
         return null;
+    }
+
+
+    private Collider2D[] ScanCollidersNearby()
+    {
+        return Physics2D.OverlapCircleAll(transform.position, _interactionRadius);
+    }
+
+
+    private bool IsFacingObject(Transform otherTransform)
+    {
+        var directionToObject = Utils.GetDirection(otherTransform.position - transform.position);
+        Debug.Log("Direction to object: " + directionToObject);
+        return directionToObject == Direction;
     }
 }

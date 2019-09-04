@@ -27,6 +27,8 @@ public class WalkManager : MonoBehaviour
     [Header("Display")]
     [SerializeField]
     private SpriteAnimator _spriteAnimator = default;
+    [SerializeField]
+    private SpriteDirectioner _spriteDirectioner;
 
     private CardinalAnimationData _walkAnimation;
     private Rigidbody2D _rb;
@@ -40,10 +42,10 @@ public class WalkManager : MonoBehaviour
     private enum State
     {
         Stop,
-        Left,
-        Right,
-        Top,
-        Down
+        West,
+        East,
+        North,
+        South
     }
 
     private State _state = State.Stop;
@@ -92,9 +94,9 @@ public class WalkManager : MonoBehaviour
         if (absX < Epsilon && absY < Epsilon)
             return State.Stop;
         else if (absX >= absY)
-            return direction.x > 0 ? State.Right : State.Left;
+            return direction.x > 0 ? State.East : State.West;
         else
-            return direction.y > 0 ? State.Top : State.Down;
+            return direction.y > 0 ? State.North : State.South;
 
     }
 
@@ -118,21 +120,26 @@ public class WalkManager : MonoBehaviour
         }
         switch (state)
         {
-            case State.Top:
+            case State.North:
+                _spriteDirectioner.SetDirection(Direction.North);
                 _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.North));
                 break;
-            case State.Down:
+            case State.South:
+                _spriteDirectioner.SetDirection(Direction.South);
                 _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.South));
                 break;
-            case State.Left:
-                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.East));
-                break;
-            case State.Right:
+            case State.West:
+                _spriteDirectioner.SetDirection(Direction.West);
                 _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.West));
                 break;
+            case State.East:
+                _spriteDirectioner.SetDirection(Direction.East);
+                _spriteAnimator.StartAnimation(_walkAnimation.Get(Direction.East));
+                break;
             case State.Stop:
-            default:
+            default:  
                 _spriteAnimator.StopCurrentAnimation();
+                _spriteDirectioner.RefreshSprite();
                 break;
         }
     }

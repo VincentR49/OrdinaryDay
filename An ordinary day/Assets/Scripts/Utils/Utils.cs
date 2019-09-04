@@ -36,7 +36,7 @@ public static class Utils
         var absX = Mathf.Abs(v.x);
         var absY = Mathf.Abs(v.y);
         if (absX >= absY)
-            return v.x > 0 ? Direction.West : Direction.East;
+            return v.x > 0 ? Direction.East : Direction.West;
         else
             return v.y > 0 ? Direction.North : Direction.South;
     }

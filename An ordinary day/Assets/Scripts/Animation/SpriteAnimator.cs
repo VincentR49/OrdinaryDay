@@ -10,7 +10,6 @@ public class SpriteAnimator : MonoBehaviour
 
     private bool IsAnimationRunning => _currentAnimation != null;
 
-    private Coroutine _currentAnimationRoutine;
     private AnimationData _currentAnimation;
     private SpriteRenderer _spriteRenderer;
 
@@ -30,8 +29,7 @@ public class SpriteAnimator : MonoBehaviour
         else
         {
             StopCurrentAnimation();
-            //Debug.Log("StartAnimation");
-            _currentAnimationRoutine = StartCoroutine(AnimationCoroutine(animation));
+            StartCoroutine(AnimationCoroutine(animation));
         }
     }
 

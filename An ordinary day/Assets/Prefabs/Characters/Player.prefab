@@ -136,6 +136,7 @@ MonoBehaviour:
   - GroundTag: Road
     Multiplier: 1.2
   _spriteAnimator: {fileID: 3175301384753072671}
+  _spriteDirectioner: {fileID: 6313559178790158276}
 --- !u!50 &800747845
 Rigidbody2D:
   serializedVersion: 4
@@ -210,5 +211,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954020b596db54ef2b9eeba0a8b9828f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactionRadius: 1
+  _interactionRadius: 0.5
   _spriteDirectioner: {fileID: 6313559178790158276}

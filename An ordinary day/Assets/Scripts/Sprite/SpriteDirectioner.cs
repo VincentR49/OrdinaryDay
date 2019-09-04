@@ -13,7 +13,7 @@ public class SpriteDirectioner : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void SetDirection(Direction direction)
+    public void SetSprite(Direction direction)
     {
         if (_cardinalSprite == null)
         {
@@ -26,16 +26,28 @@ public class SpriteDirectioner : MonoBehaviour
         _spriteRenderer.sprite = sprite.Sprite;
     }
 
+
+    public void RefreshSprite()
+    {
+        SetSprite(_direction);
+    }
+
+
+    public void SetDirection(Direction direction)
+    {
+        _direction = direction;
+    }
+
     public void Init(CardinalSpriteData sprite)
     {
         _cardinalSprite = sprite;
-        SetDirection(InitDirection);
+        SetSprite(InitDirection);
     }
 
 
     public void FaceTowards(Transform other)
     {
-        SetDirection(Utils.GetDirection(other.position - transform.position));
+        SetSprite(Utils.GetDirection(other.position - transform.position));
     }
 
 
