@@ -2200,9 +2200,83 @@ Transform:
   - {fileID: 760965372}
   - {fileID: 1248171526}
   - {fileID: 2079135640}
+  - {fileID: 720227981}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &720227980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720227981}
+  - component: {fileID: 720227983}
+  - component: {fileID: 720227982}
+  m_Layer: 0
+  m_Name: HouseDoor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &720227981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720227980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.62, y: 3.26, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 602114442}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &720227982
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720227980}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1, y: -0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &720227983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720227980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbf8a693ccf3496bb3687ed9a954039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactibleObjectData: {fileID: 11400000, guid: 77da9d21eea4f4e07a015203d10134f6,
+    type: 2}
+  _priorityLevel: 1
 --- !u!1 &760965371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,6 +2323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactibleObjectData: {fileID: 11400000, guid: 3f6f75923a23c4a54bc801f4184de661,
     type: 2}
+  _priorityLevel: 0
 --- !u!61 &760965374
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2489,6 +2564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactibleObjectData: {fileID: 11400000, guid: 3f6f75923a23c4a54bc801f4184de661,
     type: 2}
+  _priorityLevel: 0
 --- !u!61 &1248171528
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3087,6 +3163,7 @@ GameObject:
   - component: {fileID: 2079135640}
   - component: {fileID: 2079135641}
   - component: {fileID: 2079135642}
+  - component: {fileID: 2079135643}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -3122,6 +3199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactibleObjectData: {fileID: 11400000, guid: 9f4d99dafd5d145eb92c87e9e4b6e61f,
     type: 2}
+  _priorityLevel: 0
 --- !u!61 &2079135642
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3135,7 +3213,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.7, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3146,7 +3224,33 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 0.7, y: 2}
+  m_EdgeRadius: 0
+--- !u!61 &2079135643
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079135639}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.7, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
 --- !u!1 &2086601143
 GameObject:

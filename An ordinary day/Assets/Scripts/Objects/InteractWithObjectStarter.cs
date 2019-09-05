@@ -43,19 +43,18 @@ public class InteractWithObjectStarter : MonoBehaviour
         var nearbyColliders = ScanCollidersNearby();
         if (nearbyColliders == null)
             return null;
+        InteractibleObject objCandidate = null;
         foreach (var coll in nearbyColliders)
         {
             var intObj = coll.GetComponent<InteractibleObject>();
-            if (intObj != null)
+            if (intObj != null && IsFacingObject(intObj.transform))
             {
-                // the current caracter should face the object in order to interact with it
-                if (IsFacingObject(intObj.transform))
-                {
-                    return intObj;
-                }
+                if (objCandidate == null
+                        || (objCandidate.GetPriorityLevel() < intObj.GetPriorityLevel()))
+                    objCandidate = intObj;
             }   
         }
-        return null;
+        return objCandidate;
     }
 
 

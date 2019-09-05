@@ -25,6 +25,7 @@ public class DialogueVariableStorage : VariableStorageBehaviour
     {
         Clear();
         _variables.Add(DialogueVariables.PlayerName, new Yarn.Value(_playerData.FirstName + " " + _playerData.LastName));
+        _variables.Add(DialogueVariables.KnowJisooHouseKeyLocation, new Yarn.Value(false));
     }
 
     /// Set a variable's value

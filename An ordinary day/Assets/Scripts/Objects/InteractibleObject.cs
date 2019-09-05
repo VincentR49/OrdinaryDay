@@ -8,6 +8,9 @@ public class InteractibleObject : MonoBehaviour
 {
     [SerializeField]
     private InteractibleObjectData _interactibleObjectData;
+    [SerializeField]
+    [Tooltip("Interaction priority level")]
+    private int _priorityLevel;
 
     private static List<InteractibleObject> _interactibleObjects = new List<InteractibleObject>();
     public delegate void InstanciationHandler(InteractibleObject interactibleObject);
@@ -31,7 +34,7 @@ public class InteractibleObject : MonoBehaviour
     #region Accessors
 
     public InteractibleObjectData GetData() => _interactibleObjectData;
-
+    public int GetPriorityLevel() => _priorityLevel;
     public static List<InteractibleObject> GetInteractibleObjects() => _interactibleObjects;
 
     #endregion

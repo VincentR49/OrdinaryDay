@@ -29,8 +29,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     private InteractibleObjectDataList _allObjects;
 
     private DialogueVariableStorage _variableStorage;
-    private CharacterDialogueDisplay CurrentDialogueDisplay
-        => _playerDisplay.IsActive() ? _playerDisplay : (CharacterDialogueDisplay) _otherDisplay;
+    private CharacterDialogueDisplay CurrentDialogueDisplay => _playerDisplay.IsActive() ? _playerDisplay : _otherDisplay;
     
     private string _speaker;
     private bool _optionWasJustChosen;

@@ -18,5 +18,25 @@
 			"y": 259
 		},
 		"colorID": 0
+	},
+	{
+		"title": "JisooHouseDoor",
+		"tags": "",
+		"body": "La porte de la maison est fermée.\n<<if $knowJisooHouseKeyLocation == true>>\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<endif>>",
+		"position": {
+			"x": -96,
+			"y": 96
+		},
+		"colorID": 0
+	},
+	{
+		"title": "GotJisooHouseKey",
+		"tags": "",
+		"body": "J'ai trouvé la clé de la maison.",
+		"position": {
+			"x": -99,
+			"y": 364
+		},
+		"colorID": 0
 	}
 ]

@@ -12,9 +12,9 @@
 	{
 		"title": "Jisoo.First",
 		"tags": "",
-		"body": "Jisoo: Bonjour !\nPlayer: Bonjour !\nJisoo: Vous êtes nouveau par ici?\nC'est la première fois que je vous vois.\nIl n'y a pas grand monde dans ce village, ça change de voir de nouveaux visages.\n->Oui, je suis de passage pour le travail\n    Jisoo: C'est bien ce que je pensais !\n    <page>Ah j'oubliais, j'ai des courses à faire ce matin.\n    <page>Désolée de partir si brusquement.\n    N'hésitez pas à me rendre visite à l'occasion, je serai ravie de rediscuter avec vous.\n    J'habite dans la petite maison bleue au coin de la rue.\n    Frappez trois fois sur la porte et j'ouvrirai.\n    A bientôt ! 😊\n->Non, je suis né ici\n    Jisoo: Ah bon? Je pensais connaître tout le monde pourtant...\n    Player: Visiblement pas tout le monde !\n    Jisoo: Je dois y aller, j'ai des courses à faire.\n    Player: Pas de soucis, au revoir !\n    Jisoo: Au revoir !",
+		"body": "Jisoo: Bonjour !\nPlayer: Bonjour !\nJisoo: Vous êtes nouveau par ici?\nC'est la première fois que je vous vois.\nIl n'y a pas grand monde dans ce village, ça change de voir de nouveaux visages.\n->Oui, je suis de passage pour le travail\n    Jisoo: C'est bien ce que je pensais !\n    <page>Ah j'oubliais, j'ai des courses à faire ce matin.\n    <page>Désolée de partir si brusquement.\n    N'hésitez pas à me rendre visite à l'occasion, je serai ravie de rediscuter avec vous.\n    J'habite dans la petite maison au nord est.\n    Si vous voulez entrer, la clé est sous le tapis, devant la porte d'entrée.\n    <<set $knowJisooHouseKeyLocation to true>>\n    A bientôt ! 😊\n->Non, je suis né ici\n    Jisoo: Ah bon? Je pensais connaître tout le monde pourtant...\n    Player: Visiblement pas tout le monde !\n    Jisoo: Je dois y aller, j'ai des courses à faire.\n    Player: Pas de soucis, au revoir !\n    Jisoo: Au revoir !",
 		"position": {
-			"x": 322,
+			"x": 323,
 			"y": 90
 		},
 		"colorID": 0

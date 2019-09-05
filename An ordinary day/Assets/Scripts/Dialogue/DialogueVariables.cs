@@ -3,5 +3,6 @@
 /// </summary>
 public static class DialogueVariables
 { 
-    public const string PlayerName = "playerName";
+    public const string PlayerName = "$playerName";
+    public const string KnowJisooHouseKeyLocation = "$knowJisooHouseKeyLocation";
 }
