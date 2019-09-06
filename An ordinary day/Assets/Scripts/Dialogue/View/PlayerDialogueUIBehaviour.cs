@@ -108,7 +108,14 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // We keep the same speaker as before, we just add some text to the previous text input
         else if (string.IsNullOrEmpty(lineSpeaker) || _speaker.Equals(lineSpeaker))
         {
-            yield return CurrentDialogueDisplay.AppendLine(line.text);
+            if (_optionWasJustChosen)
+            {
+                yield return CurrentDialogueDisplay.SetLine(line.text);
+            }
+            else
+            {
+                yield return CurrentDialogueDisplay.AppendLine(line.text);
+            }
         }
         else // we change speaker only if we reached last page of the previous dialogue
              // and the user pressed the continue key
@@ -117,6 +124,8 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
             ChangeSpeaker(lineSpeaker);
             yield return CurrentDialogueDisplay.SetLine(line.text);
         }
+        if (_optionWasJustChosen)
+            _optionWasJustChosen = false;
         Debug.Log("RunLine (" + _speaker + "): " + line.text);
     }
 
@@ -153,7 +162,6 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // We display directly the new content
         if (_optionWasJustChosen)
         {
-            _optionWasJustChosen = false;
             yield break;
         }
         // Then, and only then, we wait for user input to display the dialogue options
@@ -244,7 +252,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     private string ReplaceVariableTagByValue(string variableTag)
     {
         // variable tag is in this form : [$Tag]
-        variableTag = variableTag.Replace("[$", "");
+        variableTag = variableTag.Replace("[", "");
         variableTag = variableTag.Replace("]", "");
         var value = _variableStorage.GetValue(variableTag);
         if (value == Value.NULL)
