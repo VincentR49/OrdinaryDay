@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private InteractWithObjectStarter _interactWithObjectStarter;
 
-
     private Vector2 _moveDirection;
 
 
@@ -25,6 +24,14 @@ public class PlayerController : MonoBehaviour
     {
         _walkManager.Init(_playerData.WalkingAnimation);
         _spriteDirectioner.Init(_playerData.CardinalSprite);
+        InitInventory();
+    }
+
+
+    private void InitInventory()
+    {
+        Debug.Log("Init Player inventory");
+        _playerData.Inventory.Init(_playerData.DefaultInventory);
     }
 
     // Update is called once per frame

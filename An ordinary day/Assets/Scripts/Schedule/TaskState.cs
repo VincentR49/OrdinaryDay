@@ -1,4 +1,7 @@
-﻿public enum TaskState
+﻿/// <summary>
+/// Describe the state of a scheduled task
+/// </summary>
+public enum TaskState
 {
     ToDo,
     Doing,

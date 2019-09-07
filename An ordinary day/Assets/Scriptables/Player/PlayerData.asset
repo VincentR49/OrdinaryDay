@@ -19,3 +19,5 @@ MonoBehaviour:
   DialogueTag: Player
   DialoguePicture: {fileID: -3966044189379602213, guid: ae4319e0c79ea45199c2c20a89c905ff,
     type: 3}
+  DefaultInventory: {fileID: 11400000, guid: 7f5f9dcad8dee4549b95d13d5a73b6dd, type: 2}
+  Inventory: {fileID: 11400000, guid: 6825c0fff438c481a98bd2b4525a6ad9, type: 2}

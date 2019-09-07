@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Scriptable containing the Player informations
@@ -18,4 +16,8 @@ public class PlayerData : ScriptableObject
     [Header("Dialogue")]
     public string DialogueTag;
     public Sprite DialoguePicture;
+
+    [Header("Inventory")]
+    public InventoryData DefaultInventory;
+    public RuntimeInventory Inventory;
 }

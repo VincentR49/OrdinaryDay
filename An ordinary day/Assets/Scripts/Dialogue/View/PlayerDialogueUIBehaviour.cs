@@ -108,7 +108,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // We keep the same speaker as before, we just add some text to the previous text input
         else if (string.IsNullOrEmpty(lineSpeaker) || _speaker.Equals(lineSpeaker))
         {
-            if (_optionWasJustChosen)
+            if (_optionWasJustChosen) // reset the dialogue line
             {
                 yield return CurrentDialogueDisplay.SetLine(line.text);
             }

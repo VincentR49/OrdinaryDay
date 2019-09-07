@@ -27,6 +27,12 @@ public class CharacterDialogueDisplay : MonoBehaviour
     public bool IsDisplayingText { get; private set; }
 
 
+    /// <summary>
+    /// To call before displaying text
+    /// Initialize the picture and name to diaply during dialogue.
+    /// </summary>
+    /// <param name="picture"></param>
+    /// <param name="nameText"></param>
     public void Init(Sprite picture, string nameText = "")
     {
         _picture.sprite = picture;
