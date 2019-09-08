@@ -11,6 +11,16 @@ public class RuntimeInventory : RuntimeVariableData<Inventory>
     public event ItemMovementHandler OnItemRemoved;
 
 
+    public void Init()
+    {
+        Value = new Inventory();
+    }
+
+    public void Init(Inventory other)
+    {
+        Value = new Inventory(other);
+    }
+
     public void Init(InventoryData other)
     {
         Value = new Inventory(other.Value);
@@ -19,8 +29,6 @@ public class RuntimeInventory : RuntimeVariableData<Inventory>
 
     public void AddItem(GameItemData item)
     {
-        if (Value == null)
-            Value = new Inventory();
         Value.AddItem(item);
         OnItemAdded?.Invoke(item);
         Debug.Log("Add Item in inventory: " + item.Tag);

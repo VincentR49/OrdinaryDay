@@ -8,16 +8,16 @@ public class InventoryDebugScript : MonoBehaviour
     [SerializeField]
     private GameItemData[] _testObjects;
 
-    [SerializeField]
-    private bool _onStart;
-
+    private void Awake()
+    {
+        _playerInventory.Init();
+        _playerInventory.Value.SetMoney(500);
+    }
 
     private void Start()
     {
-        if (_onStart)
-            StartCoroutine(TestRoutine());
+        StartCoroutine(TestRoutine());
     }
-
 
     private IEnumerator TestRoutine()
     {

@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 
 /// <summary>
 /// Manage the display of the player inventory
@@ -19,10 +20,12 @@ public class PlayerInventoryDisplay : MonoBehaviour
     private GridLayoutGroup _containersGrid;
     [SerializeField]
     private PlayerInventoryItemInfoDisplay _itemInfoDisplay;
-    
+    [SerializeField]
+    private TextMeshProUGUI _moneyField;
+
     [Header("Debug")]
     [SerializeField]
-    private bool _hideOnAwake;
+    private bool _showOnStart;
 
     private List<PlayerInventoryItemContainer> _itemContainers;
 
@@ -32,17 +35,18 @@ public class PlayerInventoryDisplay : MonoBehaviour
     private void Awake()
     {
         HideObjectInfo();
-        if (_hideOnAwake)
-            Hide();
         RefreshContainersList();
         AddContainersListeners();
         AddInventoryListeners();
+        Hide();
     }
 
 
     private void Start()
     {
         InitItemDisplays();
+        if (_showOnStart)
+            Show();
     }
 
 
@@ -90,6 +94,10 @@ public class PlayerInventoryDisplay : MonoBehaviour
         RemoveItem(itemData);
     }
 
+    #endregion
+
+
+    #region Item Info listener
 
     private void OnItemPointerEnter(GameItemData itemData)
     {
@@ -188,7 +196,9 @@ public class PlayerInventoryDisplay : MonoBehaviour
     public void Show()
     {
         Debug.Log("Show player inventory");
+        RefreshMoneyAmount();
         _inventoryPanel.SetActive(true);
+        GamePauser.Pause();
     }
 
 
@@ -199,6 +209,7 @@ public class PlayerInventoryDisplay : MonoBehaviour
         HideObjectInfo();
         foreach (var container in _itemContainers)
             container.UnSelectContainer();
+        GamePauser.Resume();
     }
 
 
@@ -213,5 +224,11 @@ public class PlayerInventoryDisplay : MonoBehaviour
     private void HideObjectInfo()
     {
         _itemInfoDisplay.Show(false);
+    }
+
+
+    private void RefreshMoneyAmount()
+    {
+        _moneyField.text = _playerInventory.Value?.GetMoney() + "$";
     }
 }
