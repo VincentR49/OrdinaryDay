@@ -23,10 +23,12 @@ public class InventoryDebugScript : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         yield return AddObjectRoutine();
+        /*
         yield return new WaitForSeconds(2);
         yield return RemoveObjectRoutine();
         yield return new WaitForSeconds(2);
         yield return AddObjectRoutine();
+        */
     }
 
 
@@ -37,7 +39,7 @@ public class InventoryDebugScript : MonoBehaviour
         foreach (var item in _testObjects)
         {
             _playerInventory.AddItem(item);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-
+/// <summary>
+/// Manage the diplay of an inventory object
+/// </summary>
 public class PlayerInventoryItemDisplay : MonoBehaviour
 {
     [SerializeField]
@@ -13,7 +15,14 @@ public class PlayerInventoryItemDisplay : MonoBehaviour
     {
         _itemData = gameItem;
         _itemPicture.sprite = gameItem.Sprite;
+        _itemPicture.enabled = true;
     }
 
-    public GameItemData GetData() => _itemData;
+
+    public void Reset()
+    {
+        _itemData = null;
+        _itemPicture.sprite = null;
+        _itemPicture.enabled = false;
+    }
 }

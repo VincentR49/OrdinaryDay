@@ -17,6 +17,8 @@ public class PlayerInventoryDisplay : MonoBehaviour
     private GameObject _inventoryPanel;
     [SerializeField]
     private GridLayoutGroup _containersGrid;
+    [SerializeField]
+    private PlayerInventoryItemInfoDisplay _itemInfoDisplay;
     
     [Header("Debug")]
     [SerializeField]
@@ -24,14 +26,16 @@ public class PlayerInventoryDisplay : MonoBehaviour
 
     private List<PlayerInventoryItemContainer> _itemContainers;
 
-    public bool IsOpen { get; private set; }
+    public bool IsOpen => _inventoryPanel.activeSelf;
 
     #region Init
     private void Awake()
     {
+        HideObjectInfo();
         if (_hideOnAwake)
             Hide();
         RefreshContainersList();
+        AddContainersListeners();
         AddInventoryListeners();
     }
 
@@ -56,6 +60,7 @@ public class PlayerInventoryDisplay : MonoBehaviour
     private void OnDestroy()
     {
         RemoveInventoryListeners();
+        RemoveContainersListeners();
     }
 
 
@@ -84,10 +89,45 @@ public class PlayerInventoryDisplay : MonoBehaviour
     {
         RemoveItem(itemData);
     }
+
+
+    private void OnItemPointerEnter(GameItemData itemData)
+    {
+        //Debug.Log("OnItemPointerEnter");
+        _itemInfoDisplay.Init(itemData);
+        var container = _itemContainers.FirstOrDefault(x => x.ContainObject(itemData));
+        ShowObjectInfo(container.transform.position);
+    }
+
+
+    private void OnItemPointerExit(GameItemData itemData)
+    {
+        HideObjectInfo();
+    }
+
+
+    private void RemoveContainersListeners()
+    {
+        foreach (var container in _itemContainers)
+        {
+            container.OnItemSelected -= OnItemPointerEnter;
+            container.OnItemUnselected -= OnItemPointerExit;
+        }
+    }
+
+
+    private void AddContainersListeners()
+    {
+        foreach (var container in _itemContainers)
+        {
+            container.OnItemSelected += OnItemPointerEnter;
+            container.OnItemUnselected += OnItemPointerExit;
+        }
+    }
     #endregion
 
 
-    #region Update view
+    #region Containers management
 
     private void AddItem(GameItemData itemData)
     {
@@ -98,8 +138,8 @@ public class PlayerInventoryDisplay : MonoBehaviour
 
     private void RemoveItem(GameItemData itemData)
     {
-		var container = _itemContainers.FirstOrDefault(x => x.GetItemData() == itemData);
-        container.Clear();
+		var container = _itemContainers.FirstOrDefault(x => x.ContainObject(itemData));
+        container.RemoveItem();
         container.MoveAtTheEnd();
         RefreshContainersList();
         foreach (var y in _itemContainers)
@@ -127,6 +167,8 @@ public class PlayerInventoryDisplay : MonoBehaviour
         }
     }
 
+    #endregion
+
 
     private void Update()
     {
@@ -147,7 +189,6 @@ public class PlayerInventoryDisplay : MonoBehaviour
     {
         Debug.Log("Show player inventory");
         _inventoryPanel.SetActive(true);
-        IsOpen = true;
     }
 
 
@@ -155,8 +196,22 @@ public class PlayerInventoryDisplay : MonoBehaviour
     {
         Debug.Log("Hide player inventory");
         _inventoryPanel.SetActive(false);
-        IsOpen = false;
+        HideObjectInfo();
+        foreach (var container in _itemContainers)
+            container.UnSelectContainer();
     }
-    #endregion
 
+
+
+    private void ShowObjectInfo(Vector3 position)
+    {
+        _itemInfoDisplay.transform.position = position;
+        _itemInfoDisplay.Show(true);
+    }
+
+
+    private void HideObjectInfo()
+    {
+        _itemInfoDisplay.Show(false);
+    }
 }

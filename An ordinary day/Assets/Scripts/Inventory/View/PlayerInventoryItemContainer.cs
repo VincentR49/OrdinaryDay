@@ -1,31 +1,42 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Behaviour to attach in an item slot of the inventory
 /// </summary>
 public class PlayerInventoryItemContainer : MonoBehaviour
 {
-    [Header("Item prefab")]
+    [Header("Item")]
     [SerializeField]
-    private PlayerInventoryItemDisplay _itemPrefab;
-
     private PlayerInventoryItemDisplay _itemDisplay;
-	public bool IsEmpty => _itemDisplay == null;
-	public GameItemData GetItemData() => IsEmpty ? null : _itemDisplay.GetData();
+
+    [Header("Design")]
+    [SerializeField]
+    private Image _backgroundImage;
+    [SerializeField]
+    private Color _pointerOverColor;
+
+	public bool IsEmpty => _itemData == null;
     public int Index => transform.GetSiblingIndex();
+    private Color _originalColor;
+    private GameItemData _itemData;
+
+    public delegate void OnItemSelection(GameItemData itemData);
+    public event OnItemSelection OnItemSelected;
+    public event OnItemSelection OnItemUnselected;
+
 
     private void Awake()
     {
-        Clear();
-        Debug.Log(Index);
+        _originalColor = _backgroundImage.color;
+        RemoveItem();
     }
 
 
-    public void Clear()
+    public void RemoveItem()
 	{
-		foreach (Transform child in transform)
-			Destroy(child.gameObject);
-		_itemDisplay = null;
+        _itemData = null;
+        _itemDisplay.Reset();
 	}
 
 
@@ -42,7 +53,43 @@ public class PlayerInventoryItemContainer : MonoBehaviour
 			Debug.LogError("Cannot Add item, an item is already present.");
 			return;
 		}
-		_itemDisplay = Instantiate(_itemPrefab, transform);
+        _itemData = itemData;
 		_itemDisplay.Init(itemData);
 	}
+
+
+    public void OnPointerEnter()
+    {
+        //Debug.Log("OnPointerEnter");
+        if (IsEmpty)
+            return;
+        SelectContainer();
+        OnItemSelected?.Invoke(_itemData);
+    }
+
+
+    public void OnPointerExit()
+    {
+        //Debug.Log("OnPointerExit");
+        UnSelectContainer();
+        OnItemUnselected?.Invoke(_itemData);
+        if (IsEmpty)
+            return;
+    }
+
+
+    public void SelectContainer()
+    {
+        _backgroundImage.color = _pointerOverColor;
+    }
+
+
+    public void UnSelectContainer()
+    {
+
+        _backgroundImage.color = _originalColor;
+    }
+
+
+    public bool ContainObject(GameItemData itemData) => IsEmpty ? false : itemData == _itemData;
 }
