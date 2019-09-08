@@ -563,6 +563,7 @@ MonoBehaviour:
   _containersGrid: {fileID: 907698433257655635}
   _itemInfoDisplay: {fileID: 5662759499118341673}
   _moneyField: {fileID: 5280069705566355690}
+  _pauseGameDuringInventory: 1
   _showOnStart: 0
 --- !u!1 &5395622122291629842
 GameObject:

@@ -16,3 +16,4 @@ MonoBehaviour:
   Name: Blue Key
   Description: A strange blue key
   Sprite: {fileID: 21300000, guid: 612f7ead5173a47118bf2c29d9be74fe, type: 3}
+  IsUnique: 1

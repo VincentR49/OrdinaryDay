@@ -28,6 +28,10 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     [SerializeField]
     private InteractibleObjectDataList _allObjects;
 
+    [Header("Parameters")]
+    [SerializeField]
+    private bool _pauseGameDuringDialogue = true;
+
     private DialogueVariableStorage _variableStorage;
     private CharacterDialogueDisplay CurrentDialogueDisplay => _playerDisplay.IsActive() ? _playerDisplay : _otherDisplay;
     
@@ -66,7 +70,8 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         _playerDisplay.Show(false);
         _otherDisplay.Show(false);
         _dialogueContainer.SetActive(true);
-        GamePauser.Pause();
+        if (_pauseGameDuringDialogue)
+            GamePauser.Pause();
         yield break;
     }
 
@@ -78,7 +83,8 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         yield return WaitForSpeakerToFinish();
         _dialogueContainer.SetActive(false);
         ResetDisplays();
-        GamePauser.Resume();
+        if(_pauseGameDuringDialogue)
+            GamePauser.Resume();
         yield break;
     }
 
@@ -205,6 +211,8 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
             return;
         }
         // the speaker tag for npc corresponds to their first name
+        // TODO find a way to dont dupplicate the code here
+        // store data in dialogue objects or something similar
         var npcData = _allNpcs.Items.FirstOrDefault(npc => npc.FirstName.Equals(_speaker));
         if (npcData != null)
         {
@@ -217,7 +225,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
             OtherSpeaks(objectData.DialoguePicture);
             return;
         }
-        Debug.LogError("Couldnt find any NPC  or object with the given tag: " + _speaker);
+        Debug.LogError("Couldnt find any NPC or object with the given tag: " + _speaker);
     }
 
     

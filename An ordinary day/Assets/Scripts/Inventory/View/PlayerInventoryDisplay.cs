@@ -23,6 +23,10 @@ public class PlayerInventoryDisplay : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _moneyField;
 
+    [Header("Parameters")]
+    [SerializeField]
+    private bool _pauseGameDuringInventory = true;
+
     [Header("Debug")]
     [SerializeField]
     private bool _showOnStart;
@@ -198,7 +202,8 @@ public class PlayerInventoryDisplay : MonoBehaviour
         Debug.Log("Show player inventory");
         RefreshMoneyAmount();
         _inventoryPanel.SetActive(true);
-        GamePauser.Pause();
+        if (_pauseGameDuringInventory)
+            GamePauser.Pause();
     }
 
 
@@ -209,7 +214,8 @@ public class PlayerInventoryDisplay : MonoBehaviour
         HideObjectInfo();
         foreach (var container in _itemContainers)
             container.UnSelectContainer();
-        GamePauser.Resume();
+        if (_pauseGameDuringInventory)
+            GamePauser.Resume();
     }
 
 

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb741cca580bc416e87f66a9e5ee331c, type: 3}
-  m_Name: GoldKey
+  m_Name: JisooHouseKey
   m_EditorClassIdentifier: 
   Tag: JisooHouseKey
   Name: Jisoo's House key
   Description: The key of Jisoo's House
   Sprite: {fileID: 21300000, guid: 82e368d8d2428480b9ba16858e9e7ac0, type: 3}
+  IsUnique: 1

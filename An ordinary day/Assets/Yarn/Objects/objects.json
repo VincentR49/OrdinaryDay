@@ -32,9 +32,9 @@
 	{
 		"title": "GotJisooHouseKey",
 		"tags": "",
-		"body": "Player: J'ai trouvé la clé de la maison.",
+		"body": "<<addItem Player JisooHouseKey>>\nPlayer: Je viens de trouver une clé sous le tapis d'entrée.",
 		"position": {
-			"x": -99,
+			"x": -97,
 			"y": 364
 		},
 		"colorID": 0

@@ -10,6 +10,11 @@ public class Inventory
     [SerializeField]
     private int _money;
 
+    public delegate void ItemMovementHandler(GameItemData item);
+    public event ItemMovementHandler OnItemAdded;
+    public event ItemMovementHandler OnItemRemoved;
+
+
     public Inventory()
     {
         // nothing yet
@@ -25,13 +30,22 @@ public class Inventory
 
     public void AddItem(GameItemData item)
     {
+        if (_items.Contains(item) && item.IsUnique)
+        {
+            Debug.LogWarning("Item unique already in inventory: " + item.Tag);
+            return;
+        }
+        Debug.Log("Add Item in inventory: " + item.Tag);
         _items.Add(item);
+        OnItemAdded?.Invoke(item);
     }
 
 
     public void RemoveItem(GameItemData item)
     {
         _items.Remove(item);
+        OnItemRemoved?.Invoke(item);
+        Debug.Log("Remove Item from inventory: " + item.Tag);
     }
 
 

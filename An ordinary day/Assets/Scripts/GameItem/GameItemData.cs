@@ -10,4 +10,5 @@ public class GameItemData : ScriptableObject
     public string Name;
     public string Description;
     public Sprite Sprite;
+    public bool IsUnique;
 }

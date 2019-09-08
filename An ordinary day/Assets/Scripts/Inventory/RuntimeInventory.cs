@@ -10,35 +10,49 @@ public class RuntimeInventory : RuntimeVariableData<Inventory>
     public event ItemMovementHandler OnItemAdded;
     public event ItemMovementHandler OnItemRemoved;
 
-
     public void Init()
     {
-        Value = new Inventory();
-    }
-
-    public void Init(Inventory other)
-    {
-        Value = new Inventory(other);
+        Init(new Inventory());
     }
 
     public void Init(InventoryData other)
     {
-        Value = new Inventory(other.Value);
+        Init(other.Value);
+    }
+
+    public void Init(Inventory other)
+    {
+        if (Value != null)
+            RemovedInventoryListener();
+        Value = new Inventory(other);
+        AddInventoryListener();
     }
 
 
     public void AddItem(GameItemData item)
     {
         Value.AddItem(item);
-        OnItemAdded?.Invoke(item);
-        Debug.Log("Add Item in inventory: " + item.Tag);
     }
 
 
     public void RemoveItem(GameItemData item)
     {
         Value.RemoveItem(item);
-        OnItemRemoved?.Invoke(item);
-        Debug.Log("Remove Item from inventory: " + item.Tag);
     }
+
+
+    private void AddInventoryListener()
+    {
+        Value.OnItemAdded += FireOnItemAddedEvent;
+        Value.OnItemRemoved += FireOnItemRemovedEvent;
+    }
+
+    private void RemovedInventoryListener()
+    {
+        Value.OnItemAdded -= FireOnItemAddedEvent;
+        Value.OnItemRemoved -= FireOnItemRemovedEvent;
+    }
+
+    private void FireOnItemAddedEvent(GameItemData itemData) => OnItemAdded?.Invoke(itemData);
+    private void FireOnItemRemovedEvent(GameItemData itemData) => OnItemRemoved?.Invoke(itemData);
 }
