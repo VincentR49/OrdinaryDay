@@ -25,6 +25,8 @@ public class InventoryDebugScript : MonoBehaviour
         yield return AddObjectRoutine();
         yield return new WaitForSeconds(2);
         yield return RemoveObjectRoutine();
+        yield return new WaitForSeconds(2);
+        yield return AddObjectRoutine();
     }
 
 

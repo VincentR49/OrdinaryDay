@@ -14,60 +14,24 @@ public class PlayerInventoryDisplay : MonoBehaviour
 
     [Header("View")]
     [SerializeField]
-    private GameObject _inventoryContainer;
+    private GameObject _inventoryPanel;
     [SerializeField]
-    private GridLayoutGroup _itemsGrid;
-
-    [Header("Item prefab")]
-    [SerializeField]
-    private PlayerInventoryItemDisplay _itemPrefab;
-
+    private GridLayoutGroup _containersGrid;
+    
     [Header("Debug")]
     [SerializeField]
     private bool _hideOnAwake;
 
+    private List<PlayerInventoryItemContainer> _itemContainers;
+
     public bool IsOpen { get; private set; }
-    private List<ItemContainer> _itemContainers;
-
-
-    private class ItemContainer
-	{
-		public Transform transform;
-		private PlayerInventoryItemDisplay _itemDisplay;
-		public bool IsEmpty => _itemDisplay == null;
-        public GameItemData GetItemData() => IsEmpty ? null : _itemDisplay.GetData();
-
-		public ItemContainer(Transform transform)
-		{
-			this.transform = transform;
-		}
-
-        public void Clear()
-		{
-			foreach (Transform child in transform)
-				Destroy(child.gameObject);
-			_itemDisplay = null;
-		}
-
-        public void AddItem(PlayerInventoryItemDisplay itemPrefab, GameItemData itemData)
-		{
-            if (!IsEmpty)
-			{
-				Debug.LogError("Cannot Add item, an item is already present.");
-				return;
-			}
-            _itemDisplay = Instantiate(itemPrefab, transform);
-            _itemDisplay.Init(itemData);
-        }
-	}
-
 
     #region Init
     private void Awake()
     {
         if (_hideOnAwake)
             Hide();
-        InitContainers();
+        RefreshContainersList();
         AddInventoryListeners();
     }
 
@@ -75,18 +39,6 @@ public class PlayerInventoryDisplay : MonoBehaviour
     private void Start()
     {
         InitItemDisplays();
-    }
-
-
-    private void InitContainers()
-    {
-        _itemContainers = new List<ItemContainer>();
-        foreach (Transform containerTransform in _itemsGrid.transform)
-        {
-			var container = new ItemContainer(containerTransform);
-			container.Clear();
-            _itemContainers.Add(container);
-        }
     }
 
 
@@ -101,13 +53,10 @@ public class PlayerInventoryDisplay : MonoBehaviour
     }
     #endregion
 
-
-
     private void OnDestroy()
     {
         RemoveInventoryListeners();
     }
-
 
 
     #region Inventory listeners
@@ -140,28 +89,25 @@ public class PlayerInventoryDisplay : MonoBehaviour
 
     #region Update view
 
-    private void MoveItem(int originalIndex, int newIndex)
-	{
-        // TODO
-	}
-
-
     private void AddItem(GameItemData itemData)
     {
         var container = GetFirstFreeContainer();
-        container.AddItem(_itemPrefab, itemData);
+        container.AddItem(itemData);
     }
 
 
     private void RemoveItem(GameItemData itemData)
     {
-		var index = _itemContainers.FindIndex(x => x.GetItemData() == itemData);
-        _itemContainers[index].Clear();
-        // TODO
+		var container = _itemContainers.FirstOrDefault(x => x.GetItemData() == itemData);
+        container.Clear();
+        container.MoveAtTheEnd();
+        RefreshContainersList();
+        foreach (var y in _itemContainers)
+            Debug.Log(y.Index);
     }
 
 
-    private ItemContainer GetFirstFreeContainer()
+    private PlayerInventoryItemContainer GetFirstFreeContainer()
     {
         foreach (var container in _itemContainers)
         {
@@ -169,6 +115,16 @@ public class PlayerInventoryDisplay : MonoBehaviour
                 return container;
         }
         return null;
+    }
+
+
+    private void RefreshContainersList()
+    {
+        _itemContainers = new List<PlayerInventoryItemContainer>();
+        foreach (Transform child in _containersGrid.transform)
+        {
+            _itemContainers.Add(child.GetComponent<PlayerInventoryItemContainer>());
+        }
     }
 
 
@@ -190,7 +146,7 @@ public class PlayerInventoryDisplay : MonoBehaviour
     public void Show()
     {
         Debug.Log("Show player inventory");
-        _inventoryContainer.SetActive(true);
+        _inventoryPanel.SetActive(true);
         IsOpen = true;
     }
 
@@ -198,7 +154,7 @@ public class PlayerInventoryDisplay : MonoBehaviour
     public void Hide()
     {
         Debug.Log("Hide player inventory");
-        _inventoryContainer.SetActive(false);
+        _inventoryPanel.SetActive(false);
         IsOpen = false;
     }
     #endregion
