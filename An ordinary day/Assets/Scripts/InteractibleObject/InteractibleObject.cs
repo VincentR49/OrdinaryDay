@@ -3,39 +3,45 @@ using UnityEngine;
 
 /// <summary>
 /// Object with possible interaction
+/// Basically a holder for InteractibleObjectData
 /// </summary>
 public class InteractibleObject : MonoBehaviour
 {
     [SerializeField]
-    private InteractibleObjectData _interactibleObjectData;
+    private InteractibleObjectData _data;
     [SerializeField]
     [Tooltip("Interaction priority level")]
     private int _priorityLevel;
 
-    private static List<InteractibleObject> _interactibleObjects = new List<InteractibleObject>();
-    public delegate void InstanciationHandler(InteractibleObject interactibleObject);
+    public delegate void InstanciationHandler(InteractibleObjectData data);
     public static event InstanciationHandler OnInteractibleObjectCreated;
     public static event InstanciationHandler OnInteractibleObjectDestroyed;
-    
-    private void Awake()
+    private PlayerDialogueRunner _dialogueRunner;
+
+
+    private void Start()
     {
-        _interactibleObjects.Add(this);
-        OnInteractibleObjectCreated?.Invoke(this);
+        OnInteractibleObjectCreated?.Invoke(_data);
+        _dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
     }
 
 
     private void OnDestroy()
     {
-        _interactibleObjects.Remove(this);
-        OnInteractibleObjectDestroyed?.Invoke(this);
+        OnInteractibleObjectDestroyed?.Invoke(_data);
     }
 
 
+    public void InteractWith(GameObject interactor)
+    {
+        // TODO implement logic here
+        _dialogueRunner.StartDialogue(_data.DefaultNodeStory);
+    }
+
     #region Accessors
 
-    public InteractibleObjectData GetData() => _interactibleObjectData;
+    public InteractibleObjectData GetData() => _data;
     public int GetPriorityLevel() => _priorityLevel;
-    public static List<InteractibleObject> GetInteractibleObjects() => _interactibleObjects;
 
     #endregion
 }

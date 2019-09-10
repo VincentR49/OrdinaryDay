@@ -34,13 +34,12 @@ public class PlayerDialogueRunner : DialogueRunner
     }
 
 
-    private void OnInteractibleObjectCreated(InteractibleObject interactibleObject)
+    private void OnInteractibleObjectCreated(InteractibleObjectData objectData)
     {
-        var obj = interactibleObject.GetData();
-        if (obj.YarnDialogue != null && !NodeExists(obj.StartNodeStory))
+        if (objectData.YarnDialogue != null && !NodeExists(objectData.DefaultNodeStory))
         {
-            Debug.Log("Added script on dialogue runner: " + obj.StartNodeStory);
-            AddScript(obj.YarnDialogue);
+            Debug.Log("Added script on dialogue runner: " + objectData.DefaultNodeStory);
+            AddScript(objectData.YarnDialogue);
         }
     }
 }

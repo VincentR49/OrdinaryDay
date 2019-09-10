@@ -22,7 +22,7 @@
 	{
 		"title": "JisooHouseDoor",
 		"tags": "",
-		"body": "Player: La porte de la maison est fermée.\n<<if $knowJisooHouseKeyLocation == true>>\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<endif>>",
+		"body": "Player: La porte de la maison est fermée.\n<<if $knowJisooHouseKeyLocation == true>>\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<endif>>\n",
 		"position": {
 			"x": -96,
 			"y": 96

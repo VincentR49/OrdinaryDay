@@ -10,6 +10,6 @@ public class InteractibleObjectData : ScriptableObject
 
     [Header("Dialogue")]
     public TextAsset YarnDialogue;
-    public string StartNodeStory;
+    public string DefaultNodeStory;
     public Sprite DialoguePicture;
 }

@@ -24,8 +24,8 @@ public class DialogueVariableStorage : VariableStorageBehaviour
     public override void ResetToDefaults()
     {
         Clear();
-        _variables.Add(DialogueVariables.PlayerName, new Yarn.Value(_playerData.FirstName + " " + _playerData.LastName));
-        _variables.Add(DialogueVariables.KnowJisooHouseKeyLocation, new Yarn.Value(true)); // debug (otherwise false)
+        _variables.Add(DialogueVariableConstants.PlayerName, new Yarn.Value(_playerData.FirstName + " " + _playerData.LastName));
+        _variables.Add(DialogueVariableConstants.KnowJisooHouseKeyLocation, new Yarn.Value(false)); // debug (otherwise false)
     }
 
     /// Set a variable's value

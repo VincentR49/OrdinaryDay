@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Behaviour that enables to start an interaction with a given interactible objects
+/// Behaviour that enables to start an interaction with a given interactible object
 /// </summary>
 public class InteractWithObjectStarter : MonoBehaviour
 {
@@ -31,13 +31,13 @@ public class InteractWithObjectStarter : MonoBehaviour
     }
 
 
-    public void StartInteraction(InteractibleObject obj)
+    private void StartInteraction(InteractibleObject obj)
     {
-        _dialogueRunner.StartDialogue(obj.GetData().StartNodeStory);
+        obj.InteractWith(gameObject);
     }
 
 
-    public InteractibleObject CheckForNearbyObjects()
+    private InteractibleObject CheckForNearbyObjects()
     {
         Debug.Log("CheckForNearbyObjects");
         var nearbyColliders = ScanCollidersNearby();
@@ -47,6 +47,7 @@ public class InteractWithObjectStarter : MonoBehaviour
         foreach (var coll in nearbyColliders)
         {
             var intObj = coll.GetComponent<InteractibleObject>();
+            // need to face the object to interact with it
             if (intObj != null && IsFacingObject(intObj.transform))
             {
                 if (objCandidate == null

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: JisooHouse
   YarnDialogue: {fileID: 4900000, guid: 64d4de15edaf7428db3c60a8d68148b3, type: 3}
-  StartNodeStory: JisooHouse
+  DefaultNodeStory: JisooHouse
   DialoguePicture: {fileID: 21300000, guid: 3af4fbc94131e436f9de002ef87e1460, type: 3}
