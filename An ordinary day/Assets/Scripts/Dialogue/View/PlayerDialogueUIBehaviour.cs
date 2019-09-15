@@ -24,9 +24,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     [SerializeField]
     private CharacterDialogueDisplay _otherDisplay;
     [SerializeField]
-    private NPCDataList _allNpcs;
-    [SerializeField]
-    private InteractibleObjectDataList _allObjects;
+    private DialogueAgentDataList _allDialogueAgentData;
 
     [Header("Parameters")]
     [SerializeField]
@@ -210,19 +208,10 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
             PlayerSpeaks();
             return;
         }
-        // the speaker tag for npc corresponds to their first name
-        // TODO find a way to dont dupplicate the code here
-        // store data in dialogue objects or something similar
-        var npcData = _allNpcs.Items.FirstOrDefault(npc => npc.FirstName.Equals(_speaker));
-        if (npcData != null)
+        var agentData = _allDialogueAgentData.Items.FirstOrDefault(agent => agent.Tag.Equals(_speaker));
+        if (agentData != null)
         {
-            OtherSpeaks(npcData.DialoguePicture, npcData.FirstName);
-            return;
-        }
-        var objectData = _allObjects.Items.FirstOrDefault(obj => obj.Tag.Equals(_speaker));
-        if (objectData != null)
-        {
-            OtherSpeaks(objectData.DialoguePicture);
+            OtherSpeaks(agentData.DialoguePicture, agentData.DialogueDisplayName);
             return;
         }
         Debug.LogError("Couldnt find any NPC or object with the given tag: " + _speaker);

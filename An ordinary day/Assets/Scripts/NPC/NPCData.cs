@@ -21,9 +21,7 @@ public class NPCData : ScriptableObject
     public RuntimeSchedule InGameSchedule; // reference to the dynamic schedule
 
     [Header("Dialogue")]
-    public TextAsset YarnDialogue;
-    public string StartNodeStory;
-    public Sprite DialoguePicture;
+    public DialogueAgentData DialogueAgentData;
 
     public override string ToString() 
         => string.Format("{0} {1}, {2}, {3}", FirstName, LastName, Age, Gender);

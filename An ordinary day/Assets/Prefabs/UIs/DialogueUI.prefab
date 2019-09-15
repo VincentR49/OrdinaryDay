@@ -1286,8 +1286,9 @@ MonoBehaviour:
   _playerDisplay: {fileID: 7558630614396451630}
   _playerData: {fileID: 11400000, guid: e5a95cfcc20c442a595fc5531fa0bea9, type: 2}
   _otherDisplay: {fileID: 1771529341280771671}
-  _allNpcs: {fileID: 11400000, guid: 6ffa9fcbe70df4a7eb48fc24128c31a7, type: 2}
-  _allObjects: {fileID: 11400000, guid: 6845b7b9db55e4457930cc1786406395, type: 2}
+  _allDialogueAgentData: {fileID: 11400000, guid: 5aeb8dcdeef1b49b5a58e9a2a0605460,
+    type: 2}
+  _pauseGameDuringDialogue: 1
 --- !u!1 &6325314026166242957
 GameObject:
   m_ObjectHideFlags: 0

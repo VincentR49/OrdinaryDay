@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 800747845}
   - component: {fileID: 6313559178790158276}
   - component: {fileID: 3651036228150101991}
-  - component: {fileID: 949811407328490242}
   - component: {fileID: 2960911098032627636}
   - component: {fileID: 18140092512250311}
   m_Layer: 9
@@ -118,7 +117,7 @@ MonoBehaviour:
   _walkManager: {fileID: 3363905535439149627}
   _spriteDirectioner: {fileID: 6313559178790158276}
   _playerData: {fileID: 11400000, guid: e5a95cfcc20c442a595fc5531fa0bea9, type: 2}
-  _speakToNPCStarter: {fileID: 949811407328490242}
+  _speakToNPCStarter: {fileID: 0}
   _interactWithObjectStarter: {fileID: 2960911098032627636}
 --- !u!114 &3363905535439149627
 MonoBehaviour:
@@ -187,19 +186,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.2}
   m_Size: {x: 0.75, y: 0.5}
   m_Direction: 1
---- !u!114 &949811407328490242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447140917735947389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5880a537a77f5467089568c5d50691c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactionRadius: 1
 --- !u!114 &2960911098032627636
 MonoBehaviour:
   m_ObjectHideFlags: 0

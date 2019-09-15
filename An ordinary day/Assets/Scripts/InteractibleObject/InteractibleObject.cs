@@ -1,47 +1,23 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// Object with possible interaction
-/// Basically a holder for InteractibleObjectData
+/// Attach to an object that can be interactible via InteractWithObjectStarter.
+/// Raise an event when the interaction is started.
 /// </summary>
 public class InteractibleObject : MonoBehaviour
 {
     [SerializeField]
-    private InteractibleObjectData _data;
-    [SerializeField]
     [Tooltip("Interaction priority level")]
     private int _priorityLevel;
 
-    public delegate void InstanciationHandler(InteractibleObjectData data);
-    public static event InstanciationHandler OnInteractibleObjectCreated;
-    public static event InstanciationHandler OnInteractibleObjectDestroyed;
-    private PlayerDialogueRunner _dialogueRunner;
-
-
-    private void Start()
-    {
-        OnInteractibleObjectCreated?.Invoke(_data);
-        _dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
-    }
-
-
-    private void OnDestroy()
-    {
-        OnInteractibleObjectDestroyed?.Invoke(_data);
-    }
-
+    public delegate void InteractionStartedHandler(GameObject interactor);
+    public event InteractionStartedHandler OnInteractionStarted;
 
     public void InteractWith(GameObject interactor)
     {
-        // TODO implement logic here
-        _dialogueRunner.StartDialogue(_data.DefaultNodeStory);
+        Debug.Log("Start interaction with: " + gameObject.name);
+        OnInteractionStarted?.Invoke(interactor);
     }
 
-    #region Accessors
-
-    public InteractibleObjectData GetData() => _data;
     public int GetPriorityLevel() => _priorityLevel;
-
-    #endregion
 }

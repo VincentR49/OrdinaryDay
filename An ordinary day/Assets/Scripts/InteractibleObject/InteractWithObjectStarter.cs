@@ -10,18 +10,12 @@ public class InteractWithObjectStarter : MonoBehaviour
     [SerializeField]
     private SpriteDirectioner _spriteDirectioner;
 
-    private PlayerDialogueRunner _dialogueRunner;
     private Direction Direction => _spriteDirectioner.GetDirection();
 
-    private void Start()
-    {
-        _dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
-    }
-
-
+    
     public bool StartInteractionIfPossible()
-    { 
-        if (_dialogueRunner.isDialogueRunning)
+    {
+        if (GamePauser.IsPaused)
             return false;
         var obj = CheckForNearbyObjects();
         if (obj == null)

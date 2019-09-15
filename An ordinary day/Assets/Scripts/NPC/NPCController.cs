@@ -14,6 +14,8 @@ public class NPCController : MonoBehaviour
     private SpriteDirectioner _spriteDirectioner;
     [SerializeField]
     private ScheduleHandler _scheduleHandler;
+    [SerializeField]
+    private SpeakableObject _speakableObject;
     
     [Header("Debug")]
     [SerializeField]
@@ -46,6 +48,7 @@ public class NPCController : MonoBehaviour
         _npcData = npcData;
         name = npcData.FirstName;
         Debug.Log("NPC Initialisation: " + _npcData);
+        _speakableObject.SetDialogueData(npcData.DialogueAgentData);
         InitSprites();
         InitScheduleSystem();
         if (!_npcControllers.Contains(this))
@@ -66,26 +69,6 @@ public class NPCController : MonoBehaviour
     private void InitScheduleSystem()
     {
         _scheduleHandler.Init(_npcData.InGameSchedule);
-    }
-    #endregion
-
-
-    #region Dialogue
-
-    // Call when a dialogue is starting
-    public void OnDialogueStarted(Transform speakerTransform)
-    {
-        Debug.Log("On dialogue started: " + _npcData.FirstName);
-        StartCoroutine(StopWalkingAndFaceSpeaker(speakerTransform));
-    }
-
-
-    private IEnumerator StopWalkingAndFaceSpeaker(Transform speakerTransform)
-    {
-        _walkManager.Stop();
-        yield return new WaitForEndOfFrame();
-        // more polite ;)
-        _spriteDirectioner.FaceTowards(speakerTransform);
     }
     #endregion
 

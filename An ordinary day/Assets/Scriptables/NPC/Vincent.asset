@@ -20,7 +20,4 @@ MonoBehaviour:
   WalkingAnimation: {fileID: 11400000, guid: 33ffe97020054411db01a57423d56ce1, type: 2}
   DefaultSchedule: {fileID: 11400000, guid: e8c966f5c670a472cb319f2e0feb4d9b, type: 2}
   InGameSchedule: {fileID: 11400000, guid: 1592a022023d54e17a9dff5dca49171b, type: 2}
-  YarnDialogue: {fileID: 4900000, guid: 217d442e81d5e48ff9f4a9f236c68cbf, type: 3}
-  StartNodeStory: Vincent.Story
-  DialoguePicture: {fileID: -6295871403012345928, guid: ae4319e0c79ea45199c2c20a89c905ff,
-    type: 3}
+  DialogueAgentData: {fileID: 11400000, guid: dd7cfba45b7024b5283e03925774c92e, type: 2}

@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 6740313738230560726}
   - component: {fileID: 8550125135232159765}
   - component: {fileID: 9092662860448043110}
+  - component: {fileID: 2871941687587344742}
+  - component: {fileID: 8742057299168821766}
   m_Layer: 11
   m_Name: NPC
   m_TagString: PNJ
@@ -262,5 +264,36 @@ MonoBehaviour:
   _walkManager: {fileID: 4197437973840161361}
   _spriteDirectioner: {fileID: 4197437973840161363}
   _scheduleHandler: {fileID: 6740313738230560726}
+  _speakableObject: {fileID: 2871941687587344742}
   _npcData: {fileID: 0}
   _initOnStart: 0
+--- !u!114 &2871941687587344742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197437973840161370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b355fc90dc54cb6b9e0714cd380199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueAgentData: {fileID: 0}
+  _interactibleObject: {fileID: 8742057299168821766}
+  _faceOtherWhileSpeaking: 1
+  _walkManager: {fileID: 4197437973840161361}
+  _spriteDirectioner: {fileID: 4197437973840161363}
+--- !u!114 &8742057299168821766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197437973840161370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cbf8a693ccf3496bb3687ed9a954039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priorityLevel: 90
