@@ -2,7 +2,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Holder of dialogue information
+/// Attach this to a game object to make him able to speak (start dialogue) with another one.
+/// 
 /// </summary>
 public class SpeakableObject : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class SpeakableObject : MonoBehaviour
     private DialogueAgentData _dialogueAgentData;
     [SerializeField]
     private InteractibleObject _interactibleObject;
+    [SerializeField]
+    private bool _autoSpeakingOnInteraction = true;
 
     [Header("Optional")]
     [SerializeField]
@@ -37,7 +40,10 @@ public class SpeakableObject : MonoBehaviour
 
     private void OnInteractionStarted(GameObject interactor)
     {
-        StartSpeaking(interactor);
+        if (_autoSpeakingOnInteraction)
+        {
+            StartSpeaking(interactor);
+        }
     }
 
 

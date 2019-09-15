@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Data holder of Dialogue Information for Yarn Plugin
+/// </summary>
 [CreateAssetMenu(menuName = "Scriptables/Dialogue Agent")]
 public class DialogueAgentData : ScriptableObject
 {
