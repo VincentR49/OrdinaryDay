@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-
 /// <summary>
 /// Attach this to a game object to make him able to speak (start dialogue) with another one.
 /// 
@@ -31,6 +30,10 @@ public class SpeakableObject : MonoBehaviour
         _interactibleObject.OnInteractionStarted += OnInteractionStarted;
     }
 
+    private void Start()
+    {
+        _dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
+    }
 
     private void OnDestroy()
     {
@@ -47,12 +50,6 @@ public class SpeakableObject : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        _dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
-    }
-
-
     public void StartSpeaking(GameObject speaker)
     {
         if (!CanSpeak())
@@ -60,7 +57,6 @@ public class SpeakableObject : MonoBehaviour
             Debug.LogError("Cannot speak to: " + gameObject.name);
             return;
         }
-        AddDialogueDataIfNeeded();
         StartCoroutine(StartSpeakingRoutine(speaker));
     }
 
@@ -77,10 +73,21 @@ public class SpeakableObject : MonoBehaviour
             _spriteDirectioner.FaceTowards(speaker.transform);
             yield return new WaitForEndOfFrame();
         }
-        // Start the dialogue
-        _dialogueRunner.StartDialogue(_dialogueAgentData.StoryNode);
-        yield break;
+		StartDialogue();
+		yield break;
     }
+
+
+    public void StartDialogue(string nodeTag = null)
+	{
+        AddDialogueDataIfNeeded();
+        var node = _dialogueAgentData.DefaultStoryNode;
+        if (!string.IsNullOrEmpty(nodeTag))
+		{
+            node = _dialogueAgentData.GetNode(nodeTag);
+		}
+		_dialogueRunner.StartDialogue(node);
+	}
 
 
     public void SetDialogueData(DialogueAgentData dialogueAgentData)
@@ -98,9 +105,9 @@ public class SpeakableObject : MonoBehaviour
     private void AddDialogueDataIfNeeded()
     {
         if (_dialogueAgentData.YarnDialogue != null
-                && !_dialogueRunner.NodeExists(_dialogueAgentData.StoryNode))
+                && !_dialogueRunner.NodeExists(_dialogueAgentData.DefaultStoryNode))
         {
-            Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.StoryNode);
+            Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.DefaultStoryNode);
             _dialogueRunner.AddScript(_dialogueAgentData.YarnDialogue);
         }
     }

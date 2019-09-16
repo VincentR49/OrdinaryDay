@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: Tree
   DialogueDisplayName: 
-  StoryNode: RandomTree
   YarnDialogue: {fileID: 4900000, guid: 64d4de15edaf7428db3c60a8d68148b3, type: 3}
   DialoguePicture: {fileID: 21300000, guid: 6943df94dce4b419ba499e1c82fc0be1, type: 3}
+  DefaultStoryNode: RandomTree
+  OtherNodes: []

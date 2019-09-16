@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 // Singleton class heriting from fader
+// TODO make a screen Fader Factory !
 public class ScreenFader : Fader
 {
     public static ScreenFader Instance;

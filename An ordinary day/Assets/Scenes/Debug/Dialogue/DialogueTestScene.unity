@@ -350,6 +350,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b5d39be394ec4beba0895fc13066a01, type: 3}
+--- !u!1 &346844145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 346844146}
+  - component: {fileID: 346844148}
+  - component: {fileID: 346844147}
+  m_Layer: 0
+  m_Name: Teleporter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &346844146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346844145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.56, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 720227981}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &346844147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346844145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76317056f7673445eae25692d81a5648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetSpawn: {fileID: 11400000, guid: 98531f32e40014ebdb8cf3e30564aae7, type: 2}
+  _playerPrefab: {fileID: 1711677187}
+  _startTeleportDirection: 0
+--- !u!61 &346844148
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346844145}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &394610434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2278,6 @@ Transform:
   - {fileID: 760965372}
   - {fileID: 1248171526}
   - {fileID: 2079135640}
-  - {fileID: 720227981}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2221,8 +2293,9 @@ GameObject:
   - component: {fileID: 720227983}
   - component: {fileID: 720227982}
   - component: {fileID: 720227984}
+  - component: {fileID: 720227985}
   m_Layer: 0
-  m_Name: HouseDoor
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2235,12 +2308,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720227980}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.62, y: 3.26, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.06, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 602114442}
-  m_RootOrder: 3
+  m_Children:
+  - {fileID: 346844146}
+  m_Father: {fileID: 2079135640}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &720227982
 BoxCollider2D:
@@ -2255,7 +2329,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: -0.5}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2295,6 +2369,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 3cdc83ff3ab824473aaffef1f0c91645, type: 2}
   _interactibleObject: {fileID: 720227983}
+  _autoSpeakingOnInteraction: 0
+  _faceOtherWhileSpeaking: 0
+  _spriteDirectioner: {fileID: 0}
+  _walkManager: {fileID: 0}
+--- !u!114 &720227985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720227980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339b26469342d428e96f7de7c1e4e4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _key: {fileID: 11400000, guid: 8e23872d00f2e48009d1873647dcb534, type: 2}
+  _isLockedByDefault: 0
+  _autoTriggerOnInteraction: 1
+  _speakableObject: {fileID: 720227984}
+  _interactibleObject: {fileID: 720227983}
+  _playerTeleporterObject: {fileID: 346844145}
 --- !u!1 &760965371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,6 +2477,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 765750e55418f4b0ea3105a5272db2c1, type: 2}
   _interactibleObject: {fileID: 760965373}
+  _autoSpeakingOnInteraction: 1
+  _faceOtherWhileSpeaking: 0
+  _spriteDirectioner: {fileID: 0}
+  _walkManager: {fileID: 0}
 --- !u!1001 &921678588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2635,6 +2735,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 765750e55418f4b0ea3105a5272db2c1, type: 2}
   _interactibleObject: {fileID: 1248171527}
+  _autoSpeakingOnInteraction: 1
+  _faceOtherWhileSpeaking: 0
+  _spriteDirectioner: {fileID: 0}
+  _walkManager: {fileID: 0}
 --- !u!1001 &1248302998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2929,6 +3033,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4197437973840161366, guid: b9cdf6d0278024df0a863331164e819a,
     type: 3}
   m_PrefabInstance: {fileID: 1657168984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1711677187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8447140917735947389, guid: 8b5d39be394ec4beba0895fc13066a01,
+    type: 3}
+  m_PrefabInstance: {fileID: 222908801}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1863045257
 GameObject:
@@ -3702,7 +3812,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.62, y: 3.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 720227981}
   m_Father: {fileID: 602114442}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3785,6 +3896,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: de2e70dc529924b9aac7a81ef9cefa68, type: 2}
   _interactibleObject: {fileID: 2079135641}
+  _autoSpeakingOnInteraction: 1
+  _faceOtherWhileSpeaking: 0
+  _spriteDirectioner: {fileID: 0}
+  _walkManager: {fileID: 0}
 --- !u!1 &2086601143
 GameObject:
   m_ObjectHideFlags: 0

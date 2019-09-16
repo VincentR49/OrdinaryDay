@@ -20,22 +20,32 @@
 		"colorID": 0
 	},
 	{
-		"title": "JisooHouseDoor",
-		"tags": "",
-		"body": "Player: La porte de la maison est fermée.\n<<if $knowJisooHouseKeyLocation == true>>\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<endif>>\n",
-		"position": {
-			"x": -96,
-			"y": 96
-		},
-		"colorID": 0
-	},
-	{
 		"title": "GotJisooHouseKey",
 		"tags": "",
 		"body": "<<addItem Player JisooHouseKey>>\nPlayer: Je viens de trouver une clé sous le tapis d'entrée.",
 		"position": {
-			"x": -97,
-			"y": 364
+			"x": -323,
+			"y": 349
+		},
+		"colorID": 0
+	},
+	{
+		"title": "JisooHouseDoor.Locked",
+		"tags": "",
+		"body": "Player: La porte de la maison est fermée.\n<<if $knowJisooHouseKeyLocation == true>>\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<endif>>",
+		"position": {
+			"x": -321,
+			"y": 98
+		},
+		"colorID": 0
+	},
+	{
+		"title": "JisooHouseDoor.Unlocked",
+		"tags": "",
+		"body": "La porte est ouverte.\n",
+		"position": {
+			"x": -85,
+			"y": 97
 		},
 		"colorID": 0
 	}

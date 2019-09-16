@@ -29,7 +29,14 @@ public class SceneLoader : Singleton<SceneLoader>
 
     private IEnumerator FadeOut()
     {
-        ScreenFader.Instance.FadeOut(_fadeDuration);
+        if (ScreenFader.Instance == null)
+        {
+            Debug.LogError("Screen fader is missing.");
+        }
+        else
+        {
+            ScreenFader.Instance.FadeOut(_fadeDuration);
+        }
         yield return new WaitForSeconds(_fadeDuration);
     }
 
@@ -74,7 +81,14 @@ public class SceneLoader : Singleton<SceneLoader>
             yield return null;
         }
         Debug.Log("Scene loaded: " + sceneName);
-        ScreenFader.Instance.FadeIn(_fadeDuration/2);
+        if (ScreenFader.Instance == null)
+        {
+            Debug.LogError("Screen fader is missing.");
+        }
+        else
+        {
+            ScreenFader.Instance.FadeIn(_fadeDuration / 2);
+        }
         if (callAfterLoading != null)
             callAfterLoading.Invoke();
     }
