@@ -3,8 +3,9 @@
 /// <summary>
 /// Attach this to a game object simulate a door behaviour.
 /// </summary>
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, I_InteractionResponse
 {
+    // Yarn Node corresponding the Lock and Unlock text to display
     private const string LockedNode = "Locked";
     private const string UnlockedNode = "Unlocked";
 
@@ -12,40 +13,25 @@ public class Door : MonoBehaviour
     private GameItemData _key;
     [SerializeField]
     private bool _isLockedByDefault;
-    [SerializeField]
-    private bool _autoTriggerOnInteraction = true;
 
     [Header("Necessary Behaviours")]
     [SerializeField]
     private SpeakableObject _speakableObject;
     [SerializeField]
-    private InteractibleObject _interactibleObject;
-    [SerializeField]
     private GameObject _playerTeleporterObject;
-
 
     private bool _locked;
 
 
     private void Awake()
     {
-        _interactibleObject.OnInteractionStarted += OnInteractionStarted;
         SetLocked(_isLockedByDefault ? true : false);
     }
 
 
-    private void OnDestroy()
+    public void OnInteraction(GameObject interactor)
     {
-        _interactibleObject.OnInteractionStarted -= OnInteractionStarted;
-    }
-
-
-    private void OnInteractionStarted(GameObject interactor)
-    {
-        if (_autoTriggerOnInteraction)
-        {
-            _speakableObject.StartDialogue(_locked ? LockedNode : UnlockedNode);
-        }
+        _speakableObject.SpeaksTo(interactor, _locked ? LockedNode : UnlockedNode);
     }
 
 

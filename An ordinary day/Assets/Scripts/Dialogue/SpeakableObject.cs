@@ -4,14 +4,10 @@ using UnityEngine;
 /// Attach this to a game object to make him able to speak (start dialogue) with another one.
 /// 
 /// </summary>
-public class SpeakableObject : MonoBehaviour
+public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 {
     [SerializeField]
     private DialogueAgentData _dialogueAgentData;
-    [SerializeField]
-    private InteractibleObject _interactibleObject;
-    [SerializeField]
-    private bool _autoSpeakingOnInteraction = true;
 
     [Header("Optional")]
     [SerializeField]
@@ -21,47 +17,28 @@ public class SpeakableObject : MonoBehaviour
     [SerializeField]
     private WalkManager _walkManager;
 
-
     private PlayerDialogueRunner _dialogueRunner;
 
-
-    private void Awake()
-    {
-        _interactibleObject.OnInteractionStarted += OnInteractionStarted;
-    }
 
     private void Start()
     {
         _dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
     }
 
-    private void OnDestroy()
-    {
-        _interactibleObject.OnInteractionStarted -= OnInteractionStarted;
-    }
 
-
-    private void OnInteractionStarted(GameObject interactor)
-    {
-        if (_autoSpeakingOnInteraction)
-        {
-            StartSpeaking(interactor);
-        }
-    }
-
-
-    public void StartSpeaking(GameObject speaker)
+    #region Speaking
+    public void SpeaksTo(GameObject other, string nodeTag = null)
     {
         if (!CanSpeak())
         {
             Debug.LogError("Cannot speak to: " + gameObject.name);
             return;
         }
-        StartCoroutine(StartSpeakingRoutine(speaker));
+        StartCoroutine(SpeaksToRoutine(other));
     }
 
 
-    private IEnumerator StartSpeakingRoutine(GameObject speaker)
+    private IEnumerator SpeaksToRoutine(GameObject other, string nodeTag = null)
     {
         if (_walkManager != null) // stop the game object if he is walking (animation bug otherwise)
         {
@@ -70,24 +47,30 @@ public class SpeakableObject : MonoBehaviour
         }
         if (_faceOtherWhileSpeaking) // more polite
         {
-            _spriteDirectioner.FaceTowards(speaker.transform);
+            _spriteDirectioner.FaceTowards(other.transform);
             yield return new WaitForEndOfFrame();
         }
-		StartDialogue();
+		StartDialogue(nodeTag);
 		yield break;
     }
+    
 
-
-    public void StartDialogue(string nodeTag = null)
+    private void StartDialogue(string nodeTag = null)
 	{
-        AddDialogueDataIfNeeded();
         var node = _dialogueAgentData.DefaultStoryNode;
         if (!string.IsNullOrEmpty(nodeTag))
 		{
             node = _dialogueAgentData.GetNode(nodeTag);
+            if (string.IsNullOrEmpty(node))
+            {
+                Debug.LogError("Couldnt find any node with tag: " + nodeTag);
+                return;
+            }
 		}
-		_dialogueRunner.StartDialogue(node);
+        AddDialogueDataIfNeeded(node);
+        _dialogueRunner.StartDialogue(node);
 	}
+    #endregion
 
 
     public void SetDialogueData(DialogueAgentData dialogueAgentData)
@@ -96,19 +79,20 @@ public class SpeakableObject : MonoBehaviour
     }
 
 
-    public bool CanSpeak()
-    {
-        return ! _dialogueRunner.isDialogueRunning;
-    }
+    private bool CanSpeak() => ! _dialogueRunner.isDialogueRunning;
 
 
-    private void AddDialogueDataIfNeeded()
+    private void AddDialogueDataIfNeeded(string node)
     {
-        if (_dialogueAgentData.YarnDialogue != null
-                && !_dialogueRunner.NodeExists(_dialogueAgentData.DefaultStoryNode))
+        if (_dialogueAgentData.YarnDialogue != null && !_dialogueRunner.NodeExists(node))
         {
-            Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.DefaultStoryNode);
+            Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.YarnDialogue + " for node: " + node);
             _dialogueRunner.AddScript(_dialogueAgentData.YarnDialogue);
         }
+    }
+
+    public void OnInteraction(GameObject interactor)
+    {
+        SpeaksTo(interactor);
     }
 }

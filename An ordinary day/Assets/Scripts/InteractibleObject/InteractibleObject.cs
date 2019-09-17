@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// Attach to an object that can be interactible via InteractWithObjectStarter.
@@ -10,17 +9,29 @@ public class InteractibleObject : MonoBehaviour
     [SerializeField]
     [Tooltip("Interaction priority level")]
     private int _priorityLevel;
-    
-    //private UnityEvent _onInteraction;
 
-    public delegate void InteractionStartedHandler(GameObject interactor);
-    public event InteractionStartedHandler OnInteractionStarted;
+    [SerializeField]
+    [Tooltip("Behaviours should implement I_InteractionResponse")]// todo find a way later to do so
+    private MonoBehaviour[] _interactionResponses;
+
 
     public void InteractWith(GameObject interactor)
     {
         Debug.Log("Start interaction with: " + gameObject.name);
-        OnInteractionStarted?.Invoke(interactor);
-        //_onInteraction?.Invoke();
+        if (_interactionResponses == null)
+            return;
+        foreach (var response in _interactionResponses)
+        {
+            if (response is I_InteractionResponse)
+            {
+                var interactionResponse = (I_InteractionResponse) response;
+                interactionResponse.OnInteraction(interactor);
+            }
+            else
+            {
+                Debug.LogError("The behaviour doesnt implement I_InteractionResponseInterface");
+            }
+        }
     }
 
     public int GetPriorityLevel() => _priorityLevel;

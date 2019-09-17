@@ -2355,6 +2355,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priorityLevel: 1
+  _interactionResponses:
+  - {fileID: 720227985}
 --- !u!114 &720227984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2368,8 +2370,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 3cdc83ff3ab824473aaffef1f0c91645, type: 2}
-  _interactibleObject: {fileID: 720227983}
-  _autoSpeakingOnInteraction: 0
   _faceOtherWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}
@@ -2386,10 +2386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _key: {fileID: 11400000, guid: 8e23872d00f2e48009d1873647dcb534, type: 2}
-  _isLockedByDefault: 0
-  _autoTriggerOnInteraction: 1
+  _isLockedByDefault: 1
   _speakableObject: {fileID: 720227984}
-  _interactibleObject: {fileID: 720227983}
   _playerTeleporterObject: {fileID: 346844145}
 --- !u!1 &760965371
 GameObject:
@@ -2437,6 +2435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priorityLevel: 0
+  _interactionResponses:
+  - {fileID: 760965375}
 --- !u!61 &760965374
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2476,8 +2476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 765750e55418f4b0ea3105a5272db2c1, type: 2}
-  _interactibleObject: {fileID: 760965373}
-  _autoSpeakingOnInteraction: 1
   _faceOtherWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}
@@ -2695,6 +2693,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priorityLevel: 0
+  _interactionResponses:
+  - {fileID: 1248171529}
 --- !u!61 &1248171528
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2734,8 +2734,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 765750e55418f4b0ea3105a5272db2c1, type: 2}
-  _interactibleObject: {fileID: 1248171527}
-  _autoSpeakingOnInteraction: 1
   _faceOtherWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}
@@ -3282,8 +3280,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 20
@@ -3830,6 +3826,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _priorityLevel: 0
+  _interactionResponses:
+  - {fileID: 2079135644}
 --- !u!61 &2079135642
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3895,8 +3893,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: de2e70dc529924b9aac7a81ef9cefa68, type: 2}
-  _interactibleObject: {fileID: 2079135641}
-  _autoSpeakingOnInteraction: 1
   _faceOtherWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}
