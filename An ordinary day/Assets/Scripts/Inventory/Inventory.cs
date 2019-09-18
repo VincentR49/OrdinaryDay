@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Linq;
 
 [Serializable]
 public class Inventory
@@ -48,11 +49,11 @@ public class Inventory
         Debug.Log("Remove Item from inventory: " + item.Tag);
     }
 
-
     public void SetMoney(int amount) => _money = amount;
     public void AddAmount(int amount) => _money += amount;
     public int GetMoney() => _money;
 
-
     public List<GameItemData> GetItems() => _items;
+    public GameItemData GetItem(string itemTag) => _items.FirstOrDefault(item => item.Tag.Equals(itemTag));
+    public bool HasItem(string itemTag) => GetItem(itemTag) != null;
 }

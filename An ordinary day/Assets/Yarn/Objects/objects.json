@@ -32,10 +32,10 @@
 	{
 		"title": "JisooHouseDoor.Locked",
 		"tags": "",
-		"body": "Player: La porte de la maison est fermée.\n<<if $knowJisooHouseKeyLocation == true>>\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<endif>>",
+		"body": "Player: La porte de la maison est fermée.\n<<if $knowJisooHouseKeyLocation is true and $Player_has_JisooHouseKey is false>>\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<else>>\n<<if $Player_has_JisooHouseKey is true>>\n->Dévérouiller la porte\n    [[JisooDoor.Unlock]]\n->Partir\n<<endif>>\n<<endif>>\n\n",
 		"position": {
-			"x": -321,
-			"y": 98
+			"x": -320,
+			"y": 100
 		},
 		"colorID": 0
 	},
@@ -46,6 +46,16 @@
 		"position": {
 			"x": -85,
 			"y": 97
+		},
+		"colorID": 0
+	},
+	{
+		"title": "JisooDoor.Unlock",
+		"tags": "",
+		"body": "La porte est dévérouillée.\n<<unlock JisooHouseDoor>>",
+		"position": {
+			"x": -537,
+			"y": 355
 		},
 		"colorID": 0
 	}

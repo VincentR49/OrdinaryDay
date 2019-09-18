@@ -84,7 +84,8 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 
     private void AddDialogueDataIfNeeded(string node)
     {
-        if (_dialogueAgentData.YarnDialogue != null && !_dialogueRunner.NodeExists(node))
+        if (_dialogueAgentData.YarnDialogue != null
+                && !_dialogueRunner.NodeExists(node)) // TODO throw error if no nodes are loaded, check why
         {
             Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.YarnDialogue + " for node: " + node);
             _dialogueRunner.AddScript(_dialogueAgentData.YarnDialogue);

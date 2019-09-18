@@ -7,7 +7,10 @@ using Yarn.Unity;
 /// </summary>
 public class DialogueVariableStorage : VariableStorageBehaviour
 {
-    [Header("PlayerData")]
+    [SerializeField]
+    private GameItemDataList _allGameItems;
+
+    [Header("Player")]
     [SerializeField]
     private PlayerData _playerData;
 
@@ -18,6 +21,12 @@ public class DialogueVariableStorage : VariableStorageBehaviour
     private void Awake()
     {
         ResetToDefaults();
+        AddInventoryListeners();
+    }
+
+    private void OnDestroy()
+    {
+        RemoveInventoryListeners();
     }
 
     /// Erase all variables and reset to default values
@@ -26,7 +35,53 @@ public class DialogueVariableStorage : VariableStorageBehaviour
         Clear();
         _variables.Add(DialogueVariableConstants.PlayerName, new Yarn.Value(_playerData.FirstName + " " + _playerData.LastName));
         _variables.Add(DialogueVariableConstants.KnowJisooHouseKeyLocation, new Yarn.Value(false)); // debug (otherwise false)
+        RefreshPlayerInventoryRelatedVariables();
     }
+
+    #region Player Inventory
+
+    private void AddInventoryListeners()
+    {
+        _playerData.Inventory.OnItemAdded += OnPlayerInventoryChanged;
+        _playerData.Inventory.OnItemRemoved += OnPlayerInventoryChanged;
+    }
+
+
+    private void RemoveInventoryListeners()
+    {
+        _playerData.Inventory.OnItemAdded -= OnPlayerInventoryChanged;
+        _playerData.Inventory.OnItemRemoved -= OnPlayerInventoryChanged;
+    }
+
+
+    private void RefreshPlayerInventoryRelatedVariables()
+    {
+        Debug.Log("RefreshPlayerInventoryRelatedVariables");
+        foreach (var item in _allGameItems.Items)
+        {
+            RefreshPlayerInventoryRelatedVariables(item.Tag);
+        }
+    }
+
+    private void RefreshPlayerInventoryRelatedVariables(string itemTag)
+    {
+        var playerHasItem = _playerData.Inventory.Value.HasItem(itemTag);
+        var variableKey = DialogueVariableConstants.GetHasItemVariable(itemTag, _playerData.DialogueTag);
+        if (_variables.ContainsKey(variableKey))
+        {
+            _variables.Remove(variableKey); // error otherwise
+        }
+        _variables.Add(variableKey, new Yarn.Value(playerHasItem));
+    }
+
+    private void OnPlayerInventoryChanged(GameItemData gameItem)
+    {
+        Debug.Log("OnPlayerInventoryChanged");
+        RefreshPlayerInventoryRelatedVariables(gameItem.Tag);
+    }
+    #endregion
+
+
 
     /// Set a variable's value
     public override void SetValue(string variableName, Yarn.Value value)

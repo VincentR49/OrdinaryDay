@@ -37,10 +37,8 @@ public class InventoryHolder : MonoBehaviour
         _runtimeInventory.RemoveItem(item);
     }
 
-    [YarnCommand("hasItem")]
-    public bool HasItem(string itemTag) => GetItem(itemTag) != null;
-    
 
-    private GameItemData GetItem(string itemTag)
-        => _allGameItems.Items.FirstOrDefault(x => x.Tag.Equals(itemTag));
+    public bool HasItem(string itemTag) => _runtimeInventory.Value.HasItem(itemTag);
+
+    private GameItemData GetItem(string itemTag) => _allGameItems.GetItem(itemTag);
 }

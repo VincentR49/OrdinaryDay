@@ -2295,7 +2295,7 @@ GameObject:
   - component: {fileID: 720227984}
   - component: {fileID: 720227985}
   m_Layer: 0
-  m_Name: Door
+  m_Name: JisooHouseDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2386,7 +2386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _key: {fileID: 11400000, guid: 8e23872d00f2e48009d1873647dcb534, type: 2}
-  _isLockedByDefault: 1
+  _locked: 1
   _speakableObject: {fileID: 720227984}
   _playerTeleporterObject: {fileID: 346844145}
 --- !u!1 &760965371
@@ -3789,7 +3789,6 @@ GameObject:
   - component: {fileID: 2079135640}
   - component: {fileID: 2079135641}
   - component: {fileID: 2079135642}
-  - component: {fileID: 2079135643}
   - component: {fileID: 2079135644}
   m_Layer: 0
   m_Name: House
@@ -3841,7 +3840,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.7, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3852,33 +3851,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 2}
-  m_EdgeRadius: 0
---- !u!61 &2079135643
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2079135639}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.7, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &2079135644
 MonoBehaviour:
