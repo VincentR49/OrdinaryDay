@@ -103,7 +103,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         {
             if (string.IsNullOrEmpty(lineSpeaker))
             {
-                Debug.LogError("The first speaker of the dialogue is unknown. Will assign the player Tag.");
+                Debug.LogWarning("The first speaker of the dialogue is unknown. Will assign the player Tag.");
                 lineSpeaker = _playerData.DialogueTag;
             }
             ChangeSpeaker(lineSpeaker);

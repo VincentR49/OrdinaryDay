@@ -25,7 +25,13 @@ public class DialogueAgentData : ScriptableObject
     }
 
 
-    public string GetNode(string nodeTag)
+    /// <summary>
+    /// Return the yarn node name from the node tag described in the dialogue agent data.
+    /// If this node cannot be find, return the default node.
+    /// </summary>
+    /// <param name="nodeTag"></param>
+    /// <returns></returns>
+    public string GetYarnNode(string nodeTag)
     {
         NodeWithTag node = null;
         if (OtherNodes != null)
@@ -38,5 +44,24 @@ public class DialogueAgentData : ScriptableObject
             return DefaultStoryNode;
         }
         return node.Node;
+    }
+
+    /// <summary>
+    /// Return the node tag corresponding the given yarnNode.
+    /// If this one cannot be find, return the yarnNode name.
+    /// </summary>
+    /// <param name="yarnNode"></param>
+    /// <returns></returns>
+    public string GetNodeTag(string yarnNode)
+    {
+        if (OtherNodes != null)
+        {
+            var nodeTag = OtherNodes.FirstOrDefault(n => n.Node.Equals(yarnNode));
+            if (nodeTag != null)
+            {
+                return nodeTag.Tag;
+            }
+        }
+        return yarnNode;
     }
 }

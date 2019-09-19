@@ -27,18 +27,18 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 
 
     #region Speaking
-    public void SpeaksTo(GameObject other, string nodeTag = null)
+    public void SpeaksTo(GameObject other, string nodeTag = null, bool tagIsYarnNodeName = false)
     {
         if (!CanSpeak())
         {
             Debug.LogError("Cannot speak to: " + gameObject.name);
             return;
         }
-        StartCoroutine(SpeaksToRoutine(other));
+        StartCoroutine(SpeaksToRoutine(other, nodeTag, tagIsYarnNodeName));
     }
 
 
-    private IEnumerator SpeaksToRoutine(GameObject other, string nodeTag = null)
+    private IEnumerator SpeaksToRoutine(GameObject other, string nodeTag = null, bool tagIsYarnNodeName = false)
     {
         if (_walkManager != null) // stop the game object if he is walking (animation bug otherwise)
         {
@@ -50,17 +50,17 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
             _spriteDirectioner.FaceTowards(other.transform);
             yield return new WaitForEndOfFrame();
         }
-		StartDialogue(nodeTag);
+		StartDialogue(nodeTag, tagIsYarnNodeName);
 		yield break;
     }
     
 
-    private void StartDialogue(string nodeTag = null)
+    private void StartDialogue(string nodeTag = null, bool tagIsYarnNodeName = false)
 	{
         var node = _dialogueAgentData.DefaultStoryNode;
         if (!string.IsNullOrEmpty(nodeTag))
 		{
-            node = _dialogueAgentData.GetNode(nodeTag);
+            node = tagIsYarnNodeName ? nodeTag : _dialogueAgentData.GetYarnNode(nodeTag);
             if (string.IsNullOrEmpty(node))
             {
                 Debug.LogError("Couldnt find any node with tag: " + nodeTag);
@@ -95,5 +95,17 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
     public void OnInteraction(GameObject interactor)
     {
         SpeaksTo(interactor);
+    }
+
+
+    public string GetYarnNodeName(string nodeTag)
+    {
+        return _dialogueAgentData.GetYarnNode(nodeTag);
+    }
+
+
+    public string GetNodeTag(string yarnNodeName)
+    {
+        return _dialogueAgentData.GetNodeTag(yarnNodeName);
     }
 }

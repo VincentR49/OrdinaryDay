@@ -1,0 +1,62 @@
+[
+	{
+		"title": "Door.Locked",
+		"tags": "",
+		"body": "La porte est vérouillée.",
+		"position": {
+			"x": 412,
+			"y": 166
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Door.Unlocked",
+		"tags": "",
+		"body": "La porte est ouverte.",
+		"position": {
+			"x": 413,
+			"y": 389
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Door.JustUnlocked",
+		"tags": "",
+		"body": "Vous venez de dévérouiller la porte.",
+		"position": {
+			"x": 690,
+			"y": -60
+		},
+		"colorID": 0
+	},
+	{
+		"title": "JisooHouseDoor.Locked",
+		"tags": "",
+		"body": "<<if $knowJisooHouseKeyLocation is true and $Player_has_JisooHouseKey is false>>\nIl y a effectivement une clé ici.\n->Récupérer la clé sous le tapis\n    [[GotJisooHouseKey]]\n->Partir\n<<else>>\n[[Door.Locked]]\n<<endif>>",
+		"position": {
+			"x": -238,
+			"y": 161
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Door.UnlockChoice",
+		"tags": "",
+		"body": "La porte est vérouillée.\n-> Dévérouiller la porte\n    [[Door.JustUnlocked]]\n-> Partir",
+		"position": {
+			"x": 412,
+			"y": -61
+		},
+		"colorID": 0
+	},
+	{
+		"title": "GotJisooHouseKey",
+		"tags": "",
+		"body": "<<addItem Player JisooHouseKey>>\nPlayer: Je viens de trouver une clé sous le tapis d'entrée.",
+		"position": {
+			"x": -242,
+			"y": 416
+		},
+		"colorID": 0
+	}
+]
