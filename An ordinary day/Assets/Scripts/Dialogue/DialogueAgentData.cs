@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// Data holder of Dialogue Information for Yarn Plugin
 /// </summary>
-[CreateAssetMenu(menuName = "Scriptables/Dialogue Agent")]
+[CreateAssetMenu(menuName = "Scriptables/Dialogue/Dialogue Agent")]
 public class DialogueAgentData : ScriptableObject
 {
     public string Tag; // tag of the agent in the yarn dialogue

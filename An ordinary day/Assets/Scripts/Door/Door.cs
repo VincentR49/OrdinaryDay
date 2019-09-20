@@ -6,12 +6,6 @@ using System.Collections.Generic;
 /// </summary>
 public class Door : MonoBehaviour, I_InteractionResponse
 {
-    // Dialogue Agent Data Node tag corresponding the Lock and Unlock text to display
-    private const string LockedNodeTag = "Locked";
-    private const string UnlockedNodeTag = "Unlocked";
-    private const string UnlockChoiceNodeTag = "UnlockChoice";
-    private const string JustUnlockedNodeTag = "JustUnlocked";
-
     [SerializeField]
     [Tooltip("Optional")]
     private GameItemData _key;
@@ -24,6 +18,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
     [SerializeField]
     private GameObject _playerTeleporterObject;
 
+    private DoorDialogueData DialogueData => (DoorDialogueData) _speakableObject.GetDialogueData();
 
     private void Awake()
     {
@@ -33,9 +28,8 @@ public class Door : MonoBehaviour, I_InteractionResponse
 
     public void OnInteraction(GameObject interactor)
     {
-        // TODO Manage here the game logic
         var inventoryHolder = interactor.GetComponent<InventoryHolder>();
-        var nodeTag = _locked ? LockedNodeTag : UnlockedNodeTag;
+        var node = _locked ? DialogueData.LockedNode : DialogueData.UnlockedNode;
         if (inventoryHolder == null)
         {
             Debug.LogWarning("The interactor doesnt have any inventory system.");
@@ -44,11 +38,11 @@ public class Door : MonoBehaviour, I_InteractionResponse
         {
             if (_locked && _key != null && inventoryHolder.HasItem(_key.Tag))
             {
-                nodeTag = UnlockChoiceNodeTag;
+                node = DialogueData.UnlockChoiceNode;
             }
         }
         _speakableObject.OnDialogueFinished += OnDialogueFinished;
-        _speakableObject.SpeaksTo(interactor, nodeTag);
+        _speakableObject.SpeaksTo(interactor, node, true);
     }
 
 
@@ -58,9 +52,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
         _speakableObject.OnDialogueFinished -= OnDialogueFinished;
         foreach (var node in visitedNodes)
         {
-            var nodeTag = _speakableObject.GetNodeTag(node);
-            Debug.Log(nodeTag);
-            if (JustUnlockedNodeTag.Equals(nodeTag))
+            if (DialogueData.JustUnlockedNode.Equals(node))
             {
                 Unlock();
             }

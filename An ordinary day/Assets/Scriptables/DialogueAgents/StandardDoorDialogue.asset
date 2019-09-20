@@ -9,20 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b7aedc36ac3403880cf3eef09d6609, type: 3}
+  m_Script: {fileID: 11500000, guid: cd79e7548ae4846d29eabd44d3f0943c, type: 3}
   m_Name: StandardDoorDialogue
   m_EditorClassIdentifier: 
   Tag: Door
   DialogueDisplayName: 
   YarnDialogue: {fileID: 4900000, guid: 32216186d8a3547d28e80fa9f2a597ba, type: 3}
   DialoguePicture: {fileID: 21300000, guid: 3af4fbc94131e436f9de002ef87e1460, type: 3}
-  DefaultStoryNode: Door.Locked
-  OtherNodes:
-  - Tag: Locked
-    Node: Door.Locked
-  - Tag: Unlocked
-    Node: Door.Unlocked
-  - Tag: UnlockChoice
-    Node: Door.UnlockChoice
-  - Tag: JustUnlocked
-    Node: Door.JustUnlocked
+  DefaultStoryNode: 
+  OtherNodes: []
+  LockedNode: Door.Locked
+  UnlockedNode: Door.Unlocked
+  JustUnlockedNode: Door.JustUnlocked
+  UnlockChoiceNode: Door.UnlockChoice

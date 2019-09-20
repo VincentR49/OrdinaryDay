@@ -2443,7 +2443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b355fc90dc54cb6b9e0714cd380199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueAgentData: {fileID: 11400000, guid: 3c5f441fb9eed43a2835c22abd864a10, type: 2}
+  _dialogueAgentData: {fileID: 11400000, guid: d9a816bf15bf44eafa58fc46b4f50276, type: 2}
   _faceOtherWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}
@@ -3371,7 +3371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b355fc90dc54cb6b9e0714cd380199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueAgentData: {fileID: 11400000, guid: ea61f178ad879467c9a850405b6b91ba, type: 2}
+  _dialogueAgentData: {fileID: 11400000, guid: 75fe4d545f6b94d6e814a87f738c1d03, type: 2}
   _faceOtherWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}

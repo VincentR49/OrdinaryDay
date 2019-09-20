@@ -32,18 +32,18 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 
 
     #region Speaking
-    public void SpeaksTo(GameObject other, string nodeTag = null, bool tagIsYarnNodeName = false)
+    public void SpeaksTo(GameObject other, string nodeTag = null, bool isYarnNodeName = false)
     {
         if (!CanSpeak())
         {
             Debug.LogError("Cannot speak to: " + gameObject.name);
             return;
         }
-        StartCoroutine(SpeaksToRoutine(other, nodeTag, tagIsYarnNodeName));
+        StartCoroutine(SpeaksToRoutine(other, nodeTag, isYarnNodeName));
     }
 
 
-    private IEnumerator SpeaksToRoutine(GameObject other, string nodeTag = null, bool tagIsYarnNodeName = false)
+    private IEnumerator SpeaksToRoutine(GameObject other, string nodeTag = null, bool isYarnNodeName = false)
     {
         if (_walkManager != null) // stop the game object if he is walking (animation bug otherwise)
         {
@@ -55,17 +55,17 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
             _spriteDirectioner.FaceTowards(other.transform);
             yield return new WaitForEndOfFrame();
         }
-		StartDialogue(nodeTag, tagIsYarnNodeName);
+		StartDialogue(nodeTag, isYarnNodeName);
 		yield break;
     }
     
 
-    private void StartDialogue(string nodeTag = null, bool tagIsYarnNodeName = false)
+    private void StartDialogue(string nodeTag = null, bool isYarnNodeName = false)
 	{
         var node = _dialogueAgentData.DefaultStoryNode;
         if (!string.IsNullOrEmpty(nodeTag))
 		{
-            node = tagIsYarnNodeName ? nodeTag : _dialogueAgentData.GetYarnNode(nodeTag);
+            node = isYarnNodeName ? nodeTag : _dialogueAgentData.GetYarnNode(nodeTag);
             if (string.IsNullOrEmpty(node))
             {
                 Debug.LogError("Couldnt find any node with tag: " + nodeTag);
@@ -104,16 +104,17 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
         _dialogueAgentData = dialogueAgentData;
     }
 
+    public DialogueAgentData GetDialogueData() => _dialogueAgentData;
 
     private bool CanSpeak() => ! _dialogueRunner.isDialogueRunning;
 
 
-    private void AddDialogueDataIfNeeded(string node)
+    private void AddDialogueDataIfNeeded(string nodeName)
     {
         if (_dialogueAgentData.YarnDialogue != null
-                && !_dialogueRunner.NodeExists(node)) // TODO throw error if no nodes are loaded, check why
+                && !_dialogueRunner.NodeExists(nodeName)) // TODO throw error if no nodes are loaded, check why
         {
-            Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.YarnDialogue + " for node: " + node);
+            Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.YarnDialogue.name + " for node: " + nodeName);
             _dialogueRunner.AddScript(_dialogueAgentData.YarnDialogue);
         }
     }
