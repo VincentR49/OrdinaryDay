@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Attach this to a game object simulate a door behaviour.
@@ -12,6 +13,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
     private const string JustUnlockedNodeTag = "JustUnlocked";
 
     [SerializeField]
+    [Tooltip("Optional")]
     private GameItemData _key;
     [SerializeField]
     private bool _locked;
@@ -40,35 +42,42 @@ public class Door : MonoBehaviour, I_InteractionResponse
         }
         else // has inventory
         {
-            if (_locked && inventoryHolder.HasItem(_key.Tag))
+            if (_locked && _key != null && inventoryHolder.HasItem(_key.Tag))
             {
                 nodeTag = UnlockChoiceNodeTag;
             }
         }
+        _speakableObject.OnDialogueFinished += OnDialogueFinished;
         _speakableObject.SpeaksTo(interactor, nodeTag);
-        //TODO Add listener to the speakable object to check when the dialogue is finished
     }
 
 
-    private void OnDialogueFinished(string lastYarnNode)
+    private void OnDialogueFinished(List<string> visitedNodes)
     {
-        // We unlock the door if the last dialogue node is the justUnlocked node.
-        var nodeTag = _speakableObject.GetNodeTag(lastYarnNode);
-        if (nodeTag.Equals(JustUnlockedNodeTag))
+        // We unlock the door if the player has visited the just unlocked node
+        _speakableObject.OnDialogueFinished -= OnDialogueFinished;
+        foreach (var node in visitedNodes)
         {
-            Unlock();
+            var nodeTag = _speakableObject.GetNodeTag(node);
+            Debug.Log(nodeTag);
+            if (JustUnlockedNodeTag.Equals(nodeTag))
+            {
+                Unlock();
+            }
         }
     }
 
 
     public void Lock()
     {
+        Debug.Log("Lock " + gameObject.name);
         SetLocked(true);
     }
 
     
     public void Unlock()
     {
+        Debug.Log("Unlock " + gameObject.name);
         SetLocked(false);
     }
 

@@ -24,3 +24,5 @@ MonoBehaviour:
     Node: Door.Unlocked
   - Tag: UnlockChoice
     Node: Door.UnlockChoice
+  - Tag: JustUnlocked
+    Node: Door.JustUnlocked

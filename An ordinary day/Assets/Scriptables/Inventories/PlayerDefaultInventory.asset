@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Value:
     _items:
-    - {fileID: 11400000, guid: fef51f256b63f46df829462f947ddfa1, type: 2}
+    - {fileID: 11400000, guid: 9d464bdcb4a42419e83b04cacab9ada7, type: 2}
     _money: 500

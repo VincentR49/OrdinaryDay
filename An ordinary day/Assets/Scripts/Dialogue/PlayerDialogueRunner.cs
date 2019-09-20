@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Yarn.Unity;
 
 /// <summary>
@@ -7,5 +8,5 @@ using Yarn.Unity;
 /// </summary>
 public class PlayerDialogueRunner : DialogueRunner
 {
-   // nothing yet
+    // nothing yet
 }

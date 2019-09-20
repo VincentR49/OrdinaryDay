@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// Attach this to a game object to make him able to speak (start dialogue) with another one.
@@ -6,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 {
+    private const float ListenDialogueRoutineRefreshRateSec = 0.25f;
     [SerializeField]
     private DialogueAgentData _dialogueAgentData;
 
@@ -18,6 +20,9 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
     private WalkManager _walkManager;
 
     private PlayerDialogueRunner _dialogueRunner;
+
+    public delegate void DialogueFinishedHandler(List<string> _visitedNodes);
+    public event DialogueFinishedHandler OnDialogueFinished;
 
 
     private void Start()
@@ -69,7 +74,28 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 		}
         AddDialogueDataIfNeeded(node);
         _dialogueRunner.StartDialogue(node);
+        StartCoroutine(ListenForEndOfDialogue());
 	}
+
+
+    private IEnumerator ListenForEndOfDialogue()
+    {
+        var visitedNodes = new List<string>();
+        yield return new WaitForSecondsRealtime(ListenDialogueRoutineRefreshRateSec);
+        while (_dialogueRunner.isDialogueRunning)
+        {
+            var currentNode = _dialogueRunner.currentNodeName;
+            if (!string.IsNullOrEmpty(currentNode)
+                    && !visitedNodes.Contains(currentNode))
+            {
+                visitedNodes.Add(currentNode);
+            }
+            yield return new WaitForSecondsRealtime(ListenDialogueRoutineRefreshRateSec);
+        }
+        Debug.Log("Visited nodes: " + string.Join(", ", visitedNodes));
+        OnDialogueFinished?.Invoke(visitedNodes);
+    }
+
     #endregion
 
 
