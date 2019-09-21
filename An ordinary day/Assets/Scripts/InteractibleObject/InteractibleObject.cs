@@ -3,7 +3,9 @@
 /// <summary>
 /// Attach to an object that can be interactible via InteractWithObjectStarter.
 /// Raise an event when the interaction is started.
+/// Need a collider to be detected via InteractWithObjectStarter.
 /// </summary>
+[RequireComponent(typeof(Collider2D))]
 public class InteractibleObject : MonoBehaviour
 {
     [SerializeField]

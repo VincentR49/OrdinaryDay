@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: PlayerDefaultInventory
   m_EditorClassIdentifier: 
   Value:
-    _items:
-    - {fileID: 11400000, guid: 9d464bdcb4a42419e83b04cacab9ada7, type: 2}
+    _items: []
     _money: 500

@@ -12,6 +12,18 @@ public class InventoryHolder : MonoBehaviour
     [SerializeField]
     private GameItemDataList _allGameItems;
 
+
+    public void AddItem(GameItemData item)
+    {
+        _runtimeInventory.AddItem(item);
+    }
+
+
+    public void RemoveItem(GameItemData item)
+    {
+        _runtimeInventory.RemoveItem(item);
+    }
+
     [YarnCommand("addItem")]
     public void AddItem(string itemTag)
     {
@@ -22,7 +34,7 @@ public class InventoryHolder : MonoBehaviour
             Debug.LogError("Couldnt find any object with the tag: " + itemTag);
             return;
         }
-        _runtimeInventory.AddItem(item);
+        AddItem(item);
     }
 
     [YarnCommand("removeItem")]
@@ -34,7 +46,7 @@ public class InventoryHolder : MonoBehaviour
             Debug.LogError("Couldnt find any object with the tag: " + itemTag);
             return;
         }
-        _runtimeInventory.RemoveItem(item);
+        RemoveItem(item);
     }
 
 
