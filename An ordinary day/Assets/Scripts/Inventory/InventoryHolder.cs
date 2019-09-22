@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Linq;
 using Yarn.Unity;
 
 /// <summary>
@@ -10,7 +9,7 @@ public class InventoryHolder : MonoBehaviour
     [SerializeField]
     private RuntimeInventory _runtimeInventory;
     [SerializeField]
-    private GameItemDataList _allGameItems;
+    private GameItemDataList _allGameItems; // necessary to add specific item from the item list
 
 
     public void AddItem(GameItemData item)
@@ -24,11 +23,12 @@ public class InventoryHolder : MonoBehaviour
         _runtimeInventory.RemoveItem(item);
     }
 
+
     [YarnCommand("addItem")]
     public void AddItem(string itemTag)
     {
         Debug.Log("Add item: " + itemTag);
-        var item = GetItem(itemTag);
+        var item = _allGameItems.GetItem(itemTag);
         if (item == null)
         {
             Debug.LogError("Couldnt find any object with the tag: " + itemTag);
@@ -40,17 +40,13 @@ public class InventoryHolder : MonoBehaviour
     [YarnCommand("removeItem")]
     public void RemoveItem(string itemTag)
     {
-        var item = GetItem(itemTag);
-        if (item == null)
+        var item = _runtimeInventory.Value.GetItem(itemTag);
+        if (item != null)
         {
-            Debug.LogError("Couldnt find any object with the tag: " + itemTag);
-            return;
+            RemoveItem(item);
         }
-        RemoveItem(item);
     }
 
 
     public bool HasItem(string itemTag) => _runtimeInventory.Value.HasItem(itemTag);
-
-    private GameItemData GetItem(string itemTag) => _allGameItems.GetItem(itemTag);
 }
