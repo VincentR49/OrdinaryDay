@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class DataList<T> : ScriptableObject
+public class DataList<T> : ScriptableObject where T: UnityEngine.Object
 {
     public List<T> Items;
     
@@ -32,5 +32,20 @@ public class DataList<T> : ScriptableObject
         if (Items == null)
             return;
         Items.Clear();
+    }
+
+
+    public void Add(List<T> items)
+    {
+        foreach (var item in items)
+            Add(item);
+    }
+
+
+    public void LoadAllFromPath(string folder)
+    {
+        var assets = Utils.FindAssetsByType<T>(folder);
+        Clear();
+        Add(assets);
     }
 }

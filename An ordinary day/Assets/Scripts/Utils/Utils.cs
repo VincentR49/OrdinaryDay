@@ -9,6 +9,27 @@ using UnityEditor;
 /// </summary>
 public static class Utils
 {
+    public static List<T> FindAssetsByType<T>(string folder = null) where T : UnityEngine.Object
+    {
+        return FindAssetsByType<T>(folder == null ? null : new string[] { folder });
+    }
+
+    public static List<T> FindAssetsByType<T>(string[] searchInFolders = null) where T : UnityEngine.Object
+    {
+        List<T> assets = new List<T>();
+        string[] guids = AssetDatabase.FindAssets(string.Format("t:{0}", typeof(T)), searchInFolders);
+        for (int i = 0; i < guids.Length; i++)
+        {
+            string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
+            T asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+            if (asset != null)
+            {
+                assets.Add(asset);
+            }
+        }
+        return assets;
+    }
+
     public static bool IsPath(string str)
     {
         if (str == null)

@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7b7aedc36ac3403880cf3eef09d6609, type: 3}
-  m_Name: JisooHouseDialogue
+  m_Name: JisooDialogue
   m_EditorClassIdentifier: 
-  Tag: JisooHouse
-  DialogueDisplayName: 
-  DialoguePicture: {fileID: 21300000, guid: 3af4fbc94131e436f9de002ef87e1460, type: 3}
-  DefaultDialogueFile: {fileID: 4900000, guid: 64d4de15edaf7428db3c60a8d68148b3, type: 3}
-  DefaultStoryNode: JisooHouse
-  OtherNodes: []
+  Tag: Jisoo
+  DialoguePicture: {fileID: -8107361669236297097, guid: ae4319e0c79ea45199c2c20a89c905ff,
+    type: 3}
+  DialogueDisplayName: Jisoo
+  DefaultDialogueFile: {fileID: 4900000, guid: bdddcc76498f74102b2ed414617190b4, type: 3}
+  DefaultStoryNode: Jisoo.Story
+  TaggedNodes: []
