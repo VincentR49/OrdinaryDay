@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: Vincent
   DialogueDisplayName: Vincent
-  YarnDialogue: {fileID: 4900000, guid: 217d442e81d5e48ff9f4a9f236c68cbf, type: 3}
   DialoguePicture: {fileID: -6295871403012345928, guid: ae4319e0c79ea45199c2c20a89c905ff,
     type: 3}
+  DefaultDialogueFile: {fileID: 4900000, guid: 217d442e81d5e48ff9f4a9f236c68cbf, type: 3}
   DefaultStoryNode: Vincent.Story
   OtherNodes: []

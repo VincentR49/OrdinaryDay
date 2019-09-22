@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91038df025c24ac89312835a9545033, type: 3}
+  m_Name: BlueKeyDialogue
+  m_EditorClassIdentifier: 
+  Tag: BlueKey
+  DialoguePicture: {fileID: 21300000, guid: 612f7ead5173a47118bf2c29d9be74fe, type: 3}
+  DialogueDisplayName: 
+  DefaultDialogueFile: {fileID: 0}
+  DefaultStoryNode: 
+  TaggedNodes: []
+  GameItem: {fileID: 11400000, guid: 9d464bdcb4a42419e83b04cacab9ada7, type: 2}
+  RewardDialogueFile: {fileID: 4900000, guid: 5c4a5edc959e64ed2995c4b212b3bdce, type: 3}
+  RewardNode: Reward.BlueKey

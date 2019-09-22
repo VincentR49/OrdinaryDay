@@ -52,7 +52,7 @@
 	{
 		"title": "GotJisooHouseKey",
 		"tags": "",
-		"body": "<<addItem Player JisooHouseKey>>\nPlayer: Je viens de trouver une clé sous le tapis d'entrée.",
+		"body": "<<addItem Player JisooHouseKey>>\nJisooHouseKey: Je viens de trouver une clé sous le tapis d'entrée.\nPlayer: Elle devrait pouvoir ouvrir la porte de cette maison.",
 		"position": {
 			"x": -242,
 			"y": 416

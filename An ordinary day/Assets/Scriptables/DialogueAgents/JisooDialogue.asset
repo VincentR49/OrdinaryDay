@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tag: Jisoo
   DialogueDisplayName: Jisoo
-  YarnDialogue: {fileID: 4900000, guid: bdddcc76498f74102b2ed414617190b4, type: 3}
   DialoguePicture: {fileID: -8107361669236297097, guid: ae4319e0c79ea45199c2c20a89c905ff,
     type: 3}
+  DefaultDialogueFile: {fileID: 4900000, guid: bdddcc76498f74102b2ed414617190b4, type: 3}
   DefaultStoryNode: Jisoo.Story
   OtherNodes: []

@@ -1,0 +1,12 @@
+[
+	{
+		"title": "Reward.BlueKey",
+		"tags": "",
+		"body": "BlueKey: Vous avez trouvé une clé bleue.\nPlayer: Je me demande ce qu'elle peut ouvrir...",
+		"position": {
+			"x": 540,
+			"y": 260
+		},
+		"colorID": 0
+	}
+]

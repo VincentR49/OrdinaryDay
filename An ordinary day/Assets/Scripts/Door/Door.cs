@@ -20,6 +20,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
 
     private DoorDialogueData DialogueData => (DoorDialogueData) _speakableObject.GetDialogueData();
 
+
     private void Awake()
     {
         SetLocked(_locked);
@@ -42,7 +43,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
             }
         }
         _speakableObject.OnDialogueFinished += OnDialogueFinished;
-        _speakableObject.SpeaksTo(interactor, node, true);
+        _speakableObject.SpeaksTo(interactor, node);
     }
 
 
@@ -72,6 +73,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
         Debug.Log("Unlock " + gameObject.name);
         SetLocked(false);
     }
+
 
     private void SetLocked(bool locked)
     {

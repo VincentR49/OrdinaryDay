@@ -8,10 +8,20 @@ public class PickableGameItem : MonoBehaviour, I_InteractionResponse
     [SerializeField]
     private GameItemData _gameItem;
     [SerializeField]
+    private SpeakableObject _speakableObject;
+    [SerializeField]
     private bool _showRewardPopupOnPicking = true;
 
 
+    private GameItemDialogueData GameItemDialogueData => (GameItemDialogueData) _speakableObject.GetDialogueData();
+
     public void OnInteraction(GameObject interactor)
+    {
+        PickUpObject(interactor);
+    }
+
+
+    public void PickUpObject(GameObject interactor)
     {
         var inventoryHolder = interactor.GetComponent<InventoryHolder>();
         if (inventoryHolder == null)
@@ -22,9 +32,16 @@ public class PickableGameItem : MonoBehaviour, I_InteractionResponse
         inventoryHolder.AddItem(_gameItem.Tag);
         if (_showRewardPopupOnPicking)
         {
-            // TODO
-            Debug.LogError("TODO: show reward popup");
+            ShowRewardDialogue(interactor);
         }
         Destroy(gameObject);
+    }
+
+
+
+    private void ShowRewardDialogue(GameObject interactor)
+    {
+        _speakableObject.SpeaksTo(interactor, GameItemDialogueData.RewardNode,
+                                    yarnFile:GameItemDialogueData.RewardDialogueFile);
     }
 }

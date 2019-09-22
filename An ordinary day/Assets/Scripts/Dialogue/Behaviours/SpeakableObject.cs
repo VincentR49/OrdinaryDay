@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 /// <summary>
 /// Attach this to a game object to make him able to speak (start dialogue) with another one.
-/// 
 /// </summary>
 public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 {
@@ -19,8 +19,8 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
     [SerializeField]
     private WalkManager _walkManager;
 
-    private PlayerDialogueRunner _dialogueRunner;
 
+    private PlayerDialogueRunner _dialogueRunner;
     public delegate void DialogueFinishedHandler(List<string> _visitedNodes);
     public event DialogueFinishedHandler OnDialogueFinished;
 
@@ -32,18 +32,45 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 
 
     #region Speaking
-    public void SpeaksTo(GameObject other, string nodeTag = null, bool isYarnNodeName = false)
+    /// <summary>
+    /// Speaks to the given game object.
+    /// If the nodeTag is not precised, the DefaultStoryNode will be loaded by default.
+    /// If yarnFile is not precised, the DefaultDialogueFile will be loaded by default.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <param name="yarnFile"></param>
+    public void SpeaksTo(GameObject other, string node = null, TextAsset yarnFile = null)
     {
         if (!CanSpeak())
         {
             Debug.LogError("Cannot speak to: " + gameObject.name);
             return;
         }
-        StartCoroutine(SpeaksToRoutine(other, nodeTag, isYarnNodeName));
+        if (node == null)
+        {
+            node = _dialogueAgentData.DefaultStoryNode;
+        }
+        if (yarnFile == null)
+        {
+            yarnFile = _dialogueAgentData.DefaultDialogueFile;
+        }
+        StartCoroutine(SpeaksToRoutine(other, node, yarnFile));
     }
 
 
-    private IEnumerator SpeaksToRoutine(GameObject other, string nodeTag = null, bool isYarnNodeName = false)
+    public void SpeaksTo(GameObject other, TaggedDialogueNode taggedNode, TextAsset yarnFile = null)
+    {
+        var node = _dialogueAgentData.GetYarnNode(taggedNode.Tag);
+        if (string.IsNullOrEmpty(node))
+        {
+            Debug.LogError("Couldnt find any node with tag: " + taggedNode.Tag);
+            return;
+        }
+        SpeaksTo(other, node, yarnFile);
+    }
+
+
+    private IEnumerator SpeaksToRoutine(GameObject other, string node, TextAsset yarnFile)
     {
         if (_walkManager != null) // stop the game object if he is walking (animation bug otherwise)
         {
@@ -55,27 +82,17 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
             _spriteDirectioner.FaceTowards(other.transform);
             yield return new WaitForEndOfFrame();
         }
-		StartDialogue(nodeTag, isYarnNodeName);
-		yield break;
+        StartDialogue(node, yarnFile);
+        yield break;
     }
-    
 
-    private void StartDialogue(string nodeTag = null, bool isYarnNodeName = false)
-	{
-        var node = _dialogueAgentData.DefaultStoryNode;
-        if (!string.IsNullOrEmpty(nodeTag))
-		{
-            node = isYarnNodeName ? nodeTag : _dialogueAgentData.GetYarnNode(nodeTag);
-            if (string.IsNullOrEmpty(node))
-            {
-                Debug.LogError("Couldnt find any node with tag: " + nodeTag);
-                return;
-            }
-		}
-        AddDialogueDataIfNeeded(node);
+
+    private void StartDialogue(string node, TextAsset yarnFile)
+    {
+        AddDialogueDataIfNeeded(node, yarnFile);
         _dialogueRunner.StartDialogue(node);
         StartCoroutine(ListenForEndOfDialogue());
-	}
+    }
 
 
     private IEnumerator ListenForEndOfDialogue()
@@ -106,33 +123,20 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 
     public DialogueAgentData GetDialogueData() => _dialogueAgentData;
 
-    private bool CanSpeak() => ! _dialogueRunner.isDialogueRunning;
+    private bool CanSpeak() => !_dialogueRunner.isDialogueRunning;
 
 
-    private void AddDialogueDataIfNeeded(string nodeName)
+    private void AddDialogueDataIfNeeded(string nodeName, TextAsset yarnFile)
     {
-        if (_dialogueAgentData.YarnDialogue != null
-                && !_dialogueRunner.NodeExists(nodeName)) // TODO throw error if no nodes are loaded, check why
+        if (yarnFile != null && !_dialogueRunner.NodeExists(nodeName)) // TODO throw error if no nodes are loaded, check why
         {
-            Debug.Log("Added script on dialogue runner: " + _dialogueAgentData.YarnDialogue.name + " for node: " + nodeName);
-            _dialogueRunner.AddScript(_dialogueAgentData.YarnDialogue);
+            Debug.Log("Added script on dialogue runner: " + yarnFile.name + " for node: " + nodeName);
+            _dialogueRunner.AddScript(yarnFile);
         }
     }
 
     public void OnInteraction(GameObject interactor)
     {
         SpeaksTo(interactor);
-    }
-
-
-    public string GetYarnNodeName(string nodeTag)
-    {
-        return _dialogueAgentData.GetYarnNode(nodeTag);
-    }
-
-
-    public string GetNodeTag(string yarnNodeName)
-    {
-        return _dialogueAgentData.GetNodeTag(yarnNodeName);
     }
 }

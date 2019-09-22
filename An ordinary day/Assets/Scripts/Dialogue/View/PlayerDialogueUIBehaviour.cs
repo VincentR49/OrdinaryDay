@@ -151,6 +151,9 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     }
     #endregion
 
+
+    #region Speaker Management
+
     private IEnumerator WaitForSpeakerToFinish()
     {
         // We wait to be sure to be at the last page of the current dialogue line
@@ -162,7 +165,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         // We need to wait the next frame to refresh the state of the input system
         // we already pressed the continue key to go to the last page of the current dialogue
         yield return new WaitForEndOfFrame();
-        // Special management in case of an option has been choose
+        // Special management in case of an option has been chosen
         // We display directly the new content
         if (_optionWasJustChosen)
         {
@@ -174,8 +177,6 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
             yield return null;
         }
     }
-
-    #region Speaker Management
 
     /// <summary>
     /// Extract the speaker tag from the current dialogue line
@@ -214,7 +215,8 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
             OtherSpeaks(agentData.DialoguePicture, agentData.DialogueDisplayName);
             return;
         }
-        Debug.LogError("Couldnt find any NPC or object with the given tag: " + _speaker);
+        Debug.LogError("Couldnt find any NPC or object with the given tag: " + _speaker + "/n" +
+            "You probably needs to add the corresponding dialogue data in the all dialogue data list.");
     }
 
     

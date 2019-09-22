@@ -5,7 +5,7 @@ using UnityEditor;
 [CustomEditor(typeof(GameItemDisplay))]
 public class GameItemDisplayEditor : Editor
 {
-    GameItemDisplay _target;
+    private GameItemDisplay _target;
 
     void OnEnable()
     {
