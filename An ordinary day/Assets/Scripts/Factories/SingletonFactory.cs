@@ -11,8 +11,6 @@ public class SingletonFactory : Singleton<SingletonFactory>
     private Dictionary<string, GameObject> _singletonInstances = new Dictionary<string, GameObject>();
 
     public static GameObject ScreenFader() => GetInstance(PathConstants.ScreenFaderPrefab);
-    public static GameObject TimeManager() => GetInstance(PathConstants.TimeManagerPrefab);
-    public static GameObject GameController() => GetInstance(PathConstants.GameControllerPrefab);
 
 
     public static GameObject GetInstance(string prefabPath)
