@@ -1,5 +1,9 @@
-﻿public static class PathConstants
+﻿// TODO replace later by references
+public static class PathConstants
 {
-    public static string PlayerPrefab = "Assets/Prefabs/Characters/Player.prefab";
-    public static string NPCPrefab = "Assets/Prefabs/Characters/NPC.prefab";
+    public static string PrefabDirectory = "Assets/Prefabs/";
+
+    public static string PlayerPrefab = PrefabDirectory + "Characters/Player.prefab";
+    public static string NPCPrefab = PrefabDirectory + "Characters/NPC.prefab";
+    public static string ScreenFaderPrefab = PrefabDirectory + "UIs/ScreenFader.prefab";
 }

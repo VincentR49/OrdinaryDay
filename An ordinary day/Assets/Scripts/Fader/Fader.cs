@@ -4,8 +4,10 @@ using UnityEngine.Events;
 public class Fader : MonoBehaviour
 {
     private const float FadeOriginalDuration = 1f; // duration in animator
+
     [SerializeField]
     private float _defaultFadeDuration = FadeOriginalDuration;
+
     protected Animator _animator;
     public UnityEvent FadeInFinished;
     public UnityEvent FadeOutFinished;
@@ -13,6 +15,7 @@ public class Fader : MonoBehaviour
     public bool IsFadingIn { private set; get; }
     public bool IsFadingOut { private set; get; }
     public float FadeDuration => FadeOriginalDuration / _animator.speed;
+
 
     protected void Awake()
     {
