@@ -5,5 +5,4 @@ public static class PathConstants
 
     public static string PlayerPrefab = PrefabDirectory + "Characters/Player.prefab";
     public static string NPCPrefab = PrefabDirectory + "Characters/NPC.prefab";
-    public static string ScreenFaderPrefab = PrefabDirectory + "UIs/ScreenFader.prefab";
 }

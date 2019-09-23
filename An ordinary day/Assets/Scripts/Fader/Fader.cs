@@ -12,9 +12,9 @@ public class Fader : MonoBehaviour
     public UnityEvent FadeInFinished;
     public UnityEvent FadeOutFinished;
 
-    public bool IsFadingIn { private set; get; }
-    public bool IsFadingOut { private set; get; }
-    public float FadeDuration => FadeOriginalDuration / _animator.speed;
+    private bool _isFadingIn;
+    private bool _isFadingOut;
+    private float _fadeDuration => FadeOriginalDuration / _animator.speed;
 
 
     protected void Awake()
@@ -28,17 +28,17 @@ public class Fader : MonoBehaviour
     public void FadeIn(float duration)
     {
         SetFadeDuration(duration);
-        Debug.Log("Start fadeIn: duration " + FadeDuration);
+        Debug.Log("Start fadeIn: duration " + _fadeDuration);
         _animator.SetTrigger("FadeIn");
-        IsFadingIn = true;
+        _isFadingIn = true;
     }
 
     public void FadeOut(float duration)
     {
         SetFadeDuration(duration);
-        Debug.Log("Start fadeOut: duration " + FadeDuration);
+        Debug.Log("Start fadeOut: duration " + _fadeDuration);
         _animator.SetTrigger("FadeOut");
-        IsFadingOut = true;
+        _isFadingOut = true;
     }
 
 
@@ -46,7 +46,7 @@ public class Fader : MonoBehaviour
     {
         Debug.Log("OnFadeInFinished");
         FadeInFinished.Invoke();
-        IsFadingIn = false;
+        _isFadingIn = false;
     }
 
 
@@ -54,7 +54,7 @@ public class Fader : MonoBehaviour
     {
         Debug.Log("OnFadeOutFinished");
         FadeOutFinished.Invoke();
-        IsFadingOut = false;
+        _isFadingOut = false;
     }
 
 
