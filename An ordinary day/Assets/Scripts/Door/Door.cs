@@ -6,18 +6,19 @@ using System.Collections.Generic;
 /// </summary>
 public class Door : MonoBehaviour, I_InteractionResponse
 {
-    [SerializeField]
-    [Tooltip("Optional")]
-    private GameItemData _key;
-    [SerializeField]
-    private bool _locked;
-
     [Header("Necessary Behaviours")]
     [SerializeField]
     private SpeakableObject _speakableObject;
     [SerializeField]
     private GameObject _playerTeleporterObject;
 
+    [SerializeField]
+    [Tooltip("Optional")]
+    private GameItemData _key;
+    [SerializeField]
+    private bool _locked;
+
+    
     private DoorDialogueData DialogueData => (DoorDialogueData) _speakableObject.GetDialogueData();
 
 
@@ -63,14 +64,14 @@ public class Door : MonoBehaviour, I_InteractionResponse
 
     public void Lock()
     {
-        Debug.Log("Lock " + gameObject.name);
+        Debug.Log("Lock Door " + gameObject.name);
         SetLocked(true);
     }
 
     
     public void Unlock()
     {
-        Debug.Log("Unlock " + gameObject.name);
+        Debug.Log("Unlock Door " + gameObject.name);
         SetLocked(false);
     }
 
