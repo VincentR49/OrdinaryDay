@@ -4,6 +4,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Attach this to a gameobject containing some game items, that can be picked by interacting with it
 /// </summary>
+[RequireComponent(typeof(SpriteRenderer))]
 public class ItemContainer : MonoBehaviour, I_InteractionResponse
 {
     [SerializeField]
@@ -14,10 +15,23 @@ public class ItemContainer : MonoBehaviour, I_InteractionResponse
     [SerializeField]
     private SpeakableObject _speakableObject;
 
+    [Header("Optional")]
+    [SerializeField]
+    private Sprite _openedSprite;
 
+    private SpriteRenderer _spriteRenderer;
     private ItemContainerDialogueData DialogueData => (ItemContainerDialogueData) _speakableObject.GetDialogueData();
-    private bool IsEmpty => _items.Count == 0;
+    private bool IsEmpty => _items == null || _items.Count == 0;
     private GameObject _lastInteractor;
+    private bool _opened;
+    private Sprite _defaultSprite;
+
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _defaultSprite = _spriteRenderer.sprite;
+    }
 
 
     public void OnInteraction(GameObject interactor)
@@ -62,5 +76,16 @@ public class ItemContainer : MonoBehaviour, I_InteractionResponse
         {
             item.PickUpObject(interactor);
         }
+        _items.Clear();
+        _opened = true;
+        RefreshSprite();
+    }
+
+
+    private void RefreshSprite()
+    {
+        if (_openedSprite == null)
+            return;
+        _spriteRenderer.sprite = _opened ? _openedSprite : _defaultSprite;
     }
 }

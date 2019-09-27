@@ -2681,7 +2681,8 @@ MonoBehaviour:
   _items:
   - {fileID: 1459306595}
   _takeItemDirectly: 1
-  _speakableObject: {fileID: 0}
+  _speakableObject: {fileID: 884699713}
+  _openedSprite: {fileID: 21300000, guid: 4e1ee9c6713884a288199874e456ecbc, type: 3}
 --- !u!114 &884699712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2709,7 +2710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b355fc90dc54cb6b9e0714cd380199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueAgentData: {fileID: 0}
+  _dialogueAgentData: {fileID: 11400000, guid: 76562f03e062346f0a608f0ea4d6e9f1, type: 2}
   _faceOtherWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}

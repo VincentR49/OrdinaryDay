@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09fd5919709b42d192cdb4ea33f343d, type: 3}
+  m_Name: WoodboxDialogue
+  m_EditorClassIdentifier: 
+  Tag: Woodbox
+  DialoguePicture: {fileID: 21300000, guid: 7af49f6e4a14b4f54bd804d78064d2d7, type: 3}
+  DialogueDisplayName: 
+  DefaultDialogueFile: {fileID: 4900000, guid: 67ba50f6fe46845ac9d7a71a005024ff, type: 3}
+  DefaultStoryNode: 
+  TaggedNodes: []
+  EmptyNode: Container.Empty
+  NotEmptyNode: Container.NotEmpty
+  JustTookItemNode: Container.JustTookItem

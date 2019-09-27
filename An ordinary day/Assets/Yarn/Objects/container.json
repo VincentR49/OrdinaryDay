@@ -1,0 +1,32 @@
+[
+	{
+		"title": "Container.Empty",
+		"tags": "",
+		"body": "Il n'y a rien d'intéressant ici.",
+		"position": {
+			"x": 321,
+			"y": 154
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Container.NotEmpty",
+		"tags": "",
+		"body": "Il y a quelque chose à l'intérieur.\n->Récupérer le contenu\n    [[Container.JustTookItem]]\n->Partir",
+		"position": {
+			"x": 322,
+			"y": 371
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Container.JustTookItem",
+		"tags": "",
+		"body": "Vous récupérez ce qui se trouve à l'intérieur.",
+		"position": {
+			"x": 585,
+			"y": 373
+		},
+		"colorID": 0
+	}
+]
