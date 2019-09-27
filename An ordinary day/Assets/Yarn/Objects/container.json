@@ -4,8 +4,8 @@
 		"tags": "",
 		"body": "Il n'y a rien d'intéressant ici.",
 		"position": {
-			"x": 321,
-			"y": 154
+			"x": -90,
+			"y": 140
 		},
 		"colorID": 0
 	},
@@ -14,8 +14,8 @@
 		"tags": "",
 		"body": "Il y a quelque chose à l'intérieur.\n->Récupérer le contenu\n    [[Container.JustTookItem]]\n->Partir",
 		"position": {
-			"x": 322,
-			"y": 371
+			"x": -90,
+			"y": 359
 		},
 		"colorID": 0
 	},
@@ -24,8 +24,28 @@
 		"tags": "",
 		"body": "Vous récupérez ce qui se trouve à l'intérieur.",
 		"position": {
-			"x": 585,
-			"y": 373
+			"x": 187,
+			"y": 361
+		},
+		"colorID": 0
+	},
+	{
+		"title": "RightTree.Empty",
+		"tags": "",
+		"body": "RightTree: C'est juste un arbre.",
+		"position": {
+			"x": 464,
+			"y": 140
+		},
+		"colorID": 0
+	},
+	{
+		"title": "RightTree.NotEmpty",
+		"tags": "",
+		"body": "RightTree: C'est juste un arbre.\nPlayer: Oh! Il y a quelque chose dans la cavité de l'arbre.",
+		"position": {
+			"x": 690,
+			"y": 141
 		},
 		"colorID": 0
 	}

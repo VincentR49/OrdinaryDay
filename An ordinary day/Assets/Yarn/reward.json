@@ -4,8 +4,18 @@
 		"tags": "",
 		"body": "BlueKey: Vous avez trouvé une clé bleue.\nPlayer: Je me demande ce qu'elle peut ouvrir...",
 		"position": {
-			"x": 540,
-			"y": 260
+			"x": 202,
+			"y": 122
+		},
+		"colorID": 0
+	},
+	{
+		"title": "Reward.GreenKey",
+		"tags": "",
+		"body": "GreenKey: Vous avez trouvé une clé verte.",
+		"position": {
+			"x": 426,
+			"y": 122
 		},
 		"colorID": 0
 	}
