@@ -21,6 +21,8 @@ public class GameItemDataListEditor : Editor
             // load all the game items included from the folder of the target
             var currentDirectory = Path.GetDirectoryName(AssetDatabase.GetAssetPath(_target));
             _target.LoadAllFromPath(currentDirectory);
+            // in order to actually save the changes...
+            EditorUtility.SetDirty(_target);
         }
     }
 }

@@ -17,6 +17,8 @@ public class GameItemDialogueDataEditor : Editor
         if (GUILayout.Button("Refresh Content"))
         {
             _target.UpdateContent();
+            // in order to actually save the changes...
+            EditorUtility.SetDirty(_target);
         }
     }
 }

@@ -18,9 +18,11 @@ public class DialogueAgentDataListEditor : Editor
         base.OnInspectorGUI();
         if (GUILayout.Button("Refresh content from directory"))
         {
-            // load all the game items included from the folder of the target
+            serializedObject.Update();
             var currentDirectory = Path.GetDirectoryName(AssetDatabase.GetAssetPath(_target));
             _target.LoadAllFromPath(currentDirectory);
+            // in order to actually save the changes...
+            EditorUtility.SetDirty(_target);
         }
     }
 }
