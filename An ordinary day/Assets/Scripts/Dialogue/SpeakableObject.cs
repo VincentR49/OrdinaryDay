@@ -4,6 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Attach this to a game object to make him able to speak (start dialogue) with another one.
+/// Will launch the dialogue system run by PlayerDialogueRunner.
 /// </summary>
 public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 {

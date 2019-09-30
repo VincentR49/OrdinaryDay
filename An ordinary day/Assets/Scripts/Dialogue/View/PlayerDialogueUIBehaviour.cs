@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 /// <summary>
-/// Manage dialogue view with NPC
+/// Manage dialogue view from player based dialogue (dialogue with npc, objects, rewards, ...)
 /// </summary>
 public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
 {
