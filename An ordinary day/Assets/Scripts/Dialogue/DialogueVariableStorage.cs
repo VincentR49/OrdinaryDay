@@ -59,12 +59,18 @@ public class DialogueVariableStorage : VariableStorageBehaviour
         Debug.Log("RefreshPlayerInventoryRelatedVariables");
         foreach (var item in _allGameItems.Items)
         {
+            // todo optimize
             RefreshPlayerInventoryRelatedVariables(item.Tag);
         }
     }
 
     private void RefreshPlayerInventoryRelatedVariables(string itemTag)
     {
+        if (_playerData.Inventory.Value == null)
+        {
+            Debug.LogError("Player inventory not initialized.");
+            return;
+        }
         var playerHasItem = _playerData.Inventory.Value.HasItem(itemTag);
         var variableKey = DialogueVariableConstants.GetHasItemVariable(itemTag, _playerData.DialogueTag);
         if (_variables.ContainsKey(variableKey))
