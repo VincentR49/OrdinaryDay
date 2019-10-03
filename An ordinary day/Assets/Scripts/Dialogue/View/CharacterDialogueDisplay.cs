@@ -1,7 +1,7 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 /// <summary>
 /// Manage the display of a dialogue for a given character
@@ -13,20 +13,17 @@ public class CharacterDialogueDisplay : MonoBehaviour
     [SerializeField]
     protected GameObject _container;
     [SerializeField]
-    protected TextMeshProUGUI _dialogue;
-    [SerializeField]
-    protected GameObject _nextPage;
-    [SerializeField]
     protected TextMeshProUGUI _name;
     [SerializeField]
     protected Image _picture;
 
-    private int TotalPage => _dialogue.textInfo.pageCount;
-    private int Page => _dialogue.pageToDisplay;
-    private int CurrentPageEndIndex => _dialogue.textInfo.pageInfo[Page - 1].lastCharacterIndex;
-    public bool IsDisplayingText { get; private set; }
+    [Header("Text")]
+    [SerializeField]
+    protected MultiPageTextHandler _multiPageText;
 
-
+    public bool IsAtLastPage => _multiPageText.IsAtLastPage();
+    public bool IsDisplayingText => _multiPageText.IsDisplayingText;
+    
     /// <summary>
     /// To call before displaying text
     /// Initialize the picture and name to diaply during dialogue.
@@ -40,6 +37,22 @@ public class CharacterDialogueDisplay : MonoBehaviour
     }
 
 
+    public IEnumerator SetText(string text)
+    {
+        yield return _multiPageText.SetText(text);
+    }
+
+    public IEnumerator AppendText(string text)
+    {
+        yield return _multiPageText.AppendText(text);
+    }
+
+        public void Reset()
+    {
+        _multiPageText.Reset();
+    }
+
+
     private void Update()
     {
         if (Input.GetKeyDown(ContinueKey))
@@ -48,80 +61,17 @@ public class CharacterDialogueDisplay : MonoBehaviour
             {
                 return;
             }
-            if(! IsAtLastPage())
+            if (!IsAtLastPage)
             {
-                StartCoroutine(GoToNextPage());
+                StartCoroutine(_multiPageText.GoToNextPage());
             }
         }
     }
 
+
     public void Show(bool show)
     {
         _container.SetActive(show);
-    }
-
-
-    public IEnumerator SetLine(string text)
-    {
-        //Debug.Log("Set text: " + text);
-        _dialogue.text = text;
-        _dialogue.pageToDisplay = 1;
-        _dialogue.maxVisibleCharacters = 0;
-        yield return ShowTextProgressively();
-    }
-
-
-    public void Reset()
-    {
-        _dialogue.text = "";
-        _dialogue.pageToDisplay = 1;
-        _nextPage.SetActive(false);
-    }
-
-    
-    public IEnumerator AppendLine(string textToDisplay)
-    {
-        if (string.IsNullOrEmpty(_dialogue.text))
-        {
-            SetLine(textToDisplay);
-            yield break;
-        }
-        _nextPage.SetActive(false);
-        _dialogue.text += System.Environment.NewLine;
-        _dialogue.text += textToDisplay;
-        yield return ShowTextProgressively();
-    }
-
-
-    private IEnumerator ShowTextProgressively()
-    {
-        IsDisplayingText = true;
-        _nextPage.SetActive(false);
-        yield return new WaitForEndOfFrame();
-        while (_dialogue.maxVisibleCharacters <= CurrentPageEndIndex)
-        {
-            _dialogue.maxVisibleCharacters++;
-            yield return new WaitForEndOfFrame();
-        }
-        IsDisplayingText = false;
-        RefreshNextPageDisplay();
-    }
-
-
-    public IEnumerator GoToNextPage()
-    {
-        _dialogue.pageToDisplay += 1;
-        yield return ShowTextProgressively();
-    }
-
-
-    public bool IsAtLastPage() => TotalPage == 0 || Page >= TotalPage;
-
-
-    private void RefreshNextPageDisplay()
-    {
-        //Debug.Log("Current page: " + _dialogue.pageToDisplay + ". Total page: " + TotalPage);
-        _nextPage.SetActive(!IsAtLastPage());
     }
 
     public bool IsActive() => isActiveAndEnabled;

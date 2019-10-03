@@ -107,18 +107,18 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
                 lineSpeaker = _playerData.DialogueTag;
             }
             ChangeSpeaker(lineSpeaker);
-            yield return CurrentDialogueDisplay.SetLine(line.text);
+            yield return CurrentDialogueDisplay.SetText(line.text);
         }
         // We keep the same speaker as before, we just add some text to the previous text input
         else if (string.IsNullOrEmpty(lineSpeaker) || _speaker.Equals(lineSpeaker))
         {
             if (_optionWasJustChosen) // reset the dialogue line
             {
-                yield return CurrentDialogueDisplay.SetLine(line.text);
+                yield return CurrentDialogueDisplay.SetText(line.text);
             }
             else
             {
-                yield return CurrentDialogueDisplay.AppendLine(line.text);
+                yield return CurrentDialogueDisplay.AppendText(line.text);
             }
         }
         else // we change speaker only if we reached last page of the previous dialogue
@@ -126,7 +126,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
         {
             yield return WaitForSpeakerToFinish();
             ChangeSpeaker(lineSpeaker);
-            yield return CurrentDialogueDisplay.SetLine(line.text);
+            yield return CurrentDialogueDisplay.SetText(line.text);
         }
         if (_optionWasJustChosen)
             _optionWasJustChosen = false;
@@ -158,7 +158,7 @@ public class PlayerDialogueUIBehaviour : Yarn.Unity.DialogueUIBehaviour
     {
         // We wait to be sure to be at the last page of the current dialogue line
         // to dont skip dialogue lines
-        while (!CurrentDialogueDisplay.IsAtLastPage() || CurrentDialogueDisplay.IsDisplayingText)
+        while (!CurrentDialogueDisplay.IsAtLastPage || CurrentDialogueDisplay.IsDisplayingText)
         {
             yield return null;
         }

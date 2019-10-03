@@ -16,7 +16,11 @@ public class NPCController : MonoBehaviour
     private ScheduleHandler _scheduleHandler;
     [SerializeField]
     private SpeakableObject _speakableObject;
-    
+
+    [Header("Dialogue")]
+    [SerializeField]
+    private NPCDialogueDisplay _dialoguedDisplay;
+
     [Header("Debug")]
     [SerializeField]
     private NPCData _npcData;
