@@ -25,11 +25,8 @@ public class MultiPageTextHandler : MonoBehaviour
         ShowNextPageIndicator(false);
         _text.text = text;
         _text.pageToDisplay = 1;
-        if (_showProgressively)
-        {
-            _text.maxVisibleCharacters = 0;
-            yield return ShowTextProgressively();
-        }
+        _text.maxVisibleCharacters = 0;
+        yield return ShowTextProgressively();
     }
 
 
@@ -43,8 +40,7 @@ public class MultiPageTextHandler : MonoBehaviour
         }
         _text.text += System.Environment.NewLine;
         _text.text += text;
-        if (_showProgressively)
-            yield return ShowTextProgressively();
+        yield return ShowTextProgressively();
     }
 
 
@@ -60,10 +56,17 @@ public class MultiPageTextHandler : MonoBehaviour
     {
         IsDisplayingText = true;
         yield return new WaitForEndOfFrame();
-        while (_text.maxVisibleCharacters <= CurrentPageEndIndex)
+        if (_showProgressively)
         {
-            _text.maxVisibleCharacters++;
-            yield return new WaitForEndOfFrame();
+            while (_text.maxVisibleCharacters <= CurrentPageEndIndex)
+            {
+                _text.maxVisibleCharacters++;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        else
+        {
+            _text.maxVisibleCharacters = CurrentPageEndIndex;
         }
         IsDisplayingText = false;
         RefreshNextPageDisplay();
@@ -74,10 +77,7 @@ public class MultiPageTextHandler : MonoBehaviour
     {
         _text.pageToDisplay += 1;
         ShowNextPageIndicator(false);
-        if (_showProgressively)
-        {
-            yield return ShowTextProgressively();
-        }
+        yield return ShowTextProgressively();
     }
 
 
