@@ -8,7 +8,7 @@ public class PickableGameItem : MonoBehaviour, I_InteractionResponse
     [SerializeField]
     private GameItemData _gameItem;
     [SerializeField]
-    private SpeakableObject _speakableObject;
+    private DialogueWithPlayerAgent _speakableObject;
     [SerializeField]
     private bool _showRewardPopupOnPicking = true;
 

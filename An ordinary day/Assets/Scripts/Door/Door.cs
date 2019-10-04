@@ -8,7 +8,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
 {
     [Header("Necessary Behaviours")]
     [SerializeField]
-    private SpeakableObject _speakableObject;
+    private DialogueWithPlayerAgent _speakableObject;
     [SerializeField]
     private GameObject _playerTeleporterObject;
 

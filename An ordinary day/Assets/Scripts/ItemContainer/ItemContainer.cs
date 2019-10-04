@@ -13,7 +13,7 @@ public class ItemContainer : MonoBehaviour, I_InteractionResponse
     [Tooltip("Put false if a dialogue should start before being able to take the item")]
     private bool _takeItemDirectly = true;
     [SerializeField]
-    private SpeakableObject _speakableObject;
+    private DialogueWithPlayerAgent _speakableObject;
 
     [Header("Optional")]
     [SerializeField]

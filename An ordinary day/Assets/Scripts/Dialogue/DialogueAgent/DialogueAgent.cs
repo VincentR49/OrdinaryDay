@@ -1,36 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity;
 
 /// <summary>
-/// Attach this to a game object to make him able to speak (start dialogue) with another one.
-/// Will launch the dialogue system run by PlayerDialogueRunner.
+/// Base class for dialogue agent behaviour.
+/// Attach this to a game object to make it able to speaks via Yarn dialogue files.
+/// Dialogue agent is related to a DialogueRunnerType file (change this later) // todo
 /// </summary>
-public class SpeakableObject : MonoBehaviour, I_InteractionResponse
+/// <typeparam name="T"></typeparam>
+public abstract class DialogueAgent<T> : MonoBehaviour where T : DialogueRunner
 {
     private const float ListenDialogueRoutineRefreshRateSec = 0.25f;
     [SerializeField]
-    private DialogueAgentData _dialogueAgentData;
+    protected DialogueAgentData _dialogueAgentData;
 
-    [Header("Optional")]
-    [SerializeField]
-    private bool _faceOtherWhileSpeaking;
-    [SerializeField]
-    private SpriteDirectioner _spriteDirectioner;
-    [SerializeField]
-    private WalkManager _walkManager;
-
-
-    private PlayerDialogueRunner _dialogueRunner;
+    protected T _dialogueRunner;
     public delegate void DialogueFinishedHandler(List<string> _visitedNodes);
     public event DialogueFinishedHandler OnDialogueFinished;
 
 
-    private void Start()
+    public void SetDialogueRunner(T dialogueRunner)
     {
-        _dialogueRunner = FindObjectOfType<PlayerDialogueRunner>(); // change this later
+        _dialogueRunner = dialogueRunner;
     }
-
 
     #region Speaking
     /// <summary>
@@ -71,18 +64,8 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
     }
 
 
-    private IEnumerator SpeaksToRoutine(GameObject other, string node, TextAsset yarnFile)
+    protected virtual IEnumerator SpeaksToRoutine(GameObject other, string node, TextAsset yarnFile)
     {
-        if (_walkManager != null) // stop the game object if he is walking (animation bug otherwise)
-        {
-            _walkManager.Stop();
-            yield return new WaitForEndOfFrame();
-        }
-        if (_faceOtherWhileSpeaking) // more polite
-        {
-            _spriteDirectioner.FaceTowards(other.transform);
-            yield return new WaitForEndOfFrame();
-        }
         StartDialogue(node, yarnFile);
         yield break;
     }
@@ -124,8 +107,7 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
 
     public DialogueAgentData GetDialogueData() => _dialogueAgentData;
 
-    private bool CanSpeak() => !_dialogueRunner.isDialogueRunning;
-
+    public bool CanSpeak() => !_dialogueRunner.isDialogueRunning;
 
     private void AddDialogueDataIfNeeded(string nodeName, TextAsset yarnFile)
     {
@@ -134,10 +116,5 @@ public class SpeakableObject : MonoBehaviour, I_InteractionResponse
             Debug.Log("Added script on dialogue runner: " + yarnFile.name + " for node: " + nodeName);
             _dialogueRunner.AddScript(yarnFile);
         }
-    }
-
-    public void OnInteraction(GameObject interactor)
-    {
-        SpeaksTo(interactor);
     }
 }

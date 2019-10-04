@@ -634,7 +634,7 @@ MonoBehaviour:
   _spriteDirectioner: {fileID: 4197437973840161363}
   _scheduleHandler: {fileID: 6740313738230560726}
   _speakableObject: {fileID: 2871941687587344742}
-  _dialoguedDisplay: {fileID: 0}
+  _dialogueDisplay: {fileID: 520108472955546024}
   _npcData: {fileID: 0}
   _initOnStart: 0
 --- !u!114 &2871941687587344742
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 0}
-  _faceOtherWhileSpeaking: 1
+  _facePlayerWhileSpeaking: 1
   _spriteDirectioner: {fileID: 4197437973840161363}
   _walkManager: {fileID: 4197437973840161361}
 --- !u!114 &8742057299168821766
