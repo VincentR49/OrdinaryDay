@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 
 /// <summary>
 /// Manage the NPC behaviours
@@ -20,7 +19,6 @@ public class NPCController : MonoBehaviour
     [Header("Dialogue")]
     [SerializeField]
     private NPCDialogueDisplay _dialogueDisplay;
-
 
     [Header("Debug")]
     [SerializeField]
@@ -48,6 +46,7 @@ public class NPCController : MonoBehaviour
     }
 
     #region Init
+
     public void Init(NPCData npcData)
     {
         _npcData = npcData;
@@ -82,6 +81,8 @@ public class NPCController : MonoBehaviour
     #region Accessors
 
     public static List<NPCController> GetNPCControllers() => _npcControllers;
+
+
     public NPCData GetNPCData() => _npcData;
 
 
@@ -94,5 +95,9 @@ public class NPCController : MonoBehaviour
         }
         return null;
     }
+
+
+    public NPCDialogueDisplay GetDialogueDisplay() => _dialogueDisplay;
+
     #endregion
 }
