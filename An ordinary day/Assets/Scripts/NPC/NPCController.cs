@@ -15,7 +15,7 @@ public class NPCController : MonoBehaviour
     [SerializeField]
     private ScheduleHandler _scheduleHandler;
     [SerializeField]
-    private DialogueWithPlayerAgent _speakableObject;
+    private DialogueWithPlayerAgent _dialogueWithPlayerAgent;
 
     [Header("Dialogue")]
     [SerializeField]
@@ -54,7 +54,7 @@ public class NPCController : MonoBehaviour
         name = npcData.FirstName;
         Debug.Log("NPC Initialisation: " + _npcData);
         _dialogueDisplay.Show(false);
-        _speakableObject.SetDialogueData(npcData.DialogueAgentData);
+        _dialogueWithPlayerAgent.SetDialogueData(npcData.DialogueAgentData);
         InitSprites();
         InitScheduleSystem();
         if (!_npcControllers.Contains(this))

@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 31f5154b9e6564c00a66e59120ce4ca2, type: 2}
-  _faceOtherWhileSpeaking: 0
+  _facePlayerWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}
 --- !u!1 &8200445463619676485
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueAgentData: {fileID: 11400000, guid: 75fe4d545f6b94d6e814a87f738c1d03, type: 2}
-  _faceOtherWhileSpeaking: 0
+  _facePlayerWhileSpeaking: 0
   _spriteDirectioner: {fileID: 0}
   _walkManager: {fileID: 0}
 --- !u!114 &8200445463632175153
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b26469342d428e96f7de7c1e4e4bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speakableObject: {fileID: 8200445463632175152}
+  _dialogueWithPlayerAgent: {fileID: 8200445463632175152}
   _playerTeleporterObject: {fileID: 8200445465095410545}
   _key: {fileID: 11400000, guid: 9d464bdcb4a42419e83b04cacab9ada7, type: 2}
   _locked: 1

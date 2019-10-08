@@ -13,14 +13,14 @@ public class ItemContainer : MonoBehaviour, I_InteractionResponse
     [Tooltip("Put false if a dialogue should start before being able to take the item")]
     private bool _takeItemDirectly = true;
     [SerializeField]
-    private DialogueWithPlayerAgent _speakableObject;
+    private DialogueWithPlayerAgent _dialogueWithPlayerAgent;
 
     [Header("Optional")]
     [SerializeField]
     private Sprite _openedSprite;
 
     private SpriteRenderer _spriteRenderer;
-    private ItemContainerDialogueData DialogueData => (ItemContainerDialogueData) _speakableObject.GetDialogueData();
+    private ItemContainerDialogueData DialogueData => (ItemContainerDialogueData) _dialogueWithPlayerAgent.GetDialogueData();
     private bool IsEmpty => _items == null || _items.Count == 0;
     private GameObject _lastInteractor;
     private bool _opened;
@@ -39,7 +39,7 @@ public class ItemContainer : MonoBehaviour, I_InteractionResponse
         _lastInteractor = interactor;
         if (IsEmpty)
         {
-            _speakableObject.SpeaksTo(interactor, DialogueData.EmptyNode);
+            _dialogueWithPlayerAgent.SpeaksTo(interactor, DialogueData.EmptyNode);
         }
         else
         {
@@ -49,8 +49,8 @@ public class ItemContainer : MonoBehaviour, I_InteractionResponse
             }
             else
             {
-                _speakableObject.SpeaksTo(interactor, DialogueData.NotEmptyNode);
-                _speakableObject.OnDialogueFinished += OnDialogueFinished;
+                _dialogueWithPlayerAgent.SpeaksTo(interactor, DialogueData.NotEmptyNode);
+                _dialogueWithPlayerAgent.OnDialogueFinished += OnDialogueFinished;
             }
         }
     }
@@ -59,7 +59,7 @@ public class ItemContainer : MonoBehaviour, I_InteractionResponse
     private void OnDialogueFinished(List<string> visitedNodes)
     {
         // We take the item only if the player has choose to take it
-        _speakableObject.OnDialogueFinished -= OnDialogueFinished;
+        _dialogueWithPlayerAgent.OnDialogueFinished -= OnDialogueFinished;
         foreach (var node in visitedNodes)
         {
             if (DialogueData.JustTookItemNode.Equals(node))

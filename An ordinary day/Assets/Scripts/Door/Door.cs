@@ -8,7 +8,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
 {
     [Header("Necessary Behaviours")]
     [SerializeField]
-    private DialogueWithPlayerAgent _speakableObject;
+    private DialogueWithPlayerAgent _dialogueWithPlayerAgent;
     [SerializeField]
     private GameObject _playerTeleporterObject;
 
@@ -19,7 +19,7 @@ public class Door : MonoBehaviour, I_InteractionResponse
     private bool _locked;
 
     
-    private DoorDialogueData DialogueData => (DoorDialogueData) _speakableObject.GetDialogueData();
+    private DoorDialogueData DialogueData => (DoorDialogueData) _dialogueWithPlayerAgent.GetDialogueData();
 
 
     private void Awake()
@@ -43,15 +43,15 @@ public class Door : MonoBehaviour, I_InteractionResponse
                 node = DialogueData.UnlockChoiceNode;
             }
         }
-        _speakableObject.OnDialogueFinished += OnDialogueFinished;
-        _speakableObject.SpeaksTo(interactor, node);
+        _dialogueWithPlayerAgent.OnDialogueFinished += OnDialogueFinished;
+        _dialogueWithPlayerAgent.SpeaksTo(interactor, node);
     }
 
 
     private void OnDialogueFinished(List<string> visitedNodes)
     {
         // We unlock the door if the player has visited the just unlocked node
-        _speakableObject.OnDialogueFinished -= OnDialogueFinished;
+        _dialogueWithPlayerAgent.OnDialogueFinished -= OnDialogueFinished;
         foreach (var node in visitedNodes)
         {
             if (DialogueData.JustUnlockedNode.Equals(node))

@@ -8,12 +8,12 @@ public class PickableGameItem : MonoBehaviour, I_InteractionResponse
     [SerializeField]
     private GameItemData _gameItem;
     [SerializeField]
-    private DialogueWithPlayerAgent _speakableObject;
+    private DialogueWithPlayerAgent _dialogueWithPlayerAgent;
     [SerializeField]
     private bool _showRewardPopupOnPicking = true;
 
 
-    private GameItemDialogueData GameItemDialogueData => (GameItemDialogueData) _speakableObject.GetDialogueData();
+    private GameItemDialogueData GameItemDialogueData => (GameItemDialogueData) _dialogueWithPlayerAgent.GetDialogueData();
 
     public void OnInteraction(GameObject interactor)
     {
@@ -41,7 +41,7 @@ public class PickableGameItem : MonoBehaviour, I_InteractionResponse
 
     private void ShowRewardDialogue(GameObject interactor)
     {
-        _speakableObject.SpeaksTo(interactor, GameItemDialogueData.RewardNode,
+        _dialogueWithPlayerAgent.SpeaksTo(interactor, GameItemDialogueData.RewardNode,
                                     yarnFile:GameItemDialogueData.RewardDialogueFile);
     }
 }
